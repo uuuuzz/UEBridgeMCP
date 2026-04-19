@@ -9,6 +9,8 @@
 [![GitHub stars](https://img.shields.io/github/stars/uuuuzz/UEBridgeMCP?style=social)](https://github.com/uuuuzz/UEBridgeMCP/stargazers)
 [![GitHub issues](https://img.shields.io/github/issues/uuuuzz/UEBridgeMCP)](https://github.com/uuuuzz/UEBridgeMCP/issues)
 
+📖 **Language / 语言**：**English** | [简体中文](README.zh-CN.md)
+
 ## Table of Contents
 
 - [Overview](#overview)
