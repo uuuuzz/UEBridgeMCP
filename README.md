@@ -1,8 +1,37 @@
-# ue-bridge-mcp
+# UEBridgeMCP
 
 **Native C++ Model Context Protocol (MCP) plugin for Unreal Engine 5.6+**
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+[![Unreal Engine](https://img.shields.io/badge/Unreal%20Engine-5.6%2B-313131?logo=unrealengine)](https://www.unrealengine.com/)
+[![Platform](https://img.shields.io/badge/platform-Win64%20%7C%20Mac%20%7C%20Linux-lightgrey.svg)](#)
+[![Release](https://img.shields.io/github/v/release/uuuuzz/UEBridgeMCP?include_prereleases&sort=semver)](https://github.com/uuuuzz/UEBridgeMCP/releases)
+[![GitHub stars](https://img.shields.io/github/stars/uuuuzz/UEBridgeMCP?style=social)](https://github.com/uuuuzz/UEBridgeMCP/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/uuuuzz/UEBridgeMCP)](https://github.com/uuuuzz/UEBridgeMCP/issues)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Quick Start](#quick-start)
+  - [Installation](#installation)
+  - [Configuration](#configuration)
+  - [Client Configuration](#client-configuration)
+- [Available Tools](#available-tools)
+  - [v2 core workflow](#v2-core-workflow)
+  - [v2 query / detail tools](#v2-querydetail-tools)
+  - [v2 batch / assert tools](#v2-batchassert-tools)
+  - [Structured response contract](#structured-response-contract)
+  - [Python scripting](#python-scripting-new-in-v1100)
+  - [Blueprint analysis](#blueprint-analysis-7-tools)
+  - [Level / World tools](#levelworld-tools-2-tools)
+  - [Project configuration](#project-configuration-1-tool)
+  - [Analysis tools](#analysis-tools-2-tools)
+  - [Asset management](#asset-management-1-tool)
+- [Architecture](#architecture)
+- [Development](#development)
+- [License](#license)
+- [Contributing](#contributing)
+- [Links](#links)
 
 ## Overview
 
@@ -366,7 +395,13 @@ Search assets by name, class, or path with wildcard support.
 
 ### Adding Custom Tools
 
-See [Docs/p0-p2-tool-schema-handoff.md](Docs/p0-p2-tool-schema-handoff.md) for the current tool surface and implementation roadmap.
+Custom tools can be registered by subclassing `UMcpToolBase` (declared in
+`Source/UEBridgeMCP/Public/McpToolBase.h`). Override `GetToolName`,
+`GetToolDescription`, `GetInputSchema`, and `Execute`, then register the tool
+with `FMcpToolRegistry::Get().RegisterTool<YourTool>()` during module startup.
+
+The built-in tools under `Source/UEBridgeMCPEditor/Private/Tools/` serve as
+reference implementations.
 
 ### Building
 
@@ -388,5 +423,10 @@ Contributions are welcome! Please open an issue or submit a pull request.
 ## Links
 
 - [GitHub Repository](https://github.com/uuuuzz/UEBridgeMCP)
+- [Changelog](CHANGELOG.md)
 - [Model Context Protocol](https://modelcontextprotocol.io)
 - [MCP Specification](https://modelcontextprotocol.io/specification)
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=uuuuzz/UEBridgeMCP&type=Date)](https://star-history.com/#uuuuzz/UEBridgeMCP&Date)

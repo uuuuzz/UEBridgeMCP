@@ -1,0 +1,99 @@
+name: CI
+
+# Lightweight checks that run on every push / PR to main.
+# NOTE: Full UE compilation requires a licensed UE install, which is not
+# feasible on standard GitHub-hosted runners. This workflow focuses on
+# structural validation instead (JSON, required files, line endings).
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate plugin structure
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Ensure required top-level files exist
+        shell: bash
+        run: |
+          set -e
+          for f in UEBridgeMCP.uplugin README.md LICENSE CHANGELOG.md RELEASE_NOTES.md .gitignore; do
+            if [[ ! -f "$f" ]]; then
+              echo "::error::Missing required file: $f"
+              exit 1
+            fi
+            echo "ok: $f"
+          done
+
+      - name: Validate .uplugin as JSON
+        shell: bash
+        run: |
+          python3 -c "import json, sys; json.load(open('UEBridgeMCP.uplugin')); print('UEBridgeMCP.uplugin is valid JSON')"
+
+      - name: Check required uplugin fields
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json, sys
+          data = json.load(open('UEBridgeMCP.uplugin'))
+          required = ['FileVersion', 'VersionName', 'FriendlyName', 'Description', 'Modules']
+          missing = [k for k in required if k not in data]
+          if missing:
+              print(f"::error::uplugin missing fields: {missing}")
+              sys.exit(1)
+          if not data['Modules']:
+              print("::error::uplugin has no Modules")
+              sys.exit(1)
+          for m in data['Modules']:
+              for mk in ('Name', 'Type', 'LoadingPhase'):
+                  if mk not in m:
+                      print(f"::error::Module entry missing '{mk}': {m}")
+                      sys.exit(1)
+          print(f"uplugin VersionName = {data['VersionName']}")
+          print(f"Modules              = {[m['Name'] for m in data['Modules']]}")
+          PY
+
+      - name: Ensure module Build.cs files exist
+        shell: bash
+        run: |
+          set -e
+          python3 - <<'PY'
+          import json, os, sys
+          data = json.load(open('UEBridgeMCP.uplugin'))
+          missing = []
+          for m in data['Modules']:
+              name = m['Name']
+              build = f"Source/{name}/{name}.Build.cs"
+              if not os.path.isfile(build):
+                  missing.append(build)
+              else:
+                  print(f"ok: {build}")
+          if missing:
+              print("::error::Missing Build.cs files:")
+              for f in missing:
+                  print(f"  - {f}")
+              sys.exit(1)
+          PY
+
+      - name: Check for CRLF in source files
+        shell: bash
+        run: |
+          set -e
+          bad=$(find Source -type f \( -name "*.cs" -o -name "*.cpp" -o -name "*.h" \) -print0 | xargs -0 grep -lU $'\r' || true)
+          if [[ -n "$bad" ]]; then
+            echo "::warning::Files with CRLF line endings (recommend LF):"
+            echo "$bad"
+          else
+            echo "No CRLF line endings in Source/"
+          fi

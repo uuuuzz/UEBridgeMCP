@@ -1,0 +1,84 @@
+name: Release
+
+# Triggered when a tag matching vX.Y.Z is pushed, or manually from the Actions tab.
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag name to build (e.g. v1.19.0)'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  package-and-release:
+    name: Package plugin and publish GitHub Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Resolve version
+        id: ver
+        shell: bash
+        run: |
+          if [[ "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
+            TAG="${{ inputs.tag }}"
+          else
+            TAG="${GITHUB_REF_NAME}"
+          fi
+          VERSION="${TAG#v}"
+          echo "tag=${TAG}"       >> "$GITHUB_OUTPUT"
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+          echo "Resolved tag=${TAG}, version=${VERSION}"
+
+      - name: Verify .uplugin VersionName matches tag
+        shell: bash
+        run: |
+          UPLUGIN_VERSION=$(grep -oE '"VersionName"[^,]*' UEBridgeMCP.uplugin | head -n1 | grep -oE '"[0-9]+\.[0-9]+\.[0-9]+"' | tr -d '"')
+          EXPECTED="${{ steps.ver.outputs.version }}"
+          echo "uplugin VersionName: ${UPLUGIN_VERSION}"
+          echo "tag version:         ${EXPECTED}"
+          if [[ "${UPLUGIN_VERSION}" != "${EXPECTED}" ]]; then
+            echo "::warning::uplugin VersionName (${UPLUGIN_VERSION}) does not match tag (${EXPECTED}). Continuing anyway."
+          fi
+
+      - name: Build source zip
+        id: pack
+        shell: bash
+        run: |
+          STAGING="UEBridgeMCP"
+          mkdir -p "${STAGING}"
+          rsync -a \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='Binaries/' \
+            --exclude='Intermediate/' \
+            --exclude='DerivedDataCache/' \
+            --exclude='Saved/' \
+            --exclude='.vs/' \
+            --exclude='.idea/' \
+            --exclude='.vscode/' \
+            --exclude="${STAGING}/" \
+            ./ "${STAGING}/"
+
+          ZIP_NAME="UEBridgeMCP-${{ steps.ver.outputs.tag }}.zip"
+          zip -r "${ZIP_NAME}" "${STAGING}" >/dev/null
+          ls -lh "${ZIP_NAME}"
+          echo "zip=${ZIP_NAME}" >> "$GITHUB_OUTPUT"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.ver.outputs.tag }}
+          name: UEBridgeMCP ${{ steps.ver.outputs.tag }}
+          body_path: RELEASE_NOTES.md
+          draft: false
+          prerelease: false
+          files: ${{ steps.pack.outputs.zip }}

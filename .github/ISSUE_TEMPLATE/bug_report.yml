@@ -1,0 +1,56 @@
+name: Bug report
+description: Report something that is broken or behaves unexpectedly.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a bug report! Please fill in as much as you can.
+
+  - type: input
+    id: ue-version
+    attributes:
+      label: Unreal Engine version
+      placeholder: "e.g. 5.6.0"
+    validations:
+      required: true
+
+  - type: input
+    id: plugin-version
+    attributes:
+      label: UEBridgeMCP version
+      placeholder: "e.g. 1.19.0"
+    validations:
+      required: true
+
+  - type: input
+    id: client
+    attributes:
+      label: MCP client
+      placeholder: "e.g. Claude Desktop / Cursor / Windsurf / Continue"
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Describe the bug and what you expected to happen.
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Enable the plugin
+        2. Call tool `xxx` with parameters `...`
+        3. Observe `...`
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / screenshots
+      description: Paste relevant output from the Output Log or `Saved/Logs/*.log`.
+      render: shell
