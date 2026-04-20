@@ -9,83 +9,91 @@
 [![GitHub stars](https://img.shields.io/github/stars/uuuuzz/UEBridgeMCP?style=social)](https://github.com/uuuuzz/UEBridgeMCP/stargazers)
 [![GitHub issues](https://img.shields.io/github/issues/uuuuzz/UEBridgeMCP)](https://github.com/uuuuzz/UEBridgeMCP/issues)
 
-📖 **语言 / Language**：[English](README.md) | **简体中文**
+**语言：** [English](README.md) | **简体中文**
 
-## 目录
+## 项目概览
 
-- [项目简介](#项目简介)
-- [快速开始](#快速开始)
-  - [安装](#安装)
-  - [配置](#配置)
-  - [客户端配置](#客户端配置)
-- [工具一览](#工具一览)
-  - [v2 核心工作流](#v2-核心工作流)
-  - [v2 查询 / 详情类工具](#v2-查询--详情类工具)
-  - [v2 批量 / 断言类工具](#v2-批量--断言类工具)
-  - [结构化响应约定](#结构化响应约定)
-  - [Python 脚本](#python-脚本v1100-新增)
-  - [蓝图分析](#蓝图分析7-个工具)
-  - [关卡 / 世界类工具](#关卡--世界类工具2-个)
-  - [项目配置](#项目配置1-个工具)
-  - [分析类工具](#分析类工具2-个)
-  - [资源管理](#资源管理1-个工具)
-- [架构](#架构)
-- [二次开发](#二次开发)
-- [许可协议](#许可协议)
-- [参与贡献](#参与贡献)
-- [相关链接](#相关链接)
+UEBridgeMCP 是一个原生 C++ Unreal Engine 插件，通过 Streamable HTTP 将 Unreal Editor 暴露给任意兼容 MCP 的 AI 客户端。MCP 服务直接嵌入编辑器进程内部，因此工具无需额外桥接进程就可以检查和编辑蓝图、关卡、资产、材质、Widget、StateTree、PIE 会话以及构建流程。
 
-## 项目简介
+**当前版本：** `v1.19.0`
 
-ue-bridge-mcp 是一款原生 C++ 的 Unreal Engine 插件，基于 Streamable HTTP 实现了 [Model Context Protocol (MCP)](https://modelcontextprotocol.io) 协议。它让 Claude、Cursor、Windsurf 等 AI 助手能够直接与 Unreal Editor 进行交互。
+**亮点：**
+- **原生 UE 集成** - 使用 Unreal 内置 HTTP 栈与编辑器 API
+- **46 个内置工具** - 权威列表位于 `Source/UEBridgeMCPEditor/Private/UEBridgeMCPEditor.cpp`
+- **跨客户端兼容** - 支持 Claude Code、Claude Desktop、Cursor、Continue、Windsurf 以及其他 MCP 客户端
+- **项目无关** - 不与特定游戏项目耦合，可在 UE 5.6+ C++ 项目之间迁移
+- **可扩展** - 可通过继承 `UMcpToolBase` 添加自定义工具
 
-**核心特性：**
-- ✅ **零外部依赖** —— 基于 UE 内置的 `FHttpServerModule` 实现
-- ✅ **跨 LLM 兼容** —— 支持 Claude、Cursor、Windsurf、VS Code Copilot、Continue、OpenAI 等
-- ✅ **编辑器原生集成** —— HTTP 服务直接运行在 UE Editor 内，无需外挂进程
-- ✅ **易于扩展** —— 提供简洁的工具注册系统，方便接入自定义 MCP 工具
+## 文档导航
+
+| 文档 | 说明 |
+| --- | --- |
+| [工具参考](Docs/Tools-Reference.zh-CN.md) | 内置工具完整清单，按工作流与子系统分组整理 |
+| [工具开发](Docs/ToolDevelopment.zh-CN.md) | 如何实现、注册、验证并维护自己的 MCP 工具 |
+| [故障排查](Docs/Troubleshooting.zh-CN.md) | 已知故障模式、连接问题、PIE 注意事项与调试步骤 |
+| [架构说明](Docs/Architecture.zh-CN.md) | 模块布局、请求生命周期、注册表预热与线程模型 |
+| [English Documentation Index](README.md) | 英文首页与对应英文文档入口 |
 
 ## 快速开始
 
+### 环境要求
+
+- Unreal Engine **5.6+**
+- **C++ Unreal 项目**（纯蓝图项目需要先通过添加任意 C++ 类转换为 C++ 项目）
+- `UEBridgeMCP.uplugin` 中启用的核心插件依赖：
+  - `EditorScriptingUtilities`
+  - `GameplayAbilities`
+  - `StateTree`
+  - `GameplayStateTree`
+- `PythonScriptPlugin` 为 `run-python-script` 提供支持。虽然 `.uplugin` 中将它标记为可选，但当前源码构建会在 `Source/UEBridgeMCPEditor/UEBridgeMCPEditor.Build.cs` 里直接链接它，因此除非你明确移除了 Python 工具链，否则建议保持启用。
+
 ### 安装
 
-1. 将插件克隆到项目的 `Plugins` 目录：
-```bash
-cd YourProject/Plugins
-git clone https://github.com/uuuuzz/UEBridgeMCP.git
+1. 将插件复制到你的项目中：
+
+```text
+<YourProject>/Plugins/UEBridgeMCP/
 ```
 
-2. 重新生成项目文件并编译项目
+2. 在 `.uproject` 中启用插件：
 
-3. 在 `.uproject` 中或通过 `Editor → Plugins` 启用该插件
+```json
+{
+  "Plugins": [
+    { "Name": "UEBridgeMCP", "Enabled": true }
+  ]
+}
+```
+
+3. 重新生成项目文件并编译编辑器目标。
+4. 启动编辑器并确认模块加载成功。
 
 ### 配置
 
-插件会在 `127.0.0.1:8080/mcp` 上启动一个 HTTP 服务，相关配置位于 `Config/DefaultUEBridgeMCP.ini`：
+服务端配置位于 `Config/DefaultUEBridgeMCP.ini`：
 
 ```ini
 [/Script/UEBridgeMCPEditor.McpServerSettings]
-; HTTP 服务端口（默认：8080）
-; 如果同时打开多个 UE 实例，请为每个实例配置不同端口
 ServerPort=8080
-
-; 是否在编辑器启动时自动启动服务
 bAutoStartServer=true
-
-; 监听地址（默认：127.0.0.1，仅本机可访问，较为安全）
 BindAddress=127.0.0.1
+LogLevel=Log
 ```
 
-> **提示：** 同时运行多个 UE 项目时，请为每个项目配置不同的 `ServerPort`（例如 8080、8081、8082）。
+**重要：** 在 Windows 上建议优先使用 `127.0.0.1`，不要直接写 `localhost`。部分客户端会将 `localhost` 解析为 IPv6（`[::1]`），而服务端通常绑定在 IPv4 地址上，这会导致本可避免的连接失败。
 
 ### 客户端配置
 
-**Claude Code CLI**：
+任何支持 HTTP 传输的 MCP 客户端都可以连接，下面给几个常见例子：
+
+**Claude Code CLI**
+
 ```bash
 claude mcp add --transport http unreal-engine http://127.0.0.1:8080/mcp
 ```
 
-**Claude Desktop**（`claude_desktop_config.json`）：
+**Claude Desktop**（`claude_desktop_config.json`）
+
 ```json
 {
   "mcpServers": {
@@ -96,7 +104,8 @@ claude mcp add --transport http unreal-engine http://127.0.0.1:8080/mcp
 }
 ```
 
-**Cursor**（`.cursor/mcp.json`）：
+**Cursor**（`.cursor/mcp.json`）
+
 ```json
 {
   "mcpServers": {
@@ -107,326 +116,116 @@ claude mcp add --transport http unreal-engine http://127.0.0.1:8080/mcp
 }
 ```
 
-**VS Code Continue**（`.continue/config.json`）：
+**VS Code Continue**（`.continue/config.json`）
+
 ```json
 {
-  "mcpServers": [{
-    "name": "unreal-engine",
-    "transport": { "type": "http", "url": "http://127.0.0.1:8080/mcp" }
-  }]
+  "mcpServers": [
+    {
+      "name": "unreal-engine",
+      "transport": {
+        "type": "http",
+        "url": "http://127.0.0.1:8080/mcp"
+      }
+    }
+  ]
 }
 ```
 
-## 工具一览
+### 连通性检查
 
-当前插件已内置 **v2 面向 Agent 的工具体系**，围绕以下四类能力构建：
-
-- **概要查询（summary queries）** —— 快速发现、响应体积小
-- **详情查询（detail queries）** —— 精准进一步排查
-- **批量变更（batch mutation tools）** —— 事务式编辑
-- **运行时断言（runtime assertions）** —— 用于 PIE 中的验证
-
-### v2 核心工作流
-
-推荐的 Agent 工作流是：
-
-`概要查询 → 定向详情 → 事务式编辑 → 编译/保存 → 断言`
-
-这一流程取代了旧版依赖大量"微操工具"链式调用的使用模式，例如：
-
-- `add-graph-node`
-- `connect-graph-pins`
-- `disconnect-graph-pin`
-- `remove-graph-node`
-- `set-property`
-
-### v2 查询 / 详情类工具
-
-- `query-blueprint-summary`
-- `query-blueprint-graph-summary`
-- `query-blueprint-node`
-- `query-world-summary`
-- `query-level-summary`
-- `query-actor-detail`
-- `query-material-summary`
-- `query-material-instance`
-
-### v2 批量 / 断言类工具
-
-- `edit-blueprint-graph`
-- `edit-blueprint-members`
-- `edit-blueprint-components`
-- `edit-level-batch`
-- `edit-material-instance-batch`
-- `assert-world-state`
-
-### 结构化响应约定
-
-所有 v2 工具均按 **MCP-first** 规范返回统一的结果信封：
-
-- `content`
-- `structuredContent`
-- `isError`（仅在调用失败时出现）
-- `_meta.diagnostics`
-- `_meta.timing`
-- `_meta.stats`
-
-其中供人类阅读的 `content.text` 刻意保持为简短摘要，不会重复完整数据。机器消费方应优先读取 `structuredContent`。
-
-### Actor Handle 约定
-
-Level/World 概要类工具返回的 actor handle 使用以下稳定身份字段：
-
-- `entity_id`：actor 的对象路径
-- `resource_path`：所在 world 的路径
-- `display_name`：仅用于展示的人类可读名称
-- `session_id`：创建该 handle 时所使用的 MCP 会话
-
-`query-actor-detail` 解析 handle 时会优先使用 `resource_path + entity_id`，仅在 handle 信息不完整时才回退到按 actor 名匹配。
-
-### 旧版工具
-
-源码中仍保留了部分旧版工具作为内部实现辅助或兼容层，但上文提到的 v2 工具才是未来对外的主要接口。
-
-### Python 脚本（v1.10.0 新增）
-
-#### `run-python-script`
-在 Unreal Editor 的 Python 环境中执行 Python 脚本。
-
-**参数：**
-- `script`（string，可选）—— 内联 Python 代码
-- `script_path`（string，可选）—— Python 脚本文件路径
-- `arguments`（object，可选）—— 可通过 `unreal.get_mcp_args()` 访问的参数
-
-**前置条件：** 需要启用 `PythonScriptPlugin`
-
-**示例：**
-```json
-{
-  "script": "import unreal\nprint(unreal.SystemLibrary.get_project_name())",
-  "arguments": {"asset_path": "/Game/MyAsset"}
-}
-```
-
----
-
-### 蓝图分析（7 个工具）
-
-#### `analyze-blueprint`
-完整的蓝图结构分析，包括父类、函数、变量和组件。
-
-**参数：**
-- `asset_path`（string，必填）—— 蓝图资源路径（例如 `/Game/Blueprints/BP_Character`）
-
-**返回值：** 包含完整蓝图元数据的 JSON
-
----
-
-#### `get-blueprint-functions`
-列出所有函数的签名、参数、返回类型及元数据。
-
-**参数：**
-- `asset_path`（string，必填）—— 蓝图资源路径
-- `function_filter`（string，可选）—— 按函数名过滤（支持通配符）
-
-**返回值：** 带完整签名的函数定义数组
-
----
-
-#### `get-blueprint-variables`
-列出所有变量的类型、默认值、网络复制设置及元数据。
-
-**参数：**
-- `asset_path`（string，必填）—— 蓝图资源路径
-- `variable_filter`（string，可选）—— 按变量名过滤（支持通配符）
-
-**返回值：** 带类型和默认值的变量数组
-
----
-
-#### `get-blueprint-components`
-获取组件层级结构，包含 transform 和附加关系。
-
-**参数：**
-- `asset_path`（string，必填）—— 蓝图资源路径
-- `include_transforms`（boolean，可选）—— 是否包含组件 transform（默认 true）
-
-**返回值：** 带层级关系和 transform 的组件树
-
----
-
-#### `get-blueprint-graph`
-读取完整的蓝图图表结构，包含所有节点、连接和 pin 数据。
-
-**参数：**
-- `asset_path`（string，必填）—— 蓝图资源路径
-- `graph_name`（string，可选）—— 指定图表名
-- `graph_type`（string，可选）—— 过滤条件：`event`、`function` 或 `macro`
-- `include_positions`（boolean，可选）—— 是否包含节点的 X/Y 坐标（默认 false）
-
-**返回值：** 所有图表及其节点、pin 和连接
-
----
-
-#### `get-blueprint-node`
-通过 GUID 获取指定蓝图节点的详细信息。
-
-**参数：**
-- `asset_path`（string，必填）—— 蓝图资源路径
-- `node_guid`（string，必填）—— 要检查的节点 GUID
-
-**返回值：** 节点的完整详情，包含 pin 和连接
-
----
-
-#### `get-blueprint-defaults`
-读取蓝图 CDO（Class Default Object）的属性默认值。
-
-**参数：**
-- `asset_path`（string，必填）—— 蓝图资源路径
-- `property_filter`（string，可选）—— 按属性名过滤（支持通配符）
-- `category_filter`（string，可选）—— 按属性分类过滤
-
-**返回值：** 所有属性默认值，包含类型、分类与标志位
-
----
-
-### 关卡 / 世界类工具（2 个）
-
-#### `query-level`
-列出当前关卡中的 Actor，支持多种过滤条件。
-
-**参数：**
-- `class_filter`（string，可选）—— 按 Actor 类过滤（支持通配符）
-- `folder_filter`（string，可选）—— 按 World Outliner 文件夹路径过滤
-- `tag_filter`（string，可选）—— 按 Actor 标签过滤
-- `include_hidden`（boolean，可选）—— 是否包含隐藏 Actor（默认 false）
-- `include_components`（boolean，可选）—— 是否返回组件列表（默认 false）
-- `include_transform`（boolean，可选）—— 是否返回 transform（默认 true）
-- `limit`（integer，可选）—— 返回的最大条数（默认 100）
-
-**返回值：** Actor 数组，按需附带 transform 与组件信息
-
----
-
-#### `get-actor-details`
-对关卡中指定 Actor 进行深度检查。
-
-**参数：**
-- `actor_name`（string，必填）—— 要检查的 Actor 名或 label
-- `include_properties`（boolean，可选）—— 是否返回所有属性（默认 true）
-- `include_components`（boolean，可选）—— 是否返回组件详情（默认 true）
-
-**返回值：** 完整的 Actor 详情，包含属性和组件层级
-
----
-
-### 项目配置（1 个工具）
-
-#### `get-project-settings`
-查询项目配置。
-
-**参数：**
-- `section`（string，可选）—— 查询区块：`input`、`collision`、`tags`、`maps` 或 `all`（默认 `all`）
-
-**返回值：** 对应配置区块的 JSON，包括：
-- **input**：Action/Axis 映射（含按键与修饰键）
-- **collision**：碰撞 Profile、通道及响应设置
-- **tags**：Gameplay Tag 来源与设置
-- **maps**：默认地图与 GameMode
-
----
-
-### 分析类工具（2 个）
-
-#### `get-class-hierarchy`
-浏览类继承树，显示父类与子类。
-
-**参数：**
-- `class_name`（string，必填）—— 要检查的类（例如 `AActor`、`UActorComponent`）
-- `direction`（string，可选）—— `parents`、`children` 或 `both`（默认 `both`）
-- `include_blueprints`（boolean，可选）—— 是否包含蓝图子类（默认 true）
-- `depth`（integer，可选）—— 最大继承深度（默认 10）
-
-**返回值：** 包含父链与子类的类继承结构
-
----
-
-#### `inspect-data-asset`
-读取 DataTable / DataAsset 的内容。
-
-**参数：**
-- `asset_path`（string，必填）—— DataTable 或 DataAsset 路径
-- `row_filter`（string，可选）—— 按行名过滤（支持通配符，仅 DataTable 生效）
-
-**返回值：**
-- **DataTable**：所有行及其字段数据
-- **DataAsset**：所有属性及对应值
-
----
-
-### 资源管理（1 个工具）
-
-#### `search-assets`
-按名称、类或路径搜索资源，支持通配符。
-
-**参数：**
-- `pattern`（string，可选）—— 搜索匹配模式（支持通配符）
-- `class_filter`（string，可选）—— 按资源类过滤
-- `path_filter`（string，可选）—— 按资源路径过滤
-- `limit`（integer，可选）—— 返回的最大条数（默认 100）
-
-**返回值：** 匹配到的资源数组，包含路径与类型
-
-## 架构
-
-```
-┌──────────────────┐  HTTP POST   ┌──────────────────────────────┐
-│  Claude / Cursor │ ──────────►  │  UE 编辑器                   │
-│  Windsurf / 其他 │  JSON-RPC    │  └─ UEBridgeMCP 插件         │
-│                  │ ◄──────────  │     └─ FHttpServerModule     │
-│                  │   响应       │        (127.0.0.1:8080/mcp)  │
-└──────────────────┘              └──────────────────────────────┘
-```
-
-**模块划分：**
-- `UEBridgeMCP`（Runtime）—— MCP 协议核心层（JSON-RPC、工具注册表）
-- `UEBridgeMCPEditor`（Editor）—— HTTP 服务 + UE 编辑器侧工具实现
-
-## 二次开发
-
-### 添加自定义工具
-
-通过继承 `UMcpToolBase`（声明位于 `Source/UEBridgeMCP/Public/McpToolBase.h`）
-即可注册自定义工具。需要重写 `GetToolName`、`GetToolDescription`、
-`GetInputSchema` 以及 `Execute` 方法，并在模块启动时通过
-`FMcpToolRegistry::Get().RegisterTool<YourTool>()` 完成注册。
-
-`Source/UEBridgeMCPEditor/Private/Tools/` 目录下的内置工具可作为参考实现。
-
-### 编译
-
-需要 Unreal Engine 5.6 或更高版本。
+可以通过 `tools/list` 请求确认服务是否可达：
 
 ```bash
-# 使用 UnrealBuildTool 进行编译
-<UE>/Engine/Build/BatchFiles/Build.bat YourProjectEditor Win64 Development
+curl -s -X POST http://127.0.0.1:8080/mcp \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
 ```
 
-## 许可协议
+如果插件运行正常，响应中应包含当前编辑器会话已注册的工具集合。
 
-GNU General Public License v3.0 —— 详见 [LICENSE](LICENSE)
+## 内置工具面
 
-## 参与贡献
+权威注册位置为：
 
-欢迎任何形式的贡献！请通过 Issue 或 Pull Request 提交你的反馈和代码。
+```text
+Source/UEBridgeMCPEditor/Private/UEBridgeMCPEditor.cpp
+```
+
+在 `v1.19.0` 中，插件共注册了 **46 个内置工具**，可归纳为以下几组：
+
+| 分组 | 数量 | 示例 |
+| --- | ---: | --- |
+| 查询与检查 | 15 | `query-blueprint-summary`, `query-asset`, `get-asset-diff`, `find-references`, `get-logs` |
+| 创建与编辑 | 14 | `create-asset`, `add-widget`, `edit-blueprint-graph`, `edit-level-batch`, `apply-material` |
+| StateTree | 5 | `query-statetree`, `add-statetree-state`, `add-statetree-transition` |
+| PIE、脚本、构建与 RPC | 8 | `run-python-script`, `trigger-live-coding`, `pie-session`, `pie-input`, `wait-for-world-condition`, `call-function` |
+| 高层编排 | 4 | `blueprint-scaffold-from-spec`, `query-gameplay-state`, `auto-fix-blueprint-compile-errors`, `generate-level-structure` |
+
+完整清单与逐工具说明见 [工具参考](Docs/Tools-Reference.zh-CN.md)。
+
+## 架构速览
+
+```text
+MCP Client
+  -> HTTP POST /mcp
+  -> UEBridgeMCPEditor 模块
+  -> FMcpServer
+  -> FMcpToolRegistry
+  -> 继承自 UMcpToolBase 的工具
+  -> Unreal Editor 子系统 / 资产 / World / PIE
+```
+
+插件包含两个模块：
+
+- `UEBridgeMCP` - 运行时协议类型、Schema 辅助、基类与工具注册表
+- `UEBridgeMCPEditor` - 编辑器侧服务、子系统集成、内置工具以及工具栏/状态集成
+
+完整生命周期、预热行为和线程约束见 [架构说明](Docs/Architecture.zh-CN.md)。
+
+## 扩展 UEBridgeMCP
+
+要添加一个新工具：
+
+1. 在 `Source/UEBridgeMCPEditor/Public/Tools/` 和 `Private/Tools/` 下创建新的 `UMcpToolBase` 子类
+2. 重写 `GetToolName`、`GetToolDescription`、`GetInputSchema`、`GetRequiredParams` 和 `Execute`
+3. 在 `FUEBridgeMCPEditorModule::RegisterBuiltInTools()` 中注册该类
+4. 重新编译或触发 Live Coding
+5. 如果当前分支或仓库已经有测试基建，就补充自动化验证；如果没有，就至少记录一条可复现的编辑器实机验证路径，比如 `tools/list` 或 `tools/call`
+
+更完整的实现建议与约束见 [工具开发](Docs/ToolDevelopment.zh-CN.md)。
+
+## 版本管理
+
+UEBridgeMCP 对公开发布版本采用语义化版本管理。
+
+- 保持 `UEBridgeMCP.uplugin` 中的 `VersionName` 与 `Source/UEBridgeMCP/Public/UEBridgeMCP.h` 中的 `UEBRIDGEMCP_VERSION` 完全一致。
+- 当公开工具名、输入输出 Schema、默认行为或其他对外可见行为发生变化时，在同一个 PR 里同步递增这两个版本号。
+- 升级版本时同时更新 `CHANGELOG.md` 与 `RELEASE_NOTES.md`。
+
+## 故障排查入口
+
+如果你遇到以下问题，请先查看 [故障排查](Docs/Troubleshooting.zh-CN.md)：
+
+- 客户端无法连接到 `http://127.0.0.1:8080/mcp`
+- `tools/list` 为空，或缺少预期工具
+- PIE 启动/停止看起来卡住了
+- Python 执行失败或导致编辑器崩溃
+- Live Coding 或重新编译后看不到最新代码变更
+- 多个 UE 项目占用了同一个服务端口
+
+## 许可证
+
+GNU General Public License v3.0 - 详见 [LICENSE](LICENSE)。
 
 ## 相关链接
 
 - [GitHub 仓库](https://github.com/uuuuzz/UEBridgeMCP)
 - [更新日志](CHANGELOG.md)
-- [Model Context Protocol 官网](https://modelcontextprotocol.io)
-- [MCP 协议规范](https://modelcontextprotocol.io/specification)
+- [Release Notes](RELEASE_NOTES.md)
+- [MCP 概览](https://modelcontextprotocol.io)
+- [MCP 规范](https://modelcontextprotocol.io/specification)
+- [Unreal Engine 文档](https://docs.unrealengine.com/5.6/)
 
 ## Star 历史
 

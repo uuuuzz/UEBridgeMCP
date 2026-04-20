@@ -9,83 +9,91 @@
 [![GitHub stars](https://img.shields.io/github/stars/uuuuzz/UEBridgeMCP?style=social)](https://github.com/uuuuzz/UEBridgeMCP/stargazers)
 [![GitHub issues](https://img.shields.io/github/issues/uuuuzz/UEBridgeMCP)](https://github.com/uuuuzz/UEBridgeMCP/issues)
 
-📖 **Language / 语言**：**English** | [简体中文](README.zh-CN.md)
-
-## Table of Contents
-
-- [Overview](#overview)
-- [Quick Start](#quick-start)
-  - [Installation](#installation)
-  - [Configuration](#configuration)
-  - [Client Configuration](#client-configuration)
-- [Available Tools](#available-tools)
-  - [v2 core workflow](#v2-core-workflow)
-  - [v2 query / detail tools](#v2-querydetail-tools)
-  - [v2 batch / assert tools](#v2-batchassert-tools)
-  - [Structured response contract](#structured-response-contract)
-  - [Python scripting](#python-scripting-new-in-v1100)
-  - [Blueprint analysis](#blueprint-analysis-7-tools)
-  - [Level / World tools](#levelworld-tools-2-tools)
-  - [Project configuration](#project-configuration-1-tool)
-  - [Analysis tools](#analysis-tools-2-tools)
-  - [Asset management](#asset-management-1-tool)
-- [Architecture](#architecture)
-- [Development](#development)
-- [License](#license)
-- [Contributing](#contributing)
-- [Links](#links)
+**Language:** **English** | [简体中文](README.zh-CN.md)
 
 ## Overview
 
-ue-bridge-mcp is a native C++ Unreal Engine plugin that implements the [Model Context Protocol (MCP)](https://modelcontextprotocol.io) over Streamable HTTP. It enables AI assistants like Claude, Cursor, Windsurf, and others to interact directly with the Unreal Editor.
+UEBridgeMCP is a native C++ Unreal Engine plugin that exposes the Unreal Editor to any MCP-compatible AI client over Streamable HTTP. It embeds the MCP server directly inside the editor process, so tools can inspect and edit Blueprints, levels, assets, materials, widgets, StateTrees, PIE sessions, and build workflows without a separate bridge process.
 
-**Key Features:**
-- ✅ **Zero Dependencies** - Uses UE's built-in `FHttpServerModule`
-- ✅ **Cross-LLM Compatible** - Works with Claude, Cursor, Windsurf, VS Code Copilot, Continue, OpenAI, and more
-- ✅ **Editor-Integrated** - HTTP server runs directly in UE Editor, no separate process needed
-- ✅ **Extensible** - Easy-to-use tool registration system for custom MCP tools
+**Current release:** `v1.19.0`
+
+**Highlights:**
+- **Native UE integration** - uses Unreal's built-in HTTP stack and editor APIs
+- **46 built-in tools** - the authoritative list lives in `Source/UEBridgeMCPEditor/Private/UEBridgeMCPEditor.cpp`
+- **Cross-client compatible** - works with Claude Code, Claude Desktop, Cursor, Continue, Windsurf, and other MCP clients
+- **Project-agnostic** - no game-specific coupling; can be moved between UE 5.6+ C++ projects
+- **Extensible** - add custom tools by subclassing `UMcpToolBase`
+
+## Documentation Map
+
+| Document | Description |
+| --- | --- |
+| [Tools Reference](Docs/Tools-Reference.md) | Full list of the built-in tools, grouped by workflow and subsystem |
+| [Tool Development](Docs/ToolDevelopment.md) | How to implement, register, validate, and maintain your own MCP tools |
+| [Troubleshooting](Docs/Troubleshooting.md) | Known failure modes, connection issues, PIE caveats, and debugging steps |
+| [Architecture](Docs/Architecture.md) | Module layout, request lifecycle, registry warmup, and threading model |
+| [Chinese Documentation Index](README.zh-CN.md) | Chinese landing page with links to the translated docs |
 
 ## Quick Start
 
+### Requirements
+
+- Unreal Engine **5.6+**
+- A **C++ Unreal project** (Blueprint-only projects should be converted by adding any C++ class)
+- Core plugin dependencies enabled in `UEBridgeMCP.uplugin`:
+  - `EditorScriptingUtilities`
+  - `GameplayAbilities`
+  - `StateTree`
+  - `GameplayStateTree`
+- `PythonScriptPlugin` powers `run-python-script`. The plugin descriptor marks it optional, but the current source build links against it directly in `Source/UEBridgeMCPEditor/UEBridgeMCPEditor.Build.cs`, so keep it enabled unless you intentionally remove Python tooling.
+
 ### Installation
 
-1. Clone into your project's `Plugins` directory:
-```bash
-cd YourProject/Plugins
-git clone https://github.com/uuuuzz/UEBridgeMCP.git
+1. Copy the plugin into your project:
+
+```text
+<YourProject>/Plugins/UEBridgeMCP/
 ```
 
-2. Regenerate project files and build your project
+2. Enable it in your `.uproject`:
 
-3. Enable the plugin in your `.uproject` file or via Editor → Plugins
+```json
+{
+  "Plugins": [
+    { "Name": "UEBridgeMCP", "Enabled": true }
+  ]
+}
+```
+
+3. Regenerate project files and build your editor target.
+4. Launch the editor and confirm the module loads successfully.
 
 ### Configuration
 
-The plugin starts an HTTP server on `127.0.0.1:8080/mcp`. Configure in `Config/DefaultUEBridgeMCP.ini`:
+Server settings live in `Config/DefaultUEBridgeMCP.ini`:
 
 ```ini
 [/Script/UEBridgeMCPEditor.McpServerSettings]
-; HTTP server port (default: 8080)
-; Change this if running multiple UE instances
 ServerPort=8080
-
-; Auto-start server when editor opens
 bAutoStartServer=true
-
-; Bind address (default: 127.0.0.1 for security)
 BindAddress=127.0.0.1
+LogLevel=Log
 ```
 
-> **Tip:** When running multiple UE projects, set a different `ServerPort` for each project (e.g., 8080, 8081, 8082).
+**Important:** on Windows, prefer `127.0.0.1` instead of `localhost`. Some clients resolve `localhost` to IPv6 (`[::1]`) while the server commonly binds IPv4, which causes avoidable connection failures.
 
 ### Client Configuration
 
-**Claude Code CLI**:
+Any MCP client that supports HTTP transport can connect. Examples:
+
+**Claude Code CLI**
+
 ```bash
 claude mcp add --transport http unreal-engine http://127.0.0.1:8080/mcp
 ```
 
-**Claude Desktop** (`claude_desktop_config.json`):
+**Claude Desktop** (`claude_desktop_config.json`)
+
 ```json
 {
   "mcpServers": {
@@ -96,7 +104,8 @@ claude mcp add --transport http unreal-engine http://127.0.0.1:8080/mcp
 }
 ```
 
-**Cursor** (`.cursor/mcp.json`):
+**Cursor** (`.cursor/mcp.json`)
+
 ```json
 {
   "mcpServers": {
@@ -107,327 +116,116 @@ claude mcp add --transport http unreal-engine http://127.0.0.1:8080/mcp
 }
 ```
 
-**VS Code Continue** (`.continue/config.json`):
+**VS Code Continue** (`.continue/config.json`)
+
 ```json
 {
-  "mcpServers": [{
-    "name": "unreal-engine",
-    "transport": { "type": "http", "url": "http://127.0.0.1:8080/mcp" }
-  }]
+  "mcpServers": [
+    {
+      "name": "unreal-engine",
+      "transport": {
+        "type": "http",
+        "url": "http://127.0.0.1:8080/mcp"
+      }
+    }
+  ]
 }
 ```
 
-## Available Tools
+### Sanity Check
 
-The plugin now ships a **v2 agent-first tool surface** built around:
-
-- **summary queries** for fast discovery with small response bodies
-- **detail queries** for precise follow-up inspection
-- **batch mutation tools** for transactional edits
-- **runtime assertions** for PIE verification
-
-### v2 core workflow
-
-The intended agent workflow is now:
-
-`summary query -> targeted detail -> transactional edit -> compile/save -> assert`
-
-This replaces the older default pattern of chaining many micro-tools such as:
-
-- `add-graph-node`
-- `connect-graph-pins`
-- `disconnect-graph-pin`
-- `remove-graph-node`
-- `set-property`
-
-### v2 query/detail tools
-
-- `query-blueprint-summary`
-- `query-blueprint-graph-summary`
-- `query-blueprint-node`
-- `query-world-summary`
-- `query-level-summary`
-- `query-actor-detail`
-- `query-material-summary`
-- `query-material-instance`
-
-### v2 batch/assert tools
-
-- `edit-blueprint-graph`
-- `edit-blueprint-members`
-- `edit-blueprint-components`
-- `edit-level-batch`
-- `edit-material-instance-batch`
-- `assert-world-state`
-
-### Structured response contract
-
-All v2 tools now return a **standard MCP-first** result envelope:
-
-- `content`
-- `structuredContent`
-- `isError` (only when the call failed)
-- `_meta.diagnostics`
-- `_meta.timing`
-- `_meta.stats`
-
-Human-readable `content.text` is intentionally kept to a short summary instead of duplicating the full payload. Machine consumers should read `structuredContent` first.
-
-### Actor handle contract
-
-Level/world summary tools emit actor handles using stable identity fields:
-
-- `entity_id`: actor object path
-- `resource_path`: world path
-- `display_name`: human-readable label only
-- `session_id`: MCP session used to create the handle
-
-`query-actor-detail` resolves handles by `resource_path + entity_id` first and only falls back to actor names when a complete handle is not available.
-
-### Legacy tools
-
-Some legacy tools still exist in source as implementation helpers or compatibility shims, but the v2 tools above are the primary public interface going forward.
-
-### Python Scripting (New in v1.10.0)
-
-#### `run-python-script`
-Execute Python scripts in Unreal Editor's Python environment.
-
-**Parameters:**
-- `script` (string, optional) - Inline Python code
-- `script_path` (string, optional) - Path to Python script file
-- `arguments` (object, optional) - Arguments accessible via `unreal.get_mcp_args()`
-
-**Requirements:** PythonScriptPlugin must be enabled
-
-**Example:**
-```json
-{
-  "script": "import unreal\nprint(unreal.SystemLibrary.get_project_name())",
-  "arguments": {"asset_path": "/Game/MyAsset"}
-}
-```
-
----
-
-### Blueprint Analysis (7 tools)
-
-#### `analyze-blueprint`
-Complete Blueprint structure analysis including parent class, functions, variables, and components.
-
-**Parameters:**
-- `asset_path` (string, required) - Blueprint asset path (e.g., `/Game/Blueprints/BP_Character`)
-
-**Returns:** JSON with complete Blueprint metadata
-
----
-
-#### `get-blueprint-functions`
-List all functions with signatures, parameters, return types, and metadata.
-
-**Parameters:**
-- `asset_path` (string, required) - Blueprint asset path
-- `function_filter` (string, optional) - Filter by function name (wildcards supported)
-
-**Returns:** Array of function definitions with full signatures
-
----
-
-#### `get-blueprint-variables`
-List all variables with types, default values, replication settings, and metadata.
-
-**Parameters:**
-- `asset_path` (string, required) - Blueprint asset path
-- `variable_filter` (string, optional) - Filter by variable name (wildcards supported)
-
-**Returns:** Array of variables with types and default values
-
----
-
-#### `get-blueprint-components`
-Get component hierarchy with transforms and attachment relationships.
-
-**Parameters:**
-- `asset_path` (string, required) - Blueprint asset path
-- `include_transforms` (boolean, optional) - Include component transforms (default: true)
-
-**Returns:** Component tree with hierarchy and transforms
-
----
-
-#### `get-blueprint-graph`
-Read complete Blueprint graph structure including all nodes, connections, and pin data.
-
-**Parameters:**
-- `asset_path` (string, required) - Blueprint asset path
-- `graph_name` (string, optional) - Specific graph name
-- `graph_type` (string, optional) - Filter: `event`, `function`, or `macro`
-- `include_positions` (boolean, optional) - Include node X/Y positions (default: false)
-
-**Returns:** All graphs with nodes, pins, and connections
-
----
-
-#### `get-blueprint-node`
-Get detailed information about a specific Blueprint node by GUID.
-
-**Parameters:**
-- `asset_path` (string, required) - Blueprint asset path
-- `node_guid` (string, required) - Node GUID to inspect
-
-**Returns:** Full node details with pins and connections
-
----
-
-#### `get-blueprint-defaults`
-Read CDO (Class Default Object) property values from Blueprint.
-
-**Parameters:**
-- `asset_path` (string, required) - Blueprint asset path
-- `property_filter` (string, optional) - Filter by property name (wildcards supported)
-- `category_filter` (string, optional) - Filter by property category
-
-**Returns:** All property defaults with types, categories, and flags
-
----
-
-### Level/World Tools (2 tools)
-
-#### `query-level`
-List actors in the currently open level with filtering options.
-
-**Parameters:**
-- `class_filter` (string, optional) - Filter by actor class (wildcards supported)
-- `folder_filter` (string, optional) - Filter by World Outliner folder path
-- `tag_filter` (string, optional) - Filter by actor tag
-- `include_hidden` (boolean, optional) - Include hidden actors (default: false)
-- `include_components` (boolean, optional) - Include component list (default: false)
-- `include_transform` (boolean, optional) - Include transforms (default: true)
-- `limit` (integer, optional) - Max results (default: 100)
-
-**Returns:** Array of actors with optional transforms and components
-
----
-
-#### `get-actor-details`
-Deep inspection of a specific actor in the level.
-
-**Parameters:**
-- `actor_name` (string, required) - Actor name or label to inspect
-- `include_properties` (boolean, optional) - Include all properties (default: true)
-- `include_components` (boolean, optional) - Include component details (default: true)
-
-**Returns:** Complete actor details with properties and component hierarchy
-
----
-
-### Project Configuration (1 tool)
-
-#### `get-project-settings`
-Query project configuration settings.
-
-**Parameters:**
-- `section` (string, optional) - Section to query: `input`, `collision`, `tags`, `maps`, or `all` (default: `all`)
-
-**Returns:** JSON with requested configuration sections:
-- **input**: Action/axis mappings with keys and modifiers
-- **collision**: Profiles, channels, and responses
-- **tags**: Gameplay tag sources and settings
-- **maps**: Default maps and game modes
-
----
-
-### Analysis Tools (2 tools)
-
-#### `get-class-hierarchy`
-Browse class inheritance tree showing parents and children.
-
-**Parameters:**
-- `class_name` (string, required) - Class to inspect (e.g., `AActor`, `UActorComponent`)
-- `direction` (string, optional) - `parents`, `children`, or `both` (default: `both`)
-- `include_blueprints` (boolean, optional) - Include Blueprint subclasses (default: true)
-- `depth` (integer, optional) - Max inheritance depth (default: 10)
-
-**Returns:** Class hierarchy with parent chain and child classes
-
----
-
-#### `inspect-data-asset`
-Read DataTable and DataAsset contents.
-
-**Parameters:**
-- `asset_path` (string, required) - DataTable or DataAsset path
-- `row_filter` (string, optional) - Filter rows by name (wildcards supported, DataTable only)
-
-**Returns:**
-- **DataTable**: All rows with field data
-- **DataAsset**: All properties with values
-
----
-
-### Asset Management (1 tool)
-
-#### `search-assets`
-Search assets by name, class, or path with wildcard support.
-
-**Parameters:**
-- `pattern` (string, optional) - Search pattern (wildcards supported)
-- `class_filter` (string, optional) - Filter by asset class
-- `path_filter` (string, optional) - Filter by asset path
-- `limit` (integer, optional) - Max results (default: 100)
-
-**Returns:** Array of matching assets with paths and types
-
-## Architecture
-
-```
-┌──────────────────┐  HTTP POST   ┌──────────────────────────────┐
-│  Claude / Cursor │ ──────────►  │  UE Editor                   │
-│  Windsurf / etc  │  JSON-RPC    │  └─ UEBridgeMCP Plugin          │
-│                  │ ◄──────────  │     └─ FHttpServerModule     │
-│                  │   Response   │        (127.0.0.1:8080/mcp)│
-└──────────────────┘              └──────────────────────────────┘
-```
-
-**Modules:**
-- `UEBridgeMCP` (Runtime) - Core MCP protocol layer (JSON-RPC, tool registry)
-- `UEBridgeMCPEditor` (Editor) - HTTP server + UE Editor tool implementations
-
-## Development
-
-### Adding Custom Tools
-
-Custom tools can be registered by subclassing `UMcpToolBase` (declared in
-`Source/UEBridgeMCP/Public/McpToolBase.h`). Override `GetToolName`,
-`GetToolDescription`, `GetInputSchema`, and `Execute`, then register the tool
-with `FMcpToolRegistry::Get().RegisterTool<YourTool>()` during module startup.
-
-The built-in tools under `Source/UEBridgeMCPEditor/Private/Tools/` serve as
-reference implementations.
-
-### Building
-
-Requires Unreal Engine 5.6 or higher.
+Use a `tools/list` request to confirm the server is reachable:
 
 ```bash
-# Build with UnrealBuildTool
-<UE>/Engine/Build/BatchFiles/Build.bat YourProjectEditor Win64 Development
+curl -s -X POST http://127.0.0.1:8080/mcp \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
 ```
+
+If the plugin is running correctly, the response should contain the registered tool set for the current editor session.
+
+## Built-in Tool Surface
+
+The authoritative registration site is:
+
+```text
+Source/UEBridgeMCPEditor/Private/UEBridgeMCPEditor.cpp
+```
+
+At `v1.19.0`, the plugin registers **46 built-in tools** across the following groups:
+
+| Group | Count | Examples |
+| --- | ---: | --- |
+| Query and inspection | 15 | `query-blueprint-summary`, `query-asset`, `get-asset-diff`, `find-references`, `get-logs` |
+| Creation and editing | 14 | `create-asset`, `add-widget`, `edit-blueprint-graph`, `edit-level-batch`, `apply-material` |
+| StateTree | 5 | `query-statetree`, `add-statetree-state`, `add-statetree-transition` |
+| PIE, scripting, build, and RPC | 8 | `run-python-script`, `trigger-live-coding`, `pie-session`, `pie-input`, `wait-for-world-condition`, `call-function` |
+| High-level orchestration | 4 | `blueprint-scaffold-from-spec`, `query-gameplay-state`, `auto-fix-blueprint-compile-errors`, `generate-level-structure` |
+
+See [Tools Reference](Docs/Tools-Reference.md) for the full list and per-tool summaries.
+
+## Architecture Snapshot
+
+```text
+MCP Client
+  -> HTTP POST /mcp
+  -> UEBridgeMCPEditor module
+  -> FMcpServer
+  -> FMcpToolRegistry
+  -> UMcpToolBase-derived tools
+  -> Unreal Editor subsystems / assets / worlds / PIE
+```
+
+The plugin ships two modules:
+
+- `UEBridgeMCP` - runtime protocol types, schema helpers, base classes, and tool registry
+- `UEBridgeMCPEditor` - editor-only server, subsystem integration, built-in tools, and toolbar/status integration
+
+See [Architecture](Docs/Architecture.md) for the full lifecycle, warmup behavior, and threading constraints.
+
+## Extending UEBridgeMCP
+
+To add a new tool:
+
+1. Create a new `UMcpToolBase` subclass under `Source/UEBridgeMCPEditor/Public/Tools/` and `Private/Tools/`
+2. Override `GetToolName`, `GetToolDescription`, `GetInputSchema`, `GetRequiredParams`, and `Execute`
+3. Register the class in `FUEBridgeMCPEditorModule::RegisterBuiltInTools()`
+4. Rebuild or trigger Live Coding
+5. Add automated validation if your branch or repo contains a test harness; otherwise document a focused live-editor validation recipe such as a `tools/list` or `tools/call` request
+
+See [Tool Development](Docs/ToolDevelopment.md) for a fuller guide and recommended implementation rules.
+
+## Versioning
+
+UEBridgeMCP follows semantic versioning for public releases.
+
+- Keep `VersionName` in `UEBridgeMCP.uplugin` and `UEBRIDGEMCP_VERSION` in `Source/UEBridgeMCP/Public/UEBridgeMCP.h` identical.
+- Bump both in the same PR when public tool names, schemas, defaults, or externally visible behavior changes.
+- Update `CHANGELOG.md` and `RELEASE_NOTES.md` alongside the version bump.
+
+## Troubleshooting Entry Points
+
+Start with [Troubleshooting](Docs/Troubleshooting.md) if you hit any of these problems:
+
+- The client cannot connect to `http://127.0.0.1:8080/mcp`
+- `tools/list` is empty or missing expected tools
+- PIE start/stop appears stuck
+- Python execution fails or crashes the editor
+- Live Coding or rebuild operations do not reflect recent code changes
+- Multiple UE projects are fighting over the same server port
 
 ## License
 
-GNU General Public License v3.0 - see [LICENSE](LICENSE) for details
-
-## Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request.
+GNU General Public License v3.0 - see [LICENSE](LICENSE) for details.
 
 ## Links
 
 - [GitHub Repository](https://github.com/uuuuzz/UEBridgeMCP)
 - [Changelog](CHANGELOG.md)
-- [Model Context Protocol](https://modelcontextprotocol.io)
+- [Release Notes](RELEASE_NOTES.md)
+- [MCP Overview](https://modelcontextprotocol.io)
 - [MCP Specification](https://modelcontextprotocol.io/specification)
+- [Unreal Engine Documentation](https://docs.unrealengine.com/5.6/)
 
 ## Star History
 
