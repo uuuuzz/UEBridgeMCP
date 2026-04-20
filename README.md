@@ -15,6 +15,8 @@
 
 UEBridgeMCP is a native C++ Unreal Engine plugin that exposes the Unreal Editor to any MCP-compatible AI client over Streamable HTTP. It embeds the MCP server directly inside the editor process, so tools can inspect and edit Blueprints, levels, assets, materials, widgets, StateTrees, PIE sessions, and build workflows without a separate bridge process.
 
+**Acknowledgments:** This project is a heavily extended and optimized fork of [yes-ue-mcp](https://github.com/softdaddy-o/yes-ue-mcp) by softdaddy-o. Special thanks to the original author for the foundational MCP HTTP server architecture.
+
 **Current release:** `v1.19.0`
 
 **Highlights:**

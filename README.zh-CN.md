@@ -15,6 +15,8 @@
 
 UEBridgeMCP 是一个原生 C++ Unreal Engine 插件，通过 Streamable HTTP 将 Unreal Editor 暴露给任意兼容 MCP 的 AI 客户端。MCP 服务直接嵌入编辑器进程内部，因此工具无需额外桥接进程就可以检查和编辑蓝图、关卡、资产、材质、Widget、StateTree、PIE 会话以及构建流程。
 
+**致谢声明：** 本项目是基于 softdaddy-o 开源的 [yes-ue-mcp](https://github.com/softdaddy-o/yes-ue-mcp) 进行深度重构与扩充的分支版本。特别感谢原作者在基础 MCP HTTP 服务架构上所做出的贡献。
+
 **当前版本：** `v1.19.0`
 
 **亮点：**
