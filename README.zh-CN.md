@@ -8,6 +8,14 @@
 [![Release](https://img.shields.io/github/v/release/uuuuzz/UEBridgeMCP?include_prereleases&sort=semver)](https://github.com/uuuuzz/UEBridgeMCP/releases)
 [![GitHub stars](https://img.shields.io/github/stars/uuuuzz/UEBridgeMCP?style=social)](https://github.com/uuuuzz/UEBridgeMCP/stargazers)
 [![GitHub issues](https://img.shields.io/github/issues/uuuuzz/UEBridgeMCP)](https://github.com/uuuuzz/UEBridgeMCP/issues)
+![QQ 群](https://img.shields.io/badge/QQ%20%E7%BE%A4-1102258979-12B7F5?logo=tencentqq&logoColor=white)
+
+<details>
+<summary>扫码加入 QQ 群</summary>
+
+<img src="Docs/Images/qq-group-qrcode.jpg" alt="QQ 群二维码" width="300" />
+
+</details>
 
 **语言：** [English](README.md) | **简体中文**
 
