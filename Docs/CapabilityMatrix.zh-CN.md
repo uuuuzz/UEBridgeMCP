@@ -16,7 +16,7 @@
 
 截至 `2026-04-24`：
 
-- 基础编辑器工具面：已补入 2026-04-24 UnrealMCPServer 对齐批次；准确运行时数量以 `tools/list` 为准。
+- 基础编辑器工具面：已补入 2026-04-24 能力扩展批次；准确运行时数量以 `tools/list` 为准。
 - 额外运行时工具会随着条件编辑器能力和 Step 6 扩展模块一起增减。
 
 | 能力族 | 状态 | 当前 UEBridgeMCP 覆盖 | 计划步骤 / 备注 |
@@ -42,5 +42,5 @@
 
 - Step 6 明确把项目口径从“固定总数”改成了“运行时动态清单”。
 - `get-project-info` 现在会返回 Sequencer、Control Rig、Landscape、Foliage、World Partition、PCG、Niagara、MetaSound、External AI 的 `optional_capabilities`。
-- 2026-04-24 兼容批次新增 UnrealMCPServer 风格名称别名；`Validation/Smoke/VerifyCompatibilityAliases.ps1` 会检查 alias target 和核心期望映射。
+- 2026-04-24 兼容批次新增名称兼容别名；`Validation/Smoke/VerifyCompatibilityAliases.ps1` 会检查 alias target 和核心期望映射。
 - 路线图继续按工作流能力族推进，而不是和任何第三方插件做 1:1 工具对齐。

@@ -1,6 +1,0 @@
-{
-  "ok": true,
-  "errors": [
-    "collision_enabled: StaticMeshComponent: Failed to find property 'collision_enabled' for attribute 'collision_enabled' on 'StaticMeshComponent'"
-  ]
-}

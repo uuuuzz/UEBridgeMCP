@@ -2,7 +2,7 @@
 
 ## Goal
 
-Close Step 6 as a validation-ready delivery in `G:\UEProjects\MyProject`, keeping `UEBridgeMCP` and `UnrealMCPServer` mounted side by side and using the baseline server for black-box protocol comparison.
+Close Step 6 as a validation-ready delivery in `G:\UEProjects\MyProject`, using a local black-box baseline endpoint for protocol comparison.
 
 ## Runtime evidence
 
@@ -13,14 +13,14 @@ Close Step 6 as a validation-ready delivery in `G:\UEProjects\MyProject`, keepin
 
 ## Environment notes
 
-- The project configuration remains `127.0.0.1:8080` for `UEBridgeMCP` and `127.0.0.1:13579` for `UnrealMCPServer`.
+- The project configuration remains `127.0.0.1:8080` for `UEBridgeMCP` and `127.0.0.1:13579` for the comparison baseline.
 - The final validation run executed `UEBridgeMCP` temporarily on `127.0.0.1:18080` because an unrelated `LyraStarterGame` editor session was already listening on `8080`.
 - `G:\UEProjects\MyProject\Config\DefaultUEBridgeMCP.ini` was restored to `8080` after each validation run.
 - Final run editor process exited cleanly: `Editor closed: True`.
 
 ## Protocol
 
-- `UnrealMCPServer`:
+- Comparison baseline:
   - `initialize` succeeded
   - `tools/list` succeeded
   - runtime tool count from `tools/list`: `304`

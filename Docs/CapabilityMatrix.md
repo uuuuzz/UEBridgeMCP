@@ -16,7 +16,7 @@ Status legend:
 
 As of `2026-04-24`:
 
-- Base editor surface: expanded with the 2026-04-24 UnrealMCPServer parity batch; use `tools/list` for the exact runtime count.
+- Base editor surface: expanded with the 2026-04-24 capability batch; use `tools/list` for the exact runtime count.
 - Additional runtime tools may be contributed by conditional editor integrations and Step 6 extension modules.
 
 | Capability family | Status | Current UEBridgeMCP coverage | Planned step / notes |
@@ -42,5 +42,5 @@ Notes:
 
 - Step 6 intentionally changed the contract from "one fixed total" to "dynamic runtime inventory".
 - `get-project-info` now reports `optional_capabilities` for Sequencer, Control Rig, Landscape, Foliage, World Partition, PCG, Niagara, MetaSound, and External AI.
-- The 2026-04-24 compatibility pass adds name-only UnrealMCPServer-style aliases; `Validation/Smoke/VerifyCompatibilityAliases.ps1` checks alias targets and core expected mappings.
+- The 2026-04-24 compatibility pass adds name-only compatibility aliases; `Validation/Smoke/VerifyCompatibilityAliases.ps1` checks alias targets and core expected mappings.
 - Capability planning continues to align to workflow families, not 1:1 parity with any other plugin.

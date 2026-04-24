@@ -176,7 +176,7 @@ Source/UEBridgeMCPEditor/Private/UEBridgeMCPEditor.cpp
 - always-on 编辑器工具由 `RegisterBuiltInTools()` 注册。
 - Sequencer、Landscape、Foliage、World Partition、Niagara、MetaSound 等可选模块可带来条件工具。
 - Control Rig、PCG、External AI 等扩展模块可追加工具。
-- UnrealMCPServer 风格名称以兼容 alias 形式暴露，并解析到 UEBridgeMCP 的 canonical 工具。
+- 兼容名称以 alias 形式暴露，并解析到 UEBridgeMCP 的 canonical 工具。
 
 发布验收口径是：`initialize.capabilities.tools.registeredCount == tools/list.length`，再加上 `Validation/Smoke/` 下的预检脚本全部通过。
 

@@ -1,8 +1,0 @@
-{
-    "jsonrpc":  "2.0",
-    "id":  "spawn-actor",
-    "error":  {
-                  "code":  -32603,
-                  "message":  "Tool execution timed out after 120 seconds. The editor GameThread may be blocked or frozen. Try stopping PIE or restarting the editor."
-              }
-}

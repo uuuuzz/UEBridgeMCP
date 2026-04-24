@@ -288,9 +288,9 @@ namespace
 		return AdaptedArguments;
 	}
 
-	void RegisterUnrealMCPCompatibilityAliases(FMcpToolRegistry& Registry)
+	void RegisterCompatibilityAliases(FMcpToolRegistry& Registry)
 	{
-		// Name-only aliases for UnrealMCPServer-style snake_case tool names.
+		// Name-only aliases for common snake_case tool names.
 		// The canonical UEBridgeMCP tool schema remains the source of truth.
 		Registry.RegisterToolAlias(TEXT("get_project_info"), TEXT("get-project-info"));
 		Registry.RegisterToolAlias(TEXT("execute_python"), TEXT("run-python-script"));
@@ -763,7 +763,7 @@ void FUEBridgeMCPEditorModule::RegisterBuiltInTools()
 	Registry.RegisterToolClass(UQueryGameplayStateTool::StaticClass());
 	Registry.RegisterToolClass(UAutoFixBlueprintCompileErrorsTool::StaticClass());
 	Registry.RegisterToolClass(UGenerateLevelStructureTool::StaticClass());
-	RegisterUnrealMCPCompatibilityAliases(Registry);
+	RegisterCompatibilityAliases(Registry);
 
 	// P0-H2: 模块加载阶段（GameThread）预实例化所有工具，避免首次 NewObject/AddToRoot
 	// 发生在后台线程（当工具 RequiresGameThread()==false 时，ExecuteTool 会在后台线程调用 FindTool）。

@@ -1,1 +1,0 @@
-{"method":"tools/call","params":{"arguments":{"include":["world"],"action":"get-state"},"name":"pie-session"},"id":"06_pie_state_0","jsonrpc":"2.0"}

@@ -1,9 +1,0 @@
-{
-  "path": "/Game/Materials/NPR/M_NPR_SunnySkyDome.M_NPR_SunnySkyDome",
-  "blend_mode": "<BlendMode.BLEND_OPAQUE: 0>",
-  "shading_model": "<MaterialShadingModel.MSM_UNLIT: 0>",
-  "two_sided": "True",
-  "material_domain": "<MaterialDomain.MD_SURFACE: 0>",
-  "expr_err": "Material: Property 'Expressions' for attribute 'expressions' on 'Material' is protected and cannot be read",
-  "exprs": []
-}

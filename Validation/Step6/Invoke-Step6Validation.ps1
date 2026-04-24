@@ -5,7 +5,7 @@ param(
     [string]$MapPath = "/Game/Maps/L_Empty",
     [string]$OutputRoot = "G:\UEProjects\UEBridgeMCP\Tmp\Validation\Step6",
     [int]$UEBridgePort = 8080,
-    [int]$UnrealMcpPort = 13579,
+    [int]$BaselineMcpPort = 13579,
     [switch]$LaunchEditor,
     [switch]$CloseEditorWhenDone,
     [int]$StartupTimeoutSeconds = 240,
@@ -291,7 +291,7 @@ $summary = [ordered]@{
     map_path = $MapPath
     requested_ports = @{
         uebridge = $UEBridgePort
-        unreal_mcp_server = $UnrealMcpPort
+        baseline_mcp_server = $BaselineMcpPort
     }
     scenarios = @()
     observations = @()
@@ -315,40 +315,40 @@ if ($LaunchEditor) {
 if (-not (Wait-TcpPort -Address "127.0.0.1" -Port $UEBridgePort -TimeoutSeconds $StartupTimeoutSeconds)) {
     throw "UEBridgeMCP endpoint did not become ready on port $UEBridgePort"
 }
-if (-not (Wait-TcpPort -Address "127.0.0.1" -Port $UnrealMcpPort -TimeoutSeconds $StartupTimeoutSeconds)) {
-    throw "UnrealMCPServer endpoint did not become ready on port $UnrealMcpPort"
+if (-not (Wait-TcpPort -Address "127.0.0.1" -Port $BaselineMcpPort -TimeoutSeconds $StartupTimeoutSeconds)) {
+    throw "Baseline MCP endpoint did not become ready on port $BaselineMcpPort"
 }
 
 $ueBridgeServer = New-McpServerHandle -Name "uebridge" -Uri "http://127.0.0.1:$UEBridgePort/mcp" -TimeoutSeconds $RequestTimeoutSeconds
-$unrealServer = New-McpServerHandle -Name "unrealmcp" -Uri "http://127.0.0.1:$UnrealMcpPort/mcp" -TimeoutSeconds $RequestTimeoutSeconds
+$baselineServer = New-McpServerHandle -Name "baseline" -Uri "http://127.0.0.1:$BaselineMcpPort/mcp" -TimeoutSeconds $RequestTimeoutSeconds
 
 $scenarioResults = New-Object 'System.Collections.Generic.List[object]'
 
 $bridgeTools = Invoke-McpCall -Server $ueBridgeServer.Handle -Method "tools/list" -Params @{} -Id "uebridge-tools-list"
-$unrealTools = Invoke-McpCall -Server $unrealServer.Handle -Method "tools/list" -Params @{} -Id "unrealmcp-tools-list"
+$baselineTools = Invoke-McpCall -Server $baselineServer.Handle -Method "tools/list" -Params @{} -Id "baseline-tools-list"
 $bridgeResources = Invoke-McpCall -Server $ueBridgeServer.Handle -Method "resources/list" -Params @{} -Id "uebridge-resources-list"
-$unrealResources = Invoke-McpCall -Server $unrealServer.Handle -Method "resources/list" -Params @{} -Id "unrealmcp-resources-list"
+$baselineResources = Invoke-McpCall -Server $baselineServer.Handle -Method "resources/list" -Params @{} -Id "baseline-resources-list"
 $bridgePrompts = Invoke-McpCall -Server $ueBridgeServer.Handle -Method "prompts/list" -Params @{} -Id "uebridge-prompts-list"
-$unrealPrompts = Invoke-McpCall -Server $unrealServer.Handle -Method "prompts/list" -Params @{} -Id "unrealmcp-prompts-list"
+$baselinePrompts = Invoke-McpCall -Server $baselineServer.Handle -Method "prompts/list" -Params @{} -Id "baseline-prompts-list"
 
-Add-ScenarioResult -Collection $scenarioResults -Name "protocol.initialize" -ServerName "UnrealMCPServer" -Invocation $unrealServer.Initialize
+Add-ScenarioResult -Collection $scenarioResults -Name "protocol.initialize" -ServerName "ReferenceBaseline" -Invocation $baselineServer.Initialize
 Add-ScenarioResult -Collection $scenarioResults -Name "protocol.initialize" -ServerName "UEBridgeMCP" -Invocation $ueBridgeServer.Initialize
-Add-ScenarioResult -Collection $scenarioResults -Name "protocol.tools_list" -ServerName "UnrealMCPServer" -Invocation $unrealTools
+Add-ScenarioResult -Collection $scenarioResults -Name "protocol.tools_list" -ServerName "ReferenceBaseline" -Invocation $baselineTools
 Add-ScenarioResult -Collection $scenarioResults -Name "protocol.tools_list" -ServerName "UEBridgeMCP" -Invocation $bridgeTools
-Add-ScenarioResult -Collection $scenarioResults -Name "protocol.resources_list" -ServerName "UnrealMCPServer" -Invocation $unrealResources
+Add-ScenarioResult -Collection $scenarioResults -Name "protocol.resources_list" -ServerName "ReferenceBaseline" -Invocation $baselineResources
 Add-ScenarioResult -Collection $scenarioResults -Name "protocol.resources_list" -ServerName "UEBridgeMCP" -Invocation $bridgeResources
-Add-ScenarioResult -Collection $scenarioResults -Name "protocol.prompts_list" -ServerName "UnrealMCPServer" -Invocation $unrealPrompts
+Add-ScenarioResult -Collection $scenarioResults -Name "protocol.prompts_list" -ServerName "ReferenceBaseline" -Invocation $baselinePrompts
 Add-ScenarioResult -Collection $scenarioResults -Name "protocol.prompts_list" -ServerName "UEBridgeMCP" -Invocation $bridgePrompts
 
 $bridgeResourceList = To-ArraySafe $bridgeResources.Response.Json.result.resources
-$unrealResourceList = To-ArraySafe $unrealResources.Response.Json.result.resources
+$baselineResourceList = To-ArraySafe $baselineResources.Response.Json.result.resources
 $bridgePromptList = To-ArraySafe $bridgePrompts.Response.Json.result.prompts
-$unrealPromptList = To-ArraySafe $unrealPrompts.Response.Json.result.prompts
+$baselinePromptList = To-ArraySafe $baselinePrompts.Response.Json.result.prompts
 
-if ($unrealResourceList.Count -gt 0) {
-    $firstUnrealUri = [string]$unrealResourceList[0].uri
-    $unrealRead = Invoke-McpCall -Server $unrealServer.Handle -Method "resources/read" -Params @{ uri = $firstUnrealUri } -Id "unrealmcp-resources-read"
-    Add-ScenarioResult -Collection $scenarioResults -Name "protocol.resources_read" -ServerName "UnrealMCPServer" -Invocation $unrealRead -Notes $firstUnrealUri
+if ($baselineResourceList.Count -gt 0) {
+    $firstBaselineUri = [string]$baselineResourceList[0].uri
+    $baselineRead = Invoke-McpCall -Server $baselineServer.Handle -Method "resources/read" -Params @{ uri = $firstBaselineUri } -Id "baseline-resources-read"
+    Add-ScenarioResult -Collection $scenarioResults -Name "protocol.resources_read" -ServerName "ReferenceBaseline" -Invocation $baselineRead -Notes $firstBaselineUri
 }
 
 if ($bridgeResourceList.Count -gt 0) {
@@ -360,11 +360,11 @@ if ($bridgeResourceList.Count -gt 0) {
     Add-ScenarioResult -Collection $scenarioResults -Name "protocol.resources_read" -ServerName "UEBridgeMCP" -Invocation $bridgeRead -Notes $bridgeReadUri
 }
 
-if ($unrealPromptList.Count -gt 0) {
-    $firstPrompt = [string]$unrealPromptList[0].name
-    $unrealPromptArgs = @{ goal = "Validate prompt expansion"; issue = "Baseline performance review"; world_mode = "editor" }
-    $unrealPrompt = Invoke-McpCall -Server $unrealServer.Handle -Method "prompts/get" -Params @{ name = $firstPrompt; arguments = $unrealPromptArgs } -Id "unrealmcp-prompts-get"
-    Add-ScenarioResult -Collection $scenarioResults -Name "protocol.prompts_get" -ServerName "UnrealMCPServer" -Invocation $unrealPrompt -Notes $firstPrompt
+if ($baselinePromptList.Count -gt 0) {
+    $firstPrompt = [string]$baselinePromptList[0].name
+    $baselinePromptArgs = @{ goal = "Validate prompt expansion"; issue = "Baseline performance review"; world_mode = "editor" }
+    $baselinePrompt = Invoke-McpCall -Server $baselineServer.Handle -Method "prompts/get" -Params @{ name = $firstPrompt; arguments = $baselinePromptArgs } -Id "baseline-prompts-get"
+    Add-ScenarioResult -Collection $scenarioResults -Name "protocol.prompts_get" -ServerName "ReferenceBaseline" -Invocation $baselinePrompt -Notes $firstPrompt
 }
 
 $bridgePrompt = Invoke-McpCall -Server $ueBridgeServer.Handle -Method "prompts/get" -Params @{
@@ -647,20 +647,20 @@ $summary["uebridge"] = @{
     prompts_list_count = $bridgePromptList.Count
     capability_checks = $capabilityChecks
 }
-$summary["unreal_mcp_server"] = @{
-    session_id = $unrealServer.Handle.SessionId
-    initialize = $unrealServer.Initialize.Response.Json
-    tools_list_count = @($unrealTools.Response.Json.result.tools).Count
-    resources_list_count = $unrealResourceList.Count
-    prompts_list_count = $unrealPromptList.Count
+$summary["reference_baseline"] = @{
+    session_id = $baselineServer.Handle.SessionId
+    initialize = $baselineServer.Initialize.Response.Json
+    tools_list_count = @($baselineTools.Response.Json.result.tools).Count
+    resources_list_count = $baselineResourceList.Count
+    prompts_list_count = $baselinePromptList.Count
 }
 $summary["scenarios"] = $scenarioResultsArray
 
 Write-JsonFile -Path (Join-Path $runRoot "summary.json") -Value $summary
 Write-JsonFile -Path (Join-Path $runRoot "uebridge.initialize.json") -Value $ueBridgeServer.Initialize
-Write-JsonFile -Path (Join-Path $runRoot "unrealmcp.initialize.json") -Value $unrealServer.Initialize
+Write-JsonFile -Path (Join-Path $runRoot "baseline.initialize.json") -Value $baselineServer.Initialize
 Write-JsonFile -Path (Join-Path $runRoot "uebridge.tools_list.json") -Value $bridgeTools
-Write-JsonFile -Path (Join-Path $runRoot "unrealmcp.tools_list.json") -Value $unrealTools
+Write-JsonFile -Path (Join-Path $runRoot "baseline.tools_list.json") -Value $baselineTools
 Write-JsonFile -Path (Join-Path $runRoot "scenario-results.json") -Value $scenarioResultsArray
 
 $closedEditor = $false

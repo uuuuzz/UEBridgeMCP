@@ -1,1 +1,0 @@
-{"method":"tools/call","params":{"arguments":{"max_hits":8,"channel":"Visibility","shape":"line","return_all":true,"start":[0,0,400],"end":[0,0,-200],"world":"editor"},"name":"trace-gameplay-collision"},"id":"07_trace_collision","jsonrpc":"2.0"}

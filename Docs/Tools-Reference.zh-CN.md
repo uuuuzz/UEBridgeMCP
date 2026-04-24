@@ -477,9 +477,9 @@ Sequencer Round 1 收口说明：
 
 客户端应该联合使用 `optional_capabilities` 和 `tools/list`，不要再假设 Step 6 的工具总数固定不变。
 
-## UnrealMCPServer 兼容别名
+## 兼容别名
 
-UEBridgeMCP 现在会为常见 UnrealMCPServer 风格的 `snake_case` 工具名注册一层“名称兼容”别名。
+UEBridgeMCP 现在会为常见 `snake_case` 工具名注册一层“名称兼容”别名。
 
 - alias 调用会通过 `FMcpToolRegistry::ResolveToolName()` 解析到 canonical 工具。
 - `tools/list` 会包含 alias definition，description 中会标明 canonical target。

@@ -1,6 +1,6 @@
 # Release Preflight
 
-Use this before tagging or packaging a release. It verifies the runtime inventory and the UnrealMCPServer compatibility layer without relying on a hard-coded tool count.
+Use this before tagging or packaging a release. It verifies the runtime inventory and the compatibility alias layer without relying on a hard-coded tool count.
 
 ## Run
 
@@ -29,7 +29,7 @@ The release should pass these checks:
 - Static compatibility alias validation passes.
 - `initialize.capabilities.tools.registeredCount` equals `tools/list.length`.
 - `resources/list` and `prompts/list` return successfully.
-- Expected UnrealMCPServer-style aliases are visible in `tools/list`.
+- Expected compatibility aliases are visible in `tools/list`.
 - Read-only or dry-run alias calls complete.
 - Safety probes confirm high-risk operations reject unconfirmed execution.
 

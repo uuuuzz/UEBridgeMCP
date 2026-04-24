@@ -1,6 +1,6 @@
 # Step 6 Comparison Matrix
 
-This document records the behavior-level Step 6 validation comparison in `G:\UEProjects\MyProject`, using `UnrealMCPServer` as the black-box baseline and `UEBridgeMCP` as the target.
+This document records the behavior-level Step 6 validation comparison in `G:\UEProjects\MyProject`, using a local black-box baseline endpoint and `UEBridgeMCP` as the target.
 
 Allowed status values:
 
@@ -14,13 +14,13 @@ Allowed status values:
 - Host project: `G:\UEProjects\MyProject`
 - Validation map: `/Game/Maps/L_Empty`
 - Temporary validation content root: `/Game/UEBridgeMCPValidation/Step6`
-- Baseline plugin: `UnrealMCPServer`
+- Baseline endpoint: local MCP-compatible editor bridge on `127.0.0.1:13579`
 - Target plugin: `UEBridgeMCP`
 - Final validated run: `G:\UEProjects\UEBridgeMCP\Tmp\Validation\Step6\20260423_114727`
 
 ## Matrix
 
-| Scenario | UnrealMCPServer baseline | UEBridgeMCP result | Status | Notes |
+| Scenario | Reference baseline | UEBridgeMCP result | Status | Notes |
 | --- | --- | --- | --- | --- |
 | Protocol handshake (`initialize`, `tools/list`) | `initialize` and `tools/list` both returned `200`; `tools/list` reported `304` tools | `initialize` and `tools/list` both returned `200`; `registeredCount=93` and `tools/list` also returned `93` tools | `Equivalent` | Baseline does not expose `registeredCount` in `initialize`; UEBridgeMCP does, and its value matches runtime tool registration. |
 | Resources list/read | `resources/list` and `resources/read` succeeded; validation read `unreal://project/info` | `resources/list` and `resources/read` succeeded; validation read `uebmcp://builtin/resources/performance-triage-guide` | `Equivalent` | Both servers expose working MCP resources. The resource payloads differ by design. |

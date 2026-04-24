@@ -176,7 +176,7 @@ At `v1.19.0`, the tool surface is intentionally dynamic:
 - Always-on editor tools are registered in `RegisterBuiltInTools()`.
 - Conditional tools appear when optional UE modules such as Sequencer, Landscape, Foliage, World Partition, Niagara, and MetaSound are available.
 - Extension modules can add Control Rig, PCG, and External AI tools.
-- UnrealMCPServer-style compatibility aliases are exposed as name-only aliases that resolve to canonical UEBridgeMCP tools.
+- Compatibility aliases are exposed as name-only aliases that resolve to canonical UEBridgeMCP tools.
 
 The release gate is `initialize.capabilities.tools.registeredCount == tools/list.length`, plus the preflight checks under `Validation/Smoke/`.
 

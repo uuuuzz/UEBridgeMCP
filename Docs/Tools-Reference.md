@@ -478,9 +478,9 @@ These tools are intentionally kept outside the core editor module.
 
 Clients should use that object together with `tools/list` instead of assuming any fixed Step 6 tool count.
 
-## UnrealMCPServer Compatibility Aliases
+## Compatibility Aliases
 
-UEBridgeMCP now registers a name-only compatibility alias layer for common UnrealMCPServer-style `snake_case` names.
+UEBridgeMCP now registers a name-only compatibility alias layer for common `snake_case` tool names.
 
 - Alias calls resolve through `FMcpToolRegistry::ResolveToolName()`.
 - `tools/list` includes alias definitions whose descriptions identify the canonical target.

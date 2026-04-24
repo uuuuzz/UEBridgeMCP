@@ -1,6 +1,6 @@
 # 发布前预检
 
-发布打 tag 或打包前运行这套检查。它验证运行时工具清单和 UnrealMCPServer 兼容层，不依赖写死的工具数量。
+发布打 tag 或打包前运行这套检查。它验证运行时工具清单和兼容 alias 层，不依赖写死的工具数量。
 
 ## 运行方式
 
@@ -29,7 +29,7 @@ Tmp/Validation/ReleasePreflight/<timestamp>/summary.json
 - 静态兼容 alias 检查通过。
 - `initialize.capabilities.tools.registeredCount` 等于 `tools/list.length`。
 - `resources/list` 和 `prompts/list` 成功返回。
-- 预期的 UnrealMCPServer 风格 alias 能在 `tools/list` 里看到。
+- 预期的兼容 alias 能在 `tools/list` 里看到。
 - 只读或 dry-run alias 抽样调用成功。
 - 安全探针确认高风险操作会拒绝未确认的真实执行。
 
