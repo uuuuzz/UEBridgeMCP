@@ -461,15 +461,25 @@ namespace NiagaraToolUtils
 		Object->SetBoolField(TEXT("allowed_by_scalability"), Handle.IsAllowedByScalability());
 		Object->SetStringField(TEXT("unique_instance_name"), Handle.GetUniqueInstanceName());
 
+#if ENGINE_MAJOR_VERSION > 5 || (ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 7)
 		if (const UNiagaraEmitterBase* EmitterBase = Handle.GetEmitterBase())
 		{
 			Object->SetStringField(TEXT("emitter_class"), EmitterBase->GetClass()->GetName());
 			Object->SetStringField(TEXT("emitter_path"), EmitterBase->GetPathName());
 		}
+#else
+		const FVersionedNiagaraEmitter VersionedEmitter = Handle.GetInstance();
+		if (VersionedEmitter.Emitter)
+		{
+			Object->SetStringField(TEXT("emitter_class"), VersionedEmitter.Emitter->GetClass()->GetName());
+			Object->SetStringField(TEXT("emitter_path"), VersionedEmitter.Emitter->GetPathName());
+		}
+#endif
 
 		if (bIncludeRenderers)
 		{
 			TArray<TSharedPtr<FJsonValue>> Renderers;
+#if ENGINE_MAJOR_VERSION > 5 || (ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 7)
 			Handle.ForEachEnabledRendererWithIndex([&Renderers](const UNiagaraRendererProperties* Renderer, int32 Index)
 			{
 				TSharedPtr<FJsonObject> RendererObject = MakeShareable(new FJsonObject);
@@ -481,6 +491,24 @@ namespace NiagaraToolUtils
 				}
 				Renderers.Add(MakeShareable(new FJsonValueObject(RendererObject)));
 			});
+#else
+			if (const FVersionedNiagaraEmitterData* EmitterData = Handle.GetEmitterData())
+			{
+				int32 Index = 0;
+				EmitterData->ForEachEnabledRenderer([&Renderers, &Index](const UNiagaraRendererProperties* Renderer)
+				{
+					TSharedPtr<FJsonObject> RendererObject = MakeShareable(new FJsonObject);
+					RendererObject->SetNumberField(TEXT("index"), Index);
+					if (Renderer)
+					{
+						RendererObject->SetStringField(TEXT("class"), Renderer->GetClass()->GetName());
+						RendererObject->SetStringField(TEXT("name"), Renderer->GetName());
+					}
+					Renderers.Add(MakeShareable(new FJsonValueObject(RendererObject)));
+					++Index;
+				});
+			}
+#endif
 			Object->SetArrayField(TEXT("enabled_renderers"), Renderers);
 			Object->SetNumberField(TEXT("enabled_renderer_count"), Renderers.Num());
 		}

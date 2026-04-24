@@ -63,6 +63,81 @@ namespace
 		OutHandle = FMetaSoundNodeHandle(Guid);
 		return true;
 	}
+
+	void ConnectNamedMetaSoundNodes(
+		UMetaSoundBuilderBase* Builder,
+		const FMetaSoundNodeHandle& SourceHandle,
+		const FString& OutputName,
+		const FMetaSoundNodeHandle& TargetHandle,
+		const FString& InputName,
+		EMetaSoundBuilderResult& OutResult)
+	{
+#if ENGINE_MAJOR_VERSION > 5 || (ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 7)
+		Builder->ConnectNodes(SourceHandle, FName(*OutputName), TargetHandle, FName(*InputName), OutResult);
+#else
+		EMetaSoundBuilderResult FindOutputResult = EMetaSoundBuilderResult::Failed;
+		FMetaSoundBuilderNodeOutputHandle OutputHandle = Builder->FindNodeOutputByName(SourceHandle, FName(*OutputName), FindOutputResult);
+		if (FindOutputResult != EMetaSoundBuilderResult::Succeeded)
+		{
+			OutResult = FindOutputResult;
+			return;
+		}
+
+		EMetaSoundBuilderResult FindInputResult = EMetaSoundBuilderResult::Failed;
+		FMetaSoundBuilderNodeInputHandle InputHandle = Builder->FindNodeInputByName(TargetHandle, FName(*InputName), FindInputResult);
+		if (FindInputResult != EMetaSoundBuilderResult::Succeeded)
+		{
+			OutResult = FindInputResult;
+			return;
+		}
+
+		Builder->ConnectNodes(OutputHandle, InputHandle, OutResult);
+#endif
+	}
+
+	void ConnectGraphInputToNamedNode(
+		UMetaSoundBuilderBase* Builder,
+		const FString& GraphInputName,
+		const FMetaSoundNodeHandle& TargetHandle,
+		const FString& InputName,
+		EMetaSoundBuilderResult& OutResult)
+	{
+#if ENGINE_MAJOR_VERSION > 5 || (ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 7)
+		Builder->ConnectGraphInputToNode(FName(*GraphInputName), TargetHandle, FName(*InputName), OutResult);
+#else
+		EMetaSoundBuilderResult FindInputResult = EMetaSoundBuilderResult::Failed;
+		FMetaSoundBuilderNodeInputHandle InputHandle = Builder->FindNodeInputByName(TargetHandle, FName(*InputName), FindInputResult);
+		if (FindInputResult != EMetaSoundBuilderResult::Succeeded)
+		{
+			OutResult = FindInputResult;
+			return;
+		}
+
+		Builder->ConnectNodeInputToGraphInput(FName(*GraphInputName), InputHandle, OutResult);
+#endif
+	}
+
+	void ConnectNamedNodeToGraphOutput(
+		UMetaSoundBuilderBase* Builder,
+		const FMetaSoundNodeHandle& SourceHandle,
+		const FString& OutputName,
+		const FString& GraphOutputName,
+		EMetaSoundBuilderResult& OutResult)
+	{
+#if ENGINE_MAJOR_VERSION > 5 || (ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 7)
+		Builder->ConnectNodeToGraphOutput(SourceHandle, FName(*OutputName), FName(*GraphOutputName), OutResult);
+#else
+		EMetaSoundBuilderResult FindOutputResult = EMetaSoundBuilderResult::Failed;
+		FMetaSoundBuilderNodeOutputHandle OutputHandle = Builder->FindNodeOutputByName(SourceHandle, FName(*OutputName), FindOutputResult);
+		if (FindOutputResult != EMetaSoundBuilderResult::Succeeded)
+		{
+			OutResult = FindOutputResult;
+			return;
+		}
+
+		Builder->ConnectNodeOutputToGraphOutput(FName(*GraphOutputName), OutputHandle, OutResult);
+#endif
+	}
 }
 
 FString UEditMetaSoundGraphTool::GetToolDescription() const
@@ -301,7 +376,7 @@ FMcpToolResult UEditMetaSoundGraphTool::Execute(const TSharedPtr<FJsonObject>& A
 			else
 			{
 				EMetaSoundBuilderResult Result = EMetaSoundBuilderResult::Failed;
-				Builder->ConnectNodes(SourceHandle, FName(*OutputName), TargetHandle, FName(*InputName), Result);
+				ConnectNamedMetaSoundNodes(Builder, SourceHandle, OutputName, TargetHandle, InputName, Result);
 				bSuccess = Result == EMetaSoundBuilderResult::Succeeded;
 				bChanged = bSuccess;
 				ItemResult->SetStringField(TEXT("builder_result"), MetaSoundToolUtils::BuilderResultToString(Result));
@@ -335,7 +410,7 @@ FMcpToolResult UEditMetaSoundGraphTool::Execute(const TSharedPtr<FJsonObject>& A
 			else
 			{
 				EMetaSoundBuilderResult Result = EMetaSoundBuilderResult::Failed;
-				Builder->ConnectGraphInputToNode(FName(*GraphInputName), TargetHandle, FName(*InputName), Result);
+				ConnectGraphInputToNamedNode(Builder, GraphInputName, TargetHandle, InputName, Result);
 				bSuccess = Result == EMetaSoundBuilderResult::Succeeded;
 				bChanged = bSuccess;
 				ItemResult->SetStringField(TEXT("builder_result"), MetaSoundToolUtils::BuilderResultToString(Result));
@@ -369,7 +444,7 @@ FMcpToolResult UEditMetaSoundGraphTool::Execute(const TSharedPtr<FJsonObject>& A
 			else
 			{
 				EMetaSoundBuilderResult Result = EMetaSoundBuilderResult::Failed;
-				Builder->ConnectNodeToGraphOutput(SourceHandle, FName(*OutputName), FName(*GraphOutputName), Result);
+				ConnectNamedNodeToGraphOutput(Builder, SourceHandle, OutputName, GraphOutputName, Result);
 				bSuccess = Result == EMetaSoundBuilderResult::Succeeded;
 				bChanged = bSuccess;
 				ItemResult->SetStringField(TEXT("builder_result"), MetaSoundToolUtils::BuilderResultToString(Result));

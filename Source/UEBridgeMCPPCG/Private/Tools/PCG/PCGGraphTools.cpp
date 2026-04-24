@@ -396,7 +396,11 @@ FMcpToolResult UEditPCGGraphTool::Execute(const TSharedPtr<FJsonObject>& Argumen
 					const FString NodeTitle = GetStringArgOrDefault(*OperationObject, TEXT("node_title"));
 					if (!NodeTitle.IsEmpty())
 					{
+#if ENGINE_MAJOR_VERSION > 5 || (ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 7)
 						Node->SetNodeTitle(FName(*NodeTitle));
+#else
+						ResultObject->SetStringField(TEXT("node_title_warning"), TEXT("node_title is ignored on UE versions where UPCGNode::SetNodeTitle is unavailable"));
+#endif
 					}
 
 					int32 PositionX = 0;

@@ -4,8 +4,13 @@
 
 #include "Utils/McpAssetModifier.h"
 
+#if ENGINE_MAJOR_VERSION > 5 || (ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 7)
 #include "ControlRigBlueprintLegacy.h"
 #include "RigVMBlueprintLegacy.h"
+#else
+#include "ControlRigBlueprint.h"
+#include "RigVMBlueprint.h"
+#endif
 #include "RigVMModel/RigVMController.h"
 #include "RigVMModel/RigVMGraph.h"
 #include "RigVMModel/RigVMNode.h"

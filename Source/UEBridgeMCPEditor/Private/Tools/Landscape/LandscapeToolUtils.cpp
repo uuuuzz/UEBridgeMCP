@@ -104,7 +104,11 @@ namespace LandscapeToolUtils
 				TSharedPtr<FJsonObject> LayerObject = MakeShareable(new FJsonObject);
 				if (Allocation.LayerInfo)
 				{
+#if ENGINE_MAJOR_VERSION > 5 || (ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 7)
 					LayerObject->SetStringField(TEXT("name"), Allocation.LayerInfo->GetLayerName().ToString());
+#else
+					LayerObject->SetStringField(TEXT("name"), Allocation.LayerInfo->LayerName.ToString());
+#endif
 					LayerObject->SetStringField(TEXT("layer_info_path"), Allocation.LayerInfo->GetPathName());
 				}
 				else

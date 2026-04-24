@@ -54,8 +54,13 @@ namespace
 		Object->SetStringField(TEXT("animation_path"), Sample.Animation ? Sample.Animation->GetPathName() : TEXT(""));
 		Object->SetArrayField(TEXT("sample_value"), VectorToJsonArray(Sample.SampleValue));
 		Object->SetNumberField(TEXT("rate_scale"), Sample.RateScale);
+#if ENGINE_MAJOR_VERSION > 5 || (ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 7)
 		Object->SetBoolField(TEXT("use_single_frame"), Sample.bUseSingleFrameForBlending);
 		Object->SetNumberField(TEXT("frame_index_to_sample"), static_cast<double>(Sample.FrameIndexToSample));
+#else
+		Object->SetBoolField(TEXT("use_single_frame"), false);
+		Object->SetNumberField(TEXT("frame_index_to_sample"), 0.0);
+#endif
 		return Object;
 	}
 
