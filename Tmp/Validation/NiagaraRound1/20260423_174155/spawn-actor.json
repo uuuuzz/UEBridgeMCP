@@ -1,0 +1,29 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "20",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Either \u0027script\u0027 or \u0027script_path\u0027 must be provided"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "code":  "UEBMCP_ERROR",
+                                             "message":  "Either \u0027script\u0027 or \u0027script_path\u0027 must be provided"
+                                         },
+                   "isError":  true,
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  0.017599988495931029
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "run-python-script",
+                                               "mutates":  false,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  1
+                                           }
+                             }
+               }
+}

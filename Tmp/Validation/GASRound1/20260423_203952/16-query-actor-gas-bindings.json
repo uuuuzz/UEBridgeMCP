@@ -1,0 +1,60 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "query-actor-gas",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Request succeeded"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "tool":  "query-gas-asset-summary",
+                                             "success":  true,
+                                             "asset_path":  "/Game/UEBridgeMCPValidation/GASRound1/BP_GASRound1_20260423_203952",
+                                             "asset_class":  "/Game/UEBridgeMCPValidation/GASRound1/BP_GASRound1_20260423_203952.BP_GASRound1_20260423_203952_C",
+                                             "summary":  {
+                                                             "asset_path":  "/Game/UEBridgeMCPValidation/GASRound1/BP_GASRound1_20260423_203952",
+                                                             "gas_type":  "actor_bindings",
+                                                             "valid":  true,
+                                                             "ability_system_component_count":  1,
+                                                             "ability_system_components":  [
+                                                                                               {
+                                                                                                   "name":  "AbilitySystem",
+                                                                                                   "class":  "/Script/GameplayAbilities.AbilitySystemComponent"
+                                                                                               }
+                                                                                           ],
+                                                             "binding_variable_count":  3,
+                                                             "binding_variables":  [
+                                                                                       {
+                                                                                           "name":  "DefaultAbility",
+                                                                                           "binding_kind":  "ability",
+                                                                                           "class_path":  "/Game/UEBridgeMCPValidation/GASRound1/GA_GASRound1_20260423_203952.GA_GASRound1_20260423_203952_C"
+                                                                                       },
+                                                                                       {
+                                                                                           "name":  "StartupEffect",
+                                                                                           "binding_kind":  "gameplay_effect",
+                                                                                           "class_path":  "/Game/UEBridgeMCPValidation/GASRound1/GE_GASRound1_20260423_203952.GE_GASRound1_20260423_203952_C"
+                                                                                       },
+                                                                                       {
+                                                                                           "name":  "DefaultAttributes",
+                                                                                           "binding_kind":  "attribute_set",
+                                                                                           "class_path":  "/Game/UEBridgeMCPValidation/GASRound1/AS_GASRound1_20260423_203952.AS_GASRound1_20260423_203952_C"
+                                                                                       }
+                                                                                   ]
+                                                         }
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  0.031899980967864394
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "query-gas-asset-summary",
+                                               "mutates":  false,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  0
+                                           }
+                             }
+               }
+}

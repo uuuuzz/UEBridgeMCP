@@ -1,0 +1,23 @@
+﻿{
+    "timestamp":  "20260423_202947",
+    "evidence_dir":  "G:\\UEProjects\\UEBridgeMCP\\Tmp\\Validation\\GASRound1\\20260423_202947",
+    "asset_root":  "/Game/UEBridgeMCPValidation/GASRound1",
+    "attribute_set_path":  "/Game/UEBridgeMCPValidation/GASRound1/AS_GASRound1_20260423_202947",
+    "gameplay_effect_path":  "/Game/UEBridgeMCPValidation/GASRound1/GE_GASRound1_20260423_202947",
+    "gameplay_ability_path":  "/Game/UEBridgeMCPValidation/GASRound1/GA_GASRound1_20260423_202947",
+    "actor_blueprint_path":  "/Game/UEBridgeMCPValidation/GASRound1/BP_GASRound1_20260423_202947",
+    "tools_visible":  [
+                          "query-gas-asset-summary",
+                          "create-gameplay-ability",
+                          "create-gameplay-effect",
+                          "create-attribute-set",
+                          "edit-gameplay-effect-modifiers",
+                          "manage-ability-system-bindings"
+                      ],
+    "registered_count":  128,
+    "tags_success":  true,
+    "attribute_set_created":  true,
+    "attribute_count":  2,
+    "gameplay_effect_created":  false,
+    "gameplay_effect_modifier_count":  0
+}

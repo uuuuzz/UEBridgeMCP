@@ -19,7 +19,7 @@
 
 ### 1.2 服务器根本没起来
 
-- 编辑器没开，或插件被禁用。打开 `Edit -> Plugins`，搜 "UEBridgeMCP"，确认 Runtime 和 Editor 两个模块都是启用状态。
+- 编辑器没开，或插件被禁用。打开 `Edit -> Plugins`，搜 "UEBridgeMCP"，确认插件和它的 Editor 模块都处于启用状态。
 - 端口被其他进程占了。Windows 上：
   ```powershell
   netstat -ano | findstr 8080
@@ -28,7 +28,7 @@
 
 ### 1.3 多个 UE 实例之间端口冲突
 
-每个编辑器实例需要自己**独立的**端口。给每个项目分配不同的 `ServerPort`（8080 / 8081 / 8082），客户端 URL 也跟着改。也可以在启动时用 `SOFT_UE_BRIDGE_PORT=8081` 环境变量或 CLI 参数覆盖。
+每个编辑器实例需要自己**独立的**端口。请在 `Config/DefaultUEBridgeMCP.ini` 或编辑器 settings 对象里给每个项目分配不同的 `ServerPort`（8080 / 8081 / 8082），客户端 URL 也跟着改。
 
 ### 1.4 `tools/list` 返回空或 404
 
@@ -46,8 +46,11 @@
 
 - `EditorScriptingUtilities`
 - `GameplayAbilities`
+- `EnhancedInput`
 - `StateTree` + `GameplayStateTree`
 - `PythonScriptPlugin`（在 `Build.cs` 里是硬链接）
+- 如果保留当前条件工具源码，保持 `Niagara` 和 `Metasound` 启用
+- 如果保留扩展模块，保持 `ControlRig` 和 `PCG` 启用
 
 然后 Generate Project Files、重新编译。
 
@@ -168,7 +171,7 @@ v2 把旧的 v1 工具合并了：
 | `query-level` | `query-level-summary` + `query-actor-detail` |
 | `query-material` | `query-material-summary` |
 | `spawn-actor` / `set-property` / `add-component` | `edit-level-batch` |
-| `add-graph-node` / `remove-graph-node` / `connect-graph-pins` / `disconnect-graph-pin` | `edit-blueprint-graph` |
+| `add-graph-node` / `remove-graph-node` / `connect-graph-pins` / `disconnect-graph-pin` | Blueprint 图请用 `edit-blueprint-graph`，`UMaterial` 表达式图请用 `edit-material-graph` |
 | `set-property`（改蓝图成员时） | `edit-blueprint-members` |
 | `analyze-blueprint` | `query-blueprint-summary` |
 
@@ -186,7 +189,7 @@ UEBridgeMCP **完全**没有游戏逻辑耦合 ? `Source/` 里没有任何 `Lyra
 2. 新项目必须是 C++ 项目，UE 5.6+。
 3. 在 `.uproject` 里加 `{"Name":"UEBridgeMCP","Enabled":true}`。
 4. 重新生成工程文件、编译。
-5. 用 `curl -X POST http://127.0.0.1:8080/mcp -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'` 验证 ? 应返回 46 个工具。
+5. 用 `curl -X POST http://127.0.0.1:8080/mcp -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'` 验证。Step 6 之后不要再期待固定数量，改为对照 `initialize.capabilities.tools.registeredCount`。
 
 ### 6.2 通过 Perforce / Git 提交
 
@@ -225,12 +228,12 @@ curl -i -X POST http://127.0.0.1:8080/mcp \
   -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
 ```
 
-或者在启动编辑器前设环境变量 `UEBMCP_LOG_SESSIONS=1`，开启内置的 MCP 会话日志。
+当前源码没有单独的 session-log 环境变量；需要完整请求 / 响应证据时，用 `LogLevel=Verbose` 配合 `curl -i`。
 
 ---
 
 延伸阅读：
 
-- [工具速查手册](./Tools-Reference.zh-CN.md) ? 46 个内置工具。
+- [工具速查手册](./Tools-Reference.zh-CN.md) ? 运行时基础工具面与条件工具面说明。
 - [自定义工具开发指南](./ToolDevelopment.zh-CN.md) ? 如何写一个新工具。
 - [架构文档](./Architecture.zh-CN.md) ? HTTP / Registry / Session 内部设计。

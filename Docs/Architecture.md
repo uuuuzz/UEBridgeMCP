@@ -1,6 +1,6 @@
 # UEBridgeMCP ? Architecture
 
-How the 46 built-in tools, the HTTP server, the registry, and the session manager fit together inside a UE editor process.
+How the runtime tool surface, the HTTP server, the registry, and the session manager fit together inside a UE editor process.
 
 ---
 
@@ -10,30 +10,32 @@ How the 46 built-in tools, the HTTP server, the registry, and the session manage
 +---------------------------------+   HTTP POST /mcp   +---------------------------------------+
 | MCP client                      | ---JSON-RPC 2.0--> | UE editor process                     |
 |  Claude Desktop / Claude Code   |                    |                                       |
-|  Cursor / Windsurf / Continue   | <--- Response ---- |  +- UEBridgeMCP          (Runtime)    |
+|  Cursor / Windsurf / Continue   | <--- Response ---- |  +- UEBridgeMCP          (Editor)     |
 |  Codex / custom scripts / curl  |                    |  |   McpToolBase / Result / Registry  |
 +---------------------------------+                    |  |   Schema / Protocol types          |
                                                        |  +- UEBridgeMCPEditor    (Editor)     |
                                                        |      McpServer (FHttpServerModule)    |
                                                        |      McpEditorSubsystem (lifecycle)   |
-                                                       |      46 x UMcpToolBase subclasses     |
+                                                       |      Dynamic UMcpToolBase tool surface |
                                                        |      Toolbar icon + log capture       |
+                                                       |  +- UEBridgeMCP* extension modules    |
+                                                       |      Control Rig / PCG / External AI  |
                                                        +---------------------------------------+
 ```
 
 - **Transport.** `FHttpServerModule` binds `127.0.0.1:8080` by default. No external dependencies ? no Node.js / no Python server / no extra ports.
-- **Protocol.** MCP 2025-03-26 over Streamable HTTP, JSON-RPC 2.0 framing. The server replies with either a plain `application/json` response or an `text/event-stream` stream for long-running calls.
+- **Protocol.** MCP 2025-06-18 over Streamable HTTP, JSON-RPC 2.0 framing. The server currently replies to POST requests with `application/json`; GET/SSE stream requests are rejected with `405` because streaming is not implemented.
 - **Thread model.** HTTP requests land on worker threads. Every tool that touches UE object APIs is marshaled onto the game thread via `AsyncTask(ENamedThreads::GameThread, ...)` + `TPromise<FMcpToolResult>`. Pure read-only, thread-safe tools can opt out by returning `false` from `RequiresGameThread()`.
 
 ---
 
 ## Modules
 
-### `UEBridgeMCP` (Runtime)
+### `UEBridgeMCP` (Editor)
 
 Load phase: `Default`.
 
-Contains the small, engine-agnostic surface that both server and tools depend on:
+Contains the small shared surface that both the editor-side server and tools depend on:
 
 ```
 Source/UEBridgeMCP/
@@ -65,14 +67,28 @@ Source/UEBridgeMCPEditor/
     Server/McpServer.h              # thin wrapper over FHttpServerModule
     Subsystem/McpEditorSubsystem.h  # UEditorSubsystem: lifecycle + settings
     UI/McpToolbarExtension.h        # editor toolbar status icon
-    Tools/<Category>/...            # 46 tool headers
+    Tools/<Category>/...            # tool headers (registered + compatibility)
   Private/
     UEBridgeMCPEditor.cpp           # RegisterBuiltInTools() - the authoritative tool list
     Server/McpServer.cpp            # route handlers for /mcp, /mcp/session/*
     Server/McpSessionManager.cpp    # sticky per-client session IDs
     Subsystem/McpEditorSubsystem.cpp
-    Tools/<Category>/*.cpp          # 46 tool implementations
+    Tools/<Category>/*.cpp          # tool implementations (registered + compatibility)
 ```
+
+### Extension modules (Editor)
+
+Load phase: **`PostEngineInit`**.
+
+The plugin descriptor also declares editor-only extension modules that register focused tool families through the same `FMcpToolRegistry`:
+
+```text
+Source/UEBridgeMCPControlRig/   # edit-control-rig-graph
+Source/UEBridgeMCPPCG/          # generate/query/edit/run PCG tools
+Source/UEBridgeMCPExternalAI/   # external content and asset-generation tools
+```
+
+These modules keep optional workflow surfaces outside the core editor module while still appearing in `tools/list` when the module is loaded.
 
 ---
 
@@ -147,7 +163,7 @@ LogLevel=Log               ; Error | Warning | Log | Verbose | VeryVerbose
 
 Overridable at runtime via `UMcpEditorSubsystem::GetSettings()` ? useful for automated tests that spin up multiple editors on different ports.
 
-Environment variable `SOFT_UE_BRIDGE_PORT` is honored only as a launch-time override when present.
+No launch-time environment-variable or CLI port override is currently wired; change `ServerPort` in config or through the editor settings object before starting the server.
 
 ---
 
@@ -192,12 +208,13 @@ MCP clients that follow the spec will surface this as a tool failure (with `isEr
 ```
 Editor launch
    v
-UEBridgeMCPEditor module load  (PostEngineInit)
+UEBridgeMCPEditor and extension module load  (PostEngineInit)
    v
 FUEBridgeMCPEditorModule::StartupModule()
    RegisterBuiltInTools()      -> populate FMcpToolRegistry
-     Registry.WarmupAllTools() -> pre-instantiate all 46
+Registry.WarmupAllTools() -> pre-instantiate registered canonical tools
    FMcpToolbarExtension::Initialize()
+Extension modules register and warm their focused tool families in the same registry
    v
 FUEBridgeMCPEditorModule owns UMcpEditorSubsystem
    v
@@ -230,5 +247,5 @@ FUEBridgeMCPEditorModule::ShutdownModule()
 See also:
 
 - [Tool Development Guide](./ToolDevelopment.md) ? author a new tool.
-- [Tools Reference](./Tools-Reference.md) ? 46 built-in tools.
+- [Tools Reference](./Tools-Reference.md) ? live base and conditional tool surface.
 - [Troubleshooting](./Troubleshooting.md) ? connectivity, build, PIE, Python.

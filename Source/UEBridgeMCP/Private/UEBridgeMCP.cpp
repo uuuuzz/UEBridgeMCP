@@ -4,7 +4,7 @@
 #include "Misc/EngineVersionComparison.h"
 
 // Enforce minimum engine version at compile time
-static_assert(UE_VERSION_NEWER_THAN(5, 5, 0), "ue-bridge-mcp requires Unreal Engine 5.6 or higher. Please upgrade your engine version.");
+static_assert(!UE_VERSION_OLDER_THAN(5, 6, 0), "ue-bridge-mcp requires Unreal Engine 5.6 or higher. Please upgrade your engine version.");
 
 DEFINE_LOG_CATEGORY(LogUEBridgeMCP);
 

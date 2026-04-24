@@ -1,0 +1,104 @@
+{
+    "jsonrpc":  "2.0",
+    "id":  "tool-50f06453fff443ad82aa463834039f33",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Request succeeded"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "tool":  "apply-blueprint-fixups",
+                                             "success":  true,
+                                             "asset_path":  "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Broken_20260423_165454",
+                                             "asset_handle":  {
+                                                                  "kind":  "asset",
+                                                                  "asset_path":  "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Broken_20260423_165454",
+                                                                  "asset_class":  "Blueprint"
+                                                              },
+                                             "results":  [
+                                                             {
+                                                                 "action":  "reconstruct_invalid_nodes",
+                                                                 "success":  true,
+                                                                 "reconstructed_nodes":  0,
+                                                                 "index":  0
+                                                             }
+                                                         ],
+                                             "partial_results":  [
+
+                                                                 ],
+                                             "compile":  {
+                                                             "attempted":  false,
+                                                             "success":  true,
+                                                             "warning_count":  0,
+                                                             "error_count":  0,
+                                                             "diagnostics":  [
+
+                                                                             ]
+                                                         },
+                                             "findings_after":  [
+                                                                    {
+                                                                        "code":  "orphan_pin",
+                                                                        "severity":  "warning",
+                                                                        "message":  "Node \u0027Broken Function\u0027 contains orphan pin \u0027execute\u0027",
+                                                                        "graph_name":  "EventGraph",
+                                                                        "node_guid":  "EBE6A827-429E-0E05-B91D-71BF6D185042",
+                                                                        "handle":  {
+                                                                                       "kind":  "blueprint_node",
+                                                                                       "session_id":  "77348D07-4A10-00D9-908D-7FB786466FF3",
+                                                                                       "resource_path":  "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Broken_20260423_165454",
+                                                                                       "entity_id":  "EBE6A827-429E-0E05-B91D-71BF6D185042",
+                                                                                       "display_name":  "Broken Function"
+                                                                                   }
+                                                                    },
+                                                                    {
+                                                                        "code":  "unresolved_member_reference",
+                                                                        "severity":  "error",
+                                                                        "message":  "Call function node \u0027Broken Function\u0027 could not resolve its target function",
+                                                                        "graph_name":  "EventGraph",
+                                                                        "node_guid":  "EBE6A827-429E-0E05-B91D-71BF6D185042",
+                                                                        "handle":  {
+                                                                                       "kind":  "blueprint_node",
+                                                                                       "session_id":  "77348D07-4A10-00D9-908D-7FB786466FF3",
+                                                                                       "resource_path":  "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Broken_20260423_165454",
+                                                                                       "entity_id":  "EBE6A827-429E-0E05-B91D-71BF6D185042",
+                                                                                       "display_name":  "Broken Function"
+                                                                                   }
+                                                                    },
+                                                                    {
+                                                                        "code":  "unlinked_required_pin",
+                                                                        "severity":  "error",
+                                                                        "message":  "Node \u0027Branch\u0027 has an unlinked required exec pin \u0027execute\u0027",
+                                                                        "graph_name":  "EventGraph",
+                                                                        "node_guid":  "97FA17CB-4C61-6667-3974-02BF54B0AD92",
+                                                                        "handle":  {
+                                                                                       "kind":  "blueprint_node",
+                                                                                       "session_id":  "77348D07-4A10-00D9-908D-7FB786466FF3",
+                                                                                       "resource_path":  "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Broken_20260423_165454",
+                                                                                       "entity_id":  "97FA17CB-4C61-6667-3974-02BF54B0AD92",
+                                                                                       "display_name":  "Branch"
+                                                                                   }
+                                                                    }
+                                                                ],
+                                             "diagnostics":  [
+
+                                                             ],
+                                             "modified_assets":  [
+                                                                     "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Broken_20260423_165454"
+                                                                 ]
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  1.3080000062473118
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "apply-blueprint-fixups",
+                                               "mutates":  false,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  0
+                                           }
+                             }
+               }
+}

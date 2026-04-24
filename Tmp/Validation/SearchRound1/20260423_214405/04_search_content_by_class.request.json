@@ -1,0 +1,14 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "search_content_by_class",
+    "method":  "tools/call",
+    "params":  {
+                   "name":  "search-content-by-class",
+                   "arguments":  {
+                                     "class":  "Blueprint",
+                                     "query":  "BP_SearchRound1_20260423_214405",
+                                     "path":  "/Game/UEBridgeMCPValidation/SearchRound1",
+                                     "limit":  10
+                                 }
+               }
+}

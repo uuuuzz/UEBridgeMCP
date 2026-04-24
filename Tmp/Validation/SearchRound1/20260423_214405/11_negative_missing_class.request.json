@@ -1,0 +1,13 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "negative_missing_class",
+    "method":  "tools/call",
+    "params":  {
+                   "name":  "search-content-by-class",
+                   "arguments":  {
+                                     "query":  "BP_SearchRound1",
+                                     "path":  "/Game/UEBridgeMCPValidation/SearchRound1",
+                                     "limit":  5
+                                 }
+               }
+}

@@ -1,0 +1,47 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "search_assets_advanced",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Asset search complete"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "query":  "BP_SearchRound1_20260423_214405",
+                                             "results":  [
+                                                             {
+                                                                 "kind":  "asset",
+                                                                 "name":  "BP_SearchRound1_20260423_214405",
+                                                                 "path":  "/Game/UEBridgeMCPValidation/SearchRound1/BP_SearchRound1_20260423_214405.BP_SearchRound1_20260423_214405",
+                                                                 "package":  "/Game/UEBridgeMCPValidation/SearchRound1/BP_SearchRound1_20260423_214405",
+                                                                 "package_path":  "/Game/UEBridgeMCPValidation/SearchRound1",
+                                                                 "class":  "Blueprint",
+                                                                 "class_path":  "/Script/Engine.Blueprint",
+                                                                 "score":  100
+                                                             }
+                                                         ],
+                                             "count":  1,
+                                             "total_matches":  1,
+                                             "scanned":  1,
+                                             "truncated":  false,
+                                             "class_filter_resolved":  true,
+                                             "paths":  [
+                                                           "/Game/UEBridgeMCPValidation/SearchRound1"
+                                                       ]
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  3.5722999891731888
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "search-assets-advanced",
+                                               "mutates":  false,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  1
+                                           }
+                             }
+               }
+}

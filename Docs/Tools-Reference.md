@@ -1,313 +1,516 @@
-# UEBridgeMCP ? Tools Reference (46 built-in tools)
+# UEBridgeMCP Tools Reference
 
-> Authoritative list ? every row below appears exactly once in
-> `Source/UEBridgeMCPEditor/Private/UEBridgeMCPEditor.cpp :: RegisterBuiltInTools()`.
-> For the machine-readable full JSON Schema of each tool, query the running editor:
->
-> ```bash
-> curl -s -X POST http://127.0.0.1:8080/mcp \
->   -H "Content-Type: application/json" \
->   -H "Accept: application/json,text/event-stream" \
->   -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
-> ```
->
-> This document is the human-facing cheat sheet. The editor is the source of truth.
+Source of truth:
 
-## Table of Contents
+- The live runtime inventory is whatever the editor returns from `tools/list`.
+- The live count is whatever `initialize.capabilities.tools.registeredCount` reports.
+- `Source/UEBridgeMCPEditor/Private/UEBridgeMCPEditor.cpp :: RegisterBuiltInTools()` is the base editor registration source.
+- Step 6 added protocol-level `resources/*` and `prompts/*`, plus conditional and extension-module tools, so the runtime count is intentionally dynamic.
 
-1. [Blueprint Query (3)](#1-blueprint-query-3)
-2. [Level / World Query (3)](#2-level--world-query-3)
-3. [Material Query (2)](#3-material-query-2)
-4. [Project / Asset / Utility Query (7)](#4-project--asset--utility-query-7)
-5. [Create / Utility Write (3)](#5-create--utility-write-3)
-6. [StateTree (5)](#6-statetree-5)
-7. [Scripting (1)](#7-scripting-1)
-8. [Build (2)](#8-build-2)
-9. [PIE ? Play-In-Editor (4)](#9-pie--play-in-editor-4)
-10. [Reflection RPC (1)](#10-reflection-rpc-1)
-11. [Batch Edit (6)](#11-batch-edit-6)
-12. [Asset Lifecycle & Validation (5)](#12-asset-lifecycle--validation-5)
-13. [High-Level Orchestration (4)](#13-high-level-orchestration-4)
+Current inventory model:
 
-Total: **46** tools (3 + 3 + 2 + 7 + 3 + 5 + 1 + 2 + 4 + 1 + 6 + 5 + 4).
+- Base editor surface: always-on tools registered directly from `RegisterBuiltInTools()`.
+- Additional core conditional tools may be registered when the related engine modules are available:
+  - `query-level-sequence-summary`
+  - `edit-sequencer-tracks`
+  - `query-landscape-summary`
+  - `create-landscape`
+  - `edit-landscape-region`
+  - `query-foliage-summary`
+  - `edit-foliage-batch`
+  - `query-worldpartition-cells`
+  - `query-niagara-system-summary`
+  - `query-niagara-emitter-summary`
+  - `create-niagara-system-from-template`
+  - `edit-niagara-user-parameters`
+  - `apply-niagara-system-to-actor`
+  - `query-metasound-summary`
+  - `create-metasound-source`
+  - `edit-metasound-graph`
+  - `set-metasound-input-defaults`
+- Additional extension-module tools may appear when the corresponding modules are loaded:
+  - `edit-control-rig-graph`
+  - `generate-pcg-scatter`
+  - `query-pcg-graph-summary`
+  - `edit-pcg-graph`
+  - `run-pcg-graph`
+  - `generate-external-content`
+  - `generate-external-asset`
 
----
+Do not treat any single fixed number as authoritative after Step 6. For release gating, run `Validation/Smoke/Invoke-ReleasePreflight.ps1`; it records the live `registeredCount`, `tools/list`, resources, prompts, compatibility aliases, and safety probes in `Tmp/Validation/ReleasePreflight/<timestamp>/summary.json`.
 
-## Conventions
+## Protocol Surface
 
-- All requests are JSON-RPC 2.0 over HTTP POST to `http://127.0.0.1:8080/mcp`.
-- Every tool call uses MCP's standard `tools/call` method:
-  ```json
-  {"jsonrpc":"2.0","id":1,"method":"tools/call",
-   "params":{"name":"<tool-name>","arguments":{ ... }}}
-  ```
-- Paths:
-  - Asset paths use UE object paths ? `/Game/Blueprints/BP_Hero` (no extension).
-  - World / level paths ? `/Game/Maps/TestMap`.
-- Error envelope: `{"isError": true, "content":[{"type":"text","text":"UEBMCP_<CATEGORY>: <msg>"}]}`.
-- Successful responses always carry a structured `content[0].text` JSON string and `isError:false`.
+UEBridgeMCP now exposes all of these MCP methods:
 
-> **Note on v1 vs v2 tools** ? several older tools (`query-blueprint`, `query-blueprint-graph`, `query-level`, `query-material`, `set-property`, `add-graph-node`, `spawn-actor`, ?) still exist in the source tree but are **no longer registered**. They were absorbed into the v2 batch tools below (`edit-blueprint-graph`, `edit-level-batch`, `edit-material-instance-batch`, the `query-*-summary` family). The running server will tell you exactly what is live via `tools/list`.
+- `initialize`
+- `tools/list`
+- `tools/call`
+- `resources/list`
+- `resources/read`
+- `prompts/list`
+- `prompts/get`
 
----
+`initialize` advertises:
 
-## 1. Blueprint Query (3)
+- `capabilities.tools`
+- `capabilities.resources`
+- `capabilities.prompts`
+- `capabilities.tools.registeredCount`
 
-| Tool | Purpose | Key args |
+## Built-in Resources
+
+Built-in resources are repo-tracked text files under `Resources/MCP/Resources/` and are read-only at runtime.
+
+| URI | Name | Purpose |
 |---|---|---|
-| `query-blueprint-summary` | Compact BP summary with counts for graphs, functions, variables, components | `blueprint_path` |
-| `query-blueprint-graph-summary` | List all graphs (Event / Function / Macro) in a BP with node counts | `blueprint_path` |
-| `query-blueprint-node` | Deep info for a single node incl. object/class pin defaults | `blueprint_path`, `node_guid` |
+| `uebmcp://builtin/resources/animation-smoke-checklist` | Animation Smoke Checklist | Minimal animation authoring and regression checklist |
+| `uebmcp://builtin/resources/sequencer-edit-recipe` | Sequencer Edit Recipe | Safe Sequencer edit order and validation recipe |
+| `uebmcp://builtin/resources/world-production-recipe` | World Production Recipe | Practical world-production workflow guidance |
+| `uebmcp://builtin/resources/performance-triage-guide` | Performance Triage Guide | Structured performance triage and evidence capture guide |
+| `uebmcp://builtin/resources/external-content-safety-guide` | External Content Safety Guide | Provenance and safety guidance for external content workflows |
 
-**Example**
-```json
-{"name":"query-blueprint-summary",
- "arguments":{"blueprint_path":"/Game/Blueprints/BP_Hero"}}
-```
+## Built-in Prompts
 
----
+Built-in prompts are repo-tracked JSON templates under `Resources/MCP/Prompts/`.
 
-## 2. Level / World Query (3)
-
-| Tool | Purpose | Key args |
+| Prompt name | Purpose | Key arguments |
 |---|---|---|
-| `query-level-summary` | Compact counts-and-buckets view of the current level | `world_type` (`editor`\|`pie`) |
-| `query-actor-detail` | Detailed reflected info for a specific actor (components, properties, tags) | `actor_name` or `actor_label` |
-| `query-world-summary` | Streaming level structure, world composition, gameplay settings | `include[]` |
+| `animation-workflow-brief` | Compose a concise animation workflow brief | `goal`, `asset_path`, `notes` |
+| `sequencer-edit-brief` | Compose a safe Sequencer edit brief | `goal`, `sequence_path`, `shot_notes` |
+| `performance-triage-brief` | Compose a lightweight performance investigation brief | `goal`, `world_mode`, `focus_area` |
 
-**Example**
-```json
-{"name":"query-actor-detail","arguments":{"actor_label":"BP_Hero_C_0"}}
-```
+## Workflow Presets
 
----
+Step 6 added project workflow presets:
 
-## 3. Material Query (2)
+- `manage-workflow-presets`
+- `run-workflow-preset`
 
-| Tool | Purpose | Key args |
+Preset files live under `Config/UEBridgeMCP/WorkflowPresets/*.json`.
+
+Preset schema includes:
+
+- `id`
+- `title`
+- `description`
+- `resource_uris[]`
+- `prompt_name`
+- `tool_calls[]`
+- `default_arguments{}`
+
+`run-workflow-preset` supports:
+
+- `dry_run=true` to expand resources, prompt, and resolved tool plan without execution
+- sequential tool execution when `dry_run=false`
+
+## Base Tool Surface
+
+The base editor surface below is always registered by `RegisterBuiltInTools()`.
+
+### 1. Blueprint Query
+
+- `query-blueprint-summary`
+- `query-blueprint-graph-summary`
+- `query-blueprint-node`
+- `query-blueprint-findings`
+- `analyze-blueprint-compile-results`
+
+### 2. Animation And Performance Query
+
+- `query-animation-asset-summary`
+- `query-skeleton-summary`
+- `query-performance-report`
+- `capture-performance-snapshot`
+- `query-render-stats`
+- `query-memory-report`
+- `profile-visible-actors`
+- `query-physics-summary`
+
+### 3. Level And World Query
+
+- `query-level-summary`
+- `query-actor-detail`
+- `query-actor-selection`
+- `query-spatial-context`
+- `query-world-summary`
+
+### 4. Material, StaticMesh, Audio, And Environment Query
+
+- `query-material-summary`
+- `query-material-instance`
+- `query-static-mesh-summary`
+- `query-mesh-complexity`
+- `query-audio-asset-summary`
+- `query-environment-summary`
+
+### 5. Project, Asset, And Utility Query
+
+- `get-project-info`
+- `query-asset`
+- `query-datatable`
+- `get-asset-diff`
+- `get-class-hierarchy`
+- `query-engine-api-symbol`
+- `query-class-member-summary`
+- `query-plugin-capabilities`
+- `query-editor-subsystem-summary`
+- `query-workspace-health`
+- `find-references`
+- `search-project`
+- `search-assets-advanced`
+- `search-blueprint-symbols`
+- `search-level-entities`
+- `search-content-by-class`
+- `query-unused-assets`
+- `inspect-widget-blueprint`
+- `get-logs`
+
+### 6. Widget And UMG Authoring
+
+- `create-widget-blueprint`
+- `edit-widget-blueprint`
+- `edit-widget-layout-batch`
+- `edit-widget-animation`
+- `edit-widget-component`
+- `create-common-ui-widget`
+- `edit-common-ui`
+- `query-common-ui-widgets`
+
+Compatibility note:
+
+- `add-widget` is still registered for compatibility, but new write flows should prefer the batched widget tools.
+
+### 7. Create And Data Authoring
+
+- `create-asset`
+- `create-user-defined-struct`
+- `create-user-defined-enum`
+- `add-component`
+- `add-widget`
+- `add-datatable-row`
+- `spawn-actor`
+
+Create note:
+
+- `create-asset` now explicitly supports `BlueprintInterface`, `LevelSequence`, and `FoliageType_InstancedStaticMesh` in addition to Blueprint, WidgetBlueprint, AnimBlueprint, Material, DataTable, DataAsset, and generic class-path-based creation.
+- Use `asset_class="BlueprintInterface"` with a normal asset path such as `/Game/UEBridgeMCPValidation/BlueprintRound1/BPI_BlueprintRound1_20260423_123000`.
+- `parent_class` is ignored for `BlueprintInterface`; interface assets are created through the engine's dedicated Blueprint Interface factory.
+- Use `asset_class="AnimBlueprint"` with `parent_class` set to a Skeleton asset path. AnimBlueprint creation now uses the engine `UAnimBlueprintFactory`, so the result is a real `AnimBlueprint` asset with a target skeleton and default animation graph.
+- Use `asset_class="LevelSequence"` to create an initialized Level Sequence asset. The asset is initialized through `ULevelSequence::Initialize()`, so it has a real MovieScene before later Sequencer edits run.
+- Use `asset_class="FoliageType_InstancedStaticMesh"` with `static_mesh_path` to create a saved foliage type asset. This is the preferred World Partition-safe setup before adding foliage with `edit-foliage-batch` and `foliage_type_path`.
+
+### 8. StateTree
+
+- `query-statetree`
+- `add-statetree-state`
+- `remove-statetree-state`
+- `add-statetree-transition`
+- `add-statetree-task`
+- `edit-statetree-bindings`
+
+### 9. Gameplay, Input, AI, Navigation, Networking
+
+- `create-input-action`
+- `create-input-mapping-context`
+- `edit-input-mapping-context`
+- `manage-gameplay-tags`
+- `query-gas-asset-summary`
+- `create-gameplay-ability`
+- `create-gameplay-effect`
+- `create-attribute-set`
+- `edit-gameplay-effect-modifiers`
+- `manage-ability-system-bindings`
+- `query-ability-system-state`
+- `create-gameframework-blueprint-set`
+- `create-ai-behavior-assets`
+- `query-navigation-state`
+- `query-navigation-path`
+- `edit-navigation-build`
+- `query-ai-behavior-assets`
+- `edit-blackboard-keys`
+- `query-replication-summary`
+- `edit-replication-settings`
+- `query-network-component-settings`
+- `edit-network-component-settings`
+- `trace-gameplay-collision`
+- `edit-collision-settings`
+- `edit-physics-simulation`
+- `create-physics-constraint`
+- `edit-physics-constraint`
+
+### 10. Scripting, Build, PIE, Reflection
+
+- `run-python-script`
+- `trigger-live-coding`
+- `build-and-relaunch`
+- `pie-session`
+- `pie-input`
+- `wait-for-world-condition`
+- `assert-world-state`
+- `query-runtime-actor-state`
+- `query-ability-system-state`
+- `trace-gameplay-collision`
+- `call-function`
+- `edit-editor-selection`
+- `edit-viewport-camera`
+- `run-editor-command`
+
+### 11. Batch Edit And Asset Lifecycle
+
+- `edit-blueprint-graph`
+- `edit-blueprint-members`
+- `create-blueprint-function`
+- `create-blueprint-event`
+- `edit-blueprint-function-signature`
+- `manage-blueprint-interfaces`
+- `layout-blueprint-graph`
+- `apply-blueprint-fixups`
+- `edit-blueprint-components`
+- `add-graph-node`
+- `connect-graph-pins`
+- `disconnect-graph-pin`
+- `remove-graph-node`
+- `set-property`
+- `edit-datatable-batch`
+- `edit-level-actor`
+- `edit-level-batch`
+- `align-actors-batch`
+- `drop-actors-to-surface`
+- `edit-static-mesh-settings`
+- `edit-static-mesh-slots`
+- `replace-static-mesh`
+- `edit-material-instance-batch`
+- `create-material-instance`
+- `edit-material-graph`
+- `create-sound-cue`
+- `edit-sound-cue-routing`
+- `create-audio-component-setup`
+- `apply-audio-to-actor`
+- `edit-gameplay-effect-modifiers`
+- `manage-ability-system-bindings`
+- `edit-environment-lighting`
+- `create-animation-montage`
+- `create-blend-space`
+- `edit-blend-space-samples`
+- `edit-animation-notifies`
+- `edit-anim-graph-node`
+- `edit-anim-blueprint-state-machine`
+- `compile-assets`
+- `manage-assets`
+- `manage-asset-folders`
+- `import-assets`
+- `source-control-assets`
+- `capture-viewport`
+- `apply-material`
+- `apply-physical-material`
+- `edit-spline-actors`
+
+### 12. Workflow And High-Level Orchestration
+
+- `manage-workflow-presets`
+- `run-workflow-preset`
+- `run-editor-macro`
+- `run-project-maintenance-checks`
+- `blueprint-scaffold-from-spec`
+- `create-blueprint-pattern`
+- `generate-blueprint-pattern`
+- `query-gameplay-state`
+- `auto-fix-blueprint-compile-errors`
+- `generate-level-structure`
+- `generate-level-pattern`
+
+Blueprint Phase 1C note:
+
+- `analyze-blueprint-compile-results` compiles a Blueprint in memory, merges compile diagnostics with static Blueprint findings, and returns normalized `issues[]` plus `suggested_fixups`.
+- `apply-blueprint-fixups` applies safe structural fixups: `refresh_all_nodes`, `reconstruct_invalid_nodes`, `remove_orphan_pins`, `recompile_dependencies`, and `conform_implemented_interfaces`.
+- `create-blueprint-pattern` is the curated high-level Actor pattern entrypoint for `logic_actor_skeleton`, `toggle_state_actor`, and `interaction_stub_actor`.
+- `blueprint-scaffold-from-spec` remains a lower-level spec-driven scaffold tool and is not the backend for curated Phase 1C patterns.
+
+Niagara Phase 2A note:
+
+- Niagara tools are conditionally registered from the core editor module when the engine `Niagara` and `NiagaraEditor` modules are available.
+- `query-niagara-system-summary` and `query-niagara-emitter-summary` cover system/emitter summaries, exposed user parameters, enabled emitter handles, and renderer summaries.
+- `create-niagara-system-from-template` creates a new Niagara system either from Niagara's editor factory or by duplicating an existing system template.
+- `edit-niagara-user-parameters` supports batched add/remove/rename/default-value edits for v1 scalar/vector/color user parameters.
+- `apply-niagara-system-to-actor` creates or updates an actor NiagaraComponent and can apply component-level user parameter overrides; editor-world `activate_now` requests are deferred with a warning instead of starting simulation on the editor GameThread.
+
+Audio Phase 2B note:
+
+- Audio tools are always registered from the core editor module and use engine `AudioEditor` support for SoundCue creation.
+- `query-audio-asset-summary` covers `SoundWave` and `SoundCue` metadata, including cue node routing summaries.
+- `create-sound-cue` creates a new SoundCue from an optional `initial_sound_wave_path` and basic volume/pitch settings.
+- `edit-sound-cue-routing` supports batched `operations[]` for wave-player, random, mixer, attenuation wrapping, multiplier edits, dry-run, rollback, and save paths.
+- `create-audio-component-setup` and `apply-audio-to-actor` create or update actor `AudioComponent` setup; editor-world `play_now` requests are deferred with a warning instead of starting playback on the editor GameThread.
+
+MetaSound Phase 2C note:
+
+- MetaSound tools are conditionally registered from the core editor module when `MetasoundEngine`, `MetasoundFrontend`, and `MetasoundEditor` are available.
+- `query-metasound-summary` summarizes MetaSound Source assets, graph inputs/outputs, interfaces, and optional default-graph nodes/edges.
+- `create-metasound-source` creates a new MetaSound Source through the engine Source Builder, with optional v1 graph inputs and output format selection.
+- `set-metasound-input-defaults` supports batched bool/int32/float/string graph input default edits, including dry-run, rollback, and save paths.
+- `edit-metasound-graph` is intentionally restricted to v1 structural edits: graph I/O, class-name node insertion, explicit connections, node input defaults, and layout. Arbitrary MetaSound graph synthesis remains future work.
+
+Physics Phase 3A note:
+
+- Physics tools are always registered from the core editor module and use engine `PhysicsCore` plus editor-world actor/component APIs.
+- `query-physics-summary` returns world or actor physics summaries, including PrimitiveComponent collision/simulation state and PhysicsConstraintComponent details.
+- `edit-collision-settings` supports collision profile, enabled mode, object channel, all-channel response, and per-channel response edits with dry-run, rollback, and save paths.
+- `edit-physics-simulation` supports simulate physics, gravity, mass override, mass scale, damping, mobility adjustment, wake, and sleep edits.
+- `create-physics-constraint` and `edit-physics-constraint` cover basic two-component constraints, disable-collision, projection, linear limits, angular limits, and break thresholds.
+- `apply-physical-material` applies a PhysicalMaterial override to a PrimitiveComponent; runtime physics playback/simulation assertions remain future work.
+
+GAS Phase 3B note:
+
+- GAS tools are always registered from the core editor module and use engine `GameplayAbilities`, `GameplayAbilitiesEditor`, and `GameplayTasks` support.
+- `create-attribute-set` creates AttributeSet Blueprint assets and seeds `FGameplayAttributeData` member variables.
+- `create-gameplay-effect` creates GameplayEffect Blueprint assets with duration, period, granted target tags, and simple constant modifiers.
+- `edit-gameplay-effect-modifiers` supports dry-run and rollback-safe edits for duration, period, granted tags, clear/add/remove modifiers, and final compile/save.
+- `create-gameplay-ability` creates GameplayAbility Blueprint assets with asset tags, activation tag containers, common policy fields, cost effect, and cooldown effect defaults.
+- `query-gas-asset-summary` summarizes GameplayAbility, GameplayEffect, AttributeSet, and Actor Blueprint GAS bindings.
+- `manage-ability-system-bindings` adds an `AbilitySystemComponent` to Actor Blueprints and stores ability/effect/attribute-set class bindings as categorized `TSubclassOf` variables with UEBridgeMCP metadata.
+- v1 intentionally stops at asset and Actor Blueprint configuration; runtime granting, prediction validation, complex execution calculations, and ability task graph authoring remain future work.
+
+Gameplay Runtime Phase 3C note:
+
+- `query-runtime-actor-state` returns read-only editor or PIE actor runtime state: transform, bounds, velocity, actor tags, components, collision summaries, and optional GAS state.
+- `query-ability-system-state` returns live `AbilitySystemComponent` state for editor or PIE actors, including owned gameplay tags, spawned AttributeSets, and activatable abilities.
+- `trace-gameplay-collision` runs read-only line, sphere, capsule, or box traces in editor or PIE worlds and returns structured hit actor/component data.
+- Phase 3C validates live PIE querying and collision traces, but does not grant abilities, activate abilities, validate prediction, or assert long-running runtime physics simulation.
+
+Search Phase 4A note:
+
+- `search-assets-advanced` provides ranked asset search with exact, wildcard, contains, camel-case, and fuzzy subsequence matching across asset name/path/class fields.
+- `search-content-by-class` is the class-first asset search entrypoint and keeps `class` required while still supporting query and path filters.
+- `search-blueprint-symbols` scans Blueprint variables, function graphs, macro graphs, event graphs, and optionally graph nodes with result caps to avoid long GameThread stalls.
+- `search-level-entities` searches editor or PIE actors by label/name/class/folder/tag and returns actor handles plus optional transform/bounds data.
+- `search-project` aggregates assets, Blueprint symbols, and level entities into per-section results plus a flattened ranked list.
+
+Engine API Phase 4B note:
+
+- `query-engine-api-symbol` searches loaded local reflection data for classes, functions, properties, structs, enums, subsystems, and plugins.
+- `query-class-member-summary` resolves a class name or path and returns structured function/property summaries with flags, parameter data, and optional metadata.
+- `query-plugin-capabilities` reports local plugin enablement, mounted/content/Verse support, descriptor metadata, and module loading state.
+- `query-editor-subsystem-summary` lists Editor/Engine/World/GameInstance subsystem classes and reports current instance availability where the relevant context exists.
+- Phase 4B is intentionally local-only: it does not proxy external documentation sites or build an online docs mirror.
+
+Macro / Utility Phase 4C note:
+
+- `query-workspace-health` returns a read-only snapshot of project paths, UEBridgeMCP plugin/server state, editor/PIE world availability, optional capabilities, validation path existence, and dirty packages.
+- `run-project-maintenance-checks` bundles curated maintenance checks: workspace health, conservative unused-asset candidates, and optional Blueprint compile checks.
+- `generate-blueprint-pattern` is a workflow-facing wrapper over `create-blueprint-pattern`; it keeps the same curated Actor catalog and adds a dry-run plan path.
+- `generate-level-pattern` creates engine-only editor-world scaffold patterns: `test_anchor_pair`, `interaction_test_lane`, and `lighting_blockout_minimal`.
+- `run-editor-macro` only exposes a curated macro catalog: `collect_workspace_health`, `run_maintenance_checks`, `compile_blueprint_assets`, and `cleanup_generated_actors`.
+- Phase 4C intentionally does not add a universal script executor. Use `run-python-script` only as the existing explicit scripting tool, not as the backend for curated macros.
+
+Animation Round 2 closure note:
+
+- `edit-anim-blueprint-state-machine` now supports `create_state_machine` and `ensure_state_machine` operations, including optional `connect_to_output`, so positive state-machine smoke can be created from public MCP tools instead of depending on a prebuilt AnimBP fixture.
+- The self-contained host smoke creates an AnimBlueprint through `create-asset(asset_class="AnimBlueprint")`, creates a `Locomotion` state machine, adds two states, sets the entry state, adds a transition, assigns a sequence, queries the summary, and compiles the asset.
+- Evidence: `Tmp/Validation/AnimationRound2/20260423_223834/summary.json`.
+
+Sequencer Round 1 closure note:
+
+- `create-asset(asset_class="LevelSequence")` now creates a real initialized `ULevelSequence` with a MovieScene, so Sequencer smoke does not depend on prebuilt sequence assets.
+- `query-level-sequence-summary` reports playback range, frame rates, bindings, possessables, spawnables, master/binding tracks, sections, and camera cut details.
+- `edit-sequencer-tracks` now uses the engine camera-cut path instead of creating a Camera Cut as an ordinary master track, so `GetCameraCutTrack()` and the summary agree.
+- Evidence: `Tmp/Validation/SequencerRound1/20260423_225804/summary.json`.
+
+## Core Conditional Editor Tools
+
+These are registered from the core editor module only when the related engine modules are available.
+
+| Tool | Typical dependency | Notes |
 |---|---|---|
-| `query-material-summary` | Compact overview of a `Material` asset: shading model, domain, blend mode, param counts | `material_path` |
-| `query-material-instance` | Inspect `MaterialInstanceConstant` / `Dynamic` overrides, parent chain, scalar / vector / texture params | `material_instance_path` |
+| `query-level-sequence-summary` | `LevelSequence`, `MovieSceneTracks` | Summarizes playback range, bindings, tracks, sections, and camera cuts |
+| `edit-sequencer-tracks` | `LevelSequence`, `MovieSceneTracks` | v1 focuses on bindings, Camera Cuts, basic tracks, sections, keys, and playback ranges |
+| `query-landscape-summary` | `Landscape` | Summarizes Landscape actors, components, layers, bounds, and optional height samples |
+| `create-landscape` | `Landscape` | Creates small flat editor-world Landscape actors for blockouts and validation fixtures |
+| `edit-landscape-region` | `Landscape` | v1 supports rectangular-region terrain and layer edits |
+| `query-foliage-summary` | `Foliage` | Summarizes editor or PIE foliage by foliage type and static mesh, with optional instance samples |
+| `edit-foliage-batch` | `Foliage` | v1 supports add, remove in bounds, transform edits, and foliage mesh replacement |
+| `query-worldpartition-cells` | Engine World Partition support | Returns structured no-op or unsupported results on non-World-Partition maps |
+| `edit-worldpartition-cells` | Engine World Partition support | Loads or unloads World Partition runtime cells where engine support is available |
+| `query-niagara-system-summary` | `Niagara`, `NiagaraEditor` | Summarizes Niagara systems, emitters, renderers, readiness, and user parameters |
+| `query-niagara-emitter-summary` | `Niagara`, `NiagaraEditor` | Summarizes an emitter asset or a system emitter handle |
+| `create-niagara-system-from-template` | `Niagara`, `NiagaraEditor` | Creates a Niagara system from a template or factory-backed empty/default system |
+| `edit-niagara-user-parameters` | `Niagara`, `NiagaraEditor` | Batched v1 user parameter editing with dry-run, compile, and save support |
+| `apply-niagara-system-to-actor` | `Niagara`, `NiagaraEditor` | Adds or updates a NiagaraComponent on an editor-world actor |
+| `query-metasound-summary` | `MetasoundEngine`, `MetasoundFrontend`, `MetasoundEditor` | Summarizes MetaSound Source assets and optional default-graph structure |
+| `create-metasound-source` | `MetasoundEngine`, `MetasoundFrontend`, `MetasoundEditor` | Creates a MetaSound Source through the official Source Builder |
+| `edit-metasound-graph` | `MetasoundEngine`, `MetasoundFrontend`, `MetasoundEditor` | Restricted v1 MetaSound graph I/O, connection, default, and layout edits |
+| `set-metasound-input-defaults` | `MetasoundEngine`, `MetasoundFrontend`, `MetasoundEditor` | Batch edits supported graph input defaults with dry-run and rollback |
 
-**Example**
-```json
-{"name":"query-material-instance",
- "arguments":{"material_instance_path":"/Game/Materials/MI_Hero_Red"}}
-```
+## Extension-Module Tools
 
----
+These tools are intentionally kept outside the core editor module.
 
-## 4. Project / Asset / Utility Query (7)
-
-| Tool | Purpose | Key args |
+| Tool | Module | Notes |
 |---|---|---|
-| `get-project-info` | Project / engine / modules / plugins / target platforms | *(none)* |
-| `query-asset` | Content Browser search + DataTable / DataAsset inspection | `pattern`, `class_filter`, `path`, `inspect` |
-| `get-asset-diff` | Structured diff of a binary asset (BP / Material / DT) against SCM base | `asset_path`, `revision` |
-| `get-class-hierarchy` | Parent / child class trees (C++ & Blueprint) | `class_name`, `direction` (`up`\|`down`\|`both`) |
-| `find-references` | Find what references an asset or what it references | `asset_path`, `direction` |
-| `inspect-widget-blueprint` | UMG Widget BP tree, bindings, animations, input mappings | `widget_path` |
-| `get-logs` | Read UE output-log buffer with category / text / level filters | `category`, `contains`, `limit`, `level` |
+| `edit-control-rig-graph` | `UEBridgeMCPControlRig` | Optional Control Rig editor graph editing |
+| `generate-pcg-scatter` | `UEBridgeMCPPCG` | Optional PCG scatter setup using an existing graph or a scaffold graph asset |
+| `query-pcg-graph-summary` | `UEBridgeMCPPCG` | Summarizes PCG graph nodes, pins, edges, and settings |
+| `edit-pcg-graph` | `UEBridgeMCPPCG` | Adds, removes, edits, and connects PCG graph nodes in a bounded v1 surface |
+| `run-pcg-graph` | `UEBridgeMCPPCG` | Triggers PCG component generation for selected actors or actor paths |
+| `generate-external-content` | `UEBridgeMCPExternalAI` | Optional HTTP/JSON external text or JSON generation tool |
+| `generate-external-asset` | `UEBridgeMCPExternalAI` | Produces external asset payloads and explicit import plans without writing imported assets in v1 |
 
-**Example**
-```json
-{"name":"get-logs","arguments":{"category":"LogBlueprint","limit":100,"level":"Warning"}}
-```
+`generate-external-content` is intentionally extension-scoped:
 
----
+- It is not part of the core editor tool surface.
+- It uses a provider/settings layer.
+- v1 supports text and JSON outputs only.
+- It does not download or import binary media.
 
-## 5. Create / Utility Write (3)
+## Optional Capability Reporting
 
-| Tool | Purpose | Key args |
-|---|---|---|
-| `create-asset` | Create a new Blueprint / Material / DataTable / Level / etc. | `class_name`, `target_path`, `parent_class` |
-| `add-widget` | Add a widget to a UMG Widget BP tree | `widget_path`, `widget_class`, `parent_slot_name` |
-| `add-datatable-row` | Add or update a row in a DataTable asset | `datatable_path`, `row_name`, `fields{}` |
+`get-project-info` now returns an `optional_capabilities` object with at least:
 
-**Example**
-```json
-{"name":"create-asset",
- "arguments":{"class_name":"Blueprint","target_path":"/Game/Blueprints/BP_NewActor",
-              "parent_class":"/Script/Engine.Actor"}}
-```
+- `sequencer_available`
+- `control_rig_available`
+- `landscape_available`
+- `foliage_available`
+- `world_partition_available`
+- `pcg_available`
+- `niagara_available`
+- `metasound_available`
+- `external_ai_available`
 
----
+Clients should use that object together with `tools/list` instead of assuming any fixed Step 6 tool count.
 
-## 6. StateTree (5)
+## UnrealMCPServer Compatibility Aliases
 
-| Tool | Purpose | Key args |
-|---|---|---|
-| `query-statetree` | Inspect a StateTree asset ? states, tasks, transitions | `statetree_path` |
-| `add-statetree-state` | Add a new state under a parent state | `statetree_path`, `parent_state_id`, `state_name` |
-| `remove-statetree-state` | Remove a state (and its subtree) | `statetree_path`, `state_id` |
-| `add-statetree-transition` | Add a transition between two states | `statetree_path`, `from_state_id`, `to_state_id`, `trigger` |
-| `add-statetree-task` | Add a task node to a state | `statetree_path`, `state_id`, `task_class`, `properties{}` |
+UEBridgeMCP now registers a name-only compatibility alias layer for common UnrealMCPServer-style `snake_case` names.
 
-**Example**
-```json
-{"name":"add-statetree-transition",
- "arguments":{"statetree_path":"/Game/AI/ST_Enemy",
-              "from_state_id":"Patrol","to_state_id":"Chase",
-              "trigger":"OnEnterCondition"}}
-```
+- Alias calls resolve through `FMcpToolRegistry::ResolveToolName()`.
+- `tools/list` includes alias definitions whose descriptions identify the canonical target.
+- Canonical UEBridgeMCP schemas remain authoritative; aliases do not rewrite legacy argument payloads.
+- Static smoke coverage lives at `Validation/Smoke/VerifyCompatibilityAliases.ps1`.
+- Release preflight coverage lives at `Validation/Smoke/Invoke-ReleasePreflight.ps1` and adds runtime alias calls plus safety probes.
 
----
-
-## 7. Scripting (1)
-
-| Tool | Purpose | Key args |
-|---|---|---|
-| `run-python-script` | Execute inline Python or a `.py` file inside UE's embedded interpreter | `command` **or** `script_path`, `capture_output` |
-
-Returns `stdout`, `stderr`, and any `AsyncTask`-spawned log lines. Python errors are caught and returned as structured errors ? the editor does **not** crash (see [Troubleshooting](./Troubleshooting.md)).
-
-**Example**
-```json
-{"name":"run-python-script",
- "arguments":{"command":"import unreal\nprint(unreal.SystemLibrary.get_engine_version())"}}
-```
-
----
-
-## 8. Build (2)
-
-| Tool | Purpose | Key args |
-|---|---|---|
-| `trigger-live-coding` | Fire Live Coding compile (Ctrl+Alt+F11 equivalent); optional `wait_for_completion` | `wait_for_completion` (bool), `timeout_seconds` |
-| `build-and-relaunch` | Close **this** editor instance (identified by PID), rebuild, relaunch | `target_configuration`, `include_editor` |
-
-`build-and-relaunch` only closes the MCP-connected editor instance; other open editors are untouched. Windows-only.
-
-**Example**
-```json
-{"name":"trigger-live-coding","arguments":{"wait_for_completion":true,"timeout_seconds":60}}
-```
-
----
-
-## 9. PIE ? Play-In-Editor (4)
-
-| Tool | Purpose | Key args |
-|---|---|---|
-| `pie-session` | **Fire-and-forget** start / stop / pause / resume PIE. Never blocks the game thread. | `action` (`start`\|`stop`\|`pause`\|`resume`), `mode` |
-| `pie-input` | Inject keys / axes / action-move-to into a running PIE world | `event` (`key`\|`axis`\|`move-to`), `key`, `axis`, `value`, `target_location` |
-| `wait-for-world-condition` | Poll a JSON-defined world condition with timeout (actor count, property equals, ?) | `condition{}`, `timeout_seconds`, `poll_interval_ms` |
-| `assert-world-state` | One-shot assertion used by tests (returns pass/fail JSON) | `assertions[]` |
-
-> **Known pitfall** ? on UE 5.6 + legacy `AxisMapping`, injected `key:W` / `axis:MoveForward` reach `UPlayerInput::InputKey` but may **not** be sampled by BP `InputAxis` nodes. Prefer `event:move-to` (AI pathfind) for end-to-end movement validation, or call `AddMovementInput` directly via `call-function`. See [Troubleshooting](./Troubleshooting.md) for the full story.
-
-**Example**
-```json
-{"name":"pie-session","arguments":{"action":"start","mode":"SelectedViewport"}}
-```
-
-Follow up with `wait-for-world-condition` or `query-gameplay-state` for readiness ? don't busy-loop `pie-session`.
-
----
-
-## 10. Reflection RPC (1)
-
-| Tool | Purpose | Key args |
-|---|---|---|
-| `call-function` | Invoke any `BlueprintCallable` UFUNCTION on an actor, CDO, or subsystem, with reflected arg marshaling | `target`, `function`, `args{}`, `world_type` |
-
-`target` accepts an actor name, `/Script/Module.Class` (for CDO), `/Game/...` (for BP CDO), or a subsystem path.
-
-**Example**
-```json
-{"name":"call-function",
- "arguments":{"target":"BP_GameMode_C_0","function":"SetDifficulty","args":{"Level":3}}}
-```
-
----
-
-## 11. Batch Edit (6)
-
-The v2 core ? replaces the legacy single-operation tools. Every batch tool supports **transactions** (single `FScopedTransaction` for undo), **dry-run validation**, and optional **compile + save** in the same call.
-
-| Tool | Purpose | Key args |
-|---|---|---|
-| `edit-blueprint-graph` | Transactional graph edits: add / remove / connect / disconnect nodes with alias-based cross-referencing | `blueprint_path`, `graph_name`, `operations[]`, `dry_run`, `compile`, `save` |
-| `edit-blueprint-members` | Create / rename / delete variables, functions, event dispatchers | `blueprint_path`, `operations[]` |
-| `edit-blueprint-components` | Edit SCS: add / remove / rename / attach / set-root / set-defaults | `blueprint_path`, `operations[]` |
-| `edit-level-batch` | Batched level mutations (spawn / delete / transform / attach / detach / duplicate) | `operations[]`, `world_type` |
-| `edit-material-instance-batch` | Batched param set on one or more `MaterialInstanceConstant` assets | `operations[]` |
-| `compile-assets` | Compile one or more `Blueprint / WidgetBlueprint / AnimBlueprint` assets | `asset_paths[]`, `save_on_success` |
-
-**Example ? build an EventGraph "Print on BeginPlay" in one round-trip**
-```json
-{"name":"edit-blueprint-graph",
- "arguments":{
-   "blueprint_path":"/Game/BP_Hero","graph_name":"EventGraph",
-   "compile":true,"save":true,
-   "operations":[
-     {"op":"add_node","alias":"print","class":"K2Node_CallFunction",
-      "properties":{"FunctionReference":{"MemberName":"PrintString"}}},
-     {"op":"connect","from_alias":"BeginPlay","from_pin":"then",
-      "to_alias":"print","to_pin":"execute"}
-   ]}}
-```
-
----
-
-## 12. Asset Lifecycle & Validation (5)
-
-| Tool | Purpose | Key args |
-|---|---|---|
-| `manage-assets` | Batched rename / move / duplicate / delete / save | `actions[]` |
-| `import-assets` | Import external files (FBX / PNG / JPG / TGA / WAV / ?) | `files[]`, `destination_path`, `options{}` |
-| `source-control-assets` | SCM ops: status, checkout, revert, submit, sync | `action`, `asset_paths[]` |
-| `capture-viewport` | Screenshot editor viewport, PIE window, or a specific panel | `source` (`editor`\|`pie`\|`panel`), `output_path`, `width`, `height` |
-| `apply-material` | Apply a material / MIC to actor(s) by name, label, or class | `target`, `material_path`, `slot_index` |
-
-**Example**
-```json
-{"name":"capture-viewport",
- "arguments":{"source":"pie","output_path":"D:/tmp/shot.png","width":1920,"height":1080}}
-```
-
----
-
-## 13. High-Level Orchestration (4)
-
-| Tool | Purpose | Key args |
-|---|---|---|
-| `blueprint-scaffold-from-spec` | Create or merge a BP from a JSON spec (components, variables, functions, event-graph steps) ? higher-level than `create-asset` + `edit-blueprint-*` | `target_path`, `spec{}`, `dry_run` |
-| `query-gameplay-state` | Snapshot of PIE gameplay: PlayerController, Pawn, GameState, GameMode, world time | `world_type`, `include[]` |
-| `auto-fix-blueprint-compile-errors` | Apply deterministic repair strategies to BP compile errors (reconnect dropped pins, replace missing node refs, ?) | `blueprint_path`, `strategies[]`, `dry_run` |
-| `generate-level-structure` | Generate a level skeleton (folders, sublevels, world settings) from a declarative spec | `map_path`, `spec{}` |
-
-**Example**
-```json
-{"name":"blueprint-scaffold-from-spec",
- "arguments":{
-   "target_path":"/Game/Blueprints/BP_Minion",
-   "spec":{
-     "parent_class":"/Script/Engine.Character",
-     "components":[{"name":"Health","class":"UHealthComponent"}],
-     "variables":[{"name":"MaxHP","type":"float","default":100.0}]
-   }}}
-```
-
----
-
-## Checking the live inventory
-
-The authoritative, machine-readable list is always what the running editor reports:
+## Checking The Live Inventory
 
 ```bash
 curl -s -X POST http://127.0.0.1:8080/mcp \
   -H "Content-Type: application/json" \
   -H "Accept: application/json,text/event-stream" \
-  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}' | jq '.result.tools | length'
+  -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"check","version":"1.0"}}}'
 ```
 
-Expect **46**. If you see a different number on your local build, your plugin copy is out of date ? pull the latest `main` and rebuild.
+Then:
 
----
+```bash
+curl -s -X POST http://127.0.0.1:8080/mcp \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json,text/event-stream" \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/list"}'
+```
 
-See also:
+If the count differs between machines, that is expected after Step 6 when optional capabilities or extension modules differ.
 
-- [Tool Development Guide](./ToolDevelopment.md) ? how to author a new tool
-- [Architecture](./Architecture.md) ? module layout, server, registry, protocol
-- [Troubleshooting](./Troubleshooting.md) ? IPv6, ports, PIE deadlock, Python GC, pie-input AxisMapping gotcha
+## See Also
+
+- [Tool Development Guide](./ToolDevelopment.md)
+- [Architecture](./Architecture.md)
+- [Troubleshooting](./Troubleshooting.md)
+- [Capability Matrix](./CapabilityMatrix.md)

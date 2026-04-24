@@ -1,0 +1,31 @@
+{
+    "jsonrpc":  "2.0",
+    "id":  "tool-fc7e5957cecc4e6f83f7231eefb15fce",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Structured result ready"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "asset_path":  "/Game/UEBridgeMCPValidation/BlueprintRound2/BPI_R2_Interface_20260423_165454",
+                                             "asset_class":  "BlueprintInterface",
+                                             "success":  true,
+                                             "created_class":  "Blueprint",
+                                             "needs_save":  true
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  3.2518999942112714
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "create-asset",
+                                               "mutates":  false,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  1
+                                           }
+                             }
+               }
+}

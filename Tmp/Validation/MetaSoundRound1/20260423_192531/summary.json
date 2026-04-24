@@ -1,0 +1,26 @@
+﻿{
+    "timestamp":  "20260423_192531",
+    "evidence_dir":  "G:\\UEProjects\\UEBridgeMCP\\Tmp\\Validation\\MetaSoundRound1\\20260423_192531",
+    "asset_path":  "/Game/UEBridgeMCPValidation/MetaSoundRound1/MS_MetaSoundRound1_20260423_192531",
+    "tools_visible":  [
+                          "query-metasound-summary",
+                          "create-metasound-source",
+                          "edit-metasound-graph",
+                          "set-metasound-input-defaults"
+                      ],
+    "metasound_available":  true,
+    "create_success":  true,
+    "initial_query_inputs":  3,
+    "dry_run_success":  true,
+    "defaults_apply_success":  true,
+    "edit_dry_run_success":  true,
+    "edit_apply_success":  true,
+    "negative_is_error":  true,
+    "negative_code":  "UEBMCP_METASOUND_GRAPH_EDIT_FAILED",
+    "final_input_count":  5,
+    "final_node_count":  10,
+    "final_edge_count":  3,
+    "post_patch_optional_asset_path":  "/Game/UEBridgeMCPValidation/MetaSoundRound1/MS_MetaSoundRound1_Optional_20260423_192531",
+    "post_patch_create_without_constructor_input_success":  true,
+    "post_patch_add_node_without_major_version_dry_run_success":  true
+}

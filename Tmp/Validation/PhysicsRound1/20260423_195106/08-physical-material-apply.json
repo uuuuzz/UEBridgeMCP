@@ -1,0 +1,70 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "610",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Physical material applied"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "valid":  true,
+                                             "name":  "StaticMeshComponent0",
+                                             "class":  "StaticMeshComponent",
+                                             "owner_name":  "PhysicsRound1_A_20260423_195106",
+                                             "is_root":  true,
+                                             "mobility":  "Movable",
+                                             "world_location":  {
+                                                                    "x":  0,
+                                                                    "y":  0,
+                                                                    "z":  120
+                                                                },
+                                             "collision_profile":  "Custom",
+                                             "collision_enabled":  "QueryAndPhysics",
+                                             "object_type":  "PhysicsBody",
+                                             "responses":  {
+                                                               "WorldStatic":  "Block",
+                                                               "WorldDynamic":  "Block",
+                                                               "Pawn":  "Overlap",
+                                                               "Visibility":  "Block",
+                                                               "Camera":  "Ignore",
+                                                               "PhysicsBody":  "Block",
+                                                               "Vehicle":  "Block",
+                                                               "Destructible":  "Block"
+                                                           },
+                                             "simulate_physics":  true,
+                                             "gravity_enabled":  false,
+                                             "mass_kg":  41.999996185302734,
+                                             "mass_scale":  1.25,
+                                             "linear_damping":  0.40000000596046448,
+                                             "angular_damping":  0.60000002384185791,
+                                             "physical_material":  "/Game/UEBridgeMCPValidation/PhysicsRound1/PM_PhysicsRound1_20260423_195106.PM_PhysicsRound1_20260423_195106",
+                                             "physical_material_name":  "PM_PhysicsRound1_20260423_195106",
+                                             "physical_material_override":  "/Game/UEBridgeMCPValidation/PhysicsRound1/PM_PhysicsRound1_20260423_195106.PM_PhysicsRound1_20260423_195106",
+                                             "tool":  "apply-physical-material",
+                                             "success":  true,
+                                             "dry_run":  false,
+                                             "actor_name":  "PhysicsRound1_A_20260423_195106",
+                                             "physical_material_path":  "/Game/UEBridgeMCPValidation/PhysicsRound1/PM_PhysicsRound1_20260423_195106",
+                                             "warnings":  [
+
+                                                          ],
+                                             "modified_assets":  [
+                                                                     "/Temp/Untitled_1"
+                                                                 ]
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  1.2926000053994358
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "apply-physical-material",
+                                               "mutates":  true,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  1
+                                           }
+                             }
+               }
+}

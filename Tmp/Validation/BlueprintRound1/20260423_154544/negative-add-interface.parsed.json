@@ -1,0 +1,75 @@
+﻿{
+    "is_error":  true,
+    "text":  "[UEBMCP_INVALID_ACTION] Class \u0027/Script/Engine.Actor\u0027 is not a Interface",
+    "structured":  {
+                       "code":  "UEBMCP_INVALID_ACTION",
+                       "message":  "Class \u0027/Script/Engine.Actor\u0027 is not a Interface",
+                       "details":  {
+                                       "asset_path":  "/Game/UEBridgeMCPValidation/BlueprintRound1/BP_BlueprintRound1_20260423_154544",
+                                       "failed_action_index":  0,
+                                       "action":  "add_interface"
+                                   },
+                       "partial_result":  {
+                                              "results":  [
+
+                                                          ],
+                                              "partial_results":  [
+                                                                      {
+                                                                          "action":  "add_interface",
+                                                                          "index":  0,
+                                                                          "success":  false,
+                                                                          "error":  "Class \u0027/Script/Engine.Actor\u0027 is not a Interface",
+                                                                          "code":  "UEBMCP_INVALID_ACTION"
+                                                                      }
+                                                                  ]
+                                          }
+                   },
+    "raw":  {
+                "jsonrpc":  "2.0",
+                "id":  "322",
+                "result":  {
+                               "content":  [
+                                               {
+                                                   "type":  "text",
+                                                   "text":  "[UEBMCP_INVALID_ACTION] Class \u0027/Script/Engine.Actor\u0027 is not a Interface"
+                                               }
+                                           ],
+                               "structuredContent":  {
+                                                         "code":  "UEBMCP_INVALID_ACTION",
+                                                         "message":  "Class \u0027/Script/Engine.Actor\u0027 is not a Interface",
+                                                         "details":  {
+                                                                         "asset_path":  "/Game/UEBridgeMCPValidation/BlueprintRound1/BP_BlueprintRound1_20260423_154544",
+                                                                         "failed_action_index":  0,
+                                                                         "action":  "add_interface"
+                                                                     },
+                                                         "partial_result":  {
+                                                                                "results":  [
+
+                                                                                            ],
+                                                                                "partial_results":  [
+                                                                                                        {
+                                                                                                            "action":  "add_interface",
+                                                                                                            "index":  0,
+                                                                                                            "success":  false,
+                                                                                                            "error":  "Class \u0027/Script/Engine.Actor\u0027 is not a Interface",
+                                                                                                            "code":  "UEBMCP_INVALID_ACTION"
+                                                                                                        }
+                                                                                                    ]
+                                                                            }
+                                                     },
+                               "isError":  true,
+                               "_meta":  {
+                                             "timing":  {
+                                                            "duration_ms":  0.09280000813305378
+                                                        },
+                                             "stats":  {
+                                                           "tool_name":  "manage-blueprint-interfaces",
+                                                           "mutates":  false,
+                                                           "supports_batch":  false,
+                                                           "requires_game_thread":  true,
+                                                           "content_items":  1
+                                                       }
+                                         }
+                           }
+            }
+}

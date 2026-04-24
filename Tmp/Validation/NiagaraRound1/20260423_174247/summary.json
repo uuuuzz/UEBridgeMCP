@@ -1,0 +1,36 @@
+﻿{
+    "timestamp":  "20260423_174247",
+    "evidence_dir":  "G:\\UEProjects\\UEBridgeMCP\\Tmp\\Validation\\NiagaraRound1\\20260423_174247",
+    "assets":  {
+                   "system":  "/Game/UEBridgeMCPValidation/NiagaraRound1/NS_NiagaraRound1_20260423_174247"
+               },
+    "actor":  "NiagaraRound1Actor_20260423_174247",
+    "tools_visible":  {
+                          "query-niagara-emitter-summary":  true,
+                          "create-niagara-system-from-template":  true,
+                          "apply-niagara-system-to-actor":  true,
+                          "analyze-blueprint-compile-results":  true,
+                          "create-blueprint-pattern":  true,
+                          "query-niagara-system-summary":  true,
+                          "apply-blueprint-fixups":  true,
+                          "edit-niagara-user-parameters":  true
+                      },
+    "optional_niagara_available":  true,
+    "create_is_error":  null,
+    "create_ready_to_run":  true,
+    "create_emitter_count":  0,
+    "query_before_is_error":  null,
+    "query_user_parameter_count_before":  0,
+    "edit_dry_run":  true,
+    "edit_success":  true,
+    "query_user_parameter_count_after":  1,
+    "invalid_error_code":  "UEBMCP_INVALID_ACTION",
+    "emitter_missing_code":  "UEBMCP_NIAGARA_EMITTER_NOT_FOUND",
+    "apply_success":  null,
+    "component_name":  null,
+    "warnings":  {
+                     "create":  0,
+                     "edit":  0,
+                     "apply":  0
+                 }
+}

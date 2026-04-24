@@ -1,0 +1,103 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "10",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Request succeeded"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "tool":  "query-render-stats",
+                                             "success":  true,
+                                             "world":  "/Temp/Untitled_1.Untitled_1",
+                                             "actor_count":  144,
+                                             "static_mesh_component_count":  65,
+                                             "estimated_triangles":  104320,
+                                             "estimated_draw_calls":  65,
+                                             "light_component_count":  1,
+                                             "shadow_caster_count":  66,
+                                             "warnings":  [
+
+                                                          ],
+                                             "top_classes":  [
+                                                                 {
+                                                                     "class":  "LandscapeStreamingProxy",
+                                                                     "count":  64
+                                                                 },
+                                                                 {
+                                                                     "class":  "WorldPartitionHLOD",
+                                                                     "count":  64
+                                                                 },
+                                                                 {
+                                                                     "class":  "DefaultPhysicsVolume",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "class":  "GameplayDebuggerPlayerManager",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "class":  "Actor",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "class":  "WorldPartitionMiniMap",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "class":  "WorldDataLayers",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "class":  "Brush",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "class":  "DirectionalLight",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "class":  "WorldSettings",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "class":  "SkyLight",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "class":  "PlayerStart",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "class":  "ExponentialHeightFog",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "class":  "VolumetricCloud",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "class":  "Landscape",
+                                                                     "count":  1
+                                                                 }
+                                                             ]
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  0.18470000941306353
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "query-render-stats",
+                                               "requested_tool_name":  "get_render_stats",
+                                               "compatibility_alias":  true,
+                                               "compatibility_arguments_adapted":  false,
+                                               "mutates":  false,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  0
+                                           }
+                             }
+               }
+}

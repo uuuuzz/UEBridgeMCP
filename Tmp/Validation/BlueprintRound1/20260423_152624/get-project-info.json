@@ -1,0 +1,75 @@
+{
+    "Request":  {
+                    "method":  "tools/call",
+                    "params":  {
+                                   "arguments":  {
+
+                                                 },
+                                   "name":  "get-project-info"
+                               },
+                    "id":  "tool-c172c4c619ed4f5390f748020ce52b05",
+                    "jsonrpc":  "2.0"
+                },
+    "Response":  {
+                     "Success":  true,
+                     "StatusCode":  200,
+                     "Headers":  {
+                                     "keep-alive":  "timeout=15.000000",
+                                     "Content-Type":  "application/json; charset=utf-8",
+                                     "Mcp-Session-Id":  "E8A41810-4ED0-8081-CC2A-7385028DB2ED",
+                                     "Access-Control-Allow-Origin":  "*",
+                                     "Content-Length":  "1213"
+                                 },
+                     "Content":  "{\r\n\t\"jsonrpc\": \"2.0\",\r\n\t\"id\": \"tool-c172c4c619ed4f5390f748020ce52b05\",\r\n\t\"result\":\r\n\t{\r\n\t\t\"content\": [\r\n\t\t\t{\r\n\t\t\t\t\"type\": \"text\",\r\n\t\t\t\t\"text\": \"Structured result ready\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"structuredContent\":\r\n\t\t{\r\n\t\t\t\"project_name\": \"MyProject\",\r\n\t\t\t\"project_path\": \"../../../../../UEProjects/MyProject/MyProject.uproject\",\r\n\t\t\t\"project_directory\": \"../../../../../UEProjects/MyProject/\",\r\n\t\t\t\"engine_version\": \"5.7.2-49658320+++UE5+Release-5.7\",\r\n\t\t\t\"plugin\":\r\n\t\t\t{\r\n\t\t\t\t\"name\": \"UEBridgeMCP\",\r\n\t\t\t\t\"version\": \"1.19.0\"\r\n\t\t\t},\r\n\t\t\t\"mcp_server\":\r\n\t\t\t{\r\n\t\t\t\t\"port\": 8080,\r\n\t\t\t\t\"bind_address\": \"127.0.0.1\",\r\n\t\t\t\t\"running\": true,\r\n\t\t\t\t\"actual_port\": 8080\r\n\t\t\t},\r\n\t\t\t\"optional_capabilities\":\r\n\t\t\t{\r\n\t\t\t\t\"sequencer_available\": true,\r\n\t\t\t\t\"landscape_available\": true,\r\n\t\t\t\t\"foliage_available\": true,\r\n\t\t\t\t\"control_rig_available\": true,\r\n\t\t\t\t\"pcg_available\": true,\r\n\t\t\t\t\"external_ai_available\": true,\r\n\t\t\t\t\"world_partition_available\": false\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"_meta\":\r\n\t\t{\r\n\t\t\t\"timing\":\r\n\t\t\t{\r\n\t\t\t\t\"duration_ms\": 0.076399999670684338\r\n\t\t\t},\r\n\t\t\t\"stats\":\r\n\t\t\t{\r\n\t\t\t\t\"tool_name\": \"get-project-info\",\r\n\t\t\t\t\"mutates\": false,\r\n\t\t\t\t\"supports_batch\": false,\r\n\t\t\t\t\"requires_game_thread\": true,\r\n\t\t\t\t\"content_items\": 1\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}",
+                     "Json":  {
+                                  "jsonrpc":  "2.0",
+                                  "id":  "tool-c172c4c619ed4f5390f748020ce52b05",
+                                  "result":  {
+                                                 "content":  [
+                                                                 {
+                                                                     "type":  "text",
+                                                                     "text":  "Structured result ready"
+                                                                 }
+                                                             ],
+                                                 "structuredContent":  {
+                                                                           "project_name":  "MyProject",
+                                                                           "project_path":  "../../../../../UEProjects/MyProject/MyProject.uproject",
+                                                                           "project_directory":  "../../../../../UEProjects/MyProject/",
+                                                                           "engine_version":  "5.7.2-49658320+++UE5+Release-5.7",
+                                                                           "plugin":  {
+                                                                                          "name":  "UEBridgeMCP",
+                                                                                          "version":  "1.19.0"
+                                                                                      },
+                                                                           "mcp_server":  {
+                                                                                              "port":  8080,
+                                                                                              "bind_address":  "127.0.0.1",
+                                                                                              "running":  true,
+                                                                                              "actual_port":  8080
+                                                                                          },
+                                                                           "optional_capabilities":  {
+                                                                                                         "sequencer_available":  true,
+                                                                                                         "landscape_available":  true,
+                                                                                                         "foliage_available":  true,
+                                                                                                         "control_rig_available":  true,
+                                                                                                         "pcg_available":  true,
+                                                                                                         "external_ai_available":  true,
+                                                                                                         "world_partition_available":  false
+                                                                                                     }
+                                                                       },
+                                                 "_meta":  {
+                                                               "timing":  {
+                                                                              "duration_ms":  0.076399999670684338
+                                                                          },
+                                                               "stats":  {
+                                                                             "tool_name":  "get-project-info",
+                                                                             "mutates":  false,
+                                                                             "supports_batch":  false,
+                                                                             "requires_game_thread":  true,
+                                                                             "content_items":  1
+                                                                         }
+                                                           }
+                                             }
+                              },
+                     "Error":  null
+                 }
+}

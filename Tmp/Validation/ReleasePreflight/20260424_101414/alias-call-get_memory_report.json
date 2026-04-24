@@ -1,0 +1,211 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "11",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Request succeeded"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "tool":  "query-memory-report",
+                                             "success":  true,
+                                             "path":  "/Game",
+                                             "asset_count":  87,
+                                             "total_bytes":  2790002,
+                                             "system_memory":  {
+                                                                   "used_physical_mb":  4288.10546875,
+                                                                   "available_physical_mb":  1574.69921875,
+                                                                   "used_virtual_mb":  6065.5078125
+                                                               },
+                                             "categories":  [
+                                                                {
+                                                                    "category":  "blueprints",
+                                                                    "asset_count":  59,
+                                                                    "total_bytes":  1825433,
+                                                                    "top_assets":  [
+                                                                                       {
+                                                                                           "object_path":  "/Game/UEBridgeMCPValidation/Step6/Animations/VLD_TutorialTPP_AnimBlueprint.VLD_TutorialTPP_AnimBlueprint",
+                                                                                           "size_bytes":  79810
+                                                                                       },
+                                                                                       {
+                                                                                           "object_path":  "/Game/UEBridgeMCPValidation/AnimationRound2/ABP_StateMachine_20260423_223834.ABP_StateMachine_20260423_223834",
+                                                                                           "size_bytes":  73668
+                                                                                       },
+                                                                                       {
+                                                                                           "object_path":  "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Toggle_20260423_164934.BP_R2_Toggle_20260423_164934",
+                                                                                           "size_bytes":  55392
+                                                                                       },
+                                                                                       {
+                                                                                           "object_path":  "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Toggle_20260423_165454.BP_R2_Toggle_20260423_165454",
+                                                                                           "size_bytes":  55374
+                                                                                       },
+                                                                                       {
+                                                                                           "object_path":  "/Game/UEBridgeMCPValidation/SearchRound1/BP_SearchRound1_20260423_214405.BP_SearchRound1_20260423_214405",
+                                                                                           "size_bytes":  55276
+                                                                                       },
+                                                                                       {
+                                                                                           "object_path":  "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Toggle_20260423_171056.BP_R2_Toggle_20260423_171056",
+                                                                                           "size_bytes":  55220
+                                                                                       },
+                                                                                       {
+                                                                                           "object_path":  "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Toggle_20260423_170713.BP_R2_Toggle_20260423_170713",
+                                                                                           "size_bytes":  55220
+                                                                                       },
+                                                                                       {
+                                                                                           "object_path":  "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Toggle_20260423_171254.BP_R2_Toggle_20260423_171254",
+                                                                                           "size_bytes":  55202
+                                                                                       },
+                                                                                       {
+                                                                                           "object_path":  "/Game/UEBridgeMCPValidation/BlueprintRound1/BP_BlueprintRound1_20260423_152624.BP_BlueprintRound1_20260423_152624",
+                                                                                           "size_bytes":  51276
+                                                                                       },
+                                                                                       {
+                                                                                           "object_path":  "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Interaction_20260423_165454.BP_R2_Interaction_20260423_165454",
+                                                                                           "size_bytes":  46244
+                                                                                       }
+                                                                                   ]
+                                                                },
+                                                                {
+                                                                    "category":  "materials",
+                                                                    "asset_count":  15,
+                                                                    "total_bytes":  126425,
+                                                                    "top_assets":  [
+                                                                                       {
+                                                                                           "object_path":  "/Game/Materials/Stylized/M_StylizedEnv_Master.M_StylizedEnv_Master",
+                                                                                           "size_bytes":  25783
+                                                                                       },
+                                                                                       {
+                                                                                           "object_path":  "/Game/Materials/Stylized/Instances/MI_StylizedEnv_Concrete.MI_StylizedEnv_Concrete",
+                                                                                           "size_bytes":  11027
+                                                                                       },
+                                                                                       {
+                                                                                           "object_path":  "/Game/Materials/Stylized/Instances/MI_StylizedEnv_Building.MI_StylizedEnv_Building",
+                                                                                           "size_bytes":  11027
+                                                                                       },
+                                                                                       {
+                                                                                           "object_path":  "/Game/Materials/Stylized/Instances/MI_StylizedEnv_Grass.MI_StylizedEnv_Grass",
+                                                                                           "size_bytes":  11009
+                                                                                       },
+                                                                                       {
+                                                                                           "object_path":  "/Game/Materials/Stylized/Instances/MI_StylizedEnv_Dirt.MI_StylizedEnv_Dirt",
+                                                                                           "size_bytes":  11003
+                                                                                       },
+                                                                                       {
+                                                                                           "object_path":  "/Game/Materials/MI_Target_Purple.MI_Target_Purple",
+                                                                                           "size_bytes":  6983
+                                                                                       },
+                                                                                       {
+                                                                                           "object_path":  "/Game/Materials/MI_Grid_Yellow.MI_Grid_Yellow",
+                                                                                           "size_bytes":  6971
+                                                                                       },
+                                                                                       {
+                                                                                           "object_path":  "/Game/Materials/MI_Grid_Orange.MI_Grid_Orange",
+                                                                                           "size_bytes":  6971
+                                                                                       },
+                                                                                       {
+                                                                                           "object_path":  "/Game/Materials/MI_Ring_Green.MI_Ring_Green",
+                                                                                           "size_bytes":  6965
+                                                                                       },
+                                                                                       {
+                                                                                           "object_path":  "/Game/Materials/MI_Floor_Gray.MI_Floor_Gray",
+                                                                                           "size_bytes":  6965
+                                                                                       }
+                                                                                   ]
+                                                                },
+                                                                {
+                                                                    "category":  "audio",
+                                                                    "asset_count":  6,
+                                                                    "total_bytes":  111330,
+                                                                    "top_assets":  [
+                                                                                       {
+                                                                                           "object_path":  "/Game/UEBridgeMCPValidation/MetaSoundRound1/MS_MetaSoundRound1_20260423_192531.MS_MetaSoundRound1_20260423_192531",
+                                                                                           "size_bytes":  53022
+                                                                                       },
+                                                                                       {
+                                                                                           "object_path":  "/Game/UEBridgeMCPValidation/MetaSoundRound1/MS_MetaSoundRound1_Optional_20260423_192531.MS_MetaSoundRound1_Optional_20260423_192531",
+                                                                                           "size_bytes":  36351
+                                                                                       },
+                                                                                       {
+                                                                                           "object_path":  "/Game/UEBridgeMCPValidation/AudioRound1/SC_AudioRound1_20260423_185956.SC_AudioRound1_20260423_185956",
+                                                                                           "size_bytes":  7348
+                                                                                       },
+                                                                                       {
+                                                                                           "object_path":  "/Game/UEBridgeMCPValidation/AudioRound1/SC_AudioRound1_20260423_184232.SC_AudioRound1_20260423_184232",
+                                                                                           "size_bytes":  7348
+                                                                                       },
+                                                                                       {
+                                                                                           "object_path":  "/Game/UEBridgeMCPValidation/AudioRound1/SC_AudioRound1_20260423_183749.SC_AudioRound1_20260423_183749",
+                                                                                           "size_bytes":  4284
+                                                                                       },
+                                                                                       {
+                                                                                           "object_path":  "/Game/UEBridgeMCPValidation/AudioRound1/SC_AudioRound1_20260423_185821.SC_AudioRound1_20260423_185821",
+                                                                                           "size_bytes":  2977
+                                                                                       }
+                                                                                   ]
+                                                                },
+                                                                {
+                                                                    "category":  "niagara",
+                                                                    "asset_count":  2,
+                                                                    "total_bytes":  101909,
+                                                                    "top_assets":  [
+                                                                                       {
+                                                                                           "object_path":  "/Game/UEBridgeMCPValidation/NiagaraRound1/NS_NiagaraRound1_20260423_174928.NS_NiagaraRound1_20260423_174928",
+                                                                                           "size_bytes":  50992
+                                                                                       },
+                                                                                       {
+                                                                                           "object_path":  "/Game/UEBridgeMCPValidation/NiagaraRound1/NS_NiagaraRound1_20260423_174247.NS_NiagaraRound1_20260423_174247",
+                                                                                           "size_bytes":  50917
+                                                                                       }
+                                                                                   ]
+                                                                },
+                                                                {
+                                                                    "category":  "other",
+                                                                    "asset_count":  2,
+                                                                    "total_bytes":  26344,
+                                                                    "top_assets":  [
+                                                                                       {
+                                                                                           "object_path":  "/Game/UEBridgeMCPValidation/SequencerRound1/LS_SequencerRound1_20260423_225804.LS_SequencerRound1_20260423_225804",
+                                                                                           "size_bytes":  14270
+                                                                                       },
+                                                                                       {
+                                                                                           "object_path":  "/Game/UEBridgeMCPValidation/SequencerRound1/LS_SequencerRound1_20260423_225029.LS_SequencerRound1_20260423_225029",
+                                                                                           "size_bytes":  12074
+                                                                                       }
+                                                                                   ]
+                                                                },
+                                                                {
+                                                                    "category":  "animation",
+                                                                    "asset_count":  2,
+                                                                    "total_bytes":  598561,
+                                                                    "top_assets":  [
+                                                                                       {
+                                                                                           "object_path":  "/Game/UEBridgeMCPValidation/Step6/Animations/VLD_Tutorial_Idle.VLD_Tutorial_Idle",
+                                                                                           "size_bytes":  594014
+                                                                                       },
+                                                                                       {
+                                                                                           "object_path":  "/Game/UEBridgeMCPValidation/Step6/Animations/VLD_TutorialMontage.VLD_TutorialMontage",
+                                                                                           "size_bytes":  4547
+                                                                                       }
+                                                                                   ]
+                                                                }
+                                                            ]
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  4.0328000031877309
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "query-memory-report",
+                                               "requested_tool_name":  "get_memory_report",
+                                               "compatibility_alias":  true,
+                                               "compatibility_arguments_adapted":  false,
+                                               "mutates":  false,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  0
+                                           }
+                             }
+               }
+}

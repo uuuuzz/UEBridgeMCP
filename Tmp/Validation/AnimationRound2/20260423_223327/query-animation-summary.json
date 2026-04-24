@@ -1,0 +1,29 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "307",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "[UEBMCP_INVALID_ASSET_TYPE] Asset is not a supported animation asset type"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "code":  "UEBMCP_INVALID_ASSET_TYPE",
+                                             "message":  "Asset is not a supported animation asset type"
+                                         },
+                   "isError":  true,
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  0.020199979189783335
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "query-animation-asset-summary",
+                                               "mutates":  false,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  1
+                                           }
+                             }
+               }
+}

@@ -1,0 +1,58 @@
+{
+    "jsonrpc":  "2.0",
+    "id":  "tool-d5de78c5cfc64b219a859fc16cfa4d53",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Request succeeded"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "tool":  "auto-fix-blueprint-compile-errors",
+                                             "success":  true,
+                                             "results":  [
+                                                             {
+                                                                 "asset_path":  "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Clean_20260423_164934",
+                                                                 "success":  true,
+                                                                 "status":  "dry_run",
+                                                                 "planned_strategies":  [
+                                                                                            "refresh_all_nodes",
+                                                                                            "reconstruct_invalid_nodes",
+                                                                                            "remove_orphan_pins",
+                                                                                            "recompile_dependencies"
+                                                                                        ]
+                                                             }
+                                                         ],
+                                             "warnings":  [
+
+                                                          ],
+                                             "diagnostics":  [
+
+                                                             ],
+                                             "modified_assets":  [
+
+                                                                 ],
+                                             "partial_results":  [
+
+                                                                 ],
+                                             "summary":  {
+                                                             "total":  1,
+                                                             "succeeded":  1,
+                                                             "failed":  0
+                                                         }
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  0.32699998700991273
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "auto-fix-blueprint-compile-errors",
+                                               "mutates":  false,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  0
+                                           }
+                             }
+               }
+}

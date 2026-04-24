@@ -4,6 +4,7 @@
 #include "Utils/McpPropertySerializer.h"
 #include "Engine/Blueprint.h"
 #include "Kismet2/KismetEditorUtilities.h"
+#include "Kismet2/CompilerResultsLog.h"
 #include "Kismet2/BlueprintEditorUtils.h"
 #include "AssetRegistry/AssetRegistryModule.h"
 #include "UObject/SavePackage.h"
@@ -138,16 +139,26 @@ bool FMcpAssetModifier::CompileBlueprint(UBlueprint* Blueprint, FString& OutErro
 		return false;
 	}
 
-	// Compile the Blueprint
-	FKismetEditorUtilities::CompileBlueprint(Blueprint, EBlueprintCompileOptions::None, nullptr);
+	FCompilerResultsLog Results;
+	Results.bSilentMode = true;
+	FKismetEditorUtilities::CompileBlueprint(Blueprint, EBlueprintCompileOptions::None, &Results);
 
-	// Check for compile errors
-	if (Blueprint->Status == BS_Error)
+	if (Blueprint->Status == BS_Error || Results.NumErrors > 0)
 	{
+		for (const TSharedRef<FTokenizedMessage>& Message : Results.Messages)
+		{
+			if (Message->GetSeverity() == EMessageSeverity::Error)
+			{
+				OutError = Message->ToText().ToString();
+				return false;
+			}
+		}
+
 		OutError = TEXT("Blueprint compilation failed with errors");
 		return false;
 	}
 
+	OutError.Reset();
 	return true;
 }
 

@@ -1,0 +1,29 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "613",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "[UEBMCP_COMPONENT_NOT_FOUND] Constraint component \u0027PC_PhysicsRound1_20260423_195106\u0027 was not found"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "code":  "UEBMCP_COMPONENT_NOT_FOUND",
+                                             "message":  "Constraint component \u0027PC_PhysicsRound1_20260423_195106\u0027 was not found"
+                                         },
+                   "isError":  true,
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  0.098099990282207727
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "edit-physics-constraint",
+                                               "mutates":  true,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  1
+                                           }
+                             }
+               }
+}

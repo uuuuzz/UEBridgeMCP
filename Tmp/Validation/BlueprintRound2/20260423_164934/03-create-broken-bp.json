@@ -1,0 +1,32 @@
+{
+    "jsonrpc":  "2.0",
+    "id":  "tool-75cf6b2583bd4c568ad9b83a123e800a",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Structured result ready"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "asset_path":  "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Broken_20260423_164934",
+                                             "asset_class":  "Blueprint",
+                                             "parent_class":  "Actor",
+                                             "success":  true,
+                                             "created_class":  "Blueprint",
+                                             "needs_save":  true
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  4.2275000014342368
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "create-asset",
+                                               "mutates":  false,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  1
+                                           }
+                             }
+               }
+}

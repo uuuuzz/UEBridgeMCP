@@ -29,7 +29,7 @@ UEBridgeMCP is a native C++ Unreal Engine plugin that exposes the Unreal Editor 
 
 **Highlights:**
 - **Native UE integration** - uses Unreal's built-in HTTP stack and editor APIs
-- **46 built-in tools** - the authoritative list lives in `Source/UEBridgeMCPEditor/Private/UEBridgeMCPEditor.cpp`
+- **Dynamic workflow tool surface** - the live inventory comes from `tools/list`, with conditional tools and compatibility aliases depending on loaded UE modules
 - **Cross-client compatible** - works with Claude Code, Claude Desktop, Cursor, Continue, Windsurf, and other MCP clients
 - **Project-agnostic** - no game-specific coupling; can be moved between UE 5.6+ C++ projects
 - **Extensible** - add custom tools by subclassing `UMcpToolBase`
@@ -40,6 +40,7 @@ UEBridgeMCP is a native C++ Unreal Engine plugin that exposes the Unreal Editor 
 | --- | --- |
 | [Tools Reference](Docs/Tools-Reference.md) | Full list of the built-in tools, grouped by workflow and subsystem |
 | [Tool Development](Docs/ToolDevelopment.md) | How to implement, register, validate, and maintain your own MCP tools |
+| [Release Preflight](Docs/ReleasePreflight.md) | Release-gate checks for runtime inventory, compatibility aliases, and safety probes |
 | [Troubleshooting](Docs/Troubleshooting.md) | Known failure modes, connection issues, PIE caveats, and debugging steps |
 | [Architecture](Docs/Architecture.md) | Module layout, request lifecycle, registry warmup, and threading model |
 | [Chinese Documentation Index](README.zh-CN.md) | Chinese landing page with links to the translated docs |
@@ -53,9 +54,11 @@ UEBridgeMCP is a native C++ Unreal Engine plugin that exposes the Unreal Editor 
 - Core plugin dependencies enabled in `UEBridgeMCP.uplugin`:
   - `EditorScriptingUtilities`
   - `GameplayAbilities`
+  - `EnhancedInput`
   - `StateTree`
   - `GameplayStateTree`
 - `PythonScriptPlugin` powers `run-python-script`. The plugin descriptor marks it optional, but the current source build links against it directly in `Source/UEBridgeMCPEditor/UEBridgeMCPEditor.Build.cs`, so keep it enabled unless you intentionally remove Python tooling.
+- Feature and extension surfaces also declare optional dependencies for `ControlRig`, `PCG`, `Niagara`, and `Metasound`; availability of those modules changes the live `tools/list` inventory.
 
 ### Installation
 
@@ -154,6 +157,12 @@ curl -s -X POST http://127.0.0.1:8080/mcp \
 
 If the plugin is running correctly, the response should contain the registered tool set for the current editor session.
 
+For release validation, run the bundled preflight after the editor MCP endpoint is online:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File Validation\Smoke\Invoke-ReleasePreflight.ps1
+```
+
 ## Built-in Tool Surface
 
 The authoritative registration site is:
@@ -162,15 +171,14 @@ The authoritative registration site is:
 Source/UEBridgeMCPEditor/Private/UEBridgeMCPEditor.cpp
 ```
 
-At `v1.19.0`, the plugin registers **46 built-in tools** across the following groups:
+At `v1.19.0`, the tool surface is intentionally dynamic:
 
-| Group | Count | Examples |
-| --- | ---: | --- |
-| Query and inspection | 15 | `query-blueprint-summary`, `query-asset`, `get-asset-diff`, `find-references`, `get-logs` |
-| Creation and editing | 14 | `create-asset`, `add-widget`, `edit-blueprint-graph`, `edit-level-batch`, `apply-material` |
-| StateTree | 5 | `query-statetree`, `add-statetree-state`, `add-statetree-transition` |
-| PIE, scripting, build, and RPC | 8 | `run-python-script`, `trigger-live-coding`, `pie-session`, `pie-input`, `wait-for-world-condition`, `call-function` |
-| High-level orchestration | 4 | `blueprint-scaffold-from-spec`, `query-gameplay-state`, `auto-fix-blueprint-compile-errors`, `generate-level-structure` |
+- Always-on editor tools are registered in `RegisterBuiltInTools()`.
+- Conditional tools appear when optional UE modules such as Sequencer, Landscape, Foliage, World Partition, Niagara, and MetaSound are available.
+- Extension modules can add Control Rig, PCG, and External AI tools.
+- UnrealMCPServer-style compatibility aliases are exposed as name-only aliases that resolve to canonical UEBridgeMCP tools.
+
+The release gate is `initialize.capabilities.tools.registeredCount == tools/list.length`, plus the preflight checks under `Validation/Smoke/`.
 
 See [Tools Reference](Docs/Tools-Reference.md) for the full list and per-tool summaries.
 
@@ -186,10 +194,13 @@ MCP Client
   -> Unreal Editor subsystems / assets / worlds / PIE
 ```
 
-The plugin ships two modules:
+The plugin descriptor currently declares five editor-only modules:
 
-- `UEBridgeMCP` - runtime protocol types, schema helpers, base classes, and tool registry
+- `UEBridgeMCP` - shared protocol types, schema helpers, base classes, and the tool/resource/prompt registries used by the editor-side MCP implementation
 - `UEBridgeMCPEditor` - editor-only server, subsystem integration, built-in tools, and toolbar/status integration
+- `UEBridgeMCPControlRig` - Control Rig extension tools
+- `UEBridgeMCPPCG` - PCG extension tools
+- `UEBridgeMCPExternalAI` - external AI content-generation extension tools
 
 See [Architecture](Docs/Architecture.md) for the full lifecycle, warmup behavior, and threading constraints.
 

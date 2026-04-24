@@ -1,0 +1,50 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "207",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Niagara system summary ready"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "asset_path":  "/Game/UEBridgeMCPValidation/NiagaraRound1/NS_NiagaraRound1_20260423_174928.NS_NiagaraRound1_20260423_174928",
+                                             "name":  "NS_NiagaraRound1_20260423_174928",
+                                             "class":  "NiagaraSystem",
+                                             "ready_to_run":  true,
+                                             "needs_compile":  false,
+                                             "warmup_time":  0,
+                                             "emitter_count":  0,
+                                             "emitters":  [
+
+                                                          ],
+                                             "user_parameters":  [
+                                                                     {
+                                                                         "name":  "SpawnRate",
+                                                                         "display_name":  "SpawnRate",
+                                                                         "type":  "float",
+                                                                         "type_name":  "NiagaraFloat",
+                                                                         "size_bytes":  4,
+                                                                         "is_data_interface":  false,
+                                                                         "is_uobject":  false,
+                                                                         "value":  10
+                                                                     }
+                                                                 ],
+                                             "user_parameter_count":  1,
+                                             "tool":  "query-niagara-system-summary"
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  0.050700007705017924
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "query-niagara-system-summary",
+                                               "mutates":  false,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  1
+                                           }
+                             }
+               }
+}

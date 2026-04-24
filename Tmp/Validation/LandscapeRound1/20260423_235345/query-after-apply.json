@@ -1,0 +1,161 @@
+{
+	"jsonrpc": "2.0",
+	"id": "3111",
+	"result":
+	{
+		"content": [
+			{
+				"type": "text",
+				"text": "Landscape summary ready"
+			}
+		],
+		"structuredContent":
+		{
+			"tool": "query-landscape-summary",
+			"world_name": "Untitled_1",
+			"world_path": "/Temp/Untitled_1.Untitled_1",
+			"world_type": "editor",
+			"landscape_count": 1,
+			"component_count": 1,
+			"landscapes": [
+				{
+					"actor":
+					{
+						"name": "Landscape_UAID_10B676572F6E82D402_1508336247",
+						"label": "LandscapeRound1_20260423_235345",
+						"class": "/Script/Landscape.Landscape",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.Landscape_UAID_10B676572F6E82D402_1508336247",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.Landscape_UAID_10B676572F6E82D402_1508336247",
+							"display_name": "LandscapeRound1_20260423_235345"
+						},
+						"transform":
+						{
+							"location": [
+								809650,
+								819650,
+								200
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "5bb6535c-4f42-f601-98e9-b1be87baf4fb",
+					"class": "/Script/Landscape.Landscape",
+					"is_main_landscape": true,
+					"component_size_quads": 7,
+					"subsection_size_quads": 7,
+					"num_subsections": 1,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						7,
+						7
+					],
+					"resolution_x": 8,
+					"resolution_y": 8,
+					"component_count": 1,
+					"material_path": "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+					"has_landscape_info": true,
+					"layers": [],
+					"actor_bounds":
+					{
+						"origin": [
+							810000,
+							820000,
+							200
+						],
+						"box_extent": [
+							350,
+							350,
+							0
+						],
+						"box_min": [
+							809650,
+							819650,
+							200
+						],
+						"box_max": [
+							810350,
+							820350,
+							200
+						],
+						"sphere_radius": 494.97474683058329
+					},
+					"height_samples": [
+						{
+							"requested_point": [
+								1,
+								1
+							],
+							"point": [
+								1,
+								1
+							],
+							"packed_height": 49152,
+							"local_height": 128
+						},
+						{
+							"requested_point": [
+								4,
+								4
+							],
+							"point": [
+								4,
+								4
+							],
+							"packed_height": 32768,
+							"local_height": 0
+						}
+					],
+					"components": [
+						{
+							"name": "LandscapeComponent_0",
+							"section_base": [
+								0,
+								0
+							],
+							"component_key": [
+								0,
+								0
+							],
+							"component_size_quads": 7,
+							"material_path": "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+							"weightmap_layers": []
+						}
+					],
+					"components_truncated": false
+				}
+			]
+		},
+		"_meta":
+		{
+			"timing":
+			{
+				"duration_ms": 0.24779999512247741
+			},
+			"stats":
+			{
+				"tool_name": "query-landscape-summary",
+				"mutates": false,
+				"supports_batch": false,
+				"requires_game_thread": true,
+				"content_items": 1
+			}
+		}
+	}
+}

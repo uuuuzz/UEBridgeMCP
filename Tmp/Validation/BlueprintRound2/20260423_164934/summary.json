@@ -1,0 +1,253 @@
+{
+    "timestamp":  "20260423_164934",
+    "evidence_dir":  "G:\\UEProjects\\UEBridgeMCP\\Tmp\\Validation\\BlueprintRound2\\20260423_164934",
+    "tool_count":  102,
+    "phase1c_tools_visible":  {
+                                  "blueprint_scaffold_from_spec":  true,
+                                  "apply_blueprint_fixups":  true,
+                                  "analyze_blueprint_compile_results":  true,
+                                  "create_blueprint_pattern":  true
+                              },
+    "assets":  {
+                   "clean_bp":  "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Clean_20260423_164934",
+                   "broken_bp":  "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Broken_20260423_164934",
+                   "interface_target_bp":  "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_InterfaceTarget_20260423_164934",
+                   "patterns":  [
+                                    "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Logic_20260423_164934",
+                                    "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Toggle_20260423_164934",
+                                    "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Interaction_20260423_164934"
+                                ],
+                   "bpi":  "/Game/UEBridgeMCPValidation/BlueprintRound2/BPI_R2_Interface_20260423_164934"
+               },
+    "checks":  {
+                   "clean_issue_count":  0,
+                   "interface_compile_success":  true,
+                   "clean_compile_success":  true,
+                   "pattern_conflict_is_structured_error":  true,
+                   "reconstruct_fixup_success":  true,
+                   "dry_run_success":  true,
+                   "pattern_conflict_code":  "UEBMCP_ASSET_ALREADY_EXISTS",
+                   "auto_fix_dry_run_success":  true,
+                   "patterns_compile_success":  true,
+                   "invalid_fixup_is_structured_error":  true,
+                   "conform_fixup_success":  true,
+                   "broken_suggested_fixups":  [
+
+                                               ],
+                   "interface_after_codes":  [
+                                                 "missing_interface_graph"
+                                             ],
+                   "pattern_success":  [
+                                           true,
+                                           true,
+                                           false
+                                       ],
+                   "broken_issue_count":  1,
+                   "invalid_fixup_code":  "UEBMCP_INVALID_ACTION",
+                   "interface_before_codes":  [
+                                                  "missing_interface_graph"
+                                              ]
+               },
+    "scenarios":  [
+                      {
+                          "name":  "01-create-clean-bp",
+                          "http_success":  true,
+                          "is_error":  null,
+                          "code":  null,
+                          "message":  null,
+                          "notes":  ""
+                      },
+                      {
+                          "name":  "02-analyze-clean-bp",
+                          "http_success":  true,
+                          "is_error":  null,
+                          "code":  null,
+                          "message":  null,
+                          "notes":  ""
+                      },
+                      {
+                          "name":  "03-create-broken-bp",
+                          "http_success":  true,
+                          "is_error":  null,
+                          "code":  null,
+                          "message":  null,
+                          "notes":  ""
+                      },
+                      {
+                          "name":  "04-broken-create-variable",
+                          "http_success":  true,
+                          "is_error":  null,
+                          "code":  null,
+                          "message":  null,
+                          "notes":  ""
+                      },
+                      {
+                          "name":  "05-broken-add-get-variable",
+                          "http_success":  true,
+                          "is_error":  null,
+                          "code":  null,
+                          "message":  null,
+                          "notes":  ""
+                      },
+                      {
+                          "name":  "06-broken-delete-variable",
+                          "http_success":  true,
+                          "is_error":  null,
+                          "code":  null,
+                          "message":  null,
+                          "notes":  ""
+                      },
+                      {
+                          "name":  "07-broken-add-unlinked-branch",
+                          "http_success":  true,
+                          "is_error":  null,
+                          "code":  null,
+                          "message":  null,
+                          "notes":  ""
+                      },
+                      {
+                          "name":  "08-analyze-broken-bp",
+                          "http_success":  true,
+                          "is_error":  null,
+                          "code":  null,
+                          "message":  null,
+                          "notes":  ""
+                      },
+                      {
+                          "name":  "09-fixups-dry-run",
+                          "http_success":  true,
+                          "is_error":  null,
+                          "code":  null,
+                          "message":  null,
+                          "notes":  ""
+                      },
+                      {
+                          "name":  "10-fixups-reconstruct",
+                          "http_success":  true,
+                          "is_error":  null,
+                          "code":  null,
+                          "message":  null,
+                          "notes":  ""
+                      },
+                      {
+                          "name":  "11-fixups-invalid-rollback",
+                          "http_success":  true,
+                          "is_error":  true,
+                          "code":  "UEBMCP_INVALID_ACTION",
+                          "message":  "Unsupported action \u0027definitely_invalid_action\u0027",
+                          "notes":  ""
+                      },
+                      {
+                          "name":  "12-create-bpi",
+                          "http_success":  true,
+                          "is_error":  null,
+                          "code":  null,
+                          "message":  null,
+                          "notes":  ""
+                      },
+                      {
+                          "name":  "13-bpi-create-function",
+                          "http_success":  true,
+                          "is_error":  null,
+                          "code":  null,
+                          "message":  null,
+                          "notes":  ""
+                      },
+                      {
+                          "name":  "14-create-interface-target-bp",
+                          "http_success":  true,
+                          "is_error":  null,
+                          "code":  null,
+                          "message":  null,
+                          "notes":  ""
+                      },
+                      {
+                          "name":  "15-add-interface-sync-false",
+                          "http_success":  true,
+                          "is_error":  null,
+                          "code":  null,
+                          "message":  null,
+                          "notes":  ""
+                      },
+                      {
+                          "name":  "16-interface-findings-before-conform",
+                          "http_success":  true,
+                          "is_error":  null,
+                          "code":  null,
+                          "message":  null,
+                          "notes":  ""
+                      },
+                      {
+                          "name":  "17-fixups-conform-interfaces",
+                          "http_success":  true,
+                          "is_error":  null,
+                          "code":  null,
+                          "message":  null,
+                          "notes":  ""
+                      },
+                      {
+                          "name":  "18-interface-findings-after-conform",
+                          "http_success":  true,
+                          "is_error":  null,
+                          "code":  null,
+                          "message":  null,
+                          "notes":  ""
+                      },
+                      {
+                          "name":  "19-interface-compile",
+                          "http_success":  true,
+                          "is_error":  null,
+                          "code":  null,
+                          "message":  null,
+                          "notes":  ""
+                      },
+                      {
+                          "name":  "20-pattern-logic",
+                          "http_success":  true,
+                          "is_error":  null,
+                          "code":  null,
+                          "message":  null,
+                          "notes":  ""
+                      },
+                      {
+                          "name":  "21-pattern-toggle",
+                          "http_success":  true,
+                          "is_error":  null,
+                          "code":  null,
+                          "message":  null,
+                          "notes":  ""
+                      },
+                      {
+                          "name":  "22-pattern-interaction",
+                          "http_success":  true,
+                          "is_error":  true,
+                          "code":  "UEBMCP_PATTERN_GRAPH_SETUP_FAILED",
+                          "message":  "Target pin not found",
+                          "notes":  ""
+                      },
+                      {
+                          "name":  "23-pattern-existing-conflict",
+                          "http_success":  true,
+                          "is_error":  true,
+                          "code":  "UEBMCP_ASSET_ALREADY_EXISTS",
+                          "message":  "Asset already exists",
+                          "notes":  ""
+                      },
+                      {
+                          "name":  "24-patterns-compile-regression",
+                          "http_success":  true,
+                          "is_error":  null,
+                          "code":  null,
+                          "message":  null,
+                          "notes":  ""
+                      },
+                      {
+                          "name":  "25-auto-fix-dry-run-regression",
+                          "http_success":  true,
+                          "is_error":  null,
+                          "code":  null,
+                          "message":  null,
+                          "notes":  ""
+                      }
+                  ]
+}

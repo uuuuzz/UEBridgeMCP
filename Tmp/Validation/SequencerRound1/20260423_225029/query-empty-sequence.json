@@ -1,0 +1,66 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "606",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Level Sequence summary ready"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "tool":  "query-level-sequence-summary",
+                                             "asset_path":  "/Game/UEBridgeMCPValidation/SequencerRound1/LS_SequencerRound1_20260423_225029",
+                                             "asset_type":  "LevelSequence",
+                                             "movie_scene_name":  "MovieScene_0",
+                                             "playback_range":  {
+                                                                    "has_start":  true,
+                                                                    "has_end":  true,
+                                                                    "start_frame":  0,
+                                                                    "start_bound":  "exclusive",
+                                                                    "end_frame":  0,
+                                                                    "end_bound":  "exclusive",
+                                                                    "duration_frames":  0
+                                                                },
+                                             "display_rate":  {
+                                                                  "numerator":  30,
+                                                                  "denominator":  1,
+                                                                  "decimal":  30
+                                                              },
+                                             "tick_resolution":  {
+                                                                     "numerator":  24000,
+                                                                     "denominator":  1,
+                                                                     "decimal":  24000
+                                                                 },
+                                             "binding_count":  0,
+                                             "spawnable_count":  0,
+                                             "possessable_count":  0,
+                                             "master_track_count":  0,
+                                             "binding_track_count":  0,
+                                             "track_count":  0,
+                                             "section_count":  0,
+                                             "has_camera_cut_track":  false,
+                                             "camera_cut_count":  0,
+                                             "master_tracks":  [
+
+                                                               ],
+                                             "master_tracks_truncated":  false,
+                                             "bindings":  [
+
+                                                          ],
+                                             "bindings_truncated":  false
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  0.067599990870803595
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "query-level-sequence-summary",
+                                               "mutates":  false,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  1
+                                           }
+                             }
+               }
+}

@@ -1,0 +1,13 @@
+{
+  "jsonrpc": "2.0",
+  "id": "sample-initialize",
+  "method": "initialize",
+  "params": {
+    "protocolVersion": "2025-06-18",
+    "capabilities": {},
+    "clientInfo": {
+      "name": "UEBridgeMCP-Step6Validation",
+      "version": "1.0"
+    }
+  }
+}

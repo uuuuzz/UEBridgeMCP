@@ -35,6 +35,8 @@ public class UEBridgeMCPEditor : ModuleRules
 			"Kismet",
 			"KismetCompiler",
 			"BlueprintGraph",
+			"MaterialEditor",
+			"StaticMeshEditor",
 
 			// Animation Blueprint
 			"AnimGraph",
@@ -56,6 +58,25 @@ public class UEBridgeMCPEditor : ModuleRules
 
 			// Animation/Sequencer (for UMG animations)
 			"MovieScene",
+			"MovieSceneTracks",
+			"LevelSequence",
+			"Landscape",
+			"Foliage",
+
+			// Niagara
+			"Niagara",
+			"NiagaraEditor",
+
+			// Audio
+			"AudioEditor",
+
+			// Physics
+			"PhysicsCore",
+
+			// MetaSound
+			"MetasoundEngine",
+			"MetasoundFrontend",
+			"MetasoundEditor",
 
 			// JSON
 			"Json",
@@ -64,6 +85,7 @@ public class UEBridgeMCPEditor : ModuleRules
 
 			// Input
 			"InputCore",
+			"EnhancedInput",
 
 			// AI/Navigation (for PIE input tools)
 			"AIModule",
@@ -78,9 +100,11 @@ public class UEBridgeMCPEditor : ModuleRules
 			"StateTreeModule",
 			"StateTreeEditorModule",
 			"GameplayStateTreeModule",
+			"PropertyBindingUtils",
 
 			// Gameplay
 			"GameplayAbilities",
+			"GameplayAbilitiesEditor",
 			"GameplayTasks",
 
 			// Python Scripting

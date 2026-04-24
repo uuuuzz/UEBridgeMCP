@@ -1,0 +1,22 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "search_project",
+    "method":  "tools/call",
+    "params":  {
+                   "name":  "search-project",
+                   "arguments":  {
+                                     "query":  "SearchRound1",
+                                     "include":  [
+                                                     "assets",
+                                                     "blueprint_symbols",
+                                                     "level_entities"
+                                                 ],
+                                     "path":  "/Game/UEBridgeMCPValidation/SearchRound1",
+                                     "include_nodes":  false,
+                                     "world":  "editor",
+                                     "limit_per_section":  10,
+                                     "total_limit":  20,
+                                     "max_blueprints":  50
+                                 }
+               }
+}

@@ -1,0 +1,1517 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "query_engine_api_function",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Engine API symbol search complete"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "query":  "LineTrace",
+                                             "results":  [
+                                                             {
+                                                                 "kind":  "function",
+                                                                 "name":  "LineTraceMultiByProfile",
+                                                                 "path":  "/Script/Engine.KismetSystemLibrary:LineTraceMultiByProfile",
+                                                                 "owner_class":  "KismetSystemLibrary",
+                                                                 "owner_class_path":  "/Script/Engine.KismetSystemLibrary",
+                                                                 "flags":  "public|static|native|blueprint_callable",
+                                                                 "score":  85,
+                                                                 "blueprint_callable":  true,
+                                                                 "blueprint_pure":  false,
+                                                                 "native":  true,
+                                                                 "parameters":  [
+                                                                                    {
+                                                                                        "name":  "WorldContextObject",
+                                                                                        "type":  "UObject*",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "Start",
+                                                                                        "type":  "FVector",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "End",
+                                                                                        "type":  "FVector",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "ProfileName",
+                                                                                        "type":  "FName",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "bTraceComplex",
+                                                                                        "type":  "bool",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "ActorsToIgnore",
+                                                                                        "type":  "TArray\u003cAActor*\u003e",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "DrawDebugType",
+                                                                                        "type":  "TEnumAsByte\u003cEDrawDebugTrace::Type\u003e",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "OutHits",
+                                                                                        "type":  "TArray\u003cFHitResult\u003e",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "bIgnoreSelf",
+                                                                                        "type":  "bool",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "TraceColor",
+                                                                                        "type":  "FLinearColor",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "TraceHitColor",
+                                                                                        "type":  "FLinearColor",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "DrawTime",
+                                                                                        "type":  "float",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "ReturnValue",
+                                                                                        "type":  "bool",
+                                                                                        "is_return":  true,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    }
+                                                                                ],
+                                                                 "parameter_count":  13,
+                                                                 "metadata":  {
+                                                                                  "DisplayName":  "Multi Line Trace By Profile",
+                                                                                  "Category":  "Collision",
+                                                                                  "ToolTip":  "Trace a ray against the world using a specific profile and return overlapping hits and then first blocking hit\nResults are sorted, so a blocking hit (if found) will be the last element of the array\nOnly the single closest blocking result will be generated, no tests will be done after that\n\n@param WorldContext   World context\n@param Start                  Start of line segment.\n@param End                    End of line segment.\n@param ProfileName    The \u0027profile\u0027 used to determine which components to hit\n@param bTraceComplex  True to test against complex collision, false to test against simplified collision.\n@param OutHit         Properties of the trace hit.\n@return                               True if there was a blocking hit, false otherwise.",
+                                                                                  "Keywords":  "raycast"
+                                                                              }
+                                                             },
+                                                             {
+                                                                 "kind":  "function",
+                                                                 "name":  "LineTraceMultiForObjects",
+                                                                 "path":  "/Script/Engine.KismetSystemLibrary:LineTraceMultiForObjects",
+                                                                 "owner_class":  "KismetSystemLibrary",
+                                                                 "owner_class_path":  "/Script/Engine.KismetSystemLibrary",
+                                                                 "flags":  "public|static|native|blueprint_callable",
+                                                                 "score":  85,
+                                                                 "blueprint_callable":  true,
+                                                                 "blueprint_pure":  false,
+                                                                 "native":  true,
+                                                                 "parameters":  [
+                                                                                    {
+                                                                                        "name":  "WorldContextObject",
+                                                                                        "type":  "UObject*",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "Start",
+                                                                                        "type":  "FVector",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "End",
+                                                                                        "type":  "FVector",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "ObjectTypes",
+                                                                                        "type":  "TArray\u003cTEnumAsByte\u003cEObjectTypeQuery\u003e \u003e",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "bTraceComplex",
+                                                                                        "type":  "bool",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "ActorsToIgnore",
+                                                                                        "type":  "TArray\u003cAActor*\u003e",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "DrawDebugType",
+                                                                                        "type":  "TEnumAsByte\u003cEDrawDebugTrace::Type\u003e",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "OutHits",
+                                                                                        "type":  "TArray\u003cFHitResult\u003e",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "bIgnoreSelf",
+                                                                                        "type":  "bool",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "TraceColor",
+                                                                                        "type":  "FLinearColor",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "TraceHitColor",
+                                                                                        "type":  "FLinearColor",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "DrawTime",
+                                                                                        "type":  "float",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "ReturnValue",
+                                                                                        "type":  "bool",
+                                                                                        "is_return":  true,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    }
+                                                                                ],
+                                                                 "parameter_count":  13,
+                                                                 "metadata":  {
+                                                                                  "DisplayName":  "Multi Line Trace For Objects",
+                                                                                  "Category":  "Collision",
+                                                                                  "ToolTip":  "Does a collision trace along the given line and returns all hits encountered.\nThis only finds objects that are of a type specified by ObjectTypes.\n\n@param WorldContext  World context\n@param Start                 Start of line segment.\n@param End                   End of line segment.\n@param ObjectTypes   Array of Object Types to trace\n@param bTraceComplex True to test against complex collision, false to test against simplified collision.\n@param OutHit                Properties of the trace hit.\n@return                              True if there was a hit, false otherwise.",
+                                                                                  "Keywords":  "raycast"
+                                                                              }
+                                                             },
+                                                             {
+                                                                 "kind":  "function",
+                                                                 "name":  "LineTraceMulti",
+                                                                 "path":  "/Script/Engine.KismetSystemLibrary:LineTraceMulti",
+                                                                 "owner_class":  "KismetSystemLibrary",
+                                                                 "owner_class_path":  "/Script/Engine.KismetSystemLibrary",
+                                                                 "flags":  "public|static|native|blueprint_callable",
+                                                                 "score":  85,
+                                                                 "blueprint_callable":  true,
+                                                                 "blueprint_pure":  false,
+                                                                 "native":  true,
+                                                                 "parameters":  [
+                                                                                    {
+                                                                                        "name":  "WorldContextObject",
+                                                                                        "type":  "UObject*",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "Start",
+                                                                                        "type":  "FVector",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "End",
+                                                                                        "type":  "FVector",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "TraceChannel",
+                                                                                        "type":  "TEnumAsByte\u003cETraceTypeQuery\u003e",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "bTraceComplex",
+                                                                                        "type":  "bool",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "ActorsToIgnore",
+                                                                                        "type":  "TArray\u003cAActor*\u003e",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "DrawDebugType",
+                                                                                        "type":  "TEnumAsByte\u003cEDrawDebugTrace::Type\u003e",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "OutHits",
+                                                                                        "type":  "TArray\u003cFHitResult\u003e",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "bIgnoreSelf",
+                                                                                        "type":  "bool",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "TraceColor",
+                                                                                        "type":  "FLinearColor",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "TraceHitColor",
+                                                                                        "type":  "FLinearColor",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "DrawTime",
+                                                                                        "type":  "float",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "ReturnValue",
+                                                                                        "type":  "bool",
+                                                                                        "is_return":  true,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    }
+                                                                                ],
+                                                                 "parameter_count":  13,
+                                                                 "metadata":  {
+                                                                                  "DisplayName":  "Multi Line Trace By Channel",
+                                                                                  "Category":  "Collision",
+                                                                                  "ToolTip":  "Does a collision trace along the given line and returns all hits encountered up to and including the first blocking hit.\nThis trace finds the objects that RESPOND to the given TraceChannel\n\n@param WorldContext  World context\n@param Start                 Start of line segment.\n@param End                   End of line segment.\n@param TraceChannel  The channel to trace\n@param bTraceComplex True to test against complex collision, false to test against simplified collision.\n@param OutHit                Properties of the trace hit.\n@return                              True if there was a blocking hit, false otherwise.",
+                                                                                  "Keywords":  "raycast"
+                                                                              }
+                                                             },
+                                                             {
+                                                                 "kind":  "function",
+                                                                 "name":  "LineTraceSingleByProfile",
+                                                                 "path":  "/Script/Engine.KismetSystemLibrary:LineTraceSingleByProfile",
+                                                                 "owner_class":  "KismetSystemLibrary",
+                                                                 "owner_class_path":  "/Script/Engine.KismetSystemLibrary",
+                                                                 "flags":  "public|static|native|blueprint_callable",
+                                                                 "score":  85,
+                                                                 "blueprint_callable":  true,
+                                                                 "blueprint_pure":  false,
+                                                                 "native":  true,
+                                                                 "parameters":  [
+                                                                                    {
+                                                                                        "name":  "WorldContextObject",
+                                                                                        "type":  "UObject*",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "Start",
+                                                                                        "type":  "FVector",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "End",
+                                                                                        "type":  "FVector",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "ProfileName",
+                                                                                        "type":  "FName",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "bTraceComplex",
+                                                                                        "type":  "bool",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "ActorsToIgnore",
+                                                                                        "type":  "TArray\u003cAActor*\u003e",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "DrawDebugType",
+                                                                                        "type":  "TEnumAsByte\u003cEDrawDebugTrace::Type\u003e",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "OutHit",
+                                                                                        "type":  "FHitResult",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "bIgnoreSelf",
+                                                                                        "type":  "bool",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "TraceColor",
+                                                                                        "type":  "FLinearColor",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "TraceHitColor",
+                                                                                        "type":  "FLinearColor",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "DrawTime",
+                                                                                        "type":  "float",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "ReturnValue",
+                                                                                        "type":  "bool",
+                                                                                        "is_return":  true,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    }
+                                                                                ],
+                                                                 "parameter_count":  13,
+                                                                 "metadata":  {
+                                                                                  "DisplayName":  "Line Trace By Profile",
+                                                                                  "Category":  "Collision",
+                                                                                  "ToolTip":  "Trace a ray against the world using a specific profile and return the first blocking hit\n\n@param WorldContext   World context\n@param Start                  Start of line segment.\n@param End                    End of line segment.\n@param ProfileName    The \u0027profile\u0027 used to determine which components to hit\n@param bTraceComplex  True to test against complex collision, false to test against simplified collision.\n@param OutHit                 Properties of the trace hit.\n@return                               True if there was a hit, false otherwise.",
+                                                                                  "Keywords":  "raycast"
+                                                                              }
+                                                             },
+                                                             {
+                                                                 "kind":  "function",
+                                                                 "name":  "LineTraceSingleForObjects",
+                                                                 "path":  "/Script/Engine.KismetSystemLibrary:LineTraceSingleForObjects",
+                                                                 "owner_class":  "KismetSystemLibrary",
+                                                                 "owner_class_path":  "/Script/Engine.KismetSystemLibrary",
+                                                                 "flags":  "public|static|native|blueprint_callable",
+                                                                 "score":  85,
+                                                                 "blueprint_callable":  true,
+                                                                 "blueprint_pure":  false,
+                                                                 "native":  true,
+                                                                 "parameters":  [
+                                                                                    {
+                                                                                        "name":  "WorldContextObject",
+                                                                                        "type":  "UObject*",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "Start",
+                                                                                        "type":  "FVector",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "End",
+                                                                                        "type":  "FVector",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "ObjectTypes",
+                                                                                        "type":  "TArray\u003cTEnumAsByte\u003cEObjectTypeQuery\u003e \u003e",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "bTraceComplex",
+                                                                                        "type":  "bool",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "ActorsToIgnore",
+                                                                                        "type":  "TArray\u003cAActor*\u003e",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "DrawDebugType",
+                                                                                        "type":  "TEnumAsByte\u003cEDrawDebugTrace::Type\u003e",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "OutHit",
+                                                                                        "type":  "FHitResult",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "bIgnoreSelf",
+                                                                                        "type":  "bool",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "TraceColor",
+                                                                                        "type":  "FLinearColor",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "TraceHitColor",
+                                                                                        "type":  "FLinearColor",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "DrawTime",
+                                                                                        "type":  "float",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "ReturnValue",
+                                                                                        "type":  "bool",
+                                                                                        "is_return":  true,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    }
+                                                                                ],
+                                                                 "parameter_count":  13,
+                                                                 "metadata":  {
+                                                                                  "DisplayName":  "Line Trace For Objects",
+                                                                                  "Category":  "Collision",
+                                                                                  "ToolTip":  "Does a collision trace along the given line and returns the first hit encountered.\nThis only finds objects that are of a type specified by ObjectTypes.\n\n@param WorldContext  World context\n@param Start                 Start of line segment.\n@param End                   End of line segment.\n@param ObjectTypes   Array of Object Types to trace\n@param bTraceComplex True to test against complex collision, false to test against simplified collision.\n@param OutHit                Properties of the trace hit.\n@return                              True if there was a hit, false otherwise.",
+                                                                                  "Keywords":  "raycast"
+                                                                              }
+                                                             },
+                                                             {
+                                                                 "kind":  "function",
+                                                                 "name":  "LineTraceSingle",
+                                                                 "path":  "/Script/Engine.KismetSystemLibrary:LineTraceSingle",
+                                                                 "owner_class":  "KismetSystemLibrary",
+                                                                 "owner_class_path":  "/Script/Engine.KismetSystemLibrary",
+                                                                 "flags":  "public|static|native|blueprint_callable",
+                                                                 "score":  85,
+                                                                 "blueprint_callable":  true,
+                                                                 "blueprint_pure":  false,
+                                                                 "native":  true,
+                                                                 "parameters":  [
+                                                                                    {
+                                                                                        "name":  "WorldContextObject",
+                                                                                        "type":  "UObject*",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "Start",
+                                                                                        "type":  "FVector",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "End",
+                                                                                        "type":  "FVector",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "TraceChannel",
+                                                                                        "type":  "TEnumAsByte\u003cETraceTypeQuery\u003e",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "bTraceComplex",
+                                                                                        "type":  "bool",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "ActorsToIgnore",
+                                                                                        "type":  "TArray\u003cAActor*\u003e",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "DrawDebugType",
+                                                                                        "type":  "TEnumAsByte\u003cEDrawDebugTrace::Type\u003e",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "OutHit",
+                                                                                        "type":  "FHitResult",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "bIgnoreSelf",
+                                                                                        "type":  "bool",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "TraceColor",
+                                                                                        "type":  "FLinearColor",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "TraceHitColor",
+                                                                                        "type":  "FLinearColor",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "DrawTime",
+                                                                                        "type":  "float",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "ReturnValue",
+                                                                                        "type":  "bool",
+                                                                                        "is_return":  true,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    }
+                                                                                ],
+                                                                 "parameter_count":  13,
+                                                                 "metadata":  {
+                                                                                  "DisplayName":  "Line Trace By Channel",
+                                                                                  "Category":  "Collision",
+                                                                                  "ToolTip":  "Does a collision trace along the given line and returns the first blocking hit encountered.\nThis trace finds the objects that RESPONDS to the given TraceChannel\n\n@param WorldContext  World context\n@param Start                 Start of line segment.\n@param End                   End of line segment.\n@param TraceChannel\n@param bTraceComplex True to test against complex collision, false to test against simplified collision.\n@param OutHit                Properties of the trace hit.\n@return                              True if there was a hit, false otherwise.",
+                                                                                  "Keywords":  "raycast"
+                                                                              }
+                                                             },
+                                                             {
+                                                                 "kind":  "function",
+                                                                 "name":  "K2_LineTraceComponent",
+                                                                 "path":  "/Script/Engine.PrimitiveComponent:K2_LineTraceComponent",
+                                                                 "owner_class":  "PrimitiveComponent",
+                                                                 "owner_class_path":  "/Script/Engine.PrimitiveComponent",
+                                                                 "flags":  "public|native|blueprint_callable",
+                                                                 "score":  65,
+                                                                 "blueprint_callable":  true,
+                                                                 "blueprint_pure":  false,
+                                                                 "native":  true,
+                                                                 "parameters":  [
+                                                                                    {
+                                                                                        "name":  "TraceStart",
+                                                                                        "type":  "FVector",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "TraceEnd",
+                                                                                        "type":  "FVector",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "bTraceComplex",
+                                                                                        "type":  "bool",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "bShowTrace",
+                                                                                        "type":  "bool",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "bPersistentShowTrace",
+                                                                                        "type":  "bool",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "HitLocation",
+                                                                                        "type":  "FVector",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "HitNormal",
+                                                                                        "type":  "FVector",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "BoneName",
+                                                                                        "type":  "FName",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "OutHit",
+                                                                                        "type":  "FHitResult",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "ReturnValue",
+                                                                                        "type":  "bool",
+                                                                                        "is_return":  true,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    }
+                                                                                ],
+                                                                 "parameter_count":  10,
+                                                                 "metadata":  {
+                                                                                  "DisplayName":  "Line Trace Component",
+                                                                                  "Category":  "Collision",
+                                                                                  "ToolTip":  "Perform a line trace against a single component\n@param TraceStart The start of the trace in world-space\n@param TraceEnd The end of the trace in world-space\n@param bTraceComplex Whether or not to trace the complex physics representation or just the simple representation\n@param bShowTrace Whether or not to draw the trace in the world (for debugging)\n@param bPersistentShowTrace Whether or not to make the debugging draw stay in the world permanently"
+                                                                              }
+                                                             },
+                                                             {
+                                                                 "kind":  "function",
+                                                                 "name":  "FindLeafTransformByLineTrace",
+                                                                 "path":  "/Script/GeometryCollectionEngine.GeometryCollectionComponent:FindLeafTransformByLineTrace",
+                                                                 "owner_class":  "GeometryCollectionComponent",
+                                                                 "owner_class_path":  "/Script/GeometryCollectionEngine.GeometryCollectionComponent",
+                                                                 "flags":  "public|native|blueprint_callable|blueprint_pure|const",
+                                                                 "score":  65,
+                                                                 "blueprint_callable":  true,
+                                                                 "blueprint_pure":  true,
+                                                                 "native":  true,
+                                                                 "parameters":  [
+                                                                                    {
+                                                                                        "name":  "Start",
+                                                                                        "type":  "FVector",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "End",
+                                                                                        "type":  "FVector",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "LeafTransformIndex",
+                                                                                        "type":  "int32",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "LeafTransformName",
+                                                                                        "type":  "FName",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "ReturnValue",
+                                                                                        "type":  "bool",
+                                                                                        "is_return":  true,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    }
+                                                                                ],
+                                                                 "parameter_count":  5,
+                                                                 "metadata":  {
+                                                                                  "Category":  "Physics",
+                                                                                  "ToolTip":  "Find a leaf transform from a line trace\n@param Start Start position for the line trace\n@param End position for the line trace\n@param LeafTransformIndex the index of leaf transform found by the line trace\n@param LeafTransformName the name of leaf transform found by the line trace\n@return true if a leaf was found"
+                                                                              }
+                                                             },
+                                                             {
+                                                                 "kind":  "function",
+                                                                 "name":  "Blueprint_PredictProjectilePath_ByObjectType",
+                                                                 "path":  "/Script/Engine.GameplayStatics:Blueprint_PredictProjectilePath_ByObjectType",
+                                                                 "owner_class":  "GameplayStatics",
+                                                                 "owner_class_path":  "/Script/Engine.GameplayStatics",
+                                                                 "flags":  "public|static|native|blueprint_callable",
+                                                                 "score":  35,
+                                                                 "blueprint_callable":  true,
+                                                                 "blueprint_pure":  false,
+                                                                 "native":  true,
+                                                                 "parameters":  [
+                                                                                    {
+                                                                                        "name":  "WorldContextObject",
+                                                                                        "type":  "UObject*",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "OutHit",
+                                                                                        "type":  "FHitResult",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "OutPathPositions",
+                                                                                        "type":  "TArray\u003cFVector\u003e",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "OutLastTraceDestination",
+                                                                                        "type":  "FVector",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "StartPos",
+                                                                                        "type":  "FVector",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "LaunchVelocity",
+                                                                                        "type":  "FVector",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "bTracePath",
+                                                                                        "type":  "bool",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "ProjectileRadius",
+                                                                                        "type":  "float",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "ObjectTypes",
+                                                                                        "type":  "TArray\u003cTEnumAsByte\u003cEObjectTypeQuery\u003e \u003e",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "bTraceComplex",
+                                                                                        "type":  "bool",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "ActorsToIgnore",
+                                                                                        "type":  "TArray\u003cAActor*\u003e",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "DrawDebugType",
+                                                                                        "type":  "TEnumAsByte\u003cEDrawDebugTrace::Type\u003e",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "DrawDebugTime",
+                                                                                        "type":  "float",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "SimFrequency",
+                                                                                        "type":  "float",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "MaxSimTime",
+                                                                                        "type":  "float",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "OverrideGravityZ",
+                                                                                        "type":  "float",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "ReturnValue",
+                                                                                        "type":  "bool",
+                                                                                        "is_return":  true,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    }
+                                                                                ],
+                                                                 "parameter_count":  17,
+                                                                 "metadata":  {
+                                                                                  "DisplayName":  "Predict Projectile Path By ObjectType",
+                                                                                  "Category":  "Game",
+                                                                                  "ToolTip":  "Predict the arc of a virtual projectile affected by gravity with collision checks along the arc. Returns a list of positions of the simulated arc and the destination reached by the simulation.\nReturns true if it hit something.\n\n@param OutPathPositions                       Predicted projectile path. Ordered series of positions from StartPos to the end. Includes location at point of impact if it hit something.\n@param OutHit                                         Predicted hit result, if the projectile will hit something\n@param OutLastTraceDestination        Goal position of the final trace it did. Will not be in the path if there is a hit.\n@param StartPos                                       First start trace location\n@param LaunchVelocity                         Velocity the \"virtual projectile\" is launched at\n@param bTracePath                                     Trace along the entire path to look for blocking hits\n@param ProjectileRadius                       Radius of the virtual projectile to sweep against the environment\n@param ObjectTypes                            ObjectTypes to trace against, if bTracePath is true.\n@param bTraceComplex                          Use TraceComplex (trace against triangles not primitives)\n@param ActorsToIgnore                         Actors to exclude from the traces\n@param DrawDebugType                          Debug type (one-frame, duration, persistent)\n@param DrawDebugTime                          Duration of debug lines (only relevant for DrawDebugType::Duration)\n@param SimFrequency                           Determines size of each sub-step in the simulation (chopping up MaxSimTime)\n@param MaxSimTime                                     Maximum simulation time for the virtual projectile.\n@param OverrideGravityZ                       Optional override of Gravity (if 0, uses WorldGravityZ)\n@return                                                       True if hit something along the path if tracing for collision."
+                                                                              }
+                                                             },
+                                                             {
+                                                                 "kind":  "function",
+                                                                 "name":  "IsValidBoneTrackName",
+                                                                 "path":  "/Script/Engine.AnimationDataModel:IsValidBoneTrackName",
+                                                                 "owner_class":  "AnimationDataModel",
+                                                                 "owner_class_path":  "/Script/Engine.AnimationDataModel",
+                                                                 "flags":  "public|native|blueprint_callable|blueprint_pure|const",
+                                                                 "score":  35,
+                                                                 "blueprint_callable":  true,
+                                                                 "blueprint_pure":  true,
+                                                                 "native":  true,
+                                                                 "parameters":  [
+                                                                                    {
+                                                                                        "name":  "TrackName",
+                                                                                        "type":  "FName",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "ReturnValue",
+                                                                                        "type":  "bool",
+                                                                                        "is_return":  true,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    }
+                                                                                ],
+                                                                 "parameter_count":  2,
+                                                                 "metadata":  {
+                                                                                  "Category":  "AnimationDataModel"
+                                                                              }
+                                                             },
+                                                             {
+                                                                 "kind":  "function",
+                                                                 "name":  "IsValidBoneTrackIndex",
+                                                                 "path":  "/Script/Engine.AnimationDataModel:IsValidBoneTrackIndex",
+                                                                 "owner_class":  "AnimationDataModel",
+                                                                 "owner_class_path":  "/Script/Engine.AnimationDataModel",
+                                                                 "flags":  "public|native|blueprint_callable|blueprint_pure|const",
+                                                                 "score":  35,
+                                                                 "blueprint_callable":  true,
+                                                                 "blueprint_pure":  true,
+                                                                 "native":  true,
+                                                                 "parameters":  [
+                                                                                    {
+                                                                                        "name":  "TrackIndex",
+                                                                                        "type":  "int32",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "ReturnValue",
+                                                                                        "type":  "bool",
+                                                                                        "is_return":  true,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    }
+                                                                                ],
+                                                                 "parameter_count":  2,
+                                                                 "metadata":  {
+                                                                                  "Category":  "AnimationDataModel"
+                                                                              }
+                                                             },
+                                                             {
+                                                                 "kind":  "function",
+                                                                 "name":  "Blueprint_PredictProjectilePath_ByTraceChannel",
+                                                                 "path":  "/Script/Engine.GameplayStatics:Blueprint_PredictProjectilePath_ByTraceChannel",
+                                                                 "owner_class":  "GameplayStatics",
+                                                                 "owner_class_path":  "/Script/Engine.GameplayStatics",
+                                                                 "flags":  "public|static|native|blueprint_callable",
+                                                                 "score":  35,
+                                                                 "blueprint_callable":  true,
+                                                                 "blueprint_pure":  false,
+                                                                 "native":  true,
+                                                                 "parameters":  [
+                                                                                    {
+                                                                                        "name":  "WorldContextObject",
+                                                                                        "type":  "UObject*",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "OutHit",
+                                                                                        "type":  "FHitResult",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "OutPathPositions",
+                                                                                        "type":  "TArray\u003cFVector\u003e",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "OutLastTraceDestination",
+                                                                                        "type":  "FVector",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "StartPos",
+                                                                                        "type":  "FVector",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "LaunchVelocity",
+                                                                                        "type":  "FVector",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "bTracePath",
+                                                                                        "type":  "bool",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "ProjectileRadius",
+                                                                                        "type":  "float",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "TraceChannel",
+                                                                                        "type":  "TEnumAsByte\u003cECollisionChannel\u003e",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "bTraceComplex",
+                                                                                        "type":  "bool",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "ActorsToIgnore",
+                                                                                        "type":  "TArray\u003cAActor*\u003e",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "DrawDebugType",
+                                                                                        "type":  "TEnumAsByte\u003cEDrawDebugTrace::Type\u003e",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "DrawDebugTime",
+                                                                                        "type":  "float",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "SimFrequency",
+                                                                                        "type":  "float",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "MaxSimTime",
+                                                                                        "type":  "float",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "OverrideGravityZ",
+                                                                                        "type":  "float",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "ReturnValue",
+                                                                                        "type":  "bool",
+                                                                                        "is_return":  true,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    }
+                                                                                ],
+                                                                 "parameter_count":  17,
+                                                                 "metadata":  {
+                                                                                  "DisplayName":  "Predict Projectile Path By TraceChannel",
+                                                                                  "Category":  "Game",
+                                                                                  "ToolTip":  "Predict the arc of a virtual projectile affected by gravity with collision checks along the arc. Returns a list of positions of the simulated arc and the destination reached by the simulation.\nReturns true if it hit something (if tracing with collision).\n\n@param OutPathPositions                       Predicted projectile path. Ordered series of positions from StartPos to the end. Includes location at point of impact if it hit something.\n@param OutHit                                         Predicted hit result, if the projectile will hit something\n@param OutLastTraceDestination        Goal position of the final trace it did. Will not be in the path if there is a hit.\n@param StartPos                                       First start trace location\n@param LaunchVelocity                         Velocity the \"virtual projectile\" is launched at\n@param bTracePath                                     Trace along the entire path to look for blocking hits\n@param ProjectileRadius                       Radius of the virtual projectile to sweep against the environment\n@param TraceChannel                           TraceChannel to trace against, if bTracePath is true.\n@param bTraceComplex                          Use TraceComplex (trace against triangles not primitives)\n@param ActorsToIgnore                         Actors to exclude from the traces\n@param DrawDebugType                          Debug type (one-frame, duration, persistent)\n@param DrawDebugTime                          Duration of debug lines (only relevant for DrawDebugType::Duration)\n@param SimFrequency                           Determines size of each sub-step in the simulation (chopping up MaxSimTime)\n@param MaxSimTime                                     Maximum simulation time for the virtual projectile.\n@param OverrideGravityZ                       Optional override of Gravity (if 0, uses WorldGravityZ)\n@return                                                       True if hit something along the path (if tracing with collision)."
+                                                                              }
+                                                             },
+                                                             {
+                                                                 "kind":  "function",
+                                                                 "name":  "Blueprint_PredictProjectilePath_Advanced",
+                                                                 "path":  "/Script/Engine.GameplayStatics:Blueprint_PredictProjectilePath_Advanced",
+                                                                 "owner_class":  "GameplayStatics",
+                                                                 "owner_class_path":  "/Script/Engine.GameplayStatics",
+                                                                 "flags":  "public|static|native|blueprint_callable",
+                                                                 "score":  35,
+                                                                 "blueprint_callable":  true,
+                                                                 "blueprint_pure":  false,
+                                                                 "native":  true,
+                                                                 "parameters":  [
+                                                                                    {
+                                                                                        "name":  "WorldContextObject",
+                                                                                        "type":  "UObject*",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "PredictParams",
+                                                                                        "type":  "FPredictProjectilePathParams",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "PredictResult",
+                                                                                        "type":  "FPredictProjectilePathResult",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "ReturnValue",
+                                                                                        "type":  "bool",
+                                                                                        "is_return":  true,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    }
+                                                                                ],
+                                                                 "parameter_count":  4,
+                                                                 "metadata":  {
+                                                                                  "DisplayName":  "Predict Projectile Path (Advanced)",
+                                                                                  "Category":  "Game",
+                                                                                  "ToolTip":  "Predict the arc of a virtual projectile affected by gravity with collision checks along the arc.\nReturns true if it hit something.\n\n@param PredictParams                          Input params to the trace (start location, velocity, time to simulate, etc).\n@param PredictResult                          Output result of the trace (Hit result, array of location/velocity/times for each trace step, etc).\n@return                                                       True if hit something along the path (if tracing with collision)."
+                                                                              }
+                                                             },
+                                                             {
+                                                                 "kind":  "function",
+                                                                 "name":  "SetDirectionalInscatteringStartDistance",
+                                                                 "path":  "/Script/Engine.ExponentialHeightFogComponent:SetDirectionalInscatteringStartDistance",
+                                                                 "owner_class":  "ExponentialHeightFogComponent",
+                                                                 "owner_class_path":  "/Script/Engine.ExponentialHeightFogComponent",
+                                                                 "flags":  "public|native|blueprint_callable",
+                                                                 "score":  35,
+                                                                 "blueprint_callable":  true,
+                                                                 "blueprint_pure":  false,
+                                                                 "native":  true,
+                                                                 "parameters":  [
+                                                                                    {
+                                                                                        "name":  "Value",
+                                                                                        "type":  "float",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    }
+                                                                                ],
+                                                                 "parameter_count":  1,
+                                                                 "metadata":  {
+                                                                                  "Category":  "Rendering|Components|ExponentialHeightFog"
+                                                                              }
+                                                             },
+                                                             {
+                                                                 "kind":  "function",
+                                                                 "name":  "DivideSplineIntoPolylineRecursiveWithDistances",
+                                                                 "path":  "/Script/Engine.SplineComponent:DivideSplineIntoPolylineRecursiveWithDistances",
+                                                                 "owner_class":  "SplineComponent",
+                                                                 "owner_class_path":  "/Script/Engine.SplineComponent",
+                                                                 "flags":  "public|native|blueprint_callable|blueprint_pure|const",
+                                                                 "score":  35,
+                                                                 "blueprint_callable":  true,
+                                                                 "blueprint_pure":  true,
+                                                                 "native":  true,
+                                                                 "parameters":  [
+                                                                                    {
+                                                                                        "name":  "StartDistanceAlongSpline",
+                                                                                        "type":  "float",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "EndDistanceAlongSpline",
+                                                                                        "type":  "float",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "CoordinateSpace",
+                                                                                        "type":  "TEnumAsByte\u003cESplineCoordinateSpace::Type\u003e",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "MaxSquareDistanceFromSpline",
+                                                                                        "type":  "float",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "OutPoints",
+                                                                                        "type":  "TArray\u003cFVector\u003e",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "OutDistancesAlongSpline",
+                                                                                        "type":  "TArray\u003cdouble\u003e",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "ReturnValue",
+                                                                                        "type":  "bool",
+                                                                                        "is_return":  true,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    }
+                                                                                ],
+                                                                 "parameter_count":  7,
+                                                                 "metadata":  {
+                                                                                  "Category":  "Spline",
+                                                                                  "ToolTip":  "Given a threshold, recursively sub-divides the spline section until the list of segments (polyline) matches the spline shape. Note: Prefer ConvertSplineToPolyline_InDistanceRange"
+                                                                              }
+                                                             },
+                                                             {
+                                                                 "kind":  "function",
+                                                                 "name":  "IsElementSelected",
+                                                                 "path":  "/Script/TypedElementRuntime.TypedElementSelectionInterface:IsElementSelected",
+                                                                 "owner_class":  "TypedElementSelectionInterface",
+                                                                 "owner_class_path":  "/Script/TypedElementRuntime.TypedElementSelectionInterface",
+                                                                 "flags":  "public|native|blueprint_callable",
+                                                                 "score":  33,
+                                                                 "blueprint_callable":  true,
+                                                                 "blueprint_pure":  false,
+                                                                 "native":  true,
+                                                                 "parameters":  [
+                                                                                    {
+                                                                                        "name":  "InElementHandle",
+                                                                                        "type":  "FScriptTypedElementHandle",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "InSelectionSet",
+                                                                                        "type":  "FScriptTypedElementListProxy",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "InSelectionOptions",
+                                                                                        "type":  "FTypedElementIsSelectedOptions",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "ReturnValue",
+                                                                                        "type":  "bool",
+                                                                                        "is_return":  true,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    }
+                                                                                ],
+                                                                 "parameter_count":  4,
+                                                                 "metadata":  {
+                                                                                  "Category":  "TypedElementInterfaces|Selection",
+                                                                                  "ToolTip":  "Test to see whether the given element is currently considered selected."
+                                                                              }
+                                                             },
+                                                             {
+                                                                 "kind":  "function",
+                                                                 "name":  "GetSelectionElement",
+                                                                 "path":  "/Script/TypedElementRuntime.TypedElementSelectionInterface:GetSelectionElement",
+                                                                 "owner_class":  "TypedElementSelectionInterface",
+                                                                 "owner_class_path":  "/Script/TypedElementRuntime.TypedElementSelectionInterface",
+                                                                 "flags":  "public|native|blueprint_callable",
+                                                                 "score":  33,
+                                                                 "blueprint_callable":  true,
+                                                                 "blueprint_pure":  false,
+                                                                 "native":  true,
+                                                                 "parameters":  [
+                                                                                    {
+                                                                                        "name":  "InElementHandle",
+                                                                                        "type":  "FScriptTypedElementHandle",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "InCurrentSelection",
+                                                                                        "type":  "FScriptTypedElementListProxy",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "InSelectionMethod",
+                                                                                        "type":  "ETypedElementSelectionMethod",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "ReturnValue",
+                                                                                        "type":  "FScriptTypedElementHandle",
+                                                                                        "is_return":  true,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    }
+                                                                                ],
+                                                                 "parameter_count":  4,
+                                                                 "metadata":  {
+                                                                                  "Category":  "TypedElementInterfaces|Selection",
+                                                                                  "ToolTip":  "Given an element, return the element that should actually perform a selection operation."
+                                                                              }
+                                                             },
+                                                             {
+                                                                 "kind":  "function",
+                                                                 "name":  "GetObject",
+                                                                 "path":  "/Script/TypedElementRuntime.TypedElementObjectInterface:GetObject",
+                                                                 "owner_class":  "TypedElementObjectInterface",
+                                                                 "owner_class_path":  "/Script/TypedElementRuntime.TypedElementObjectInterface",
+                                                                 "flags":  "public|native|blueprint_callable",
+                                                                 "score":  33,
+                                                                 "blueprint_callable":  true,
+                                                                 "blueprint_pure":  false,
+                                                                 "native":  true,
+                                                                 "parameters":  [
+                                                                                    {
+                                                                                        "name":  "InElementHandle",
+                                                                                        "type":  "FScriptTypedElementHandle",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  true
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "ReturnValue",
+                                                                                        "type":  "UObject*",
+                                                                                        "is_return":  true,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    }
+                                                                                ],
+                                                                 "parameter_count":  2,
+                                                                 "metadata":  {
+                                                                                  "Category":  "TypedElementInterfaces|Object",
+                                                                                  "ToolTip":  "Get the object instance that this handle represents, if any."
+                                                                              }
+                                                             },
+                                                             {
+                                                                 "kind":  "function",
+                                                                 "name":  "GetNumSubsteps",
+                                                                 "path":  "/Script/ClothingSystemRuntimeInterface.ClothingSimulationInteractor:GetNumSubsteps",
+                                                                 "owner_class":  "ClothingSimulationInteractor",
+                                                                 "owner_class_path":  "/Script/ClothingSystemRuntimeInterface.ClothingSimulationInteractor",
+                                                                 "flags":  "public|native|blueprint_callable|blueprint_pure|const",
+                                                                 "score":  33,
+                                                                 "blueprint_callable":  true,
+                                                                 "blueprint_pure":  true,
+                                                                 "native":  true,
+                                                                 "parameters":  [
+                                                                                    {
+                                                                                        "name":  "ReturnValue",
+                                                                                        "type":  "int32",
+                                                                                        "is_return":  true,
+                                                                                        "is_out":  true,
+                                                                                        "is_const":  false
+                                                                                    }
+                                                                                ],
+                                                                 "parameter_count":  1,
+                                                                 "metadata":  {
+                                                                                  "Category":  "ClothingSimulation",
+                                                                                  "ToolTip":  "Return the solver number of subdivisions./\nThis could be different from the number set if the simulation hasn\u0027t updated yet."
+                                                                              }
+                                                             },
+                                                             {
+                                                                 "kind":  "function",
+                                                                 "name":  "SetMaxNumIterations",
+                                                                 "path":  "/Script/ClothingSystemRuntimeInterface.ClothingSimulationInteractor:SetMaxNumIterations",
+                                                                 "owner_class":  "ClothingSimulationInteractor",
+                                                                 "owner_class_path":  "/Script/ClothingSystemRuntimeInterface.ClothingSimulationInteractor",
+                                                                 "flags":  "public|native|blueprint_callable",
+                                                                 "score":  33,
+                                                                 "blueprint_callable":  true,
+                                                                 "blueprint_pure":  false,
+                                                                 "native":  true,
+                                                                 "parameters":  [
+                                                                                    {
+                                                                                        "name":  "MaxNumIterations",
+                                                                                        "type":  "int32",
+                                                                                        "is_return":  false,
+                                                                                        "is_out":  false,
+                                                                                        "is_const":  false
+                                                                                    }
+                                                                                ],
+                                                                 "parameter_count":  1,
+                                                                 "metadata":  {
+                                                                                  "Category":  "ClothingSimulation",
+                                                                                  "ToolTip":  "Set the maximum number of solver iterations."
+                                                                              }
+                                                             }
+                                                         ],
+                                             "count":  20,
+                                             "total_matches":  358,
+                                             "truncated":  true,
+                                             "classes_truncated":  true,
+                                             "classes_scanned":  4001,
+                                             "functions_scanned":  8244,
+                                             "properties_scanned":  0,
+                                             "structs_scanned":  0,
+                                             "enums_scanned":  0,
+                                             "plugins_scanned":  0
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  34.786799980793148
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "query-engine-api-symbol",
+                                               "mutates":  false,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  1
+                                           }
+                             }
+               }
+}

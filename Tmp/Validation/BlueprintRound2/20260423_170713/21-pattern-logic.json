@@ -1,0 +1,339 @@
+﻿{
+	"jsonrpc": "2.0",
+	"id": "21-pattern-logic",
+	"result":
+	{
+		"content": [
+			{
+				"type": "text",
+				"text": "Request succeeded"
+			}
+		],
+		"structuredContent":
+		{
+			"tool": "create-blueprint-pattern",
+			"success": true,
+			"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Logic_20260423_170713",
+			"pattern": "logic_actor_skeleton",
+			"asset_handle":
+			{
+				"kind": "asset",
+				"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Logic_20260423_170713",
+				"asset_class": "Blueprint"
+			},
+			"steps": [
+				{
+					"step": "create_asset",
+					"success": true,
+					"payload":
+					{
+						"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Logic_20260423_170713",
+						"pattern": "logic_actor_skeleton"
+					}
+				},
+				{
+					"step": "edit_members",
+					"success": true,
+					"payload":
+					{
+						"tool": "edit-blueprint-members",
+						"success": true,
+						"modified_assets": [
+							"/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Logic_20260423_170713"
+						],
+						"results": [
+							{
+								"action": "create_variable",
+								"name": "bEnabled",
+								"index": 0,
+								"success": true
+							},
+							{
+								"action": "create_function",
+								"name": "InitializeLogic",
+								"graph_name": "InitializeLogic",
+								"index": 1,
+								"success": true
+							},
+							{
+								"action": "create_function",
+								"name": "ExecuteLogic",
+								"graph_name": "ExecuteLogic",
+								"index": 2,
+								"success": true
+							},
+							{
+								"action": "create_function",
+								"name": "ResetLogic",
+								"graph_name": "ResetLogic",
+								"index": 3,
+								"success": true
+							}
+						],
+						"compile":
+						{
+							"attempted": false,
+							"success": true,
+							"diagnostics": []
+						},
+						"implemented_interfaces": [],
+						"warnings": [],
+						"diagnostics": [],
+						"partial_results": []
+					}
+				},
+				{
+					"step": "create_event",
+					"success": true,
+					"payload":
+					{
+						"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Logic_20260423_170713",
+						"asset_handle":
+						{
+							"kind": "asset",
+							"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Logic_20260423_170713",
+							"asset_class": "Blueprint"
+						},
+						"results": [
+							{
+								"op": "create_custom_event",
+								"index": 0,
+								"node_guid": "39D6D56F-4279-52CD-A2C3-C5A3626A04D7",
+								"handle":
+								{
+									"kind": "blueprint_node",
+									"session_id": "05D63410-4272-EB71-1B7D-FB84C73E1B74",
+									"resource_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Logic_20260423_170713",
+									"entity_id": "39D6D56F-4279-52CD-A2C3-C5A3626A04D7",
+									"display_name": "RunLogic"
+								},
+								"node_class": "K2Node_CustomEvent",
+								"graph_name": "EventGraph",
+								"success": true
+							}
+						],
+						"partial_results": [],
+						"summary":
+						{
+							"total_operations": 1,
+							"failed_operations": 0,
+							"compiled": false,
+							"saved": false
+						}
+					}
+				},
+				{
+					"step": "configure_event_graph",
+					"success": true,
+					"payload":
+					{
+						"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Logic_20260423_170713",
+						"asset_handle":
+						{
+							"kind": "asset",
+							"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Logic_20260423_170713",
+							"asset_class": "Blueprint"
+						},
+						"results": [
+							{
+								"op": "add_call_function",
+								"index": 0,
+								"alias": "call_execute_logic",
+								"node_guid": "46EF5197-41C9-B702-7293-7484B7B9CB0C",
+								"handle":
+								{
+									"kind": "blueprint_node",
+									"session_id": "05D63410-4272-EB71-1B7D-FB84C73E1B74",
+									"resource_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Logic_20260423_170713",
+									"entity_id": "46EF5197-41C9-B702-7293-7484B7B9CB0C",
+									"display_name": "ExecuteLogic"
+								},
+								"node_class": "K2Node_CallFunction",
+								"graph_name": "EventGraph",
+								"success": true
+							},
+							{
+								"op": "auto_connect",
+								"index": 1,
+								"connections": [
+									{
+										"source_pin": "then",
+										"target_pin": "execute"
+									}
+								],
+								"success": true
+							}
+						],
+						"partial_results": [],
+						"summary":
+						{
+							"total_operations": 2,
+							"failed_operations": 0,
+							"compiled": false,
+							"saved": false
+						}
+					}
+				},
+				{
+					"step": "layout_EventGraph",
+					"success": true,
+					"payload":
+					{
+						"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Logic_20260423_170713",
+						"asset_handle":
+						{
+							"kind": "asset",
+							"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Logic_20260423_170713",
+							"asset_class": "Blueprint"
+						},
+						"results": [
+							{
+								"op": "layout_graph",
+								"index": 0,
+								"layout_nodes": 5,
+								"graph_name": "EventGraph",
+								"success": true
+							}
+						],
+						"partial_results": [],
+						"summary":
+						{
+							"total_operations": 1,
+							"failed_operations": 0,
+							"compiled": false,
+							"saved": false
+						}
+					}
+				},
+				{
+					"step": "comment_event_graph",
+					"success": true,
+					"payload":
+					{
+						"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Logic_20260423_170713",
+						"asset_handle":
+						{
+							"kind": "asset",
+							"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Logic_20260423_170713",
+							"asset_class": "Blueprint"
+						},
+						"results": [
+							{
+								"op": "comment_region",
+								"index": 0,
+								"node_guid": "C7E2410F-4D7C-A0E8-CA9A-94A9308F72A4",
+								"handle":
+								{
+									"kind": "blueprint_node",
+									"session_id": "05D63410-4272-EB71-1B7D-FB84C73E1B74",
+									"resource_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Logic_20260423_170713",
+									"entity_id": "C7E2410F-4D7C-A0E8-CA9A-94A9308F72A4",
+									"display_name": "Comment"
+								},
+								"node_class": "EdGraphNode_Comment",
+								"covered_nodes": 2,
+								"graph_name": "EventGraph",
+								"success": true
+							}
+						],
+						"partial_results": [],
+						"summary":
+						{
+							"total_operations": 1,
+							"failed_operations": 0,
+							"compiled": false,
+							"saved": false
+						}
+					}
+				},
+				{
+					"step": "compile_asset",
+					"success": true,
+					"payload":
+					{
+						"tool": "compile-assets",
+						"success": true,
+						"results": [
+							{
+								"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Logic_20260423_170713",
+								"asset_type": "Blueprint",
+								"compiled": true,
+								"success": true,
+								"warning_count": 0,
+								"error_count": 0,
+								"diagnostics": []
+							}
+						],
+						"warnings": [],
+						"diagnostics": [],
+						"modified_assets": [
+							"/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Logic_20260423_170713"
+						],
+						"partial_results": [],
+						"summary":
+						{
+							"total": 1,
+							"succeeded": 1,
+							"failed": 0
+						}
+					}
+				},
+				{
+					"step": "save_asset",
+					"success": true,
+					"payload":
+					{
+						"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Logic_20260423_170713"
+					}
+				}
+			],
+			"partial_results": [],
+			"modified_assets": [
+				"/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Logic_20260423_170713"
+			],
+			"compile":
+			{
+				"tool": "compile-assets",
+				"success": true,
+				"results": [
+					{
+						"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Logic_20260423_170713",
+						"asset_type": "Blueprint",
+						"compiled": true,
+						"success": true,
+						"warning_count": 0,
+						"error_count": 0,
+						"diagnostics": []
+					}
+				],
+				"warnings": [],
+				"diagnostics": [],
+				"modified_assets": [
+					"/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Logic_20260423_170713"
+				],
+				"partial_results": [],
+				"summary":
+				{
+					"total": 1,
+					"succeeded": 1,
+					"failed": 0
+				}
+			}
+		},
+		"_meta":
+		{
+			"timing":
+			{
+				"duration_ms": 74.797999986913055
+			},
+			"stats":
+			{
+				"tool_name": "create-blueprint-pattern",
+				"mutates": false,
+				"supports_batch": false,
+				"requires_game_thread": true,
+				"content_items": 0
+			}
+		}
+	}
+}

@@ -1,0 +1,77 @@
+{
+    "Request":  {
+                    "method":  "tools/call",
+                    "params":  {
+                                   "arguments":  {
+                                                     "asset_path":  "/Game/UEBridgeMCPValidation/BlueprintRound1/BP_BlueprintRound1_20260423_152624",
+                                                     "max_findings":  50,
+                                                     "graph_name":  "EventGraph"
+                                                 },
+                                   "name":  "query-blueprint-findings"
+                               },
+                    "id":  "tool-7bbadb3a55a44bc2970e19655d190297",
+                    "jsonrpc":  "2.0"
+                },
+    "Response":  {
+                     "Success":  true,
+                     "StatusCode":  200,
+                     "Headers":  {
+                                     "keep-alive":  "timeout=15.000000",
+                                     "Content-Type":  "application/json; charset=utf-8",
+                                     "Mcp-Session-Id":  "E8A41810-4ED0-8081-CC2A-7385028DB2ED",
+                                     "Access-Control-Allow-Origin":  "*",
+                                     "Content-Length":  "1410"
+                                 },
+                     "Content":  "{\r\n\t\"jsonrpc\": \"2.0\",\r\n\t\"id\": \"tool-7bbadb3a55a44bc2970e19655d190297\",\r\n\t\"result\":\r\n\t{\r\n\t\t\"content\": [\r\n\t\t\t{\r\n\t\t\t\t\"type\": \"text\",\r\n\t\t\t\t\"text\": \"Blueprint findings ready\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"structuredContent\":\r\n\t\t{\r\n\t\t\t\"asset_path\": \"/Game/UEBridgeMCPValidation/BlueprintRound1/BP_BlueprintRound1_20260423_152624\",\r\n\t\t\t\"asset_handle\":\r\n\t\t\t{\r\n\t\t\t\t\"kind\": \"asset\",\r\n\t\t\t\t\"asset_path\": \"/Game/UEBridgeMCPValidation/BlueprintRound1/BP_BlueprintRound1_20260423_152624\",\r\n\t\t\t\t\"asset_class\": \"Blueprint\"\r\n\t\t\t},\r\n\t\t\t\"findings\": [\r\n\t\t\t\t{\r\n\t\t\t\t\t\"code\": \"unlinked_required_pin\",\r\n\t\t\t\t\t\"severity\": \"error\",\r\n\t\t\t\t\t\"message\": \"Node \u0027Print String\u0027 has an unlinked required exec pin \u0027execute\u0027\",\r\n\t\t\t\t\t\"graph_name\": \"EventGraph\",\r\n\t\t\t\t\t\"node_guid\": \"7D97EC95-4F57-96DC-E4A1-AE99662DAAC1\",\r\n\t\t\t\t\t\"handle\":\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\t\"kind\": \"blueprint_node\",\r\n\t\t\t\t\t\t\"session_id\": \"E8A41810-4ED0-8081-CC2A-7385028DB2ED\",\r\n\t\t\t\t\t\t\"resource_path\": \"/Game/UEBridgeMCPValidation/BlueprintRound1/BP_BlueprintRound1_20260423_152624\",\r\n\t\t\t\t\t\t\"entity_id\": \"7D97EC95-4F57-96DC-E4A1-AE99662DAAC1\",\r\n\t\t\t\t\t\t\"display_name\": \"Print String\"\r\n\t\t\t\t\t}\r\n\t\t\t\t}\r\n\t\t\t],\r\n\t\t\t\"count\": 1\r\n\t\t},\r\n\t\t\"_meta\":\r\n\t\t{\r\n\t\t\t\"timing\":\r\n\t\t\t{\r\n\t\t\t\t\"duration_ms\": 0.11940000695176423\r\n\t\t\t},\r\n\t\t\t\"stats\":\r\n\t\t\t{\r\n\t\t\t\t\"tool_name\": \"query-blueprint-findings\",\r\n\t\t\t\t\"mutates\": false,\r\n\t\t\t\t\"supports_batch\": false,\r\n\t\t\t\t\"requires_game_thread\": true,\r\n\t\t\t\t\"content_items\": 1\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}",
+                     "Json":  {
+                                  "jsonrpc":  "2.0",
+                                  "id":  "tool-7bbadb3a55a44bc2970e19655d190297",
+                                  "result":  {
+                                                 "content":  [
+                                                                 {
+                                                                     "type":  "text",
+                                                                     "text":  "Blueprint findings ready"
+                                                                 }
+                                                             ],
+                                                 "structuredContent":  {
+                                                                           "asset_path":  "/Game/UEBridgeMCPValidation/BlueprintRound1/BP_BlueprintRound1_20260423_152624",
+                                                                           "asset_handle":  {
+                                                                                                "kind":  "asset",
+                                                                                                "asset_path":  "/Game/UEBridgeMCPValidation/BlueprintRound1/BP_BlueprintRound1_20260423_152624",
+                                                                                                "asset_class":  "Blueprint"
+                                                                                            },
+                                                                           "findings":  [
+                                                                                            {
+                                                                                                "code":  "unlinked_required_pin",
+                                                                                                "severity":  "error",
+                                                                                                "message":  "Node \u0027Print String\u0027 has an unlinked required exec pin \u0027execute\u0027",
+                                                                                                "graph_name":  "EventGraph",
+                                                                                                "node_guid":  "7D97EC95-4F57-96DC-E4A1-AE99662DAAC1",
+                                                                                                "handle":  {
+                                                                                                               "kind":  "blueprint_node",
+                                                                                                               "session_id":  "E8A41810-4ED0-8081-CC2A-7385028DB2ED",
+                                                                                                               "resource_path":  "/Game/UEBridgeMCPValidation/BlueprintRound1/BP_BlueprintRound1_20260423_152624",
+                                                                                                               "entity_id":  "7D97EC95-4F57-96DC-E4A1-AE99662DAAC1",
+                                                                                                               "display_name":  "Print String"
+                                                                                                           }
+                                                                                            }
+                                                                                        ],
+                                                                           "count":  1
+                                                                       },
+                                                 "_meta":  {
+                                                               "timing":  {
+                                                                              "duration_ms":  0.11940000695176423
+                                                                          },
+                                                               "stats":  {
+                                                                             "tool_name":  "query-blueprint-findings",
+                                                                             "mutates":  false,
+                                                                             "supports_batch":  false,
+                                                                             "requires_game_thread":  true,
+                                                                             "content_items":  1
+                                                                         }
+                                                           }
+                                             }
+                              },
+                     "Error":  null
+                 }
+}

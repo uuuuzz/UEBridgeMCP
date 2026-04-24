@@ -1,22 +1,17 @@
 // Copyright uuuuzz 2024-2026. All Rights Reserved.
 
 #include "Tools/Blueprint/AutoFixBlueprintCompileErrorsTool.h"
+#include "Tools/Blueprint/BlueprintCompileUtils.h"
 #include "Utils/McpAssetModifier.h"
 #include "Engine/Blueprint.h"
 #include "Kismet2/BlueprintEditorUtils.h"
-#include "EdGraph/EdGraph.h"
-#include "EdGraph/EdGraphNode.h"
-#include "EdGraph/EdGraphPin.h"
 #include "Serialization/JsonSerializer.h"
 
 namespace AutoFixBlueprintCompileErrorsToolPrivate
 {
 	bool IsSupportedStrategy(const FString& Strategy)
 	{
-		return Strategy == TEXT("refresh_all_nodes")
-			|| Strategy == TEXT("reconstruct_invalid_nodes")
-			|| Strategy == TEXT("remove_orphan_pins")
-			|| Strategy == TEXT("recompile_dependencies");
+		return BlueprintCompileUtils::IsSupportedFixupAction(Strategy, false);
 	}
 
 	TSharedPtr<FJsonObject> MakeDiagnostic(const FString& Severity, const FString& Code, const FString& Message, const FString& AssetPath)
@@ -29,171 +24,45 @@ namespace AutoFixBlueprintCompileErrorsToolPrivate
 		return Diagnostic;
 	}
 
-	bool ApplyRefreshAllNodes(UBlueprint* Blueprint, TSharedPtr<FJsonObject>& OutStrategyResult)
-	{
-		FMcpAssetModifier::RefreshBlueprintNodes(Blueprint);
-
-		OutStrategyResult = MakeShareable(new FJsonObject);
-		OutStrategyResult->SetStringField(TEXT("strategy"), TEXT("refresh_all_nodes"));
-		OutStrategyResult->SetBoolField(TEXT("success"), true);
-		return true;
-	}
-
-	bool ApplyReconstructInvalidNodes(UBlueprint* Blueprint, TSharedPtr<FJsonObject>& OutStrategyResult)
-	{
-		int32 ReconstructedNodeCount = 0;
-		TArray<UEdGraph*> AllGraphs;
-		FMcpAssetModifier::GetAllSearchableGraphs(Blueprint, AllGraphs);
-		for (UEdGraph* Graph : AllGraphs)
-		{
-			if (!Graph)
-			{
-				continue;
-			}
-
-			for (UEdGraphNode* Node : Graph->Nodes)
-			{
-				if (!Node)
-				{
-					continue;
-				}
-
-				if (Node->HasDeprecatedReference())
-				{
-					Node->Modify();
-					Node->ReconstructNode();
-					ReconstructedNodeCount++;
-				}
-			}
-		}
-
-		OutStrategyResult = MakeShareable(new FJsonObject);
-		OutStrategyResult->SetStringField(TEXT("strategy"), TEXT("reconstruct_invalid_nodes"));
-		OutStrategyResult->SetBoolField(TEXT("success"), true);
-		OutStrategyResult->SetNumberField(TEXT("reconstructed_nodes"), ReconstructedNodeCount);
-		return true;
-	}
-
-	bool ApplyRemoveOrphanPins(UBlueprint* Blueprint, TSharedPtr<FJsonObject>& OutStrategyResult)
-	{
-		int32 RemovedPinCount = 0;
-		TArray<UEdGraph*> AllGraphs;
-		FMcpAssetModifier::GetAllSearchableGraphs(Blueprint, AllGraphs);
-		for (UEdGraph* Graph : AllGraphs)
-		{
-			if (!Graph)
-			{
-				continue;
-			}
-
-			for (UEdGraphNode* Node : Graph->Nodes)
-			{
-				if (!Node)
-				{
-					continue;
-				}
-
-				TArray<UEdGraphPin*> PinsToRemove;
-				for (UEdGraphPin* Pin : Node->Pins)
-				{
-					if (Pin && Pin->bOrphanedPin)
-					{
-						PinsToRemove.Add(Pin);
-					}
-				}
-
-				for (UEdGraphPin* Pin : PinsToRemove)
-				{
-					Node->Modify();
-					Node->RemovePin(Pin);
-					RemovedPinCount++;
-				}
-			}
-		}
-
-		OutStrategyResult = MakeShareable(new FJsonObject);
-		OutStrategyResult->SetStringField(TEXT("strategy"), TEXT("remove_orphan_pins"));
-		OutStrategyResult->SetBoolField(TEXT("success"), true);
-		OutStrategyResult->SetNumberField(TEXT("removed_orphan_pins"), RemovedPinCount);
-		return true;
-	}
-
-	bool ApplyRecompileDependencies(
-		UBlueprint* Blueprint,
-		TSharedPtr<FJsonObject>& OutStrategyResult,
-		TArray<TSharedPtr<FJsonValue>>& OutDiagnostics,
-		TArray<TSharedPtr<FJsonValue>>& OutModifiedAssets)
-	{
-		TArray<UBlueprint*> DependentBlueprints;
-		FBlueprintEditorUtils::GetDependentBlueprints(Blueprint, DependentBlueprints);
-
-		TArray<TSharedPtr<FJsonValue>> DependencyResults;
-		bool bAllDependenciesCompiled = true;
-		for (UBlueprint* DependentBlueprint : DependentBlueprints)
-		{
-			if (!DependentBlueprint)
-			{
-				continue;
-			}
-
-			FMcpAssetModifier::RefreshBlueprintNodes(DependentBlueprint);
-
-			FString CompileError;
-			const bool bCompileSuccess = FMcpAssetModifier::CompileBlueprint(DependentBlueprint, CompileError);
-
-			TSharedPtr<FJsonObject> DependencyResult = MakeShareable(new FJsonObject);
-			DependencyResult->SetStringField(TEXT("asset_path"), DependentBlueprint->GetPathName());
-			DependencyResult->SetBoolField(TEXT("success"), bCompileSuccess);
-			if (!bCompileSuccess)
-			{
-				DependencyResult->SetStringField(TEXT("error"), CompileError);
-				OutDiagnostics.Add(MakeShareable(new FJsonValueObject(MakeDiagnostic(
-					TEXT("error"),
-					TEXT("UEBMCP_BLUEPRINT_COMPILE_FAILED"),
-					CompileError,
-					DependentBlueprint->GetPathName()))));
-				bAllDependenciesCompiled = false;
-			}
-			else
-			{
-				OutModifiedAssets.Add(MakeShareable(new FJsonValueString(DependentBlueprint->GetPathName())));
-			}
-
-			DependencyResults.Add(MakeShareable(new FJsonValueObject(DependencyResult)));
-		}
-
-		OutStrategyResult = MakeShareable(new FJsonObject);
-		OutStrategyResult->SetStringField(TEXT("strategy"), TEXT("recompile_dependencies"));
-		OutStrategyResult->SetBoolField(TEXT("success"), bAllDependenciesCompiled);
-		OutStrategyResult->SetArrayField(TEXT("dependencies"), DependencyResults);
-		return bAllDependenciesCompiled;
-	}
-
 	bool ApplyStrategy(
 		UBlueprint* Blueprint,
 		const FString& Strategy,
+		const FString& SessionId,
 		TSharedPtr<FJsonObject>& OutStrategyResult,
 		TArray<TSharedPtr<FJsonValue>>& OutDiagnostics,
 		TArray<TSharedPtr<FJsonValue>>& OutModifiedAssets)
 	{
-		if (Strategy == TEXT("refresh_all_nodes"))
+		FString ErrorMessage;
+		const bool bSuccess = BlueprintCompileUtils::ApplyFixupAction(
+			Blueprint,
+			Strategy,
+			Blueprint ? Blueprint->GetPathName() : FString(),
+			SessionId,
+			100,
+			OutStrategyResult,
+			ErrorMessage,
+			OutDiagnostics,
+			OutModifiedAssets);
+
+		if (!bSuccess && ErrorMessage.IsEmpty())
 		{
-			return ApplyRefreshAllNodes(Blueprint, OutStrategyResult);
-		}
-		if (Strategy == TEXT("reconstruct_invalid_nodes"))
-		{
-			return ApplyReconstructInvalidNodes(Blueprint, OutStrategyResult);
-		}
-		if (Strategy == TEXT("remove_orphan_pins"))
-		{
-			return ApplyRemoveOrphanPins(Blueprint, OutStrategyResult);
-		}
-		if (Strategy == TEXT("recompile_dependencies"))
-		{
-			return ApplyRecompileDependencies(Blueprint, OutStrategyResult, OutDiagnostics, OutModifiedAssets);
+			ErrorMessage = FString::Printf(TEXT("Strategy '%s' failed"), *Strategy);
 		}
 
-		return false;
+		if (!bSuccess)
+		{
+			OutDiagnostics.Add(MakeShareable(new FJsonValueObject(MakeDiagnostic(
+				TEXT("error"),
+				TEXT("UEBMCP_BLUEPRINT_FIXUP_FAILED"),
+				ErrorMessage,
+				Blueprint ? Blueprint->GetPathName() : FString()))));
+		}
+
+		if (OutStrategyResult.IsValid())
+		{
+			OutStrategyResult->SetStringField(TEXT("strategy"), Strategy);
+		}
+		return bSuccess;
 	}
 }
 
@@ -338,6 +207,7 @@ FMcpToolResult UAutoFixBlueprintCompileErrorsTool::Execute(const TSharedPtr<FJso
 				const bool bStrategySuccess = AutoFixBlueprintCompileErrorsToolPrivate::ApplyStrategy(
 					Blueprint,
 					Strategy,
+					Context.SessionId,
 					StrategyResult,
 					DiagnosticsArray,
 					ModifiedAssetsArray);
@@ -349,27 +219,25 @@ FMcpToolResult UAutoFixBlueprintCompileErrorsTool::Execute(const TSharedPtr<FJso
 			}
 			AttemptObject->SetArrayField(TEXT("strategy_results"), StrategyResults);
 
-			FMcpAssetModifier::RefreshBlueprintNodes(Blueprint);
-			FString CompileError;
-			const bool bCompileSuccess = FMcpAssetModifier::CompileBlueprint(Blueprint, CompileError);
+			BlueprintCompileUtils::FCompileReport CompileReport;
+			const bool bCompileSuccess = BlueprintCompileUtils::CompileBlueprintWithReport(
+				Blueprint,
+				AssetPath,
+				Context.SessionId,
+				100,
+				CompileReport);
 			AttemptObject->SetBoolField(TEXT("compile_attempted"), true);
 			AttemptObject->SetBoolField(TEXT("compile_success"), bCompileSuccess);
+			AttemptObject->SetNumberField(TEXT("warning_count"), CompileReport.WarningCount);
+			AttemptObject->SetNumberField(TEXT("error_count"), CompileReport.ErrorCount);
+			AttemptObject->SetArrayField(TEXT("compile_diagnostics"), CompileReport.Diagnostics);
 			if (!bCompileSuccess)
 			{
-				AttemptObject->SetStringField(TEXT("compile_error"), CompileError);
-				DiagnosticsArray.Add(MakeShareable(new FJsonValueObject(AutoFixBlueprintCompileErrorsToolPrivate::MakeDiagnostic(
-					TEXT("error"),
-					TEXT("UEBMCP_BLUEPRINT_COMPILE_FAILED"),
-					CompileError,
-					AssetPath))));
+				AttemptObject->SetStringField(TEXT("compile_error"), CompileReport.ErrorMessage);
 			}
-			else if (Blueprint->Status == BS_UpToDateWithWarnings)
+			for (const TSharedPtr<FJsonValue>& DiagnosticValue : CompileReport.Diagnostics)
 			{
-				DiagnosticsArray.Add(MakeShareable(new FJsonValueObject(AutoFixBlueprintCompileErrorsToolPrivate::MakeDiagnostic(
-					TEXT("warning"),
-					TEXT("UEBMCP_BLUEPRINT_COMPILE_WARNING"),
-					TEXT("Blueprint compiled with warnings after auto-fix"),
-					AssetPath))));
+				DiagnosticsArray.Add(DiagnosticValue);
 			}
 
 			AttemptArray.Add(MakeShareable(new FJsonValueObject(AttemptObject)));

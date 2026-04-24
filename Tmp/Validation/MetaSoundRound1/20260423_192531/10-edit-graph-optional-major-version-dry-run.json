@@ -1,0 +1,263 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "202",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Request succeeded"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "valid":  true,
+                                             "asset_path":  "/Game/UEBridgeMCPValidation/MetaSoundRound1/MS_MetaSoundRound1_Optional_20260423_192531",
+                                             "asset_class":  "MetaSoundSource",
+                                             "name":  "MS_MetaSoundRound1_Optional_20260423_192531",
+                                             "output_format":  "mono",
+                                             "num_channels":  1,
+                                             "duration":  9999,
+                                             "sample_rate":  48000,
+                                             "interfaces":  [
+                                                                {
+                                                                    "name":  "UE.Source.OneShot",
+                                                                    "major":  1,
+                                                                    "minor":  0
+                                                                },
+                                                                {
+                                                                    "name":  "UE.OutputFormat.Mono",
+                                                                    "major":  1,
+                                                                    "minor":  0
+                                                                },
+                                                                {
+                                                                    "name":  "UE.Source",
+                                                                    "major":  1,
+                                                                    "minor":  1
+                                                                }
+                                                            ],
+                                             "interface_count":  3,
+                                             "inputs":  [
+                                                            {
+                                                                "name":  "UE.Source.OnPlay",
+                                                                "type":  "Trigger",
+                                                                "vertex_id":  "0FDBBA3A-47C8-8F22-E9DF-289EA874A3B0",
+                                                                "node_id":  "21A8038E-45B3-58D5-AEBB-FFAF69E64102",
+                                                                "default_count":  1,
+                                                                "default":  {
+                                                                                "literal_type":  "Boolean",
+                                                                                "valid":  true,
+                                                                                "is_array":  false,
+                                                                                "array_num":  -1,
+                                                                                "value":  false
+                                                                            }
+                                                            },
+                                                            {
+                                                                "name":  "OptionalGain",
+                                                                "type":  "Float",
+                                                                "vertex_id":  "73290DEF-4944-3D16-10F7-5EAC6099AB37",
+                                                                "node_id":  "274D616D-456D-DBF8-EF0A-0FA8F884C4C5",
+                                                                "default_count":  1,
+                                                                "default":  {
+                                                                                "literal_type":  "Float",
+                                                                                "valid":  true,
+                                                                                "is_array":  false,
+                                                                                "array_num":  -1,
+                                                                                "value":  0.40000000596046448
+                                                                            }
+                                                            }
+                                                        ],
+                                             "input_count":  2,
+                                             "outputs":  [
+                                                             {
+                                                                 "name":  "UE.Source.OneShot.OnFinished",
+                                                                 "type":  "Trigger",
+                                                                 "vertex_id":  "AE7A04DC-415D-CFA0-85E4-9E8C699C4523",
+                                                                 "node_id":  "F9AF9553-45AF-88FE-107A-E3A6F5513A40"
+                                                             },
+                                                             {
+                                                                 "name":  "UE.OutputFormat.Mono.Audio:0",
+                                                                 "type":  "Audio",
+                                                                 "vertex_id":  "C0559CC6-48CB-2867-D3EF-88ACB40476C7",
+                                                                 "node_id":  "6A7D40AA-4CD3-EEE4-D7F9-EE99BA4613DC"
+                                                             }
+                                                         ],
+                                             "output_count":  2,
+                                             "node_count":  6,
+                                             "edge_count":  2,
+                                             "variable_count":  0,
+                                             "nodes":  [
+                                                           {
+                                                               "node_id":  "21A8038E-45B3-58D5-AEBB-FFAF69E64102",
+                                                               "name":  "UE.Source.OnPlay",
+                                                               "class_id":  "2B3ABC43-4E4C-0BCE-DFAB-AA8C24776369",
+                                                               "inputs":  [
+                                                                              {
+                                                                                  "name":  "UE.Source.OnPlay",
+                                                                                  "type":  "Trigger",
+                                                                                  "vertex_id":  "DC13176B-76D7-263C-9A5A-C6AF2436C9B4"
+                                                                              }
+                                                                          ],
+                                                               "input_count":  1,
+                                                               "outputs":  [
+                                                                               {
+                                                                                   "name":  "UE.Source.OnPlay",
+                                                                                   "type":  "Trigger",
+                                                                                   "vertex_id":  "CC02F279-9674-D5DA-72AB-BEB51D1DC820"
+                                                                               }
+                                                                           ],
+                                                               "output_count":  1
+                                                           },
+                                                           {
+                                                               "node_id":  "F9AF9553-45AF-88FE-107A-E3A6F5513A40",
+                                                               "name":  "UE.Source.OneShot.OnFinished",
+                                                               "class_id":  "817DA27D-42AB-6423-FF2A-7ABD838C54DB",
+                                                               "inputs":  [
+                                                                              {
+                                                                                  "name":  "UE.Source.OneShot.OnFinished",
+                                                                                  "type":  "Trigger",
+                                                                                  "vertex_id":  "DC13176B-76D7-263C-9A5A-C6AF2436C9B4"
+                                                                              }
+                                                                          ],
+                                                               "input_count":  1,
+                                                               "outputs":  [
+                                                                               {
+                                                                                   "name":  "UE.Source.OneShot.OnFinished",
+                                                                                   "type":  "Trigger",
+                                                                                   "vertex_id":  "CC02F279-9674-D5DA-72AB-BEB51D1DC820"
+                                                                               }
+                                                                           ],
+                                                               "output_count":  1
+                                                           },
+                                                           {
+                                                               "node_id":  "6A7D40AA-4CD3-EEE4-D7F9-EE99BA4613DC",
+                                                               "name":  "UE.OutputFormat.Mono.Audio:0",
+                                                               "class_id":  "894356B5-49A6-DF37-C393-B9A02FF2E0DD",
+                                                               "inputs":  [
+                                                                              {
+                                                                                  "name":  "UE.OutputFormat.Mono.Audio:0",
+                                                                                  "type":  "Audio",
+                                                                                  "vertex_id":  "1073B4F9-A628-4805-7651-709D850DE57C"
+                                                                              }
+                                                                          ],
+                                                               "input_count":  1,
+                                                               "outputs":  [
+                                                                               {
+                                                                                   "name":  "UE.OutputFormat.Mono.Audio:0",
+                                                                                   "type":  "Audio",
+                                                                                   "vertex_id":  "60C9C8D3-384E-DEE6-4823-4ABCFEADF2E6"
+                                                                               }
+                                                                           ],
+                                                               "output_count":  1
+                                                           },
+                                                           {
+                                                               "node_id":  "274D616D-456D-DBF8-EF0A-0FA8F884C4C5",
+                                                               "name":  "OptionalGain",
+                                                               "class_id":  "7FA13F0D-40FB-3CA2-0171-33A6D5BD57D8",
+                                                               "inputs":  [
+                                                                              {
+                                                                                  "name":  "OptionalGain",
+                                                                                  "type":  "Float",
+                                                                                  "vertex_id":  "2E2AB76A-85DC-7B8E-103A-4F5E6C5A00A3"
+                                                                              }
+                                                                          ],
+                                                               "input_count":  1,
+                                                               "outputs":  [
+                                                                               {
+                                                                                   "name":  "OptionalGain",
+                                                                                   "type":  "Float",
+                                                                                   "vertex_id":  "C502B26E-CED3-84DD-42DA-6C62718AACCD"
+                                                                               }
+                                                                           ],
+                                                               "output_count":  1
+                                                           },
+                                                           {
+                                                               "node_id":  "3CD045CE-49CE-8F21-E0B2-EB87A7DD27FE",
+                                                               "name":  "Input",
+                                                               "class_id":  "08411E76-4874-38BA-A474-B7AC68B131FA",
+                                                               "inputs":  [
+                                                                              {
+                                                                                  "name":  "Value",
+                                                                                  "type":  "Trigger",
+                                                                                  "vertex_id":  "1BF0F76D-42EE-2E94-B71D-20BAA93CF988"
+                                                                              }
+                                                                          ],
+                                                               "input_count":  1,
+                                                               "outputs":  [
+                                                                               {
+                                                                                   "name":  "Value",
+                                                                                   "type":  "Trigger",
+                                                                                   "vertex_id":  "F15B5FD4-4257-1082-9367-CEB4F3C5B414"
+                                                                               }
+                                                                           ],
+                                                               "output_count":  1
+                                                           },
+                                                           {
+                                                               "node_id":  "B9036611-4E71-E9FF-162F-CE821D9973E8",
+                                                               "name":  "Input",
+                                                               "class_id":  "08411E76-4874-38BA-A474-B7AC68B131FA",
+                                                               "inputs":  [
+                                                                              {
+                                                                                  "name":  "Value",
+                                                                                  "type":  "Float",
+                                                                                  "vertex_id":  "F9F9F757-4981-CE9F-31C9-318F7105338F"
+                                                                              }
+                                                                          ],
+                                                               "input_count":  1,
+                                                               "outputs":  [
+                                                                               {
+                                                                                   "name":  "Value",
+                                                                                   "type":  "Float",
+                                                                                   "vertex_id":  "DD8AFE0A-46AD-3435-2A13-41B7793CBF9F"
+                                                                               }
+                                                                           ],
+                                                               "output_count":  1
+                                                           }
+                                                       ],
+                                             "edges":  [
+                                                           {
+                                                               "from_node_id":  "21A8038E-45B3-58D5-AEBB-FFAF69E64102",
+                                                               "from_vertex_id":  "CC02F279-9674-D5DA-72AB-BEB51D1DC820",
+                                                               "to_node_id":  "3CD045CE-49CE-8F21-E0B2-EB87A7DD27FE",
+                                                               "to_vertex_id":  "1BF0F76D-42EE-2E94-B71D-20BAA93CF988"
+                                                           },
+                                                           {
+                                                               "from_node_id":  "274D616D-456D-DBF8-EF0A-0FA8F884C4C5",
+                                                               "from_vertex_id":  "C502B26E-CED3-84DD-42DA-6C62718AACCD",
+                                                               "to_node_id":  "B9036611-4E71-E9FF-162F-CE821D9973E8",
+                                                               "to_vertex_id":  "F9F9F757-4981-CE9F-31C9-318F7105338F"
+                                                           }
+                                                       ],
+                                             "tool":  "edit-metasound-graph",
+                                             "success":  true,
+                                             "dry_run":  true,
+                                             "results":  [
+                                                             {
+                                                                 "index":  0,
+                                                                 "action":  "add_node_by_class_name",
+                                                                 "success":  true,
+                                                                 "changed":  false
+                                                             }
+                                                         ],
+                                             "summary":  {
+                                                             "total":  1,
+                                                             "succeeded":  1,
+                                                             "failed":  0
+                                                         },
+                                             "saved":  false,
+                                             "warnings":  [
+
+                                                          ]
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  0.11550000635907054
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "edit-metasound-graph",
+                                               "mutates":  true,
+                                               "supports_batch":  true,
+                                               "requires_game_thread":  true,
+                                               "content_items":  0
+                                           }
+                             }
+               }
+}

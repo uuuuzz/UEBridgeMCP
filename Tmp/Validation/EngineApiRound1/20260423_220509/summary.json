@@ -1,0 +1,26 @@
+﻿{
+    "timestamp":  "20260423_220509",
+    "evidence_dir":  "G:\\UEProjects\\UEBridgeMCP\\Tmp\\Validation\\EngineApiRound1\\20260423_220509",
+    "registered_count":  140,
+    "tools_visible":  {
+                          "query-engine-api-symbol":  true,
+                          "query-class-member-summary":  true,
+                          "query-plugin-capabilities":  true,
+                          "query-editor-subsystem-summary":  true
+                      },
+    "class_search_count":  20,
+    "class_search_found_actor":  true,
+    "function_search_count":  20,
+    "function_search_found_line_trace":  true,
+    "class_members_property_count":  1,
+    "class_members_function_count":  7,
+    "class_members_resolved_actor":  true,
+    "plugin_count":  1,
+    "plugin_found":  true,
+    "plugin_modules_returned":  true,
+    "plugin_query_count":  10,
+    "subsystem_count":  20,
+    "subsystem_has_editor_or_engine":  true,
+    "negative_is_error":  true,
+    "negative_code":  "UEBMCP_CLASS_NOT_FOUND"
+}

@@ -1,0 +1,33 @@
+﻿{
+    "timestamp":  "20260423_225029",
+    "evidence_root":  "G:\\UEProjects\\UEBridgeMCP\\Tmp\\Validation\\SequencerRound1\\20260423_225029",
+    "registered_count":  146,
+    "tools_visible":  {
+                          "query-level-sequence-summary":  true,
+                          "edit-sequencer-tracks":  true,
+                          "create-asset":  true,
+                          "search-level-entities":  true
+                      },
+    "sequencer_available":  true,
+    "actor_name":  "SM_SkySphere",
+    "asset_path":  "/Game/UEBridgeMCPValidation/SequencerRound1/LS_SequencerRound1_20260423_225029",
+    "create_success":  true,
+    "create_class":  "LevelSequence",
+    "empty_query_success":  true,
+    "empty_has_movie_scene":  true,
+    "dry_run_success":  true,
+    "dry_run_modified_count":  0,
+    "edit_success":  true,
+    "edited_query_success":  true,
+    "binding_count":  1,
+    "track_count":  2,
+    "section_count":  2,
+    "playback_start":  0,
+    "playback_end":  120,
+    "negative_is_error":  true,
+    "negative_code":  "UEBMCP_ASSET_NOT_FOUND",
+    "camera_cut_success":  true,
+    "camera_cut_count":  0,
+    "final_track_count":  3,
+    "final_section_count":  3
+}

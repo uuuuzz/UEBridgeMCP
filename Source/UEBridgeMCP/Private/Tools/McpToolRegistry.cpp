@@ -48,7 +48,7 @@ void FMcpToolRegistry::RegisterToolClass(UClass* ToolClass)
 	{
 		UE_LOG(LogUEBridgeMCP, Warning, TEXT("Tool '%s' is already registered, replacing"), *ToolName);
 		// P0-H4: 替换前释放老实例的根引用
-		if (TObjectPtr<UMcpToolBase>* OldInstancePtr = ToolInstances.Find(ToolName))
+		if (TWeakObjectPtr<UMcpToolBase>* OldInstancePtr = ToolInstances.Find(ToolName))
 		{
 			if (UMcpToolBase* OldInstance = OldInstancePtr->Get())
 			{
@@ -62,15 +62,89 @@ void FMcpToolRegistry::RegisterToolClass(UClass* ToolClass)
 	}
 
 	ToolClasses.Add(ToolName, ToolClass);
+	ToolAliases.Remove(ToolName);
+	ToolAliasArgumentAdapters.Remove(ToolName);
 	UE_LOG(LogUEBridgeMCP, Log, TEXT("Registered MCP tool: %s"), *ToolName);
+}
+
+void FMcpToolRegistry::RegisterToolAlias(const FString& AliasName, const FString& TargetToolName)
+{
+	const FString CleanAlias = AliasName.TrimStartAndEnd();
+	const FString CleanTarget = TargetToolName.TrimStartAndEnd();
+
+	if (CleanAlias.IsEmpty() || CleanTarget.IsEmpty())
+	{
+		UE_LOG(LogUEBridgeMCP, Warning, TEXT("Attempted to register empty MCP tool alias '%s' -> '%s'"), *AliasName, *TargetToolName);
+		return;
+	}
+
+	FScopeLock ScopeLock(&Lock);
+
+	if (ToolClasses.Contains(CleanAlias))
+	{
+		UE_LOG(LogUEBridgeMCP, Warning, TEXT("MCP tool alias '%s' conflicts with a canonical tool name"), *CleanAlias);
+		return;
+	}
+
+	const FString ResolvedTarget = ResolveToolNameNoLock(CleanTarget);
+	if (CleanAlias == ResolvedTarget)
+	{
+		UE_LOG(LogUEBridgeMCP, Warning, TEXT("MCP tool alias '%s' resolves to itself"), *CleanAlias);
+		return;
+	}
+
+	if (!ToolClasses.Contains(ResolvedTarget))
+	{
+		UE_LOG(LogUEBridgeMCP, Warning, TEXT("MCP tool alias '%s' target is not registered: %s"), *CleanAlias, *ResolvedTarget);
+		return;
+	}
+
+	if (const FString* ExistingTarget = ToolAliases.Find(CleanAlias))
+	{
+		if (*ExistingTarget != ResolvedTarget)
+		{
+			UE_LOG(LogUEBridgeMCP, Warning, TEXT("MCP tool alias '%s' is already registered for '%s', replacing with '%s'"),
+				*CleanAlias, **ExistingTarget, *ResolvedTarget);
+		}
+	}
+
+	ToolAliases.Add(CleanAlias, ResolvedTarget);
+	UE_LOG(LogUEBridgeMCP, Log, TEXT("Registered MCP tool alias: %s -> %s"), *CleanAlias, *ResolvedTarget);
+}
+
+void FMcpToolRegistry::RegisterToolAliasArgumentAdapter(const FString& AliasName, FAliasArgumentAdapter Adapter)
+{
+	const FString CleanAlias = AliasName.TrimStartAndEnd();
+	if (CleanAlias.IsEmpty() || !Adapter)
+	{
+		UE_LOG(LogUEBridgeMCP, Warning, TEXT("Attempted to register invalid MCP tool alias adapter: %s"), *AliasName);
+		return;
+	}
+
+	FScopeLock ScopeLock(&Lock);
+	if (!ToolAliases.Contains(CleanAlias))
+	{
+		UE_LOG(LogUEBridgeMCP, Warning, TEXT("MCP tool alias adapter '%s' has no registered alias"), *CleanAlias);
+		return;
+	}
+
+	ToolAliasArgumentAdapters.Add(CleanAlias, MoveTemp(Adapter));
+	UE_LOG(LogUEBridgeMCP, Log, TEXT("Registered MCP tool alias argument adapter: %s"), *CleanAlias);
 }
 
 void FMcpToolRegistry::UnregisterTool(const FString& ToolName)
 {
 	FScopeLock ScopeLock(&Lock);
 
+	if (ToolAliases.Remove(ToolName) > 0)
+	{
+		ToolAliasArgumentAdapters.Remove(ToolName);
+		UE_LOG(LogUEBridgeMCP, Log, TEXT("Unregistered MCP tool alias: %s"), *ToolName);
+		return;
+	}
+
 	// P0-H4: 移除实例前必须 RemoveFromRoot，否则 UObject 永远驻留根集造成泄漏
-	if (TObjectPtr<UMcpToolBase>* InstancePtr = ToolInstances.Find(ToolName))
+	if (TWeakObjectPtr<UMcpToolBase>* InstancePtr = ToolInstances.Find(ToolName))
 	{
 		if (UMcpToolBase* ToolInstance = InstancePtr->Get())
 		{
@@ -83,8 +157,27 @@ void FMcpToolRegistry::UnregisterTool(const FString& ToolName)
 
 	ToolClasses.Remove(ToolName);
 	ToolInstances.Remove(ToolName);
+	for (auto It = ToolAliases.CreateIterator(); It; ++It)
+	{
+		if (It.Value() == ToolName)
+		{
+			UE_LOG(LogUEBridgeMCP, Log, TEXT("Unregistered MCP tool alias because target was removed: %s -> %s"), *It.Key(), *ToolName);
+			ToolAliasArgumentAdapters.Remove(It.Key());
+			It.RemoveCurrent();
+		}
+	}
 
 	UE_LOG(LogUEBridgeMCP, Log, TEXT("Unregistered MCP tool: %s"), *ToolName);
+}
+
+void FMcpToolRegistry::UnregisterToolAlias(const FString& AliasName)
+{
+	FScopeLock ScopeLock(&Lock);
+	if (ToolAliases.Remove(AliasName) > 0)
+	{
+		ToolAliasArgumentAdapters.Remove(AliasName);
+		UE_LOG(LogUEBridgeMCP, Log, TEXT("Unregistered MCP tool alias: %s"), *AliasName);
+	}
 }
 
 void FMcpToolRegistry::ClearAllTools()
@@ -104,6 +197,8 @@ void FMcpToolRegistry::ClearAllTools()
 	}
 
 	ToolClasses.Empty();
+	ToolAliases.Empty();
+	ToolAliasArgumentAdapters.Empty();
 	ToolInstances.Empty();
 
 	UE_LOG(LogUEBridgeMCP, Log, TEXT("Cleared all MCP tools"));
@@ -114,7 +209,7 @@ TArray<FMcpToolDefinition> FMcpToolRegistry::GetAllToolDefinitions() const
 	FScopeLock ScopeLock(&Lock);
 
 	TArray<FMcpToolDefinition> Definitions;
-	Definitions.Reserve(ToolClasses.Num());
+	Definitions.Reserve(ToolClasses.Num() + ToolAliases.Num());
 
 	for (const auto& Pair : ToolClasses)
 	{
@@ -122,6 +217,24 @@ TArray<FMcpToolDefinition> FMcpToolRegistry::GetAllToolDefinitions() const
 		if (CDO)
 		{
 			Definitions.Add(CDO->GetDefinition());
+		}
+	}
+
+	for (const auto& Pair : ToolAliases)
+	{
+		UClass* const* ToolClassPtr = ToolClasses.Find(Pair.Value);
+		if (!ToolClassPtr || !*ToolClassPtr)
+		{
+			continue;
+		}
+
+		UMcpToolBase* CDO = (*ToolClassPtr)->GetDefaultObject<UMcpToolBase>();
+		if (CDO)
+		{
+			FMcpToolDefinition Definition = CDO->GetDefinition();
+			Definition.Name = Pair.Key;
+			Definition.Description = FString::Printf(TEXT("[Compatibility alias for '%s'] %s"), *Pair.Value, *Definition.Description);
+			Definitions.Add(Definition);
 		}
 	}
 
@@ -134,21 +247,42 @@ TArray<FString> FMcpToolRegistry::GetAllToolNames() const
 
 	TArray<FString> Names;
 	ToolClasses.GetKeys(Names);
+	TArray<FString> AliasNames;
+	ToolAliases.GetKeys(AliasNames);
+	Names.Append(AliasNames);
 	return Names;
+}
+
+TMap<FString, FString> FMcpToolRegistry::GetToolAliases() const
+{
+	FScopeLock ScopeLock(&Lock);
+	return ToolAliases;
+}
+
+FString FMcpToolRegistry::ResolveToolName(const FString& ToolName) const
+{
+	FScopeLock ScopeLock(&Lock);
+	return ResolveToolNameNoLock(ToolName);
 }
 
 UMcpToolBase* FMcpToolRegistry::FindTool(const FString& ToolName)
 {
 	FScopeLock ScopeLock(&Lock);
+	const FString ResolvedToolName = ResolveToolNameNoLock(ToolName);
 
 	// Check if already instantiated
-	if (TObjectPtr<UMcpToolBase>* ExistingTool = ToolInstances.Find(ToolName))
+	if (TWeakObjectPtr<UMcpToolBase>* ExistingTool = ToolInstances.Find(ResolvedToolName))
 	{
-		return ExistingTool->Get();
+		if (UMcpToolBase* ExistingInstance = ExistingTool->Get())
+		{
+			return ExistingInstance;
+		}
+
+		ToolInstances.Remove(ResolvedToolName);
 	}
 
 	// Check if class is registered
-	UClass** ToolClassPtr = ToolClasses.Find(ToolName);
+	UClass** ToolClassPtr = ToolClasses.Find(ResolvedToolName);
 	if (!ToolClassPtr || !*ToolClassPtr)
 	{
 		return nullptr;
@@ -161,13 +295,13 @@ UMcpToolBase* FMcpToolRegistry::FindTool(const FString& ToolName)
 bool FMcpToolRegistry::HasTool(const FString& ToolName) const
 {
 	FScopeLock ScopeLock(&Lock);
-	return ToolClasses.Contains(ToolName);
+	return ToolClasses.Contains(ToolName) || ToolAliases.Contains(ToolName);
 }
 
 int32 FMcpToolRegistry::GetToolCount() const
 {
 	FScopeLock ScopeLock(&Lock);
-	return ToolClasses.Num();
+	return ToolClasses.Num() + ToolAliases.Num();
 }
 
 void FMcpToolRegistry::WarmupAllTools()
@@ -198,7 +332,8 @@ bool FMcpToolRegistry::DoesToolRequireGameThread(const FString& ToolName) const
 {
 	FScopeLock ScopeLock(&Lock);
 
-	UClass* const* ToolClassPtr = ToolClasses.Find(ToolName);
+	const FString ResolvedToolName = ResolveToolNameNoLock(ToolName);
+	UClass* const* ToolClassPtr = ToolClasses.Find(ResolvedToolName);
 	if (!ToolClassPtr || !*ToolClassPtr)
 	{
 		// 未知工具默认需要 GameThread（安全起见）
@@ -219,15 +354,50 @@ FMcpToolResult FMcpToolRegistry::ExecuteTool(
 	const TSharedPtr<FJsonObject>& Arguments,
 	const FMcpToolContext& Context)
 {
+	FString ResolvedToolName;
+	FAliasArgumentAdapter AliasArgumentAdapter;
+	{
+		FScopeLock ScopeLock(&Lock);
+		ResolvedToolName = ResolveToolNameNoLock(ToolName);
+		if (ResolvedToolName != ToolName)
+		{
+			if (const FAliasArgumentAdapter* Adapter = ToolAliasArgumentAdapters.Find(ToolName))
+			{
+				AliasArgumentAdapter = *Adapter;
+			}
+		}
+	}
+
+	TSharedPtr<FJsonObject> EffectiveArguments = Arguments;
+	bool bArgumentsAdapted = false;
+	if (AliasArgumentAdapter)
+	{
+		EffectiveArguments = AliasArgumentAdapter(Arguments);
+		if (!EffectiveArguments.IsValid())
+		{
+			EffectiveArguments = Arguments;
+		}
+		bArgumentsAdapted = EffectiveArguments != Arguments;
+	}
+
 	UE_LOG(LogUEBridgeMCP, Log, TEXT("Executing tool: %s (Thread: %s)"),
 		*ToolName, IsInGameThread() ? TEXT("GameThread") : TEXT("Background"));
+	if (ResolvedToolName != ToolName)
+	{
+		UE_LOG(LogUEBridgeMCP, Log, TEXT("Resolved MCP compatibility alias: %s -> %s"), *ToolName, *ResolvedToolName);
+		if (bArgumentsAdapted)
+		{
+			UE_LOG(LogUEBridgeMCP, Log, TEXT("Adapted MCP compatibility alias arguments for: %s"), *ToolName);
+		}
+	}
 
-	UMcpToolBase* Tool = FindTool(ToolName);
+	UMcpToolBase* Tool = FindTool(ResolvedToolName);
 	if (!Tool)
 	{
 		UE_LOG(LogUEBridgeMCP, Error, TEXT("Tool not found: %s"), *ToolName);
 		TSharedPtr<FJsonObject> Details = MakeShareable(new FJsonObject);
 		Details->SetStringField(TEXT("tool_name"), ToolName);
+		Details->SetStringField(TEXT("resolved_tool_name"), ResolvedToolName);
 		return FMcpToolResult::StructuredError(TEXT("UEBMCP_TOOL_NOT_FOUND"), FString::Printf(TEXT("Tool not found: %s"), *ToolName), Details);
 	}
 
@@ -240,12 +410,15 @@ FMcpToolResult FMcpToolRegistry::ExecuteTool(
 
 	// Execute with timing
 	double StartTime = FPlatformTime::Seconds();
-	FMcpToolResult Result = Tool->Execute(Arguments, Context);
+	FMcpToolResult Result = Tool->Execute(EffectiveArguments, Context);
 	double ElapsedMs = (FPlatformTime::Seconds() - StartTime) * 1000.0;
 	Result.SetTimingMs(ElapsedMs);
 
 	TSharedPtr<FJsonObject> Stats = MakeShareable(new FJsonObject);
-	Stats->SetStringField(TEXT("tool_name"), ToolName);
+	Stats->SetStringField(TEXT("tool_name"), ResolvedToolName);
+	Stats->SetStringField(TEXT("requested_tool_name"), ToolName);
+	Stats->SetBoolField(TEXT("compatibility_alias"), ResolvedToolName != ToolName);
+	Stats->SetBoolField(TEXT("compatibility_arguments_adapted"), bArgumentsAdapted);
 	Stats->SetBoolField(TEXT("mutates"), Tool->MutatesState());
 	Stats->SetBoolField(TEXT("supports_batch"), Tool->SupportsBatch());
 	Stats->SetBoolField(TEXT("requires_game_thread"), Tool->RequiresGameThread());
@@ -290,4 +463,10 @@ UMcpToolBase* FMcpToolRegistry::CreateToolInstance(UClass* ToolClass)
 
 	UE_LOG(LogUEBridgeMCP, Log, TEXT("Created MCP tool instance: %s"), *ToolName);
 	return Tool;
+}
+
+FString FMcpToolRegistry::ResolveToolNameNoLock(const FString& ToolName) const
+{
+	const FString* TargetToolName = ToolAliases.Find(ToolName);
+	return TargetToolName ? *TargetToolName : ToolName;
 }

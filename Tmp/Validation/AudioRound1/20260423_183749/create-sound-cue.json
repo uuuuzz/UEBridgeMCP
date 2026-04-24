@@ -1,0 +1,53 @@
+{
+    "jsonrpc":  "2.0",
+    "id":  "create-sound-cue",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "SoundCue created"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "valid":  true,
+                                             "asset_path":  "/Game/UEBridgeMCPValidation/AudioRound1/SC_AudioRound1_20260423_183749",
+                                             "volume_multiplier":  0.80000001192092896,
+                                             "pitch_multiplier":  1.0499999523162842,
+                                             "override_attenuation":  false,
+                                             "root_node_class":  "SoundNodeWavePlayer",
+                                             "has_root_node":  true,
+                                             "root_node":  {
+                                                               "valid":  true,
+                                                               "node_class":  "SoundNodeWavePlayer",
+                                                               "depth":  0,
+                                                               "child_count":  0,
+                                                               "node_type":  "wave_player",
+                                                               "sound_wave":  "/Engine/EngineSounds/WhiteNoise.WhiteNoise",
+                                                               "looping":  false,
+                                                               "children":  [
+
+                                                                            ]
+                                                           },
+                                             "tool":  "create-sound-cue",
+                                             "success":  true,
+                                             "initial_sound_wave_path":  "/Engine/EngineSounds/WhiteNoise.WhiteNoise",
+                                             "saved":  true,
+                                             "needs_save":  false,
+                                             "warnings":  [
+
+                                                          ]
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  37.467600021045655
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "create-sound-cue",
+                                               "mutates":  true,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  1
+                                           }
+                             }
+               }
+}

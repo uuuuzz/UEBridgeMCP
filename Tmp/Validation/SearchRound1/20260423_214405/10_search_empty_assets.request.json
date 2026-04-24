@@ -1,0 +1,13 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "search_empty_assets",
+    "method":  "tools/call",
+    "params":  {
+                   "name":  "search-assets-advanced",
+                   "arguments":  {
+                                     "query":  "DefinitelyNoSearchRound1AssetShouldMatch",
+                                     "path":  "/Game/UEBridgeMCPValidation/SearchRound1",
+                                     "limit":  5
+                                 }
+               }
+}

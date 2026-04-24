@@ -1,0 +1,1031 @@
+[
+  {
+    "label": "Floor",
+    "class": "StaticMeshActor",
+    "folder": "Level",
+    "loc": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      40.0,
+      40.0,
+      1.0
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Plane.Plane"
+    ],
+    "materials": [
+      "/Engine/BasicShapes/BasicShapeMaterial.BasicShapeMaterial"
+    ]
+  },
+  {
+    "label": "Grid_0_0",
+    "class": "StaticMeshActor",
+    "folder": "Layout/Grid",
+    "loc": [
+      -600.0,
+      -600.0,
+      100.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cube.Cube"
+    ],
+    "materials": [
+      "/Game/Materials/MI_Grid_Red.MI_Grid_Red"
+    ]
+  },
+  {
+    "label": "Grid_0_1",
+    "class": "StaticMeshActor",
+    "folder": "Layout/Grid",
+    "loc": [
+      -200.0,
+      -600.0,
+      100.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cube.Cube"
+    ],
+    "materials": [
+      "/Game/Materials/MI_Grid_Orange.MI_Grid_Orange"
+    ]
+  },
+  {
+    "label": "Grid_0_2",
+    "class": "StaticMeshActor",
+    "folder": "Layout/Grid",
+    "loc": [
+      200.0,
+      -600.0,
+      100.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cube.Cube"
+    ],
+    "materials": [
+      "/Game/Materials/MI_Grid_Yellow.MI_Grid_Yellow"
+    ]
+  },
+  {
+    "label": "Grid_1_0",
+    "class": "StaticMeshActor",
+    "folder": "Layout/Grid",
+    "loc": [
+      -600.0,
+      -200.0,
+      100.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cube.Cube"
+    ],
+    "materials": [
+      "/Game/Materials/MI_Grid_Orange.MI_Grid_Orange"
+    ]
+  },
+  {
+    "label": "Grid_1_1",
+    "class": "StaticMeshActor",
+    "folder": "Layout/Grid",
+    "loc": [
+      -200.0,
+      -200.0,
+      100.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cube.Cube"
+    ],
+    "materials": [
+      "/Game/Materials/MI_Grid_Yellow.MI_Grid_Yellow"
+    ]
+  },
+  {
+    "label": "Grid_1_2",
+    "class": "StaticMeshActor",
+    "folder": "Layout/Grid",
+    "loc": [
+      200.0,
+      -200.0,
+      100.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cube.Cube"
+    ],
+    "materials": [
+      "/Game/Materials/MI_Grid_Red.MI_Grid_Red"
+    ]
+  },
+  {
+    "label": "Grid_2_0",
+    "class": "StaticMeshActor",
+    "folder": "Layout/Grid",
+    "loc": [
+      -600.0,
+      200.0,
+      100.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cube.Cube"
+    ],
+    "materials": [
+      "/Game/Materials/MI_Grid_Yellow.MI_Grid_Yellow"
+    ]
+  },
+  {
+    "label": "Grid_2_1",
+    "class": "StaticMeshActor",
+    "folder": "Layout/Grid",
+    "loc": [
+      -200.0,
+      200.0,
+      100.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cube.Cube"
+    ],
+    "materials": [
+      "/Game/Materials/MI_Grid_Red.MI_Grid_Red"
+    ]
+  },
+  {
+    "label": "Grid_2_2",
+    "class": "StaticMeshActor",
+    "folder": "Layout/Grid",
+    "loc": [
+      200.0,
+      200.0,
+      100.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cube.Cube"
+    ],
+    "materials": [
+      "/Game/Materials/MI_Grid_Orange.MI_Grid_Orange"
+    ]
+  },
+  {
+    "label": "Step_0",
+    "class": "StaticMeshActor",
+    "folder": "Layout/Staircase",
+    "loc": [
+      900.0,
+      -300.0,
+      50.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cube.Cube"
+    ],
+    "materials": [
+      "/Game/Materials/MI_Stair_Blue.MI_Stair_Blue"
+    ]
+  },
+  {
+    "label": "Step_1",
+    "class": "StaticMeshActor",
+    "folder": "Layout/Staircase",
+    "loc": [
+      1040.0,
+      -300.0,
+      100.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cube.Cube"
+    ],
+    "materials": [
+      "/Game/Materials/MI_Stair_Blue.MI_Stair_Blue"
+    ]
+  },
+  {
+    "label": "Step_2",
+    "class": "StaticMeshActor",
+    "folder": "Layout/Staircase",
+    "loc": [
+      1180.0,
+      -300.0,
+      150.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cube.Cube"
+    ],
+    "materials": [
+      "/Game/Materials/MI_Stair_Blue.MI_Stair_Blue"
+    ]
+  },
+  {
+    "label": "Step_3",
+    "class": "StaticMeshActor",
+    "folder": "Layout/Staircase",
+    "loc": [
+      1320.0,
+      -300.0,
+      200.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cube.Cube"
+    ],
+    "materials": [
+      "/Game/Materials/MI_Stair_Blue.MI_Stair_Blue"
+    ]
+  },
+  {
+    "label": "Step_4",
+    "class": "StaticMeshActor",
+    "folder": "Layout/Staircase",
+    "loc": [
+      1460.0,
+      -300.0,
+      250.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cube.Cube"
+    ],
+    "materials": [
+      "/Game/Materials/MI_Stair_Blue.MI_Stair_Blue"
+    ]
+  },
+  {
+    "label": "Step_5",
+    "class": "StaticMeshActor",
+    "folder": "Layout/Staircase",
+    "loc": [
+      1600.0,
+      -300.0,
+      300.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cube.Cube"
+    ],
+    "materials": [
+      "/Game/Materials/MI_Stair_Blue.MI_Stair_Blue"
+    ]
+  },
+  {
+    "label": "Ring_0",
+    "class": "StaticMeshActor",
+    "folder": "Layout/Ring",
+    "loc": [
+      900.0,
+      1200.0,
+      100.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cylinder.Cylinder"
+    ],
+    "materials": [
+      "/Game/Materials/MI_Ring_Green.MI_Ring_Green"
+    ]
+  },
+  {
+    "label": "Ring_1",
+    "class": "StaticMeshActor",
+    "folder": "Layout/Ring",
+    "loc": [
+      636.4,
+      1836.4,
+      100.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cylinder.Cylinder"
+    ],
+    "materials": [
+      "/Game/Materials/MI_Ring_Green.MI_Ring_Green"
+    ]
+  },
+  {
+    "label": "Ring_2",
+    "class": "StaticMeshActor",
+    "folder": "Layout/Ring",
+    "loc": [
+      0.0,
+      2100.0,
+      100.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cylinder.Cylinder"
+    ],
+    "materials": [
+      "/Game/Materials/MI_Ring_Green.MI_Ring_Green"
+    ]
+  },
+  {
+    "label": "Ring_3",
+    "class": "StaticMeshActor",
+    "folder": "Layout/Ring",
+    "loc": [
+      -636.4,
+      1836.4,
+      100.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cylinder.Cylinder"
+    ],
+    "materials": [
+      "/Game/Materials/MI_Ring_Green.MI_Ring_Green"
+    ]
+  },
+  {
+    "label": "Ring_4",
+    "class": "StaticMeshActor",
+    "folder": "Layout/Ring",
+    "loc": [
+      -900.0,
+      1200.0,
+      100.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cylinder.Cylinder"
+    ],
+    "materials": [
+      "/Game/Materials/MI_Ring_Green.MI_Ring_Green"
+    ]
+  },
+  {
+    "label": "Ring_5",
+    "class": "StaticMeshActor",
+    "folder": "Layout/Ring",
+    "loc": [
+      -636.4,
+      563.6,
+      100.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cylinder.Cylinder"
+    ],
+    "materials": [
+      "/Game/Materials/MI_Ring_Green.MI_Ring_Green"
+    ]
+  },
+  {
+    "label": "Ring_6",
+    "class": "StaticMeshActor",
+    "folder": "Layout/Ring",
+    "loc": [
+      -0.0,
+      300.0,
+      100.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cylinder.Cylinder"
+    ],
+    "materials": [
+      "/Game/Materials/MI_Ring_Green.MI_Ring_Green"
+    ]
+  },
+  {
+    "label": "Ring_7",
+    "class": "StaticMeshActor",
+    "folder": "Layout/Ring",
+    "loc": [
+      636.4,
+      563.6,
+      100.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cylinder.Cylinder"
+    ],
+    "materials": [
+      "/Game/Materials/MI_Ring_Green.MI_Ring_Green"
+    ]
+  },
+  {
+    "label": "SM_TestSphere",
+    "class": "StaticMeshActor",
+    "folder": "Layout/Targets",
+    "loc": [
+      0.0,
+      0.0,
+      200.0
+    ],
+    "scale": [
+      2.0,
+      2.0,
+      2.0
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Sphere.Sphere"
+    ],
+    "materials": [
+      "/Game/Materials/MI_Target_Purple.MI_Target_Purple"
+    ]
+  },
+  {
+    "label": "AB_Sidewalk",
+    "class": "StaticMeshActor",
+    "folder": "ArtBlockout/Ground",
+    "loc": [
+      -1650.0,
+      0.0,
+      2.0
+    ],
+    "scale": [
+      5.5,
+      40.0,
+      1.0
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Plane.Plane"
+    ],
+    "materials": [
+      "/Game/Materials/Stylized/Instances/MI_StylizedEnv_Concrete.MI_StylizedEnv_Concrete"
+    ]
+  },
+  {
+    "label": "AB_DirtPath",
+    "class": "StaticMeshActor",
+    "folder": "ArtBlockout/Ground",
+    "loc": [
+      -350.0,
+      0.0,
+      1.0
+    ],
+    "scale": [
+      19.0,
+      8.5,
+      1.0
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Plane.Plane"
+    ],
+    "materials": [
+      "/Game/Materials/Stylized/Instances/MI_StylizedEnv_Dirt.MI_StylizedEnv_Dirt"
+    ]
+  },
+  {
+    "label": "AB_Wall_Left",
+    "class": "StaticMeshActor",
+    "folder": "ArtBlockout/Walls",
+    "loc": [
+      50.0,
+      -1100.0,
+      90.0
+    ],
+    "scale": [
+      22.0,
+      0.6,
+      1.8
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cube.Cube"
+    ],
+    "materials": [
+      "/Engine/BasicShapes/BasicShapeMaterial.BasicShapeMaterial"
+    ]
+  },
+  {
+    "label": "AB_Wall_Right",
+    "class": "StaticMeshActor",
+    "folder": "ArtBlockout/Walls",
+    "loc": [
+      150.0,
+      1100.0,
+      90.0
+    ],
+    "scale": [
+      21.0,
+      0.6,
+      1.8
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cube.Cube"
+    ],
+    "materials": [
+      "/Game/Materials/Stylized/Instances/MI_StylizedEnv_Concrete.MI_StylizedEnv_Concrete"
+    ]
+  },
+  {
+    "label": "AB_Wall_Back",
+    "class": "StaticMeshActor",
+    "folder": "ArtBlockout/Walls",
+    "loc": [
+      950.0,
+      0.0,
+      90.0
+    ],
+    "scale": [
+      0.6,
+      24.0,
+      1.8
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cube.Cube"
+    ],
+    "materials": [
+      "/Game/Materials/Stylized/Instances/MI_StylizedEnv_Concrete.MI_StylizedEnv_Concrete"
+    ]
+  },
+  {
+    "label": "AB_Building_A",
+    "class": "StaticMeshActor",
+    "folder": "ArtBlockout/Buildings",
+    "loc": [
+      1450.0,
+      -650.0,
+      260.0
+    ],
+    "scale": [
+      4.0,
+      3.5,
+      5.2
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cube.Cube"
+    ],
+    "materials": [
+      "/Game/Materials/Stylized/Instances/MI_StylizedEnv_Building.MI_StylizedEnv_Building"
+    ]
+  },
+  {
+    "label": "AB_Building_B",
+    "class": "StaticMeshActor",
+    "folder": "ArtBlockout/Buildings",
+    "loc": [
+      1550.0,
+      -150.0,
+      430.0
+    ],
+    "scale": [
+      4.2,
+      4.0,
+      8.6
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cube.Cube"
+    ],
+    "materials": [
+      "/Game/Materials/Stylized/Instances/MI_StylizedEnv_Building.MI_StylizedEnv_Building"
+    ]
+  },
+  {
+    "label": "AB_Building_C",
+    "class": "StaticMeshActor",
+    "folder": "ArtBlockout/Buildings",
+    "loc": [
+      1500.0,
+      380.0,
+      320.0
+    ],
+    "scale": [
+      3.8,
+      3.8,
+      6.4
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cube.Cube"
+    ],
+    "materials": [
+      "/Game/Materials/Stylized/Instances/MI_StylizedEnv_Building.MI_StylizedEnv_Building"
+    ]
+  },
+  {
+    "label": "AB_Building_D",
+    "class": "StaticMeshActor",
+    "folder": "ArtBlockout/Buildings",
+    "loc": [
+      1620.0,
+      850.0,
+      520.0
+    ],
+    "scale": [
+      4.5,
+      3.5,
+      10.4
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cube.Cube"
+    ],
+    "materials": [
+      "/Game/Materials/Stylized/Instances/MI_StylizedEnv_Building.MI_StylizedEnv_Building"
+    ]
+  },
+  {
+    "label": "AB_Building_E",
+    "class": "StaticMeshActor",
+    "folder": "ArtBlockout/Buildings",
+    "loc": [
+      1760.0,
+      80.0,
+      700.0
+    ],
+    "scale": [
+      2.4,
+      2.4,
+      14.0
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cube.Cube"
+    ],
+    "materials": [
+      "/Game/Materials/Stylized/Instances/MI_StylizedEnv_Building.MI_StylizedEnv_Building"
+    ]
+  },
+  {
+    "label": "AB_Pipe_Lower",
+    "class": "StaticMeshActor",
+    "folder": "ArtBlockout/Props",
+    "loc": [
+      620.0,
+      0.0,
+      130.0
+    ],
+    "scale": [
+      1.8,
+      1.8,
+      5.0
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cylinder.Cylinder"
+    ],
+    "materials": [
+      "/Game/Materials/Stylized/Instances/MI_StylizedEnv_Concrete.MI_StylizedEnv_Concrete"
+    ]
+  },
+  {
+    "label": "AB_Pipe_Upper_L",
+    "class": "StaticMeshActor",
+    "folder": "ArtBlockout/Props",
+    "loc": [
+      730.0,
+      -120.0,
+      280.0
+    ],
+    "scale": [
+      1.5,
+      1.5,
+      3.6
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cylinder.Cylinder"
+    ],
+    "materials": [
+      "/Game/Materials/Stylized/Instances/MI_StylizedEnv_Concrete.MI_StylizedEnv_Concrete"
+    ]
+  },
+  {
+    "label": "AB_Pipe_Upper_R",
+    "class": "StaticMeshActor",
+    "folder": "ArtBlockout/Props",
+    "loc": [
+      730.0,
+      120.0,
+      280.0
+    ],
+    "scale": [
+      1.5,
+      1.5,
+      3.6
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cylinder.Cylinder"
+    ],
+    "materials": [
+      "/Game/Materials/Stylized/Instances/MI_StylizedEnv_Concrete.MI_StylizedEnv_Concrete"
+    ]
+  },
+  {
+    "label": "AB_Tree_L_Trunk",
+    "class": "StaticMeshActor",
+    "folder": "ArtBlockout/Foliage",
+    "loc": [
+      160.0,
+      -650.0,
+      170.0
+    ],
+    "scale": [
+      0.35,
+      0.35,
+      3.4
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cylinder.Cylinder"
+    ],
+    "materials": [
+      "/Game/Materials/Stylized/Instances/MI_StylizedEnv_Dirt.MI_StylizedEnv_Dirt"
+    ]
+  },
+  {
+    "label": "AB_Tree_L_Canopy_A",
+    "class": "StaticMeshActor",
+    "folder": "ArtBlockout/Foliage",
+    "loc": [
+      140.0,
+      -650.0,
+      460.0
+    ],
+    "scale": [
+      2.4,
+      2.4,
+      2.2
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Sphere.Sphere"
+    ],
+    "materials": [
+      "/Game/Materials/Stylized/Instances/MI_StylizedEnv_Grass.MI_StylizedEnv_Grass"
+    ]
+  },
+  {
+    "label": "AB_Tree_L_Canopy_B",
+    "class": "StaticMeshActor",
+    "folder": "ArtBlockout/Foliage",
+    "loc": [
+      240.0,
+      -580.0,
+      450.0
+    ],
+    "scale": [
+      1.6,
+      1.6,
+      1.5
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Sphere.Sphere"
+    ],
+    "materials": [
+      "/Game/Materials/Stylized/Instances/MI_StylizedEnv_Grass.MI_StylizedEnv_Grass"
+    ]
+  },
+  {
+    "label": "AB_Tree_R_Trunk",
+    "class": "StaticMeshActor",
+    "folder": "ArtBlockout/Foliage",
+    "loc": [
+      300.0,
+      520.0,
+      160.0
+    ],
+    "scale": [
+      0.32,
+      0.32,
+      3.2
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Cylinder.Cylinder"
+    ],
+    "materials": [
+      "/Game/Materials/Stylized/Instances/MI_StylizedEnv_Dirt.MI_StylizedEnv_Dirt"
+    ]
+  },
+  {
+    "label": "AB_Tree_R_Canopy_A",
+    "class": "StaticMeshActor",
+    "folder": "ArtBlockout/Foliage",
+    "loc": [
+      300.0,
+      520.0,
+      440.0
+    ],
+    "scale": [
+      2.1,
+      2.1,
+      1.9
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Sphere.Sphere"
+    ],
+    "materials": [
+      "/Game/Materials/Stylized/Instances/MI_StylizedEnv_Grass.MI_StylizedEnv_Grass"
+    ]
+  },
+  {
+    "label": "AB_Tree_R_Canopy_B",
+    "class": "StaticMeshActor",
+    "folder": "ArtBlockout/Foliage",
+    "loc": [
+      390.0,
+      560.0,
+      420.0
+    ],
+    "scale": [
+      1.4,
+      1.4,
+      1.3
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Sphere.Sphere"
+    ],
+    "materials": [
+      "/Game/Materials/Stylized/Instances/MI_StylizedEnv_Grass.MI_StylizedEnv_Grass"
+    ]
+  },
+  {
+    "label": "AB_Bush_1",
+    "class": "StaticMeshActor",
+    "folder": "ArtBlockout/Foliage",
+    "loc": [
+      520.0,
+      850.0,
+      60.0
+    ],
+    "scale": [
+      0.8,
+      0.8,
+      0.6
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Sphere.Sphere"
+    ],
+    "materials": [
+      "/Game/Materials/Stylized/Instances/MI_StylizedEnv_Grass.MI_StylizedEnv_Grass"
+    ]
+  },
+  {
+    "label": "AB_Bush_2",
+    "class": "StaticMeshActor",
+    "folder": "ArtBlockout/Foliage",
+    "loc": [
+      670.0,
+      720.0,
+      50.0
+    ],
+    "scale": [
+      0.6,
+      0.6,
+      0.45
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Sphere.Sphere"
+    ],
+    "materials": [
+      "/Game/Materials/Stylized/Instances/MI_StylizedEnv_Grass.MI_StylizedEnv_Grass"
+    ]
+  },
+  {
+    "label": "AB_Bush_3",
+    "class": "StaticMeshActor",
+    "folder": "ArtBlockout/Foliage",
+    "loc": [
+      220.0,
+      -900.0,
+      55.0
+    ],
+    "scale": [
+      0.7,
+      0.7,
+      0.5
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Sphere.Sphere"
+    ],
+    "materials": [
+      "/Game/Materials/Stylized/Instances/MI_StylizedEnv_Grass.MI_StylizedEnv_Grass"
+    ]
+  },
+  {
+    "label": "AB_Bush_4",
+    "class": "StaticMeshActor",
+    "folder": "ArtBlockout/Foliage",
+    "loc": [
+      760.0,
+      -850.0,
+      45.0
+    ],
+    "scale": [
+      0.55,
+      0.55,
+      0.4
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Sphere.Sphere"
+    ],
+    "materials": [
+      "/Game/Materials/Stylized/Instances/MI_StylizedEnv_Grass.MI_StylizedEnv_Grass"
+    ]
+  },
+  {
+    "label": "NPR_SkySphere",
+    "class": "StaticMeshActor",
+    "folder": "Level/Lighting/NPR",
+    "loc": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1200.0,
+      1200.0,
+      1200.0
+    ],
+    "meshes": [
+      "/Engine/BasicShapes/Sphere.Sphere"
+    ],
+    "materials": [
+      "/Game/Materials/NPR/M_NPR_SkyBlue.M_NPR_SkyBlue"
+    ]
+  }
+]

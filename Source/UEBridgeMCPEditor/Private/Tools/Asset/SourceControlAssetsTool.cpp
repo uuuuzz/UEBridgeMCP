@@ -135,6 +135,8 @@ TMap<FString, FMcpSchemaProperty> USourceControlAssetsTool::GetInputSchema() con
 	ActionsSchema.bRequired = true;
 	ActionsSchema.Items = ActionItemSchema;
 	Schema.Add(TEXT("actions"), ActionsSchema);
+	Schema.Add(TEXT("dry_run"), FMcpSchemaProperty::Make(TEXT("boolean"), TEXT("Validate source control actions without executing provider operations")));
+	Schema.Add(TEXT("confirm_write"), FMcpSchemaProperty::Make(TEXT("boolean"), TEXT("Required for non-dry-run revert, submit, and sync actions")));
 
 	return Schema;
 }
@@ -146,20 +148,52 @@ TArray<FString> USourceControlAssetsTool::GetRequiredParams() const
 
 FMcpToolResult USourceControlAssetsTool::Execute(const TSharedPtr<FJsonObject>& Arguments, const FMcpToolContext& Context)
 {
-	ISourceControlModule& SourceControlModule = ISourceControlModule::Get();
-	if (!SourceControlModule.IsEnabled() || !SourceControlModule.GetProvider().IsAvailable())
-	{
-		return FMcpToolResult::StructuredError(
-			TEXT("UEBMCP_SOURCE_CONTROL_PROVIDER_UNAVAILABLE"),
-			TEXT("Source control provider is not available or not enabled"));
-	}
-
-	ISourceControlProvider& Provider = SourceControlModule.GetProvider();
+	(void)Context;
+	const bool bDryRun = GetBoolArgOrDefault(Arguments, TEXT("dry_run"), false);
+	const bool bConfirmWrite = GetBoolArgOrDefault(Arguments, TEXT("confirm_write"), false);
 
 	const TArray<TSharedPtr<FJsonValue>>* ActionsArray = nullptr;
 	if (!Arguments->TryGetArrayField(TEXT("actions"), ActionsArray) || !ActionsArray || ActionsArray->Num() == 0)
 	{
 		return FMcpToolResult::StructuredError(TEXT("UEBMCP_MISSING_REQUIRED_FIELD"), TEXT("'actions' array is required"));
+	}
+
+	bool bHasConfirmRequiredAction = false;
+	for (const TSharedPtr<FJsonValue>& ActionValue : *ActionsArray)
+	{
+		const TSharedPtr<FJsonObject>* ActionObject = nullptr;
+		if (!ActionValue.IsValid() || !ActionValue->TryGetObject(ActionObject) || !(*ActionObject).IsValid())
+		{
+			continue;
+		}
+
+		FString ActionName;
+		(*ActionObject)->TryGetStringField(TEXT("action"), ActionName);
+		if (ActionName == TEXT("revert") || ActionName == TEXT("submit") || ActionName == TEXT("sync"))
+		{
+			bHasConfirmRequiredAction = true;
+			break;
+		}
+	}
+
+	if (!bDryRun && bHasConfirmRequiredAction && !bConfirmWrite)
+	{
+		return FMcpToolResult::StructuredError(
+			TEXT("UEBMCP_CONFIRMATION_REQUIRED"),
+			TEXT("source-control-assets requires confirm_write=true for non-dry-run revert, submit, and sync actions"));
+	}
+
+	ISourceControlModule& SourceControlModule = ISourceControlModule::Get();
+	ISourceControlProvider* Provider = nullptr;
+	if (!bDryRun)
+	{
+		if (!SourceControlModule.IsEnabled() || !SourceControlModule.GetProvider().IsAvailable())
+		{
+			return FMcpToolResult::StructuredError(
+				TEXT("UEBMCP_SOURCE_CONTROL_PROVIDER_UNAVAILABLE"),
+				TEXT("Source control provider is not available or not enabled"));
+		}
+		Provider = &SourceControlModule.GetProvider();
 	}
 
 	TArray<TSharedPtr<FJsonValue>> ResultsArray;
@@ -220,8 +254,30 @@ FMcpToolResult USourceControlAssetsTool::Execute(const TSharedPtr<FJsonObject>& 
 
 		bool bActionSuccess = false;
 		FString ActionError;
+		const bool bKnownAction = ActionName == TEXT("status")
+			|| ActionName == TEXT("checkout")
+			|| ActionName == TEXT("revert")
+			|| ActionName == TEXT("submit")
+			|| ActionName == TEXT("sync");
+		const bool bRequiresConfirmation = ActionName == TEXT("revert")
+			|| ActionName == TEXT("submit")
+			|| ActionName == TEXT("sync");
 
-		if (ActionName == TEXT("status"))
+		if (!bKnownAction)
+		{
+			ActionError = FString::Printf(TEXT("Unsupported action: '%s'"), *ActionName);
+		}
+		else if (bDryRun)
+		{
+			ResultObject->SetBoolField(TEXT("dry_run"), true);
+			ResultObject->SetBoolField(TEXT("would_execute"), ActionName != TEXT("status"));
+			bActionSuccess = true;
+		}
+		else if (bRequiresConfirmation && !bConfirmWrite)
+		{
+			ActionError = TEXT("confirm_write=true is required for non-dry-run revert, submit, and sync actions");
+		}
+		else if (ActionName == TEXT("status"))
 		{
 			TArray<TSharedPtr<FJsonValue>> StatusArray;
 			for (int32 PathIndex = 0; PathIndex < FilePaths.Num(); ++PathIndex)
@@ -229,7 +285,7 @@ FMcpToolResult USourceControlAssetsTool::Execute(const TSharedPtr<FJsonObject>& 
 				const FString& FilePath = FilePaths[PathIndex];
 				const FString& AssetPath = AssetPaths[PathIndex];
 				const FString& PackageName = PackageNames[PathIndex];
-				FSourceControlStatePtr State = Provider.GetState(FilePath, EStateCacheUsage::ForceUpdate);
+				FSourceControlStatePtr State = Provider->GetState(FilePath, EStateCacheUsage::ForceUpdate);
 
 				TSharedPtr<FJsonObject> StatusObject = MakeShareable(new FJsonObject);
 				StatusObject->SetStringField(TEXT("asset_path"), AssetPath);
@@ -269,20 +325,20 @@ FMcpToolResult USourceControlAssetsTool::Execute(const TSharedPtr<FJsonObject>& 
 		}
 		else if (ActionName == TEXT("checkout"))
 		{
-			const ECommandResult::Type CommandResult = Provider.Execute(ISourceControlOperation::Create<FCheckOut>(), FilePaths);
+			const ECommandResult::Type CommandResult = Provider->Execute(ISourceControlOperation::Create<FCheckOut>(), FilePaths);
 			bActionSuccess = CommandResult == ECommandResult::Succeeded;
 			if (!bActionSuccess)
 			{
-				ActionError = SourceControlAssetsToolPrivate::GetProviderStatusText(Provider);
+				ActionError = SourceControlAssetsToolPrivate::GetProviderStatusText(*Provider);
 			}
 		}
 		else if (ActionName == TEXT("revert"))
 		{
-			const ECommandResult::Type CommandResult = Provider.Execute(ISourceControlOperation::Create<FRevert>(), FilePaths);
+			const ECommandResult::Type CommandResult = Provider->Execute(ISourceControlOperation::Create<FRevert>(), FilePaths);
 			bActionSuccess = CommandResult == ECommandResult::Succeeded;
 			if (!bActionSuccess)
 			{
-				ActionError = SourceControlAssetsToolPrivate::GetProviderStatusText(Provider);
+				ActionError = SourceControlAssetsToolPrivate::GetProviderStatusText(*Provider);
 			}
 		}
 		else if (ActionName == TEXT("submit"))
@@ -299,7 +355,7 @@ FMcpToolResult USourceControlAssetsTool::Execute(const TSharedPtr<FJsonObject>& 
 				CheckInOperation->SetDescription(FText::FromString(Description));
 				CheckInOperation->SetKeepCheckedOut(bKeepCheckedOut);
 
-				const ECommandResult::Type CommandResult = Provider.Execute(CheckInOperation, FilePaths);
+				const ECommandResult::Type CommandResult = Provider->Execute(CheckInOperation, FilePaths);
 				bActionSuccess = CommandResult == ECommandResult::Succeeded;
 				if (bActionSuccess)
 				{
@@ -312,7 +368,7 @@ FMcpToolResult USourceControlAssetsTool::Execute(const TSharedPtr<FJsonObject>& 
 				}
 				else
 				{
-					ActionError = SourceControlAssetsToolPrivate::GetProviderStatusText(Provider);
+					ActionError = SourceControlAssetsToolPrivate::GetProviderStatusText(*Provider);
 				}
 			}
 		}
@@ -338,16 +394,12 @@ FMcpToolResult USourceControlAssetsTool::Execute(const TSharedPtr<FJsonObject>& 
 				SyncOperation->SetLastSyncedFlag(true);
 			}
 
-			const ECommandResult::Type CommandResult = Provider.Execute(SyncOperation, FilePaths);
+			const ECommandResult::Type CommandResult = Provider->Execute(SyncOperation, FilePaths);
 			bActionSuccess = CommandResult == ECommandResult::Succeeded;
 			if (!bActionSuccess)
 			{
-				ActionError = SourceControlAssetsToolPrivate::GetProviderStatusText(Provider);
+				ActionError = SourceControlAssetsToolPrivate::GetProviderStatusText(*Provider);
 			}
-		}
-		else
-		{
-			ActionError = FString::Printf(TEXT("Unsupported action: '%s'"), *ActionName);
 		}
 
 		ResultObject->SetBoolField(TEXT("success"), bActionSuccess);

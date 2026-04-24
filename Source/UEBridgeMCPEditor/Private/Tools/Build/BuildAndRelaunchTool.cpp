@@ -27,6 +27,9 @@ TMap<FString, FMcpSchemaProperty> UBuildAndRelaunchTool::GetInputSchema() const
 	SkipRelaunch.bRequired = false;
 	Schema.Add(TEXT("skip_relaunch"), SkipRelaunch);
 
+	Schema.Add(TEXT("dry_run"), FMcpSchemaProperty::Make(TEXT("boolean"), TEXT("Validate paths and report the planned build/relaunch without closing the editor")));
+	Schema.Add(TEXT("confirm_shutdown"), FMcpSchemaProperty::Make(TEXT("boolean"), TEXT("Required for non-dry-run execution because this closes the connected editor instance")));
+
 	return Schema;
 }
 
@@ -34,9 +37,12 @@ FMcpToolResult UBuildAndRelaunchTool::Execute(
 	const TSharedPtr<FJsonObject>& Arguments,
 	const FMcpToolContext& Context)
 {
+	(void)Context;
 #if PLATFORM_WINDOWS
 	FString BuildConfig = GetStringArgOrDefault(Arguments, TEXT("build_config"), TEXT("Development"));
 	bool bSkipRelaunch = GetBoolArgOrDefault(Arguments, TEXT("skip_relaunch"), false);
+	bool bDryRun = GetBoolArgOrDefault(Arguments, TEXT("dry_run"), false);
+	bool bConfirmShutdown = GetBoolArgOrDefault(Arguments, TEXT("confirm_shutdown"), false);
 
 	// Validate build configuration
 	if (BuildConfig != TEXT("Development") && BuildConfig != TEXT("Debug") && BuildConfig != TEXT("Shipping"))
@@ -70,6 +76,33 @@ FMcpToolResult UBuildAndRelaunchTool::Execute(
 	if (!bSkipRelaunch && !FPaths::FileExists(EditorExecutable))
 	{
 		return FMcpToolResult::Error(FString::Printf(TEXT("Editor executable not found: %s"), *EditorExecutable));
+	}
+
+	TSharedPtr<FJsonObject> Plan = MakeShareable(new FJsonObject);
+	Plan->SetStringField(TEXT("tool"), GetToolName());
+	Plan->SetBoolField(TEXT("dry_run"), bDryRun);
+	Plan->SetStringField(TEXT("project"), *ProjectName);
+	Plan->SetStringField(TEXT("project_path"), ProjectPath);
+	Plan->SetStringField(TEXT("build_config"), *BuildConfig);
+	Plan->SetBoolField(TEXT("will_relaunch"), !bSkipRelaunch);
+	Plan->SetBoolField(TEXT("will_shutdown_editor"), !bDryRun);
+	Plan->SetBoolField(TEXT("would_shutdown_editor"), true);
+	Plan->SetStringField(TEXT("build_script"), BuildBatchFile);
+	Plan->SetStringField(TEXT("editor_executable"), EditorExecutable);
+
+	if (bDryRun)
+	{
+		Plan->SetBoolField(TEXT("success"), true);
+		Plan->SetBoolField(TEXT("would_execute"), true);
+		return FMcpToolResult::StructuredJson(Plan);
+	}
+
+	if (!bConfirmShutdown)
+	{
+		return FMcpToolResult::StructuredError(
+			TEXT("UEBMCP_CONFIRMATION_REQUIRED"),
+			TEXT("build-and-relaunch requires confirm_shutdown=true because it closes the MCP-connected editor instance"),
+			Plan);
 	}
 
 	// Create a batch script to handle the workflow

@@ -12,6 +12,8 @@
 class UEBRIDGEMCP_API FMcpToolRegistry
 {
 public:
+	using FAliasArgumentAdapter = TFunction<TSharedPtr<FJsonObject>(const TSharedPtr<FJsonObject>& Arguments)>;
+
 	/** Get singleton instance */
 	static FMcpToolRegistry& Get();
 
@@ -33,8 +35,17 @@ public:
 	/** Register tool class by UClass */
 	void RegisterToolClass(UClass* ToolClass);
 
+	/** Register a compatibility alias that resolves to an existing canonical tool name */
+	void RegisterToolAlias(const FString& AliasName, const FString& TargetToolName);
+
+	/** Register an optional argument adapter for a compatibility alias */
+	void RegisterToolAliasArgumentAdapter(const FString& AliasName, FAliasArgumentAdapter Adapter);
+
 	/** Unregister a tool by name */
 	void UnregisterTool(const FString& ToolName);
+
+	/** Unregister a compatibility alias by name */
+	void UnregisterToolAlias(const FString& AliasName);
 
 	/** Clear all registered tools */
 	void ClearAllTools();
@@ -44,6 +55,12 @@ public:
 
 	/** Get all tool names */
 	TArray<FString> GetAllToolNames() const;
+
+	/** Get alias -> canonical tool mappings */
+	TMap<FString, FString> GetToolAliases() const;
+
+	/** Resolve a tool name through the compatibility alias map */
+	FString ResolveToolName(const FString& ToolName) const;
 
 	/** Find tool by name */
 	UMcpToolBase* FindTool(const FString& ToolName);
@@ -82,14 +99,23 @@ private:
 	/** Tool class registry */
 	TMap<FString, UClass*> ToolClasses;
 
+	/** Compatibility aliases. Alias name -> canonical tool name. */
+	TMap<FString, FString> ToolAliases;
+
+	/** Optional argument adapters for compatibility aliases. Alias name -> adapted arguments. */
+	TMap<FString, FAliasArgumentAdapter> ToolAliasArgumentAdapters;
+
 	/** Instantiated tool objects (lazy initialization) */
-	TMap<FString, TObjectPtr<UMcpToolBase>> ToolInstances;
+	TMap<FString, TWeakObjectPtr<UMcpToolBase>> ToolInstances;
 
 	/** Lock for thread-safe access */
 	mutable FCriticalSection Lock;
 
 	/** Create tool instance from class */
 	UMcpToolBase* CreateToolInstance(UClass* ToolClass);
+
+	/** Resolve aliases without locking. Caller must hold Lock. */
+	FString ResolveToolNameNoLock(const FString& ToolName) const;
 
 	/** Singleton instance */
 	static FMcpToolRegistry* Instance;

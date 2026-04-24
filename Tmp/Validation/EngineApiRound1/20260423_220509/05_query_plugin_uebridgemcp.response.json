@@ -1,0 +1,86 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "query_plugin_uebridgemcp",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Plugin capabilities ready"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "query":  "UEBridgeMCP",
+                                             "plugins":  [
+                                                             {
+                                                                 "kind":  "plugin",
+                                                                 "name":  "UEBridgeMCP",
+                                                                 "friendly_name":  "UE Bridge MCP",
+                                                                 "description":  "Native C++ Model Context Protocol (MCP) server for Unreal Engine 5.6+. Enables AI assistants to interact with UE Editor via HTTP.",
+                                                                 "category":  "Editor",
+                                                                 "version_name":  "1.19.0",
+                                                                 "version":  1,
+                                                                 "created_by":  "uuuuzz",
+                                                                 "type":  "Project",
+                                                                 "loaded_from":  "Project",
+                                                                 "enabled":  true,
+                                                                 "mounted":  true,
+                                                                 "hidden":  false,
+                                                                 "can_contain_content":  false,
+                                                                 "can_contain_verse":  false,
+                                                                 "installed":  false,
+                                                                 "score":  100,
+                                                                 "modules":  [
+                                                                                 {
+                                                                                     "name":  "UEBridgeMCP",
+                                                                                     "type":  "Editor",
+                                                                                     "loading_phase":  "Default",
+                                                                                     "loaded":  true
+                                                                                 },
+                                                                                 {
+                                                                                     "name":  "UEBridgeMCPEditor",
+                                                                                     "type":  "Editor",
+                                                                                     "loading_phase":  "PostEngineInit",
+                                                                                     "loaded":  true
+                                                                                 },
+                                                                                 {
+                                                                                     "name":  "UEBridgeMCPControlRig",
+                                                                                     "type":  "Editor",
+                                                                                     "loading_phase":  "PostEngineInit",
+                                                                                     "loaded":  true
+                                                                                 },
+                                                                                 {
+                                                                                     "name":  "UEBridgeMCPPCG",
+                                                                                     "type":  "Editor",
+                                                                                     "loading_phase":  "PostEngineInit",
+                                                                                     "loaded":  true
+                                                                                 },
+                                                                                 {
+                                                                                     "name":  "UEBridgeMCPExternalAI",
+                                                                                     "type":  "Editor",
+                                                                                     "loading_phase":  "PostEngineInit",
+                                                                                     "loaded":  true
+                                                                                 }
+                                                                             ],
+                                                                 "module_count":  5
+                                                             }
+                                                         ],
+                                             "count":  1,
+                                             "total_matches":  1,
+                                             "plugins_scanned":  780,
+                                             "enabled_only":  false,
+                                             "truncated":  false
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  0.074300012784078717
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "query-plugin-capabilities",
+                                               "mutates":  false,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  1
+                                           }
+                             }
+               }
+}

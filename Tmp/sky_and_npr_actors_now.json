@@ -1,0 +1,882 @@
+[
+  {
+    "label": "SkyLight",
+    "class": "SkyLight",
+    "loc": [
+      0.0,
+      0.0,
+      300.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "mats": []
+  },
+  {
+    "label": "SkyAtmosphere",
+    "class": "SkyAtmosphere",
+    "loc": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "mats": []
+  },
+  {
+    "label": "SM_TestSphere",
+    "class": "StaticMeshActor",
+    "loc": [
+      0.0,
+      0.0,
+      200.0
+    ],
+    "scale": [
+      2.0,
+      2.0,
+      2.0
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Prop_Player_Lilac.MI_NPR_Prop_Player_Lilac"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_A_1",
+    "class": "StaticMeshActor",
+    "loc": [
+      1247.5,
+      -650.0,
+      180.0
+    ],
+    "scale": [
+      0.035,
+      1.82,
+      0.055
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_A_1_Hi",
+    "class": "StaticMeshActor",
+    "loc": [
+      1246.7,
+      -702.5,
+      190.0
+    ],
+    "scale": [
+      0.02,
+      0.2184,
+      0.01925
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Highlight.MI_NPR_Window_Highlight"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_A_2",
+    "class": "StaticMeshActor",
+    "loc": [
+      1247.5,
+      -650.0,
+      360.0
+    ],
+    "scale": [
+      0.035,
+      1.82,
+      0.055
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_B_1",
+    "class": "StaticMeshActor",
+    "loc": [
+      1337.5,
+      -150.0,
+      177.5
+    ],
+    "scale": [
+      0.035,
+      2.08,
+      0.055
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_B_1_Hi",
+    "class": "StaticMeshActor",
+    "loc": [
+      1336.7,
+      -210.0,
+      187.5
+    ],
+    "scale": [
+      0.02,
+      0.2496,
+      0.01925
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Highlight.MI_NPR_Window_Highlight"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_B_2",
+    "class": "StaticMeshActor",
+    "loc": [
+      1337.5,
+      -150.0,
+      352.5
+    ],
+    "scale": [
+      0.035,
+      2.08,
+      0.055
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_B_3",
+    "class": "StaticMeshActor",
+    "loc": [
+      1337.5,
+      -150.0,
+      527.5
+    ],
+    "scale": [
+      0.035,
+      2.08,
+      0.055
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_B_3_Hi",
+    "class": "StaticMeshActor",
+    "loc": [
+      1336.7,
+      -210.0,
+      537.5
+    ],
+    "scale": [
+      0.02,
+      0.2496,
+      0.01925
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Highlight.MI_NPR_Window_Highlight"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_B_4",
+    "class": "StaticMeshActor",
+    "loc": [
+      1337.5,
+      -150.0,
+      702.5
+    ],
+    "scale": [
+      0.035,
+      2.08,
+      0.055
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_C_1",
+    "class": "StaticMeshActor",
+    "loc": [
+      1307.5,
+      380.0,
+      170.0
+    ],
+    "scale": [
+      0.035,
+      1.976,
+      0.055
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_C_1_Hi",
+    "class": "StaticMeshActor",
+    "loc": [
+      1306.7,
+      323.0,
+      180.0
+    ],
+    "scale": [
+      0.02,
+      0.23712,
+      0.01925
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Highlight.MI_NPR_Window_Highlight"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_C_2",
+    "class": "StaticMeshActor",
+    "loc": [
+      1307.5,
+      380.0,
+      330.0
+    ],
+    "scale": [
+      0.035,
+      1.976,
+      0.055
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_C_3",
+    "class": "StaticMeshActor",
+    "loc": [
+      1307.5,
+      380.0,
+      490.0
+    ],
+    "scale": [
+      0.035,
+      1.976,
+      0.055
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_C_3_Hi",
+    "class": "StaticMeshActor",
+    "loc": [
+      1306.7,
+      323.0,
+      500.0
+    ],
+    "scale": [
+      0.02,
+      0.23712,
+      0.01925
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Highlight.MI_NPR_Window_Highlight"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_D_1",
+    "class": "StaticMeshActor",
+    "loc": [
+      1392.5,
+      850.0,
+      178.0
+    ],
+    "scale": [
+      0.035,
+      1.82,
+      0.055
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_D_1_Hi",
+    "class": "StaticMeshActor",
+    "loc": [
+      1391.7,
+      797.5,
+      188.0
+    ],
+    "scale": [
+      0.02,
+      0.2184,
+      0.01925
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Highlight.MI_NPR_Window_Highlight"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_D_2",
+    "class": "StaticMeshActor",
+    "loc": [
+      1392.5,
+      850.0,
+      354.0
+    ],
+    "scale": [
+      0.035,
+      1.82,
+      0.055
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_D_3",
+    "class": "StaticMeshActor",
+    "loc": [
+      1392.5,
+      850.0,
+      530.0
+    ],
+    "scale": [
+      0.035,
+      1.82,
+      0.055
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_D_3_Hi",
+    "class": "StaticMeshActor",
+    "loc": [
+      1391.7,
+      797.5,
+      540.0
+    ],
+    "scale": [
+      0.02,
+      0.2184,
+      0.01925
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Highlight.MI_NPR_Window_Highlight"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_D_4",
+    "class": "StaticMeshActor",
+    "loc": [
+      1392.5,
+      850.0,
+      706.0
+    ],
+    "scale": [
+      0.035,
+      1.82,
+      0.055
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_D_5",
+    "class": "StaticMeshActor",
+    "loc": [
+      1392.5,
+      850.0,
+      882.0
+    ],
+    "scale": [
+      0.035,
+      1.82,
+      0.055
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_D_5_Hi",
+    "class": "StaticMeshActor",
+    "loc": [
+      1391.7,
+      797.5,
+      892.0
+    ],
+    "scale": [
+      0.02,
+      0.2184,
+      0.01925
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Highlight.MI_NPR_Window_Highlight"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_E_1",
+    "class": "StaticMeshActor",
+    "loc": [
+      1637.5,
+      80.0,
+      193.33333333333331
+    ],
+    "scale": [
+      0.035,
+      1.248,
+      0.055
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_E_1_Hi",
+    "class": "StaticMeshActor",
+    "loc": [
+      1636.7,
+      44.0,
+      203.33333333333331
+    ],
+    "scale": [
+      0.02,
+      0.14976,
+      0.01925
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Highlight.MI_NPR_Window_Highlight"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_E_2",
+    "class": "StaticMeshActor",
+    "loc": [
+      1637.5,
+      80.0,
+      400.0
+    ],
+    "scale": [
+      0.035,
+      1.248,
+      0.055
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_E_3",
+    "class": "StaticMeshActor",
+    "loc": [
+      1637.5,
+      80.0,
+      606.6666666666666
+    ],
+    "scale": [
+      0.035,
+      1.248,
+      0.055
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_E_3_Hi",
+    "class": "StaticMeshActor",
+    "loc": [
+      1636.7,
+      44.0,
+      616.6666666666666
+    ],
+    "scale": [
+      0.02,
+      0.14976,
+      0.01925
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Highlight.MI_NPR_Window_Highlight"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_E_4",
+    "class": "StaticMeshActor",
+    "loc": [
+      1637.5,
+      80.0,
+      813.3333333333334
+    ],
+    "scale": [
+      0.035,
+      1.248,
+      0.055
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_E_5",
+    "class": "StaticMeshActor",
+    "loc": [
+      1637.5,
+      80.0,
+      1020.0
+    ],
+    "scale": [
+      0.035,
+      1.248,
+      0.055
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_E_5_Hi",
+    "class": "StaticMeshActor",
+    "loc": [
+      1636.7,
+      44.0,
+      1030.0
+    ],
+    "scale": [
+      0.02,
+      0.14976,
+      0.01925
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Highlight.MI_NPR_Window_Highlight"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_E_6",
+    "class": "StaticMeshActor",
+    "loc": [
+      1637.5,
+      80.0,
+      1226.6666666666667
+    ],
+    "scale": [
+      0.035,
+      1.248,
+      0.055
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Left_1",
+    "class": "StaticMeshActor",
+    "loc": [
+      -650.0,
+      -1070.0,
+      118.0
+    ],
+    "scale": [
+      0.025,
+      0.018,
+      0.95
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Left_2",
+    "class": "StaticMeshActor",
+    "loc": [
+      -300.0,
+      -1070.0,
+      118.0
+    ],
+    "scale": [
+      0.025,
+      0.018,
+      0.95
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Left_3",
+    "class": "StaticMeshActor",
+    "loc": [
+      50.0,
+      -1070.0,
+      118.0
+    ],
+    "scale": [
+      0.025,
+      0.018,
+      0.95
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Left_4",
+    "class": "StaticMeshActor",
+    "loc": [
+      400.0,
+      -1070.0,
+      118.0
+    ],
+    "scale": [
+      0.025,
+      0.018,
+      0.95
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Left_5",
+    "class": "StaticMeshActor",
+    "loc": [
+      750.0,
+      -1070.0,
+      118.0
+    ],
+    "scale": [
+      0.025,
+      0.018,
+      0.95
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Left_Top",
+    "class": "StaticMeshActor",
+    "loc": [
+      50.0,
+      -1070.0,
+      168.0
+    ],
+    "scale": [
+      21.119999999999997,
+      0.018,
+      0.025
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Right_1",
+    "class": "StaticMeshActor",
+    "loc": [
+      -550.0,
+      1070.0,
+      118.0
+    ],
+    "scale": [
+      0.025,
+      0.018,
+      0.95
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Right_2",
+    "class": "StaticMeshActor",
+    "loc": [
+      -200.0,
+      1070.0,
+      118.0
+    ],
+    "scale": [
+      0.025,
+      0.018,
+      0.95
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Right_3",
+    "class": "StaticMeshActor",
+    "loc": [
+      150.0,
+      1070.0,
+      118.0
+    ],
+    "scale": [
+      0.025,
+      0.018,
+      0.95
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Right_4",
+    "class": "StaticMeshActor",
+    "loc": [
+      500.0,
+      1070.0,
+      118.0
+    ],
+    "scale": [
+      0.025,
+      0.018,
+      0.95
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Right_5",
+    "class": "StaticMeshActor",
+    "loc": [
+      850.0,
+      1070.0,
+      118.0
+    ],
+    "scale": [
+      0.025,
+      0.018,
+      0.95
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Right_Top",
+    "class": "StaticMeshActor",
+    "loc": [
+      150.0,
+      1070.0,
+      168.0
+    ],
+    "scale": [
+      20.16,
+      0.018,
+      0.025
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Back_1",
+    "class": "StaticMeshActor",
+    "loc": [
+      920.0,
+      -800.0,
+      118.0
+    ],
+    "scale": [
+      0.018,
+      0.025,
+      0.95
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Back_2",
+    "class": "StaticMeshActor",
+    "loc": [
+      920.0,
+      -400.0,
+      118.0
+    ],
+    "scale": [
+      0.018,
+      0.025,
+      0.95
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Back_3",
+    "class": "StaticMeshActor",
+    "loc": [
+      920.0,
+      0.0,
+      118.0
+    ],
+    "scale": [
+      0.018,
+      0.025,
+      0.95
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Back_4",
+    "class": "StaticMeshActor",
+    "loc": [
+      920.0,
+      400.0,
+      118.0
+    ],
+    "scale": [
+      0.018,
+      0.025,
+      0.95
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Back_5",
+    "class": "StaticMeshActor",
+    "loc": [
+      920.0,
+      800.0,
+      118.0
+    ],
+    "scale": [
+      0.018,
+      0.025,
+      0.95
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Back_Top",
+    "class": "StaticMeshActor",
+    "loc": [
+      920.0,
+      0.0,
+      168.0
+    ],
+    "scale": [
+      0.018,
+      23.04,
+      0.025
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  }
+]

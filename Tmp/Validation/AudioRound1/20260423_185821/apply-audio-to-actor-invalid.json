@@ -1,0 +1,34 @@
+﻿{
+	"jsonrpc": "2.0",
+	"id": "apply-audio-to-actor-invalid",
+	"result":
+	{
+		"content": [
+			{
+				"type": "text",
+				"text": "[UEBMCP_ASSET_NOT_FOUND] Failed to load asset: /Game/UEBridgeMCPValidation/AudioRound1/MissingCue.MissingCue"
+			}
+		],
+		"structuredContent":
+		{
+			"code": "UEBMCP_ASSET_NOT_FOUND",
+			"message": "Failed to load asset: /Game/UEBridgeMCPValidation/AudioRound1/MissingCue.MissingCue"
+		},
+		"isError": true,
+		"_meta":
+		{
+			"timing":
+			{
+				"duration_ms": 0.8375000033993274
+			},
+			"stats":
+			{
+				"tool_name": "apply-audio-to-actor",
+				"mutates": true,
+				"supports_batch": false,
+				"requires_game_thread": true,
+				"content_items": 1
+			}
+		}
+	}
+}

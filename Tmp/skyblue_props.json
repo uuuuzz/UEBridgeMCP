@@ -1,0 +1,5 @@
+{
+  "shading_model": "<MaterialShadingModel.MSM_UNLIT: 0>",
+  "two_sided": "True",
+  "material_domain": "<MaterialDomain.MD_SURFACE: 0>"
+}

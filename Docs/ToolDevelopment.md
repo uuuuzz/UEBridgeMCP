@@ -188,6 +188,12 @@ For complex nested schemas (see `EditBlueprintGraphTool.cpp`), you can also hand
 
 9. **Epic C++ style.** PascalCase, `U/A/F/T/E/S/I` prefixes, `TEXT()` for every string literal, `nullptr`, tab indentation, brace-on-new-line. Headers in `Public/` must be self-contained.
 
+10. **Batch-first writes.** New write tools should prefer `operations[]` or `actions[]` envelopes over spawning many one-off `add-*` variants. Support `dry_run` by default; when a workflow spans multiple mutations, also expose `save` and `rollback_on_error`.
+
+11. **Source of truth.** Tool inventory, grouping, and counts come from `RegisterBuiltInTools()` plus the live editor's `tools/list`. README files and summary docs are supplementary and may lag behind the code.
+
+12. **Closed-source benchmark hygiene.** When benchmarking against a third-party or closed-source plugin, only borrow capability goals and black-box behavior. Do not reproduce code, schema prose, prompt text, error wording, screenshots, or marketing copy. Add a provenance note using [Provenance Template](./ProvenanceTemplate.md).
+
 ---
 
 ## Where to put the files
@@ -198,7 +204,7 @@ Source/UEBridgeMCPEditor/
   Private/Tools/<Category>/<ToolName>Tool.cpp
 ```
 
-Existing categories: `Analysis`, `Asset`, `Blueprint`, `Build`, `Debug`, `Level`, `Material`, `PIE`, `Project`, `References`, `Scripting`, `StateTree`, `Widget`, `Write`. Add a new one if your tool doesn't fit.
+Existing categories: `Analysis`, `Asset`, `Blueprint`, `Build`, `Debug`, `Environment`, `Level`, `Material`, `PIE`, `Project`, `References`, `Scripting`, `StateTree`, `StaticMesh`, `Widget`, `Write`. Add a new one if your tool doesn't fit.
 
 ---
 
@@ -244,7 +250,9 @@ curl -s -X POST http://127.0.0.1:8080/mcp \
 - [ ] Required args validated; errors start with `UEBMCP_`.
 - [ ] Mutations wrapped in `FScopedTransaction`.
 - [ ] No blocking waits on game-thread async ops.
+- [ ] New write APIs prefer `operations[]` / `actions[]`; support `dry_run`; add `save` / `rollback_on_error` when the change spans multiple mutations.
 - [ ] Added to `Tools-Reference.md` **and** `Tools-Reference.zh-CN.md`.
+- [ ] If the work benchmarks a closed-source plugin or product, a provenance note was added using `ProvenanceTemplate`.
 - [ ] Automated coverage added when a harness exists, otherwise manual validation steps documented.
 - [ ] `VersionName` in `UEBridgeMCP.uplugin` + `UEBRIDGEMCP_VERSION` in `UEBridgeMCP.h` bumped per semver (see [README](../README.md#versioning)).
 
@@ -253,5 +261,7 @@ curl -s -X POST http://127.0.0.1:8080/mcp \
 See also:
 
 - [Architecture](./Architecture.md) ? how the server, registry, and session manager fit together.
-- [Tools Reference](./Tools-Reference.md) ? the 46 built-in tools.
+- [Tools Reference](./Tools-Reference.md) ? the live base and conditional tool surface.
+- [Capability Matrix](./CapabilityMatrix.md) ? the authoritative gap tracker by capability family.
+- [Provenance Template](./ProvenanceTemplate.md) ? the required note format for benchmark-inspired work.
 - [Troubleshooting](./Troubleshooting.md) ? known pitfalls already fixed, do not regress.

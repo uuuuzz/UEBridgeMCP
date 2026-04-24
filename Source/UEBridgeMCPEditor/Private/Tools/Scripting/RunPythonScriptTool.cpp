@@ -43,6 +43,9 @@ TMap<FString, FMcpSchemaProperty> URunPythonScriptTool::GetInputSchema() const
 	Arguments.bRequired = false;
 	Schema.Add(TEXT("arguments"), Arguments);
 
+	Schema.Add(TEXT("dry_run"), FMcpSchemaProperty::Make(TEXT("boolean"), TEXT("Validate the request and report what would run without executing Python")));
+	Schema.Add(TEXT("confirm_execution"), FMcpSchemaProperty::Make(TEXT("boolean"), TEXT("Required for non-dry-run execution because Python can mutate editor state")));
+
 	return Schema;
 }
 
@@ -50,6 +53,65 @@ FMcpToolResult URunPythonScriptTool::Execute(
 	const TSharedPtr<FJsonObject>& Arguments,
 	const FMcpToolContext& Context)
 {
+	(void)Context;
+	const bool bDryRun = GetBoolArgOrDefault(Arguments, TEXT("dry_run"), false);
+	const bool bConfirmExecution = GetBoolArgOrDefault(Arguments, TEXT("confirm_execution"), false);
+
+	FString Script = GetStringArgOrDefault(Arguments, TEXT("script"));
+	FString ScriptPath = GetStringArgOrDefault(Arguments, TEXT("script_path"));
+
+	if (Script.IsEmpty() && ScriptPath.IsEmpty())
+	{
+		return FMcpToolResult::Error(TEXT("Either 'script' or 'script_path' must be provided"));
+	}
+
+	if (!Script.IsEmpty() && !ScriptPath.IsEmpty())
+	{
+		return FMcpToolResult::Error(TEXT("Cannot specify both 'script' and 'script_path'. Use only one."));
+	}
+
+	TArray<FString> PythonPaths;
+	if (Arguments->HasField(TEXT("python_paths")))
+	{
+		const TArray<TSharedPtr<FJsonValue>>* PathsArray;
+		if (Arguments->TryGetArrayField(TEXT("python_paths"), PathsArray))
+		{
+			for (const TSharedPtr<FJsonValue>& PathValue : *PathsArray)
+			{
+				FString PathStr = PathValue->AsString();
+				if (!PathStr.IsEmpty())
+				{
+					PythonPaths.Add(PathStr);
+				}
+			}
+		}
+	}
+
+	TSharedPtr<FJsonObject> ExecutionPlan = MakeShareable(new FJsonObject);
+	ExecutionPlan->SetStringField(TEXT("tool"), GetToolName());
+	ExecutionPlan->SetBoolField(TEXT("dry_run"), bDryRun);
+	ExecutionPlan->SetBoolField(TEXT("has_inline_script"), !Script.IsEmpty());
+	if (!ScriptPath.IsEmpty())
+	{
+		ExecutionPlan->SetStringField(TEXT("script_path"), ScriptPath);
+	}
+	ExecutionPlan->SetNumberField(TEXT("python_paths_count"), PythonPaths.Num());
+
+	if (bDryRun)
+	{
+		ExecutionPlan->SetBoolField(TEXT("success"), true);
+		ExecutionPlan->SetBoolField(TEXT("would_execute"), true);
+		return FMcpToolResult::StructuredJson(ExecutionPlan);
+	}
+
+	if (!bConfirmExecution)
+	{
+		return FMcpToolResult::StructuredError(
+			TEXT("UEBMCP_CONFIRMATION_REQUIRED"),
+			TEXT("run-python-script requires confirm_execution=true because Python can mutate editor state"),
+			ExecutionPlan);
+	}
+
 	// Check if PythonScriptPlugin is available
 	if (!FModuleManager::Get().IsModuleLoaded("PythonScriptPlugin"))
 	{
@@ -69,20 +131,6 @@ FMcpToolResult URunPythonScriptTool::Execute(
 	if (!PythonPlugin)
 	{
 		return FMcpToolResult::Error(TEXT("Failed to get PythonScriptPlugin interface"));
-	}
-
-	// Get script or script_path (mutually exclusive)
-	FString Script = GetStringArgOrDefault(Arguments, TEXT("script"));
-	FString ScriptPath = GetStringArgOrDefault(Arguments, TEXT("script_path"));
-
-	if (Script.IsEmpty() && ScriptPath.IsEmpty())
-	{
-		return FMcpToolResult::Error(TEXT("Either 'script' or 'script_path' must be provided"));
-	}
-
-	if (!Script.IsEmpty() && !ScriptPath.IsEmpty())
-	{
-		return FMcpToolResult::Error(TEXT("Cannot specify both 'script' and 'script_path'. Use only one."));
 	}
 
 	// If script_path is provided, read the file
@@ -133,24 +181,7 @@ FMcpToolResult URunPythonScriptTool::Execute(
 		}
 	}
 
-	// Get additional Python paths if provided
-	TArray<FString> PythonPaths;
-	if (Arguments->HasField(TEXT("python_paths")))
-	{
-		const TArray<TSharedPtr<FJsonValue>>* PathsArray;
-		if (Arguments->TryGetArrayField(TEXT("python_paths"), PathsArray))
-		{
-			for (const TSharedPtr<FJsonValue>& PathValue : *PathsArray)
-			{
-				FString PathStr = PathValue->AsString();
-				if (!PathStr.IsEmpty())
-				{
-					PythonPaths.Add(PathStr);
-				}
-			}
-			UE_LOG(LogUEBridgeMCP, Log, TEXT("run-python-script: Adding %d Python path(s)"), PythonPaths.Num());
-		}
-	}
+	UE_LOG(LogUEBridgeMCP, Log, TEXT("run-python-script: Adding %d Python path(s)"), PythonPaths.Num());
 
 	// Build Python command with arguments and paths if provided
 	FString PythonCommand = BuildPythonCommand(Script, Arguments, PythonPaths);

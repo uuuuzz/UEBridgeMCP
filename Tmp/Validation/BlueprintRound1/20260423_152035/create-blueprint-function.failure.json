@@ -1,0 +1,100 @@
+{
+    "Request":  {
+                    "method":  "tools/call",
+                    "params":  {
+                                   "arguments":  {
+                                                     "asset_path":  "/Game/UEBridgeMCPValidation/BlueprintRound1/BP_BlueprintRound1_20260423_152035",
+                                                     "metadata":  {
+                                                                      "DisplayName":  "Validate Function"
+                                                                  },
+                                                     "inputs":  [
+                                                                    {
+                                                                        "name":  "InputValue",
+                                                                        "default_value":  1.25,
+                                                                        "type":  {
+                                                                                     "kind":  "float"
+                                                                                 }
+                                                                    }
+                                                                ],
+                                                     "category":  "Validation",
+                                                     "outputs":  [
+                                                                     {
+                                                                         "name":  "Result",
+                                                                         "type":  {
+                                                                                      "kind":  "float"
+                                                                                  }
+                                                                     }
+                                                                 ],
+                                                     "name":  "ValidateFunction",
+                                                     "save":  false,
+                                                     "compile":  "if_needed",
+                                                     "tooltip":  "Blueprint Round 1 validation function"
+                                                 },
+                                   "name":  "create-blueprint-function"
+                               },
+                    "id":  "tool-892cb80df9994ef591a85d79b5286f5b",
+                    "jsonrpc":  "2.0"
+                },
+    "Response":  {
+                     "Success":  true,
+                     "StatusCode":  200,
+                     "Headers":  {
+                                     "keep-alive":  "timeout=15.000000",
+                                     "Content-Type":  "application/json; charset=utf-8",
+                                     "Mcp-Session-Id":  "4A328CD1-4A72-FF4E-366A-6898BF3B6236",
+                                     "Access-Control-Allow-Origin":  "*",
+                                     "Content-Length":  "1233"
+                                 },
+                     "Content":  "{\r\n\t\"jsonrpc\": \"2.0\",\r\n\t\"id\": \"tool-892cb80df9994ef591a85d79b5286f5b\",\r\n\t\"result\":\r\n\t{\r\n\t\t\"content\": [\r\n\t\t\t{\r\n\t\t\t\t\"type\": \"text\",\r\n\t\t\t\t\"text\": \"[UEBMCP_BLUEPRINT_MEMBER_NOT_FOUND] Function result node not found in \u0027ValidateFunction\u0027\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"structuredContent\":\r\n\t\t{\r\n\t\t\t\"code\": \"UEBMCP_BLUEPRINT_MEMBER_NOT_FOUND\",\r\n\t\t\t\"message\": \"Function result node not found in \u0027ValidateFunction\u0027\",\r\n\t\t\t\"details\":\r\n\t\t\t{\r\n\t\t\t\t\"asset_path\": \"/Game/UEBridgeMCPValidation/BlueprintRound1/BP_BlueprintRound1_20260423_152035\",\r\n\t\t\t\t\"failed_action_index\": 0,\r\n\t\t\t\t\"action\": \"create_function\"\r\n\t\t\t},\r\n\t\t\t\"partial_result\":\r\n\t\t\t{\r\n\t\t\t\t\"results\": [],\r\n\t\t\t\t\"partial_results\": [\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\t\"action\": \"create_function\",\r\n\t\t\t\t\t\t\"name\": \"ValidateFunction\",\r\n\t\t\t\t\t\t\"index\": 0,\r\n\t\t\t\t\t\t\"success\": false,\r\n\t\t\t\t\t\t\"error\": \"Function result node not found in \u0027ValidateFunction\u0027\",\r\n\t\t\t\t\t\t\"code\": \"UEBMCP_BLUEPRINT_MEMBER_NOT_FOUND\"\r\n\t\t\t\t\t}\r\n\t\t\t\t]\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"isError\": true,\r\n\t\t\"_meta\":\r\n\t\t{\r\n\t\t\t\"timing\":\r\n\t\t\t{\r\n\t\t\t\t\"duration_ms\": 2.8313999937381595\r\n\t\t\t},\r\n\t\t\t\"stats\":\r\n\t\t\t{\r\n\t\t\t\t\"tool_name\": \"create-blueprint-function\",\r\n\t\t\t\t\"mutates\": false,\r\n\t\t\t\t\"supports_batch\": false,\r\n\t\t\t\t\"requires_game_thread\": true,\r\n\t\t\t\t\"content_items\": 1\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}",
+                     "Json":  {
+                                  "jsonrpc":  "2.0",
+                                  "id":  "tool-892cb80df9994ef591a85d79b5286f5b",
+                                  "result":  {
+                                                 "content":  [
+                                                                 {
+                                                                     "type":  "text",
+                                                                     "text":  "[UEBMCP_BLUEPRINT_MEMBER_NOT_FOUND] Function result node not found in \u0027ValidateFunction\u0027"
+                                                                 }
+                                                             ],
+                                                 "structuredContent":  {
+                                                                           "code":  "UEBMCP_BLUEPRINT_MEMBER_NOT_FOUND",
+                                                                           "message":  "Function result node not found in \u0027ValidateFunction\u0027",
+                                                                           "details":  {
+                                                                                           "asset_path":  "/Game/UEBridgeMCPValidation/BlueprintRound1/BP_BlueprintRound1_20260423_152035",
+                                                                                           "failed_action_index":  0,
+                                                                                           "action":  "create_function"
+                                                                                       },
+                                                                           "partial_result":  {
+                                                                                                  "results":  [
+
+                                                                                                              ],
+                                                                                                  "partial_results":  [
+                                                                                                                          {
+                                                                                                                              "action":  "create_function",
+                                                                                                                              "name":  "ValidateFunction",
+                                                                                                                              "index":  0,
+                                                                                                                              "success":  false,
+                                                                                                                              "error":  "Function result node not found in \u0027ValidateFunction\u0027",
+                                                                                                                              "code":  "UEBMCP_BLUEPRINT_MEMBER_NOT_FOUND"
+                                                                                                                          }
+                                                                                                                      ]
+                                                                                              }
+                                                                       },
+                                                 "isError":  true,
+                                                 "_meta":  {
+                                                               "timing":  {
+                                                                              "duration_ms":  2.8313999937381595
+                                                                          },
+                                                               "stats":  {
+                                                                             "tool_name":  "create-blueprint-function",
+                                                                             "mutates":  false,
+                                                                             "supports_batch":  false,
+                                                                             "requires_game_thread":  true,
+                                                                             "content_items":  1
+                                                                         }
+                                                           }
+                                             }
+                              },
+                     "Error":  null
+                 }
+}

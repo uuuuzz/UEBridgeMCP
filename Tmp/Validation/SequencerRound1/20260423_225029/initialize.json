@@ -1,0 +1,25 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "601",
+    "result":  {
+                   "protocolVersion":  "2025-06-18",
+                   "capabilities":  {
+                                        "tools":  {
+                                                      "listChanged":  false,
+                                                      "list":  true,
+                                                      "call":  true,
+                                                      "registeredCount":  146
+                                                  },
+                                        "resources":  {
+
+                                                      },
+                                        "prompts":  {
+
+                                                    }
+                                    },
+                   "serverInfo":  {
+                                      "name":  "ue-bridge-mcp",
+                                      "version":  "1.19.0"
+                                  }
+               }
+}

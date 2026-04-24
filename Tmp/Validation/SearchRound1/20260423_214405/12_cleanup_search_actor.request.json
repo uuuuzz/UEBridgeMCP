@@ -1,0 +1,11 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "cleanup_search_actor",
+    "method":  "tools/call",
+    "params":  {
+                   "name":  "run-python-script",
+                   "arguments":  {
+                                     "script":  "import json\nimport unreal\nremoved=[]\nfor actor in unreal.EditorLevelLibrary.get_all_level_actors():\n    if actor.get_actor_label() == \u0027UEBridgeMCP_SearchActor_20260423_214405\u0027:\n        removed.append(actor.get_actor_label())\n        unreal.EditorLevelLibrary.destroy_actor(actor)\nprint(json.dumps({\u0027removed\u0027: removed, \u0027count\u0027: len(removed)}))"
+                                 }
+               }
+}

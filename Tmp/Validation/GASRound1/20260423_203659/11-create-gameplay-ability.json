@@ -1,0 +1,29 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "create-ga",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "[UEBMCP_ASSET_CREATE_FAILED] Failed to create GameplayAbility Blueprint: /Game/UEBridgeMCPValidation/GASRound1/GA_GASRound1_20260423_203659"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "code":  "UEBMCP_ASSET_CREATE_FAILED",
+                                             "message":  "Failed to create GameplayAbility Blueprint: /Game/UEBridgeMCPValidation/GASRound1/GA_GASRound1_20260423_203659"
+                                         },
+                   "isError":  true,
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  1965.1926000078674
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "create-gameplay-ability",
+                                               "mutates":  true,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  1
+                                           }
+                             }
+               }
+}

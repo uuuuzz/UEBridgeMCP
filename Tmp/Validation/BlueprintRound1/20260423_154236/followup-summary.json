@@ -1,0 +1,28 @@
+﻿{
+    "timestamp":  "20260423_154236",
+    "evidence_root":  "G:\\UEProjects\\UEBridgeMCP\\Tmp\\Validation\\BlueprintRound1\\20260423_154236",
+    "interface_asset_path":  "/Game/UEBridgeMCPValidation/BlueprintRound1/BPI_BlueprintRound1_20260423_154236",
+    "blueprint_asset_path":  "/Game/UEBridgeMCPValidation/BlueprintRound1/BP_BlueprintRound1_20260423_154236",
+    "required_tools_present":  {
+                                   "create-blueprint-function":  true,
+                                   "create-blueprint-event":  true,
+                                   "edit-blueprint-function-signature":  true,
+                                   "manage-blueprint-interfaces":  true,
+                                   "layout-blueprint-graph":  true,
+                                   "query-blueprint-findings":  true
+                               },
+    "create_bpi":  null,
+    "create_bp":  null,
+    "create_interface_function":  null,
+    "add_interface":  null,
+    "summary_after_add":  null,
+    "remove_interface":  null,
+    "summary_after_remove":  null,
+    "findings_after_remove":  null,
+    "compile_initial_bp":  null,
+    "compile_final_bp":  null,
+    "negative_add_interface":  {
+                                   "is_error":  true,
+                                   "text":  "[UEBMCP_INVALID_ACTION] Class \u0027/Script/Engine.Actor\u0027 is not a Interface"
+                               }
+}

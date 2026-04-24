@@ -1,0 +1,29 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "14",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "[UEBMCP_MISSING_REQUIRED_FIELD] \u0027asset_path\u0027 is required"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "code":  "UEBMCP_MISSING_REQUIRED_FIELD",
+                                             "message":  "\u0027asset_path\u0027 is required"
+                                         },
+                   "isError":  true,
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  0.022200023522600532
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "generate-blueprint-pattern",
+                                               "mutates":  true,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  1
+                                           }
+                             }
+               }
+}

@@ -1,0 +1,17 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "query_engine_api_function",
+    "method":  "tools/call",
+    "params":  {
+                   "name":  "query-engine-api-symbol",
+                   "arguments":  {
+                                     "query":  "LineTrace",
+                                     "symbol_types":  [
+                                                          "function"
+                                                      ],
+                                     "include_metadata":  true,
+                                     "limit":  20,
+                                     "max_classes":  4000
+                                 }
+               }
+}

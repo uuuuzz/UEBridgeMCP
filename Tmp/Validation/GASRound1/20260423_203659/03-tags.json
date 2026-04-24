@@ -1,0 +1,58 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "tags",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Request succeeded"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "tool":  "manage-gameplay-tags",
+                                             "success":  true,
+                                             "fast_replication":  false,
+                                             "gameplay_tags":  [
+                                                                   {
+                                                                       "tag":  "Ability.UEBridgeMCP.Round1",
+                                                                       "comment":  "UEBridgeMCP GAS Round1 smoke"
+                                                                   },
+                                                                   {
+                                                                       "tag":  "State.UEBridgeMCP.Active",
+                                                                       "comment":  "UEBridgeMCP GAS Round1 smoke"
+                                                                   }
+                                                               ],
+                                             "commonly_replicated_tags":  [
+
+                                                                          ],
+                                             "results":  [
+                                                             {
+                                                                 "index":  0,
+                                                                 "action":  "add_tag",
+                                                                 "tag":  "Ability.UEBridgeMCP.Round1",
+                                                                 "success":  true,
+                                                                 "changed":  true
+                                                             },
+                                                             {
+                                                                 "index":  1,
+                                                                 "action":  "add_tag",
+                                                                 "tag":  "State.UEBridgeMCP.Active",
+                                                                 "success":  true,
+                                                                 "changed":  true
+                                                             }
+                                                         ]
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  0.69280000752769411
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "manage-gameplay-tags",
+                                               "mutates":  true,
+                                               "supports_batch":  true,
+                                               "requires_game_thread":  true,
+                                               "content_items":  0
+                                           }
+                             }
+               }
+}

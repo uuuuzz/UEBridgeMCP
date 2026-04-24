@@ -35,6 +35,8 @@ public:
 	virtual FMcpToolResult Execute(
 		const TSharedPtr<FJsonObject>& Arguments,
 		const FMcpToolContext& Context) override;
+	virtual FString GetToolKind() const override { return TEXT("write"); }
+	virtual bool MutatesState() const override { return true; }
 	virtual bool RequiresGameThread() const override { return true; }
 
 	// Create a material expression node by class name

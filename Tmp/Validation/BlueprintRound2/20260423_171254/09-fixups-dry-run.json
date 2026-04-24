@@ -1,0 +1,158 @@
+﻿{
+	"jsonrpc": "2.0",
+	"id": "09-fixups-dry-run",
+	"result":
+	{
+		"content": [
+			{
+				"type": "text",
+				"text": "Request succeeded"
+			}
+		],
+		"structuredContent":
+		{
+			"tool": "apply-blueprint-fixups",
+			"success": true,
+			"status": "dry_run",
+			"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Broken_20260423_171254",
+			"asset_handle":
+			{
+				"kind": "asset",
+				"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Broken_20260423_171254",
+				"asset_class": "Blueprint"
+			},
+			"results": [
+				{
+					"index": 0,
+					"action": "refresh_all_nodes",
+					"success": true,
+					"status": "dry_run"
+				},
+				{
+					"index": 1,
+					"action": "reconstruct_invalid_nodes",
+					"success": true,
+					"status": "dry_run"
+				}
+			],
+			"partial_results": [],
+			"compile":
+			{
+				"attempted": false,
+				"success": true,
+				"warning_count": 0,
+				"error_count": 0,
+				"diagnostics": []
+			},
+			"findings_after": [
+				{
+					"code": "unresolved_member_reference",
+					"severity": "error",
+					"message": "Call function node 'Broken Function' could not resolve its target function",
+					"graph_name": "EventGraph",
+					"node_guid": "398DCC1E-43B8-79E0-05B3-46856F578C26",
+					"handle":
+					{
+						"kind": "blueprint_node",
+						"session_id": "42194E5B-48C0-6CAD-13CD-7FA4D40E82AE",
+						"resource_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Broken_20260423_171254",
+						"entity_id": "398DCC1E-43B8-79E0-05B3-46856F578C26",
+						"display_name": "Broken Function"
+					}
+				},
+				{
+					"code": "missing_default_value",
+					"severity": "warning",
+					"message": "Pin 'self' on node 'Broken Function' has no link and no default value",
+					"graph_name": "EventGraph",
+					"node_guid": "398DCC1E-43B8-79E0-05B3-46856F578C26",
+					"handle":
+					{
+						"kind": "blueprint_node",
+						"session_id": "42194E5B-48C0-6CAD-13CD-7FA4D40E82AE",
+						"resource_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Broken_20260423_171254",
+						"entity_id": "398DCC1E-43B8-79E0-05B3-46856F578C26",
+						"display_name": "Broken Function"
+					}
+				},
+				{
+					"code": "unresolved_member_reference",
+					"severity": "error",
+					"message": "Call function node 'Broken Function' could not resolve its target function",
+					"graph_name": "EventGraph",
+					"node_guid": "A5FEED7C-4395-FA1C-F427-FD96EC4914CD",
+					"handle":
+					{
+						"kind": "blueprint_node",
+						"session_id": "42194E5B-48C0-6CAD-13CD-7FA4D40E82AE",
+						"resource_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Broken_20260423_171254",
+						"entity_id": "A5FEED7C-4395-FA1C-F427-FD96EC4914CD",
+						"display_name": "Broken Function"
+					}
+				},
+				{
+					"code": "unlinked_required_pin",
+					"severity": "error",
+					"message": "Node 'Broken Function' has an unlinked required exec pin 'execute'",
+					"graph_name": "EventGraph",
+					"node_guid": "A5FEED7C-4395-FA1C-F427-FD96EC4914CD",
+					"handle":
+					{
+						"kind": "blueprint_node",
+						"session_id": "42194E5B-48C0-6CAD-13CD-7FA4D40E82AE",
+						"resource_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Broken_20260423_171254",
+						"entity_id": "A5FEED7C-4395-FA1C-F427-FD96EC4914CD",
+						"display_name": "Broken Function"
+					}
+				},
+				{
+					"code": "missing_default_value",
+					"severity": "warning",
+					"message": "Pin 'self' on node 'Broken Function' has no link and no default value",
+					"graph_name": "EventGraph",
+					"node_guid": "A5FEED7C-4395-FA1C-F427-FD96EC4914CD",
+					"handle":
+					{
+						"kind": "blueprint_node",
+						"session_id": "42194E5B-48C0-6CAD-13CD-7FA4D40E82AE",
+						"resource_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Broken_20260423_171254",
+						"entity_id": "A5FEED7C-4395-FA1C-F427-FD96EC4914CD",
+						"display_name": "Broken Function"
+					}
+				},
+				{
+					"code": "unlinked_required_pin",
+					"severity": "error",
+					"message": "Node 'Branch' has an unlinked required exec pin 'execute'",
+					"graph_name": "EventGraph",
+					"node_guid": "18C5C8BF-4E97-BB91-DC13-1EA5A6C79333",
+					"handle":
+					{
+						"kind": "blueprint_node",
+						"session_id": "42194E5B-48C0-6CAD-13CD-7FA4D40E82AE",
+						"resource_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Broken_20260423_171254",
+						"entity_id": "18C5C8BF-4E97-BB91-DC13-1EA5A6C79333",
+						"display_name": "Branch"
+					}
+				}
+			],
+			"diagnostics": [],
+			"modified_assets": []
+		},
+		"_meta":
+		{
+			"timing":
+			{
+				"duration_ms": 0.13369999942369759
+			},
+			"stats":
+			{
+				"tool_name": "apply-blueprint-fixups",
+				"mutates": false,
+				"supports_batch": false,
+				"requires_game_thread": true,
+				"content_items": 0
+			}
+		}
+	}
+}

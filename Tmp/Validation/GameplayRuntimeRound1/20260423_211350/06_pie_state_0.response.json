@@ -1,0 +1,41 @@
+{
+	"jsonrpc": "2.0",
+	"id": "06_pie_state_0",
+	"result":
+	{
+		"content": [
+			{
+				"type": "text",
+				"text": "Structured result ready"
+			}
+		],
+		"structuredContent":
+		{
+			"running": true,
+			"state": "running",
+			"paused": false,
+			"world":
+			{
+				"name": "Untitled_1",
+				"map_name": "UEDPIE_0_Untitled_1",
+				"time_seconds": 2.0660808235406876,
+				"actor_count": 73
+			}
+		},
+		"_meta":
+		{
+			"timing":
+			{
+				"duration_ms": 0.044499989598989487
+			},
+			"stats":
+			{
+				"tool_name": "pie-session",
+				"mutates": false,
+				"supports_batch": false,
+				"requires_game_thread": true,
+				"content_items": 1
+			}
+		}
+	}
+}

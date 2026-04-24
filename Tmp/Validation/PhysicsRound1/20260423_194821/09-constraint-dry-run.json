@@ -1,0 +1,32 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "511",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "[UEBMCP_ACTOR_NOT_FOUND] Actor not found"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "code":  "UEBMCP_ACTOR_NOT_FOUND",
+                                             "message":  "Actor not found",
+                                             "details":  {
+                                                             "actor_name":  "PhysicsRound1_A_20260423_194821"
+                                                         }
+                                         },
+                   "isError":  true,
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  0.091100024292245507
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "create-physics-constraint",
+                                               "mutates":  true,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  1
+                                           }
+                             }
+               }
+}

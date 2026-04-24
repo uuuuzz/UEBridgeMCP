@@ -1,0 +1,13 @@
+{
+  "jsonrpc": "2.0",
+  "id": "sample-prompt-get",
+  "method": "prompts/get",
+  "params": {
+    "name": "performance-triage-brief",
+    "arguments": {
+      "goal": "Validate Step 6 performance workflow",
+      "world_mode": "editor",
+      "focus_area": "validation"
+    }
+  }
+}

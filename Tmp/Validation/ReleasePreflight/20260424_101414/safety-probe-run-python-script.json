@@ -1,0 +1,38 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "16",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "[UEBMCP_CONFIRMATION_REQUIRED] run-python-script requires confirm_execution=true because Python can mutate editor state"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "code":  "UEBMCP_CONFIRMATION_REQUIRED",
+                                             "message":  "run-python-script requires confirm_execution=true because Python can mutate editor state",
+                                             "details":  {
+                                                             "tool":  "run-python-script",
+                                                             "dry_run":  false,
+                                                             "has_inline_script":  true,
+                                                             "python_paths_count":  0
+                                                         }
+                                         },
+                   "isError":  true,
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  0.01200000406242907
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "run-python-script",
+                                               "requested_tool_name":  "run-python-script",
+                                               "compatibility_alias":  false,
+                                               "compatibility_arguments_adapted":  false,
+                                               "mutates":  true,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  1
+                                           }
+                             }
+               }
+}

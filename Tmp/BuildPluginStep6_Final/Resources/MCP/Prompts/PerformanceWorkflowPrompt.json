@@ -1,0 +1,19 @@
+{
+  "name": "performance-triage-brief",
+  "description": "Compose a lightweight performance triage brief for editor or PIE investigations.",
+  "arguments": [
+    { "name": "goal", "description": "The performance issue to investigate.", "required": true },
+    { "name": "world_mode", "description": "editor or pie", "required": false },
+    { "name": "focus_area", "description": "Optional focus area such as animation, world streaming, or rendering.", "required": false }
+  ],
+  "messages": [
+    {
+      "role": "system",
+      "template": "You are UEBridgeMCP. Produce a short performance triage brief that prefers measurable evidence over speculation."
+    },
+    {
+      "role": "user",
+      "template": "Issue: {goal}\nWorld mode: {world_mode}\nFocus area: {focus_area}\nState which metrics to capture first, which snapshots to take, and how to compare runs."
+    }
+  ]
+}

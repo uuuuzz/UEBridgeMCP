@@ -1,0 +1,28 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "619",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Structured result ready"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "success":  true,
+                                             "output":  "{\u0027removed\u0027: [\u0027PhysicsRound1_TestA_20260423_195010\u0027, \u0027PhysicsRound1_TestB_20260423_195010\u0027, \u0027PhysicsRound1_A_20260423_195106\u0027, \u0027PhysicsRound1_B_20260423_195106\u0027]}\r\n"
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  25.863299990305677
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "run-python-script",
+                                               "mutates":  false,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  1
+                                           }
+                             }
+               }
+}

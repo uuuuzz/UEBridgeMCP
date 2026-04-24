@@ -1,0 +1,38 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "3",
+    "result":  {
+                   "resources":  [
+                                     {
+                                         "uri":  "uebmcp://builtin/resources/animation-smoke-checklist",
+                                         "name":  "Animation Smoke Checklist",
+                                         "description":  "Checklist for validating animation authoring and regression smoke flows.",
+                                         "mimeType":  "text/markdown"
+                                     },
+                                     {
+                                         "uri":  "uebmcp://builtin/resources/sequencer-edit-recipe",
+                                         "name":  "Sequencer Edit Recipe",
+                                         "description":  "Recipe for minimal, safe sequence editing and validation.",
+                                         "mimeType":  "text/markdown"
+                                     },
+                                     {
+                                         "uri":  "uebmcp://builtin/resources/world-production-recipe",
+                                         "name":  "World Production Recipe",
+                                         "description":  "World production recipe for spline, foliage, landscape, and world partition work.",
+                                         "mimeType":  "text/markdown"
+                                     },
+                                     {
+                                         "uri":  "uebmcp://builtin/resources/performance-triage-guide",
+                                         "name":  "Performance Triage Guide",
+                                         "description":  "Guide for editor and PIE performance triage and evidence capture.",
+                                         "mimeType":  "text/markdown"
+                                     },
+                                     {
+                                         "uri":  "uebmcp://builtin/resources/external-content-safety-guide",
+                                         "name":  "External Content Safety Guide",
+                                         "description":  "Safety and provenance guidance for external content generation workflows.",
+                                         "mimeType":  "text/markdown"
+                                     }
+                                 ]
+               }
+}

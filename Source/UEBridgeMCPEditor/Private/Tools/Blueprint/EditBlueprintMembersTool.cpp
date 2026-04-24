@@ -1,8 +1,11 @@
 // Copyright uuuuzz 2024-2026. All Rights Reserved.
 
 #include "Tools/Blueprint/EditBlueprintMembersTool.h"
+#include "Tools/Blueprint/BlueprintToolUtils.h"
 #include "Utils/McpAssetModifier.h"
+#include "Utils/McpTypeDescriptorUtils.h"
 #include "EdGraph/EdGraph.h"
+#include "EdGraph/EdGraphNodeUtils.h"
 #include "EdGraphSchema_K2.h"
 #include "Engine/Blueprint.h"
 #include "K2Node_EditablePinBase.h"
@@ -15,7 +18,7 @@
 
 FString UEditBlueprintMembersTool::GetToolDescription() const
 {
-	return TEXT("Edit Blueprint members: create/rename/delete variables, functions, and event dispatchers. "
+	return TEXT("Edit Blueprint members: create/rename/delete variables, local variables, functions, interfaces, and event dispatchers. "
 		"Accepts a batched 'actions' array. Supports compile, save, dry_run, and rollback_on_error options.");
 }
 
@@ -88,10 +91,30 @@ TMap<FString, FMcpSchemaProperty> UEditBlueprintMembersTool::GetInputSchema() co
 	ActionItemSchema->NestedRequired = {TEXT("action")};
 	ActionItemSchema->Properties.Add(TEXT("action"), MakeShared<FMcpSchemaProperty>(FMcpSchemaProperty::MakeEnum(
 		TEXT("Member edit action"),
-		{TEXT("create_variable"), TEXT("rename_variable"), TEXT("delete_variable"), TEXT("set_variable_properties"), TEXT("create_function"), TEXT("rename_function"), TEXT("delete_function"), TEXT("set_function_signature"), TEXT("create_event_dispatcher")},
+		{
+			TEXT("create_variable"),
+			TEXT("rename_variable"),
+			TEXT("delete_variable"),
+			TEXT("set_variable_properties"),
+			TEXT("create_local_variable"),
+			TEXT("rename_local_variable"),
+			TEXT("delete_local_variable"),
+			TEXT("set_local_variable_properties"),
+			TEXT("create_function"),
+			TEXT("rename_function"),
+			TEXT("delete_function"),
+			TEXT("set_function_signature"),
+			TEXT("create_event_dispatcher"),
+			TEXT("add_interface"),
+			TEXT("remove_interface")
+		},
 		true)));
 	ActionItemSchema->Properties.Add(TEXT("name"), MakeShared<FMcpSchemaProperty>(FMcpSchemaProperty::Make(TEXT("string"), TEXT("Existing or new member name"))));
 	ActionItemSchema->Properties.Add(TEXT("new_name"), MakeShared<FMcpSchemaProperty>(FMcpSchemaProperty::Make(TEXT("string"), TEXT("New member name for rename actions"))));
+	ActionItemSchema->Properties.Add(TEXT("function_name"), MakeShared<FMcpSchemaProperty>(FMcpSchemaProperty::Make(TEXT("string"), TEXT("Owning function graph name for local-variable actions"))));
+	ActionItemSchema->Properties.Add(TEXT("interface_path"), MakeShared<FMcpSchemaProperty>(FMcpSchemaProperty::Make(TEXT("string"), TEXT("Interface class path for add_interface/remove_interface"))));
+	ActionItemSchema->Properties.Add(TEXT("sync_graphs"), MakeShared<FMcpSchemaProperty>(FMcpSchemaProperty::Make(TEXT("boolean"), TEXT("Conform interface graphs after interface edits (default true)"))));
+	ActionItemSchema->Properties.Add(TEXT("preserve_functions"), MakeShared<FMcpSchemaProperty>(FMcpSchemaProperty::Make(TEXT("boolean"), TEXT("Preserve interface graphs as regular functions when removing an interface"))));
 	ActionItemSchema->Properties.Add(TEXT("type"), TypeSchema);
 	ActionItemSchema->Properties.Add(TEXT("default_value"), MakeShared<FMcpSchemaProperty>(FMcpSchemaProperty::Make(TEXT("any"), TEXT("Default value for create_variable"))));
 	ActionItemSchema->Properties.Add(TEXT("category"), MakeShared<FMcpSchemaProperty>(FMcpSchemaProperty::Make(TEXT("string"), TEXT("Member category"))));
@@ -148,6 +171,10 @@ namespace
 			{
 				return TEXT("UEBMCP_BLUEPRINT_VARIABLE_ALREADY_EXISTS");
 			}
+			if (ActionName == TEXT("create_local_variable") || ActionName == TEXT("rename_local_variable"))
+			{
+				return TEXT("UEBMCP_BLUEPRINT_LOCAL_VARIABLE_ALREADY_EXISTS");
+			}
 			if (ActionName == TEXT("create_function") || ActionName == TEXT("rename_function"))
 			{
 				return TEXT("UEBMCP_BLUEPRINT_FUNCTION_ALREADY_EXISTS");
@@ -160,6 +187,14 @@ namespace
 
 		if (ErrorMessage.Contains(TEXT("not found"), ESearchCase::IgnoreCase))
 		{
+			if (ActionName.Contains(TEXT("local_variable")))
+			{
+				return TEXT("UEBMCP_BLUEPRINT_LOCAL_VARIABLE_NOT_FOUND");
+			}
+			if (ActionName.Contains(TEXT("interface")))
+			{
+				return TEXT("UEBMCP_BLUEPRINT_INTERFACE_NOT_FOUND");
+			}
 			return TEXT("UEBMCP_BLUEPRINT_MEMBER_NOT_FOUND");
 		}
 
@@ -203,6 +238,45 @@ namespace
 
 		return false;
 	}
+
+	const UStruct* ResolveLocalVariableScope(UBlueprint* Blueprint, UEdGraph* Graph)
+	{
+		if (!Blueprint || !Graph)
+		{
+			return nullptr;
+		}
+
+		const FName FunctionName(*Graph->GetName());
+		auto ResolveOnClass = [&](UClass* OwnerClass) -> const UStruct*
+		{
+			return OwnerClass ? OwnerClass->FindFunctionByName(FunctionName, EIncludeSuperFlag::ExcludeSuper) : nullptr;
+		};
+
+		if (const UStruct* Scope = ResolveOnClass(Blueprint->SkeletonGeneratedClass))
+		{
+			return Scope;
+		}
+
+		if (const UStruct* Scope = ResolveOnClass(Blueprint->GeneratedClass))
+		{
+			return Scope;
+		}
+
+		return nullptr;
+	}
+
+	void SetTouchedGraphsResult(const TArray<UEdGraph*>& Graphs, TSharedPtr<FJsonObject>& OutResult)
+	{
+		TArray<TSharedPtr<FJsonValue>> GraphNames;
+		for (UEdGraph* Graph : Graphs)
+		{
+			if (Graph)
+			{
+				GraphNames.Add(MakeShareable(new FJsonValueString(Graph->GetName())));
+			}
+		}
+		OutResult->SetArrayField(TEXT("touched_graphs"), GraphNames);
+	}
 }
 
 bool UEditBlueprintMembersTool::GetFunctionNodes(
@@ -211,65 +285,14 @@ bool UEditBlueprintMembersTool::GetFunctionNodes(
 	UK2Node_FunctionResult*& OutResultNode,
 	FString& OutError)
 {
-	OutEntryNode = nullptr;
-	OutResultNode = nullptr;
-
-	if (!Graph)
-	{
-		OutError = TEXT("Function graph is null");
-		return false;
-	}
-
-	OutEntryNode = Cast<UK2Node_FunctionEntry>(FBlueprintEditorUtils::GetEntryNode(Graph));
-	FindFunctionResultNode(Graph, OutResultNode);
-	if (!OutEntryNode)
-	{
-		OutError = FString::Printf(TEXT("Function entry node not found in '%s'"), *Graph->GetName());
-		return false;
-	}
-
-	return true;
+	return BlueprintToolUtils::FindFunctionNodes(Graph, OutEntryNode, OutResultNode, OutError);
 }
 
 bool UEditBlueprintMembersTool::ConvertMetadataValueToString(
 	const TSharedPtr<FJsonValue>& JsonValue,
 	FString& OutString)
 {
-	if (!JsonValue.IsValid() || JsonValue->Type == EJson::Null)
-	{
-		OutString.Reset();
-		return true;
-	}
-
-	if (JsonValue->TryGetString(OutString))
-	{
-		return true;
-	}
-
-	bool bBooleanValue = false;
-	if (JsonValue->TryGetBool(bBooleanValue))
-	{
-		OutString = bBooleanValue ? TEXT("true") : TEXT("false");
-		return true;
-	}
-
-	double NumberValue = 0.0;
-	if (JsonValue->TryGetNumber(NumberValue))
-	{
-		OutString = FString::SanitizeFloat(NumberValue);
-		return true;
-	}
-
-	FString SerializedValue;
-	TSharedRef<TJsonWriter<>> Writer = TJsonWriterFactory<>::Create(&SerializedValue);
-	if (FJsonSerializer::Serialize(JsonValue.ToSharedRef(), TEXT(""), Writer))
-	{
-		Writer->Close();
-		OutString = MoveTemp(SerializedValue);
-		return true;
-	}
-
-	return false;
+	return BlueprintToolUtils::ConvertMetadataValueToString(JsonValue, OutString);
 }
 
 void UEditBlueprintMembersTool::SetOrClearBlueprintVariableMetaData(
@@ -325,139 +348,62 @@ void UEditBlueprintMembersTool::ApplyVariableMetadataObject(
 	}
 }
 
+void UEditBlueprintMembersTool::SetOrClearVariableDescriptionMetaData(
+	FBPVariableDescription& VariableDescription,
+	const FName MetaDataKey,
+	bool bShouldSet,
+	const FString& EnabledValue)
+{
+	if (bShouldSet)
+	{
+		VariableDescription.SetMetaData(MetaDataKey, EnabledValue);
+	}
+	else
+	{
+		VariableDescription.RemoveMetaData(MetaDataKey);
+	}
+}
+
+void UEditBlueprintMembersTool::SetOrClearVariableDescriptionMetaData(
+	FBPVariableDescription& VariableDescription,
+	const FName MetaDataKey,
+	const FString& Value)
+{
+	if (Value.IsEmpty())
+	{
+		VariableDescription.RemoveMetaData(MetaDataKey);
+	}
+	else
+	{
+		VariableDescription.SetMetaData(MetaDataKey, Value);
+	}
+}
+
+void UEditBlueprintMembersTool::ApplyVariableMetadataObject(
+	FBPVariableDescription& VariableDescription,
+	const TSharedPtr<FJsonObject>& MetadataObject)
+{
+	if (!MetadataObject.IsValid())
+	{
+		return;
+	}
+
+	for (const TPair<FString, TSharedPtr<FJsonValue>>& Pair : MetadataObject->Values)
+	{
+		FString MetadataValue;
+		if (ConvertMetadataValueToString(Pair.Value, MetadataValue))
+		{
+			SetOrClearVariableDescriptionMetaData(VariableDescription, FName(*Pair.Key), MetadataValue);
+		}
+	}
+}
+
 bool UEditBlueprintMembersTool::ApplyFunctionMetadataObject(
 	FKismetUserDeclaredFunctionMetadata& FunctionMetaData,
 	const TSharedPtr<FJsonObject>& MetadataObject,
 	FString& OutError)
 {
-	if (!MetadataObject.IsValid())
-	{
-		return true;
-	}
-
-	for (const TPair<FString, TSharedPtr<FJsonValue>>& Pair : MetadataObject->Values)
-	{
-		const FString& Key = Pair.Key;
-		const TSharedPtr<FJsonValue>& Value = Pair.Value;
-
-		if (Key.Equals(TEXT("ToolTip"), ESearchCase::IgnoreCase) || Key.Equals(TEXT("Tooltip"), ESearchCase::IgnoreCase))
-		{
-			FString MetadataValue;
-			if (!ConvertMetadataValueToString(Value, MetadataValue))
-			{
-				OutError = FString::Printf(TEXT("Could not convert function metadata value '%s' to string"), *Key);
-				return false;
-			}
-			FunctionMetaData.ToolTip = FText::FromString(MetadataValue);
-			continue;
-		}
-
-		if (Key.Equals(TEXT("Category"), ESearchCase::IgnoreCase))
-		{
-			FString MetadataValue;
-			if (!ConvertMetadataValueToString(Value, MetadataValue))
-			{
-				OutError = FString::Printf(TEXT("Could not convert function metadata value '%s' to string"), *Key);
-				return false;
-			}
-			FunctionMetaData.Category = FText::FromString(MetadataValue);
-			continue;
-		}
-
-		if (Key.Equals(TEXT("Keywords"), ESearchCase::IgnoreCase))
-		{
-			FString MetadataValue;
-			if (!ConvertMetadataValueToString(Value, MetadataValue))
-			{
-				OutError = FString::Printf(TEXT("Could not convert function metadata value '%s' to string"), *Key);
-				return false;
-			}
-			FunctionMetaData.Keywords = FText::FromString(MetadataValue);
-			continue;
-		}
-
-		if (Key.Equals(TEXT("CompactNodeTitle"), ESearchCase::IgnoreCase))
-		{
-			FString MetadataValue;
-			if (!ConvertMetadataValueToString(Value, MetadataValue))
-			{
-				OutError = FString::Printf(TEXT("Could not convert function metadata value '%s' to string"), *Key);
-				return false;
-			}
-			FunctionMetaData.CompactNodeTitle = FText::FromString(MetadataValue);
-			continue;
-		}
-
-		if (Key.Equals(TEXT("DeprecationMessage"), ESearchCase::IgnoreCase))
-		{
-			FString MetadataValue;
-			if (!ConvertMetadataValueToString(Value, MetadataValue))
-			{
-				OutError = FString::Printf(TEXT("Could not convert function metadata value '%s' to string"), *Key);
-				return false;
-			}
-			FunctionMetaData.DeprecationMessage = MetadataValue;
-			continue;
-		}
-
-		if (Key.Equals(TEXT("CallInEditor"), ESearchCase::IgnoreCase))
-		{
-			bool bFlagValue = false;
-			if (!Value.IsValid() || !Value->TryGetBool(bFlagValue))
-			{
-				OutError = TEXT("Function metadata 'CallInEditor' must be a boolean");
-				return false;
-			}
-			FunctionMetaData.bCallInEditor = bFlagValue;
-			continue;
-		}
-
-		if (Key.Equals(TEXT("DeprecatedFunction"), ESearchCase::IgnoreCase))
-		{
-			bool bFlagValue = false;
-			if (!Value.IsValid() || !Value->TryGetBool(bFlagValue))
-			{
-				OutError = TEXT("Function metadata 'DeprecatedFunction' must be a boolean");
-				return false;
-			}
-			FunctionMetaData.bIsDeprecated = bFlagValue;
-			continue;
-		}
-
-		if (Key.Equals(TEXT("ThreadSafe"), ESearchCase::IgnoreCase))
-		{
-			bool bFlagValue = false;
-			if (!Value.IsValid() || !Value->TryGetBool(bFlagValue))
-			{
-				OutError = TEXT("Function metadata 'ThreadSafe' must be a boolean");
-				return false;
-			}
-			FunctionMetaData.bThreadSafe = bFlagValue;
-			continue;
-		}
-
-		if (Key.Equals(TEXT("UnsafeForConstructionScripts"), ESearchCase::IgnoreCase))
-		{
-			bool bFlagValue = false;
-			if (!Value.IsValid() || !Value->TryGetBool(bFlagValue))
-			{
-				OutError = TEXT("Function metadata 'UnsafeForConstructionScripts' must be a boolean");
-				return false;
-			}
-			FunctionMetaData.bIsUnsafeDuringActorConstruction = bFlagValue;
-			continue;
-		}
-
-		FString MetadataValue;
-		if (!ConvertMetadataValueToString(Value, MetadataValue))
-		{
-			OutError = FString::Printf(TEXT("Could not convert function metadata value '%s' to string"), *Key);
-			return false;
-		}
-		FunctionMetaData.SetMetaData(FName(*Key), MoveTemp(MetadataValue));
-	}
-
-	return true;
+	return BlueprintToolUtils::ApplyFunctionMetadataObject(FunctionMetaData, MetadataObject, OutError);
 }
 
 bool UEditBlueprintMembersTool::ApplyVariableActionSettings(
@@ -584,6 +530,97 @@ bool UEditBlueprintMembersTool::ApplyVariableActionSettings(
 	return true;
 }
 
+bool UEditBlueprintMembersTool::ApplyLocalVariableActionSettings(
+	UBlueprint* Blueprint,
+	UEdGraph* Graph,
+	const FName VarName,
+	const TSharedPtr<FJsonObject>& Action,
+	bool bAllowTypeChange,
+	FString& OutError)
+{
+	if (!Blueprint || !Graph || !Action.IsValid())
+	{
+		OutError = TEXT("Invalid Blueprint, graph, or action");
+		return false;
+	}
+
+	if (!FBlueprintEditorUtils::DoesSupportLocalVariables(Graph))
+	{
+		OutError = FString::Printf(TEXT("Graph '%s' does not support local variables"), *Graph->GetName());
+		return false;
+	}
+
+	UK2Node_FunctionEntry* EntryNode = nullptr;
+	FBPVariableDescription* VariableDescription = FBlueprintEditorUtils::FindLocalVariable(Blueprint, Graph, VarName, &EntryNode);
+	if (!VariableDescription)
+	{
+		OutError = FString::Printf(TEXT("Local variable '%s' not found in '%s'"), *VarName.ToString(), *Graph->GetName());
+		return false;
+	}
+
+	if (bAllowTypeChange)
+	{
+		const TSharedPtr<FJsonObject>* TypeObject = nullptr;
+		if (Action->TryGetObjectField(TEXT("type"), TypeObject) && TypeObject && (*TypeObject).IsValid())
+		{
+			const UStruct* Scope = ResolveLocalVariableScope(Blueprint, Graph);
+			if (!Scope)
+			{
+				OutError = FString::Printf(TEXT("Could not resolve local-variable scope for '%s'"), *Graph->GetName());
+				return false;
+			}
+
+			FEdGraphPinType NewPinType;
+			if (!ParseTypeDescriptor(*TypeObject, NewPinType, OutError))
+			{
+				return false;
+			}
+
+			if (VariableDescription->VarType != NewPinType)
+			{
+				FBlueprintEditorUtils::ChangeLocalVariableType(Blueprint, Scope, VarName, NewPinType);
+				VariableDescription = FBlueprintEditorUtils::FindLocalVariable(Blueprint, Graph, VarName, &EntryNode);
+				if (!VariableDescription)
+				{
+					OutError = FString::Printf(TEXT("Local variable '%s' not found after type update"), *VarName.ToString());
+					return false;
+				}
+			}
+		}
+	}
+
+	const TSharedPtr<FJsonObject>* MetadataObject = nullptr;
+	if (Action->TryGetObjectField(TEXT("metadata"), MetadataObject) && MetadataObject && (*MetadataObject).IsValid())
+	{
+		ApplyVariableMetadataObject(*VariableDescription, *MetadataObject);
+	}
+
+	if (Action->HasField(TEXT("default_value")))
+	{
+		VariableDescription->DefaultValue = JsonValueToDefaultString(Action->TryGetField(TEXT("default_value")), VariableDescription->VarType);
+	}
+
+	FString Category;
+	if (Action->TryGetStringField(TEXT("category"), Category))
+	{
+		VariableDescription->Category = FText::FromString(Category);
+	}
+
+	FString Tooltip;
+	if (Action->TryGetStringField(TEXT("tooltip"), Tooltip))
+	{
+		SetOrClearVariableDescriptionMetaData(*VariableDescription, FName(VariableToolTipMetaDataKey), Tooltip);
+	}
+
+	if (EntryNode)
+	{
+		EntryNode->RefreshFunctionVariableCache();
+		EntryNode->UpdateLoadedDefaultValues(true);
+	}
+
+	return true;
+}
+
 bool UEditBlueprintMembersTool::ApplyFunctionActionSettings(
 	UEdGraph* Graph,
 	const TSharedPtr<FJsonObject>& Action,
@@ -617,8 +654,21 @@ bool UEditBlueprintMembersTool::ApplyFunctionActionSettings(
 
 		if (!ResultNode)
 		{
-			const UEdGraphSchema_K2* K2Schema = GetDefault<UEdGraphSchema_K2>();
-			K2Schema->CreateFunctionGraphTerminators(*Graph, (UClass*)nullptr);
+			FGraphNodeCreator<UK2Node_FunctionResult> ResultNodeCreator(*Graph);
+			ResultNode = ResultNodeCreator.CreateNode();
+			ResultNode->FunctionReference = EntryNode->FunctionReference;
+			ResultNode->NodePosX = EntryNode->NodePosX + EntryNode->NodeWidth + 256;
+			ResultNode->NodePosY = EntryNode->NodePosY;
+			ResultNodeCreator.Finalize();
+
+			if (UEdGraphPin* EntryExecPin = EntryNode->FindPin(UEdGraphSchema_K2::PN_Then, EGPD_Output))
+			{
+				if (UEdGraphPin* ResultExecPin = ResultNode->FindPin(UEdGraphSchema_K2::PN_Execute, EGPD_Input))
+				{
+					EntryExecPin->MakeLinkTo(ResultExecPin);
+				}
+			}
+
 			if (!GetFunctionNodes(Graph, EntryNode, ResultNode, OutError) || !ResultNode)
 			{
 				OutError = FString::Printf(TEXT("Function result node not found in '%s'"), *Graph->GetName());
@@ -711,113 +761,7 @@ bool UEditBlueprintMembersTool::SynchronizeUserDefinedPins(
 	EEdGraphPinDirection PinDirection,
 	FString& OutError)
 {
-	if (!EditableNode)
-	{
-		OutError = TEXT("Editable pin node is null");
-		return false;
-	}
-
-	const TArray<TSharedPtr<FUserPinInfo>> ExistingPins = EditableNode->UserDefinedPins;
-	for (const TSharedPtr<FUserPinInfo>& ExistingPin : ExistingPins)
-	{
-		EditableNode->RemoveUserDefinedPin(ExistingPin);
-	}
-
-	if (!PinDescriptors)
-	{
-		return true;
-	}
-
-	TSet<FName> SeenPins;
-	for (const TSharedPtr<FJsonValue>& PinValue : *PinDescriptors)
-	{
-		const TSharedPtr<FJsonObject>* PinObject = nullptr;
-		if (!PinValue.IsValid() || !PinValue->TryGetObject(PinObject) || !PinObject || !(*PinObject).IsValid())
-		{
-			OutError = TEXT("Pin descriptor must be an object");
-			return false;
-		}
-
-		FString PinNameString;
-		if (!(*PinObject)->TryGetStringField(TEXT("name"), PinNameString) || PinNameString.IsEmpty())
-		{
-			OutError = TEXT("Pin descriptor requires a non-empty 'name'");
-			return false;
-		}
-
-		const FName PinName(*PinNameString);
-		if (SeenPins.Contains(PinName))
-		{
-			OutError = FString::Printf(TEXT("Duplicate pin name '%s'"), *PinNameString);
-			return false;
-		}
-		SeenPins.Add(PinName);
-
-		FEdGraphPinType PinType;
-		PinType.PinCategory = UEdGraphSchema_K2::PC_Wildcard;
-
-		const TSharedPtr<FJsonObject>* TypeObject = nullptr;
-		if ((*PinObject)->TryGetObjectField(TEXT("type"), TypeObject) && TypeObject && (*TypeObject).IsValid())
-		{
-			if (!ParseTypeDescriptor(*TypeObject, PinType, OutError))
-			{
-				return false;
-			}
-		}
-
-		bool bPassByReference = false;
-		if ((*PinObject)->TryGetBoolField(TEXT("pass_by_reference"), bPassByReference))
-		{
-			PinType.bIsReference = bPassByReference;
-		}
-
-		bool bIsConst = false;
-		if ((*PinObject)->TryGetBoolField(TEXT("is_const"), bIsConst))
-		{
-			PinType.bIsConst = bIsConst;
-		}
-
-		UEdGraphPin* CreatedPin = EditableNode->CreateUserDefinedPin(PinName, PinType, PinDirection, false);
-		if (!CreatedPin)
-		{
-			OutError = FString::Printf(TEXT("Failed to create pin '%s'"), *PinNameString);
-			return false;
-		}
-
-		TSharedPtr<FUserPinInfo> CreatedPinInfo;
-		for (const TSharedPtr<FUserPinInfo>& PinInfo : EditableNode->UserDefinedPins)
-		{
-			if (PinInfo.IsValid() && PinInfo->PinName == CreatedPin->PinName)
-			{
-				CreatedPinInfo = PinInfo;
-				break;
-			}
-		}
-
-		if (!CreatedPinInfo.IsValid())
-		{
-			OutError = FString::Printf(TEXT("Failed to locate created pin info for '%s'"), *PinNameString);
-			return false;
-		}
-
-		if ((*PinObject)->HasField(TEXT("default_value")))
-		{
-			const FString DefaultValueString = JsonValueToDefaultString((*PinObject)->TryGetField(TEXT("default_value")), PinType);
-			if (!EditableNode->ModifyUserDefinedPinDefaultValue(CreatedPinInfo, DefaultValueString))
-			{
-				CreatedPinInfo->PinDefaultValue = DefaultValueString;
-				CreatedPin->DefaultValue = DefaultValueString;
-			}
-		}
-
-		FString Description;
-		if ((*PinObject)->TryGetStringField(TEXT("description"), Description))
-		{
-			CreatedPin->PinToolTip = Description;
-		}
-	}
-
-	return true;
+	return BlueprintToolUtils::SynchronizeUserDefinedPins(EditableNode, PinDescriptors, PinDirection, OutError);
 }
 
 FMcpToolResult UEditBlueprintMembersTool::Execute(
@@ -862,6 +806,16 @@ FMcpToolResult UEditBlueprintMembersTool::Execute(
 		Transaction = FMcpAssetModifier::BeginTransaction(FText::FromString(TransactionLabel));
 	}
 
+	UBlueprint* WorkingBlueprint = Blueprint;
+	if (bDryRun)
+	{
+		WorkingBlueprint = DuplicateObject<UBlueprint>(Blueprint, GetTransientPackage());
+		if (!WorkingBlueprint)
+		{
+			return FMcpToolResult::StructuredError(TEXT("UEBMCP_INTERNAL_ERROR"), TEXT("Failed to create dry-run Blueprint copy"));
+		}
+	}
+
 	// Execute actions.
 	TArray<TSharedPtr<FJsonValue>> ResultsArray;
 	TArray<TSharedPtr<FJsonValue>> PartialResultsArray;
@@ -877,7 +831,11 @@ FMcpToolResult UEditBlueprintMembersTool::Execute(
 		{
 			if (bRollbackOnError)
 			{
-				Transaction.Reset(); // Roll back the transaction.
+				if (Transaction.IsValid())
+				{
+					Transaction->Cancel();
+					Transaction.Reset();
+				}
 				return FMcpToolResult::StructuredError(TEXT("UEBMCP_INVALID_ACTION"),
 					FString::Printf(TEXT("Action at index %d is not a valid object"), i));
 			}
@@ -886,26 +844,7 @@ FMcpToolResult UEditBlueprintMembersTool::Execute(
 
 		TSharedPtr<FJsonObject> ActionResult = MakeShareable(new FJsonObject);
 		FString ActionError;
-
-		bool bSuccess = false;
-		if (!bDryRun)
-		{
-			bSuccess = ExecuteAction(Blueprint, *ActionObj, i, ActionResult, ActionError);
-		}
-		else
-		{
-			// In dry-run mode, validate only the action field.
-			FString ActionName;
-			if ((*ActionObj)->TryGetStringField(TEXT("action"), ActionName))
-			{
-				ActionResult->SetStringField(TEXT("action"), ActionName);
-				bSuccess = true;
-			}
-			else
-			{
-				ActionError = TEXT("Missing 'action' field");
-			}
-		}
+		const bool bSuccess = ExecuteAction(WorkingBlueprint, *ActionObj, i, ActionResult, ActionError);
 
 		ActionResult->SetNumberField(TEXT("index"), i);
 		ActionResult->SetBoolField(TEXT("success"), bSuccess);
@@ -917,9 +856,13 @@ FMcpToolResult UEditBlueprintMembersTool::Execute(
 			bAnyFailed = true;
 			PartialResultsArray.Add(MakeShareable(new FJsonValueObject(ActionResult)));
 
-			if (bRollbackOnError && !bDryRun)
+			if (bRollbackOnError)
 			{
-				Transaction.Reset(); // Roll back the transaction.
+				if (Transaction.IsValid())
+				{
+					Transaction->Cancel();
+					Transaction.Reset();
+				}
 				TSharedPtr<FJsonObject> ErrorDetails = MakeShareable(new FJsonObject);
 				ErrorDetails->SetStringField(TEXT("asset_path"), AssetPath);
 				ErrorDetails->SetNumberField(TEXT("failed_action_index"), i);
@@ -933,7 +876,7 @@ FMcpToolResult UEditBlueprintMembersTool::Execute(
 		}
 		else
 		{
-			bStructuralChange = true;
+			bStructuralChange = !bDryRun || bStructuralChange;
 		}
 
 		ResultsArray.Add(MakeShareable(new FJsonValueObject(ActionResult)));
@@ -959,6 +902,12 @@ FMcpToolResult UEditBlueprintMembersTool::Execute(
 			bCompileSuccess = FMcpAssetModifier::CompileBlueprint(Blueprint, CompileError);
 			if (!bCompileSuccess)
 			{
+				if (bRollbackOnError && Transaction.IsValid())
+				{
+					Transaction->Cancel();
+					Transaction.Reset();
+				}
+
 				TSharedPtr<FJsonObject> DiagItem = MakeShareable(new FJsonObject);
 				DiagItem->SetStringField(TEXT("severity"), TEXT("error"));
 				DiagItem->SetStringField(TEXT("code"), TEXT("UEBMCP_BLUEPRINT_COMPILE_FAILED"));
@@ -1002,6 +951,7 @@ FMcpToolResult UEditBlueprintMembersTool::Execute(
 
 	Response->SetArrayField(TEXT("results"), ResultsArray);
 	Response->SetObjectField(TEXT("compile"), CompileResult);
+	Response->SetArrayField(TEXT("implemented_interfaces"), BlueprintToolUtils::BuildImplementedInterfacesArray(WorkingBlueprint));
 
 	TArray<TSharedPtr<FJsonValue>> WarningsArray;
 	for (const FString& W : Warnings)
@@ -1047,6 +997,22 @@ bool UEditBlueprintMembersTool::ExecuteAction(
 	{
 		return SetVariableProperties(Blueprint, Action, OutResult, OutError);
 	}
+	else if (ActionName == TEXT("create_local_variable"))
+	{
+		return CreateLocalVariable(Blueprint, Action, OutResult, OutError);
+	}
+	else if (ActionName == TEXT("rename_local_variable"))
+	{
+		return RenameLocalVariable(Blueprint, Action, OutResult, OutError);
+	}
+	else if (ActionName == TEXT("delete_local_variable"))
+	{
+		return DeleteLocalVariable(Blueprint, Action, OutResult, OutError);
+	}
+	else if (ActionName == TEXT("set_local_variable_properties"))
+	{
+		return SetLocalVariableProperties(Blueprint, Action, OutResult, OutError);
+	}
 	else if (ActionName == TEXT("create_function"))
 	{
 		return CreateFunction(Blueprint, Action, OutResult, OutError);
@@ -1067,6 +1033,14 @@ bool UEditBlueprintMembersTool::ExecuteAction(
 	{
 		return CreateEventDispatcher(Blueprint, Action, OutResult, OutError);
 	}
+	else if (ActionName == TEXT("add_interface"))
+	{
+		return AddInterface(Blueprint, Action, OutResult, OutError);
+	}
+	else if (ActionName == TEXT("remove_interface"))
+	{
+		return RemoveInterface(Blueprint, Action, OutResult, OutError);
+	}
 
 	OutError = FString::Printf(TEXT("Unsupported action: '%s'"), *ActionName);
 	return false;
@@ -1079,238 +1053,7 @@ bool UEditBlueprintMembersTool::ParseTypeDescriptor(
 	FEdGraphPinType& OutPinType,
 	FString& OutError)
 {
-	if (!TypeObj.IsValid())
-	{
-		OutError = TEXT("Type descriptor is null");
-		return false;
-	}
-
-	OutPinType.ResetToDefaults();
-
-	FString Container = TEXT("single");
-	TypeObj->TryGetStringField(TEXT("container"), Container);
-
-	FString Kind;
-	const bool bHasKind = TypeObj->TryGetStringField(TEXT("kind"), Kind);
-	const bool bIsMap = Container.Equals(TEXT("map"), ESearchCase::IgnoreCase);
-	if (!bHasKind && !bIsMap)
-	{
-		OutError = TEXT("Type descriptor missing 'kind' field");
-		return false;
-	}
-
-	if (bHasKind)
-	{
-		if (Kind == TEXT("bool"))
-		{
-			OutPinType.PinCategory = UEdGraphSchema_K2::PC_Boolean;
-		}
-		else if (Kind == TEXT("byte"))
-		{
-			OutPinType.PinCategory = UEdGraphSchema_K2::PC_Byte;
-		}
-		else if (Kind == TEXT("int"))
-		{
-			OutPinType.PinCategory = UEdGraphSchema_K2::PC_Int;
-		}
-		else if (Kind == TEXT("int64"))
-		{
-			OutPinType.PinCategory = UEdGraphSchema_K2::PC_Int64;
-		}
-		else if (Kind == TEXT("float") || Kind == TEXT("double"))
-		{
-			OutPinType.PinCategory = UEdGraphSchema_K2::PC_Real;
-			OutPinType.PinSubCategory = (Kind == TEXT("float"))
-				? UEdGraphSchema_K2::PC_Float
-				: UEdGraphSchema_K2::PC_Double;
-		}
-		else if (Kind == TEXT("name"))
-		{
-			OutPinType.PinCategory = UEdGraphSchema_K2::PC_Name;
-		}
-		else if (Kind == TEXT("string"))
-		{
-			OutPinType.PinCategory = UEdGraphSchema_K2::PC_String;
-		}
-		else if (Kind == TEXT("text"))
-		{
-			OutPinType.PinCategory = UEdGraphSchema_K2::PC_Text;
-		}
-		else if (Kind == TEXT("struct"))
-		{
-			OutPinType.PinCategory = UEdGraphSchema_K2::PC_Struct;
-			FString StructPath;
-			if (TypeObj->TryGetStringField(TEXT("struct_path"), StructPath))
-			{
-				UScriptStruct* Struct = FindObject<UScriptStruct>(nullptr, *StructPath);
-				if (!Struct)
-				{
-					Struct = LoadObject<UScriptStruct>(nullptr, *StructPath);
-				}
-				if (Struct)
-				{
-					OutPinType.PinSubCategoryObject = Struct;
-				}
-				else
-				{
-					OutError = FString::Printf(TEXT("Struct not found: '%s'"), *StructPath);
-					return false;
-				}
-			}
-		}
-		else if (Kind == TEXT("object") || Kind == TEXT("soft_object"))
-		{
-			OutPinType.PinCategory = (Kind == TEXT("object"))
-				? UEdGraphSchema_K2::PC_Object
-				: UEdGraphSchema_K2::PC_SoftObject;
-			FString ObjectClassPath;
-			if (TypeObj->TryGetStringField(TEXT("object_class"), ObjectClassPath))
-			{
-				UClass* Class = FindObject<UClass>(nullptr, *ObjectClassPath);
-				if (!Class)
-				{
-					Class = LoadObject<UClass>(nullptr, *ObjectClassPath);
-				}
-				if (Class)
-				{
-					OutPinType.PinSubCategoryObject = Class;
-				}
-				else
-				{
-					OutError = FString::Printf(TEXT("Object class not found: '%s'"), *ObjectClassPath);
-					return false;
-				}
-			}
-		}
-		else if (Kind == TEXT("class") || Kind == TEXT("soft_class"))
-		{
-			OutPinType.PinCategory = (Kind == TEXT("class"))
-				? UEdGraphSchema_K2::PC_Class
-				: UEdGraphSchema_K2::PC_SoftClass;
-			FString ClassPath;
-			if (TypeObj->TryGetStringField(TEXT("class_path"), ClassPath))
-			{
-				UClass* Class = FindObject<UClass>(nullptr, *ClassPath);
-				if (!Class)
-				{
-					Class = LoadObject<UClass>(nullptr, *ClassPath);
-				}
-				if (Class)
-				{
-					OutPinType.PinSubCategoryObject = Class;
-				}
-				else
-				{
-					OutError = FString::Printf(TEXT("Class not found: '%s'"), *ClassPath);
-					return false;
-				}
-			}
-		}
-		else if (Kind == TEXT("enum"))
-		{
-			OutPinType.PinCategory = UEdGraphSchema_K2::PC_Byte;
-			FString EnumPath;
-			if (TypeObj->TryGetStringField(TEXT("enum_path"), EnumPath))
-			{
-				UEnum* Enum = FindObject<UEnum>(nullptr, *EnumPath);
-				if (!Enum)
-				{
-					Enum = LoadObject<UEnum>(nullptr, *EnumPath);
-				}
-				if (Enum)
-				{
-					OutPinType.PinSubCategoryObject = Enum;
-				}
-				else
-				{
-					OutError = FString::Printf(TEXT("Enum not found: '%s'"), *EnumPath);
-					return false;
-				}
-			}
-		}
-		else
-		{
-			OutError = FString::Printf(TEXT("Unknown type kind: '%s'"), *Kind);
-			return false;
-		}
-	}
-
-	if (Container.Equals(TEXT("single"), ESearchCase::IgnoreCase))
-	{
-		OutPinType.ContainerType = EPinContainerType::None;
-	}
-	else if (Container.Equals(TEXT("array"), ESearchCase::IgnoreCase))
-	{
-		OutPinType.ContainerType = EPinContainerType::Array;
-	}
-	else if (Container.Equals(TEXT("set"), ESearchCase::IgnoreCase))
-	{
-		OutPinType.ContainerType = EPinContainerType::Set;
-	}
-	else if (bIsMap)
-	{
-		const TSharedPtr<FJsonObject>* MapKeyTypeObject = nullptr;
-		const bool bHasMapKeyType = TypeObj->TryGetObjectField(TEXT("map_key_type"), MapKeyTypeObject)
-			&& MapKeyTypeObject && (*MapKeyTypeObject).IsValid();
-		if (!bHasKind && !bHasMapKeyType)
-		{
-			OutError = TEXT("Map type descriptor requires 'map_key_type' or top-level 'kind'");
-			return false;
-		}
-
-		FEdGraphPinType KeyType = OutPinType;
-		if (bHasMapKeyType)
-		{
-			if (!ParseTypeDescriptor(*MapKeyTypeObject, KeyType, OutError))
-			{
-				return false;
-			}
-		}
-
-		if (KeyType.IsContainer())
-		{
-			OutError = TEXT("Map key type cannot be a container");
-			return false;
-		}
-
-		const TSharedPtr<FJsonObject>* MapValueTypeObject = nullptr;
-		if (!TypeObj->TryGetObjectField(TEXT("map_value_type"), MapValueTypeObject)
-			|| !MapValueTypeObject || !(*MapValueTypeObject).IsValid())
-		{
-			OutError = TEXT("Map type descriptor requires 'map_value_type'");
-			return false;
-		}
-
-		FEdGraphPinType ValueType;
-		if (!ParseTypeDescriptor(*MapValueTypeObject, ValueType, OutError))
-		{
-			return false;
-		}
-
-		if (ValueType.IsContainer())
-		{
-			OutError = TEXT("Map value type cannot be a container");
-			return false;
-		}
-
-		OutPinType.PinCategory = KeyType.PinCategory;
-		OutPinType.PinSubCategory = KeyType.PinSubCategory;
-		OutPinType.PinSubCategoryObject = KeyType.PinSubCategoryObject;
-		OutPinType.PinSubCategoryMemberReference = KeyType.PinSubCategoryMemberReference;
-		OutPinType.bIsReference = KeyType.bIsReference;
-		OutPinType.bIsConst = KeyType.bIsConst;
-		OutPinType.bIsWeakPointer = KeyType.bIsWeakPointer;
-		OutPinType.bIsUObjectWrapper = KeyType.bIsUObjectWrapper;
-		OutPinType.PinValueType = FEdGraphTerminalType::FromPinType(ValueType);
-		OutPinType.ContainerType = EPinContainerType::Map;
-	}
-	else
-	{
-		OutError = FString::Printf(TEXT("Unknown container kind: '%s'"), *Container);
-		return false;
-	}
-
-	return true;
+	return McpTypeDescriptorUtils::ParseTypeDescriptor(TypeObj, OutPinType, OutError);
 }
 
 // ========== 变量操作 ==========
@@ -1457,6 +1200,210 @@ bool UEditBlueprintMembersTool::SetVariableProperties(
 
 // ========== 函数操作 ==========
 
+bool UEditBlueprintMembersTool::CreateLocalVariable(
+	UBlueprint* Blueprint,
+	const TSharedPtr<FJsonObject>& Action,
+	TSharedPtr<FJsonObject>& OutResult,
+	FString& OutError)
+{
+	FString FunctionName;
+	FString VarName;
+	if (!Action->TryGetStringField(TEXT("function_name"), FunctionName) || FunctionName.IsEmpty())
+	{
+		OutError = TEXT("'function_name' is required for create_local_variable");
+		return false;
+	}
+	if (!Action->TryGetStringField(TEXT("name"), VarName) || VarName.IsEmpty())
+	{
+		OutError = TEXT("'name' is required for create_local_variable");
+		return false;
+	}
+
+	const TSharedPtr<FJsonObject>* TypeObject = nullptr;
+	if (!Action->TryGetObjectField(TEXT("type"), TypeObject) || !TypeObject || !(*TypeObject).IsValid())
+	{
+		OutError = TEXT("'type' is required for create_local_variable");
+		return false;
+	}
+
+	UEdGraph* Graph = FMcpAssetModifier::FindGraphByName(Blueprint, FunctionName);
+	if (!Graph)
+	{
+		OutError = FString::Printf(TEXT("Function '%s' not found"), *FunctionName);
+		return false;
+	}
+	if (!FBlueprintEditorUtils::DoesSupportLocalVariables(Graph))
+	{
+		OutError = FString::Printf(TEXT("Graph '%s' does not support local variables"), *FunctionName);
+		return false;
+	}
+
+	const FName VarFName(*VarName);
+	if (FBlueprintEditorUtils::FindLocalVariable(Blueprint, Graph, VarFName))
+	{
+		OutError = FString::Printf(TEXT("Local variable '%s' already exists"), *VarName);
+		return false;
+	}
+
+	FEdGraphPinType PinType;
+	if (!ParseTypeDescriptor(*TypeObject, PinType, OutError))
+	{
+		return false;
+	}
+
+	const FString DefaultValueString = Action->HasField(TEXT("default_value"))
+		? JsonValueToDefaultString(Action->TryGetField(TEXT("default_value")), PinType)
+		: FString();
+
+	if (!FBlueprintEditorUtils::AddLocalVariable(Blueprint, Graph, VarFName, PinType, DefaultValueString))
+	{
+		OutError = FString::Printf(TEXT("Failed to add local variable '%s'"), *VarName);
+		return false;
+	}
+
+	if (!ApplyLocalVariableActionSettings(Blueprint, Graph, VarFName, Action, false, OutError))
+	{
+		if (const UStruct* Scope = ResolveLocalVariableScope(Blueprint, Graph))
+		{
+			FBlueprintEditorUtils::RemoveLocalVariable(Blueprint, Scope, VarFName);
+		}
+		return false;
+	}
+
+	OutResult->SetStringField(TEXT("function_name"), FunctionName);
+	OutResult->SetStringField(TEXT("name"), VarName);
+	FBlueprintEditorUtils::MarkBlueprintAsStructurallyModified(Blueprint);
+	return true;
+}
+
+bool UEditBlueprintMembersTool::RenameLocalVariable(
+	UBlueprint* Blueprint,
+	const TSharedPtr<FJsonObject>& Action,
+	TSharedPtr<FJsonObject>& OutResult,
+	FString& OutError)
+{
+	FString FunctionName;
+	FString OldName;
+	FString NewName;
+	if (!Action->TryGetStringField(TEXT("function_name"), FunctionName) || FunctionName.IsEmpty()
+		|| !Action->TryGetStringField(TEXT("name"), OldName) || OldName.IsEmpty()
+		|| !Action->TryGetStringField(TEXT("new_name"), NewName) || NewName.IsEmpty())
+	{
+		OutError = TEXT("'function_name', 'name', and 'new_name' are required for rename_local_variable");
+		return false;
+	}
+
+	UEdGraph* Graph = FMcpAssetModifier::FindGraphByName(Blueprint, FunctionName);
+	if (!Graph)
+	{
+		OutError = FString::Printf(TEXT("Function '%s' not found"), *FunctionName);
+		return false;
+	}
+
+	const UStruct* Scope = ResolveLocalVariableScope(Blueprint, Graph);
+	if (!Scope)
+	{
+		OutError = FString::Printf(TEXT("Could not resolve local-variable scope for '%s'"), *FunctionName);
+		return false;
+	}
+
+	const FName OldVarName(*OldName);
+	const FName NewVarName(*NewName);
+	if (!FBlueprintEditorUtils::FindLocalVariable(Blueprint, Graph, OldVarName))
+	{
+		OutError = FString::Printf(TEXT("Local variable '%s' not found"), *OldName);
+		return false;
+	}
+	if (OldVarName != NewVarName && FBlueprintEditorUtils::FindLocalVariable(Blueprint, Graph, NewVarName))
+	{
+		OutError = FString::Printf(TEXT("Local variable '%s' already exists"), *NewName);
+		return false;
+	}
+
+	FBlueprintEditorUtils::RenameLocalVariable(Blueprint, Scope, OldVarName, NewVarName);
+	OutResult->SetStringField(TEXT("function_name"), FunctionName);
+	OutResult->SetStringField(TEXT("name"), OldName);
+	OutResult->SetStringField(TEXT("new_name"), NewName);
+	FBlueprintEditorUtils::MarkBlueprintAsStructurallyModified(Blueprint);
+	return true;
+}
+
+bool UEditBlueprintMembersTool::DeleteLocalVariable(
+	UBlueprint* Blueprint,
+	const TSharedPtr<FJsonObject>& Action,
+	TSharedPtr<FJsonObject>& OutResult,
+	FString& OutError)
+{
+	FString FunctionName;
+	FString VarName;
+	if (!Action->TryGetStringField(TEXT("function_name"), FunctionName) || FunctionName.IsEmpty()
+		|| !Action->TryGetStringField(TEXT("name"), VarName) || VarName.IsEmpty())
+	{
+		OutError = TEXT("'function_name' and 'name' are required for delete_local_variable");
+		return false;
+	}
+
+	UEdGraph* Graph = FMcpAssetModifier::FindGraphByName(Blueprint, FunctionName);
+	if (!Graph)
+	{
+		OutError = FString::Printf(TEXT("Function '%s' not found"), *FunctionName);
+		return false;
+	}
+
+	const UStruct* Scope = ResolveLocalVariableScope(Blueprint, Graph);
+	if (!Scope)
+	{
+		OutError = FString::Printf(TEXT("Could not resolve local-variable scope for '%s'"), *FunctionName);
+		return false;
+	}
+
+	const FName VarFName(*VarName);
+	if (!FBlueprintEditorUtils::FindLocalVariable(Blueprint, Graph, VarFName))
+	{
+		OutError = FString::Printf(TEXT("Local variable '%s' not found"), *VarName);
+		return false;
+	}
+
+	FBlueprintEditorUtils::RemoveLocalVariable(Blueprint, Scope, VarFName);
+	OutResult->SetStringField(TEXT("function_name"), FunctionName);
+	OutResult->SetStringField(TEXT("name"), VarName);
+	FBlueprintEditorUtils::MarkBlueprintAsStructurallyModified(Blueprint);
+	return true;
+}
+
+bool UEditBlueprintMembersTool::SetLocalVariableProperties(
+	UBlueprint* Blueprint,
+	const TSharedPtr<FJsonObject>& Action,
+	TSharedPtr<FJsonObject>& OutResult,
+	FString& OutError)
+{
+	FString FunctionName;
+	FString VarName;
+	if (!Action->TryGetStringField(TEXT("function_name"), FunctionName) || FunctionName.IsEmpty()
+		|| !Action->TryGetStringField(TEXT("name"), VarName) || VarName.IsEmpty())
+	{
+		OutError = TEXT("'function_name' and 'name' are required for set_local_variable_properties");
+		return false;
+	}
+
+	UEdGraph* Graph = FMcpAssetModifier::FindGraphByName(Blueprint, FunctionName);
+	if (!Graph)
+	{
+		OutError = FString::Printf(TEXT("Function '%s' not found"), *FunctionName);
+		return false;
+	}
+
+	if (!ApplyLocalVariableActionSettings(Blueprint, Graph, FName(*VarName), Action, true, OutError))
+	{
+		return false;
+	}
+
+	OutResult->SetStringField(TEXT("function_name"), FunctionName);
+	OutResult->SetStringField(TEXT("name"), VarName);
+	FBlueprintEditorUtils::MarkBlueprintAsStructurallyModified(Blueprint);
+	return true;
+}
+
 bool UEditBlueprintMembersTool::CreateFunction(
 	UBlueprint* Blueprint,
 	const TSharedPtr<FJsonObject>& Action,
@@ -1593,6 +1540,110 @@ bool UEditBlueprintMembersTool::SetFunctionSignature(
 }
 
 // ========== 事件分发器操作 ==========
+
+bool UEditBlueprintMembersTool::AddInterface(
+	UBlueprint* Blueprint,
+	const TSharedPtr<FJsonObject>& Action,
+	TSharedPtr<FJsonObject>& OutResult,
+	FString& OutError)
+{
+	FString InterfacePath;
+	if (!Action->TryGetStringField(TEXT("interface_path"), InterfacePath) || InterfacePath.IsEmpty())
+	{
+		OutError = TEXT("'interface_path' is required for add_interface");
+		return false;
+	}
+
+	FString ResolveError;
+	UClass* InterfaceClass = BlueprintToolUtils::ResolveInterfaceClass(InterfacePath, ResolveError);
+	if (!InterfaceClass)
+	{
+		OutError = ResolveError;
+		return false;
+	}
+
+	const FTopLevelAssetPath InterfaceAssetPath = InterfaceClass->GetClassPathName();
+	const bool bAlreadyImplemented = Blueprint->ImplementedInterfaces.ContainsByPredicate([&](const FBPInterfaceDescription& Description)
+	{
+		return Description.Interface.Get() == InterfaceClass;
+	});
+	if (bAlreadyImplemented)
+	{
+		OutError = FString::Printf(TEXT("Interface '%s' already exists"), *InterfacePath);
+		return false;
+	}
+
+	if (!FBlueprintEditorUtils::ImplementNewInterface(Blueprint, InterfaceAssetPath))
+	{
+		OutError = FString::Printf(TEXT("Failed to implement interface '%s'"), *InterfacePath);
+		return false;
+	}
+
+	const bool bSyncGraphs = GetBoolArgOrDefault(Action, TEXT("sync_graphs"), true);
+	if (bSyncGraphs)
+	{
+		FBlueprintEditorUtils::ConformImplementedInterfaces(Blueprint);
+	}
+
+	TArray<UEdGraph*> TouchedGraphs;
+	FBlueprintEditorUtils::GetInterfaceGraphs(Blueprint, InterfaceAssetPath, TouchedGraphs);
+
+	OutResult->SetStringField(TEXT("interface_path"), InterfaceClass->GetPathName());
+	SetTouchedGraphsResult(TouchedGraphs, OutResult);
+	OutResult->SetArrayField(TEXT("implemented_interfaces"), BlueprintToolUtils::BuildImplementedInterfacesArray(Blueprint));
+	FBlueprintEditorUtils::MarkBlueprintAsStructurallyModified(Blueprint);
+	return true;
+}
+
+bool UEditBlueprintMembersTool::RemoveInterface(
+	UBlueprint* Blueprint,
+	const TSharedPtr<FJsonObject>& Action,
+	TSharedPtr<FJsonObject>& OutResult,
+	FString& OutError)
+{
+	FString InterfacePath;
+	if (!Action->TryGetStringField(TEXT("interface_path"), InterfacePath) || InterfacePath.IsEmpty())
+	{
+		OutError = TEXT("'interface_path' is required for remove_interface");
+		return false;
+	}
+
+	FString ResolveError;
+	UClass* InterfaceClass = BlueprintToolUtils::ResolveInterfaceClass(InterfacePath, ResolveError);
+	if (!InterfaceClass)
+	{
+		OutError = ResolveError;
+		return false;
+	}
+
+	const FTopLevelAssetPath InterfaceAssetPath = InterfaceClass->GetClassPathName();
+	TArray<UEdGraph*> TouchedGraphs;
+	FBlueprintEditorUtils::GetInterfaceGraphs(Blueprint, InterfaceAssetPath, TouchedGraphs);
+	const bool bImplemented = Blueprint->ImplementedInterfaces.ContainsByPredicate([&](const FBPInterfaceDescription& Description)
+	{
+		return Description.Interface.Get() == InterfaceClass;
+	});
+	if (!bImplemented)
+	{
+		OutError = FString::Printf(TEXT("Interface '%s' not found"), *InterfacePath);
+		return false;
+	}
+
+	const bool bPreserveFunctions = GetBoolArgOrDefault(Action, TEXT("preserve_functions"), false);
+	FBlueprintEditorUtils::RemoveInterface(Blueprint, InterfaceAssetPath, bPreserveFunctions);
+
+	const bool bSyncGraphs = GetBoolArgOrDefault(Action, TEXT("sync_graphs"), true);
+	if (bSyncGraphs)
+	{
+		FBlueprintEditorUtils::ConformImplementedInterfaces(Blueprint);
+	}
+
+	OutResult->SetStringField(TEXT("interface_path"), InterfaceClass->GetPathName());
+	SetTouchedGraphsResult(TouchedGraphs, OutResult);
+	OutResult->SetArrayField(TEXT("implemented_interfaces"), BlueprintToolUtils::BuildImplementedInterfacesArray(Blueprint));
+	FBlueprintEditorUtils::MarkBlueprintAsStructurallyModified(Blueprint);
+	return true;
+}
 
 bool UEditBlueprintMembersTool::CreateEventDispatcher(
 	UBlueprint* Blueprint,

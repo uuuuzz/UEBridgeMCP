@@ -190,6 +190,12 @@ curl -s -X POST http://127.0.0.1:8080/mcp \
 
 9. **Epic C++ 风格。** PascalCase、`U/A/F/T/E/S/I` 前缀、所有字符串字面量都包 `TEXT()`、使用 `nullptr`、Tab 缩进、大括号换行。放在 `Public/` 下的头文件必须自洽可单独包含。
 
+10. **写接口优先批处理。** 新的写工具优先采用 `operations[]` 或 `actions[]` 这种 envelope，而不是继续扩散很多一次只差一个参数的 `add-*` 变体。默认支持 `dry_run`；当一次调用会跨多步修改时，再补 `save` 和 `rollback_on_error`。
+
+11. **统计口径以注册源码为准。** 工具清单、分组和数量，一律以 `RegisterBuiltInTools()` 和运行中的 `tools/list` 为准。README 与摘要型文档只是辅助说明，可能会滞后。
+
+12. **闭源对标卫生规则。** 对标第三方或闭源插件时，只能借鉴能力目标与黑盒行为，不要复写代码、schema 描述、prompt 文本、错误措辞、截图或营销文案。相关工作需要附一段 provenance 说明，模板见 [ProvenanceTemplate](./ProvenanceTemplate.zh-CN.md)。
+
 ---
 
 ## 文件应该放哪
@@ -200,7 +206,7 @@ Source/UEBridgeMCPEditor/
   Private/Tools/<Category>/<ToolName>Tool.cpp
 ```
 
-现有分类包括：`Analysis`、`Asset`、`Blueprint`、`Build`、`Debug`、`Level`、`Material`、`PIE`、`Project`、`References`、`Scripting`、`StateTree`、`Widget`、`Write`。如果你的工具实在不适合现有分类，再新增一个。
+现有分类包括：`Analysis`、`Asset`、`Blueprint`、`Build`、`Debug`、`Environment`、`Level`、`Material`、`PIE`、`Project`、`References`、`Scripting`、`StateTree`、`StaticMesh`、`Widget`、`Write`。如果你的工具实在不适合现有分类，再新增一个。
 
 ---
 
@@ -246,7 +252,9 @@ curl -s -X POST http://127.0.0.1:8080/mcp \
 - [ ] 必填参数校验到位，错误消息以 `UEBMCP_` 开头。
 - [ ] 所有修改操作都包在 `FScopedTransaction` 里。
 - [ ] 没有在 GameThread 上阻塞等待异步操作。
+- [ ] 新写接口优先采用 `operations[]` / `actions[]`；默认支持 `dry_run`；多步修改时补 `save` / `rollback_on_error`。
 - [ ] 已同步更新 `Tools-Reference.md` **和** `Tools-Reference.zh-CN.md`。
+- [ ] 如果这次工作参考了闭源或第三方产品的能力面，已按 `ProvenanceTemplate` 补充 provenance 说明。
 - [ ] 若存在测试 harness，则补充自动化覆盖；否则写明人工验证步骤。
 - [ ] `UEBridgeMCP.uplugin` 里的 `VersionName` 和 `Source/UEBridgeMCP/Public/UEBridgeMCP.h` 里的 `UEBRIDGEMCP_VERSION` 已按 semver 同步递增（参考 [README](../README.zh-CN.md#版本管理)）。
 
@@ -255,5 +263,7 @@ curl -s -X POST http://127.0.0.1:8080/mcp \
 延伸阅读：
 
 - [架构说明](./Architecture.zh-CN.md) - 服务、注册表、会话管理如何协作。
-- [工具参考](./Tools-Reference.zh-CN.md) - 46 个内置工具总览。
+- [工具参考](./Tools-Reference.zh-CN.md) - 运行时基础工具面与条件工具面总览。
+- [能力矩阵](./CapabilityMatrix.zh-CN.md) - 当前差距的权威跟踪表。
+- [Provenance 模板](./ProvenanceTemplate.zh-CN.md) - 对标闭源能力时应附带的说明格式。
 - [故障排查](./Troubleshooting.zh-CN.md) - 已修复的坑位，不要回归。

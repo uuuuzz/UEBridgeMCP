@@ -1,12 +1,10 @@
 // Copyright uuuuzz 2024-2026. All Rights Reserved.
 
 #include "Tools/Asset/CompileAssetsTool.h"
+#include "Tools/Blueprint/BlueprintCompileUtils.h"
 #include "Utils/McpAssetModifier.h"
 #include "Engine/Blueprint.h"
 #include "Animation/AnimBlueprint.h"
-#include "Kismet2/KismetEditorUtilities.h"
-#include "Kismet2/BlueprintEditorUtils.h"
-#include "Serialization/JsonSerializer.h"
 
 FString UCompileAssetsTool::GetToolDescription() const
 {
@@ -178,34 +176,39 @@ FMcpToolResult UCompileAssetsTool::Execute(
 			}
 		}
 
-		FMcpAssetModifier::RefreshBlueprintNodes(Blueprint);
-
-		FString CompileError;
-		const bool bCompileSuccess = FMcpAssetModifier::CompileBlueprint(Blueprint, CompileError);
+		const BlueprintCompileUtils::FCompileReport CompileReport = [&]()
+		{
+			BlueprintCompileUtils::FCompileReport Report;
+			BlueprintCompileUtils::CompileBlueprintWithReport(Blueprint, AssetPath, Context.SessionId, MaxDiagnostics, Report);
+			return Report;
+		}();
+		const bool bCompileSuccess = CompileReport.bSuccess;
 		AssetResult->SetBoolField(TEXT("compiled"), true);
 		AssetResult->SetBoolField(TEXT("success"), bCompileSuccess);
+		DiagnosticsArray = bIncludeDiagnostics ? CompileReport.Diagnostics : TArray<TSharedPtr<FJsonValue>>();
+		WarningCount = CompileReport.WarningCount;
+		ErrorCount = CompileReport.ErrorCount;
 
 		if (!bCompileSuccess)
 		{
-			ErrorCount = 1;
-			AssetResult->SetStringField(TEXT("error"), CompileError);
-			if (bIncludeDiagnostics && MaxDiagnostics > 0)
+			AssetResult->SetStringField(TEXT("error"), CompileReport.ErrorMessage);
+			if (!bIncludeDiagnostics && MaxDiagnostics > 0)
 			{
 				TSharedPtr<FJsonObject> Diagnostic = MakeShareable(new FJsonObject);
 				Diagnostic->SetStringField(TEXT("severity"), TEXT("error"));
-				Diagnostic->SetStringField(TEXT("code"), TEXT("UEBMCP_BLUEPRINT_COMPILE_FAILED"));
-				Diagnostic->SetStringField(TEXT("message"), CompileError);
+				Diagnostic->SetStringField(TEXT("code"), TEXT("UEBMCP_BLUEPRINT_COMPILE_ERROR"));
+				Diagnostic->SetStringField(TEXT("message"), CompileReport.ErrorMessage);
 				Diagnostic->SetStringField(TEXT("asset_path"), AssetPath);
 				DiagnosticsArray.Add(MakeShareable(new FJsonValueObject(Diagnostic)));
 			}
 		}
-		else if (Blueprint->Status == BS_UpToDateWithWarnings)
+		else if (!bIncludeDiagnostics)
 		{
-			WarningCount = 1;
-			if (bIncludeDiagnostics && MaxDiagnostics > 0)
+			if (WarningCount > 0 && MaxDiagnostics > 0)
 			{
 				TSharedPtr<FJsonObject> Diagnostic = MakeShareable(new FJsonObject);
 				Diagnostic->SetStringField(TEXT("severity"), TEXT("warning"));
+				Diagnostic->SetStringField(TEXT("code"), TEXT("UEBMCP_BLUEPRINT_COMPILE_WARNING"));
 				Diagnostic->SetStringField(TEXT("message"), TEXT("Blueprint compiled with warnings"));
 				Diagnostic->SetStringField(TEXT("asset_path"), AssetPath);
 				DiagnosticsArray.Add(MakeShareable(new FJsonValueObject(Diagnostic)));

@@ -1,0 +1,752 @@
+[
+  {
+    "label": "NPR_WallLine_AB_Wall_Right_1",
+    "loc": [
+      -550.0,
+      1070.0,
+      118.0
+    ],
+    "scale": [
+      0.025,
+      0.018,
+      0.95
+    ],
+    "dist": 1931.776920448183,
+    "hidden": false
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Left_1",
+    "loc": [
+      -650.0,
+      -1070.0,
+      118.0
+    ],
+    "scale": [
+      0.025,
+      0.018,
+      0.95
+    ],
+    "dist": 2045.7507363156274,
+    "hidden": false
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Right_2",
+    "loc": [
+      -200.0,
+      1070.0,
+      118.0
+    ],
+    "scale": [
+      0.025,
+      0.018,
+      0.95
+    ],
+    "dist": 2230.740355259573,
+    "hidden": false
+  },
+  {
+    "label": "NPR_SkySphere",
+    "loc": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1200.0,
+      1200.0,
+      1200.0
+    ],
+    "dist": 2278.4772382807705,
+    "hidden": true
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Left_2",
+    "loc": [
+      -300.0,
+      -1070.0,
+      118.0
+    ],
+    "scale": [
+      0.025,
+      0.018,
+      0.95
+    ],
+    "dist": 2315.067285705379,
+    "hidden": false
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Right_Top",
+    "loc": [
+      150.0,
+      1070.0,
+      168.0
+    ],
+    "scale": [
+      20.16,
+      0.018,
+      0.025
+    ],
+    "dist": 2531.2988661732466,
+    "hidden": false
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Right_3",
+    "loc": [
+      150.0,
+      1070.0,
+      118.0
+    ],
+    "scale": [
+      0.025,
+      0.018,
+      0.95
+    ],
+    "dist": 2542.762866409478,
+    "hidden": false
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Left_Top",
+    "loc": [
+      50.0,
+      -1070.0,
+      168.0
+    ],
+    "scale": [
+      21.119999999999997,
+      0.018,
+      0.025
+    ],
+    "dist": 2592.452112315603,
+    "hidden": false
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Left_3",
+    "loc": [
+      50.0,
+      -1070.0,
+      118.0
+    ],
+    "scale": [
+      0.025,
+      0.018,
+      0.95
+    ],
+    "dist": 2603.6468653699203,
+    "hidden": false
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Right_4",
+    "loc": [
+      500.0,
+      1070.0,
+      118.0
+    ],
+    "scale": [
+      0.025,
+      0.018,
+      0.95
+    ],
+    "dist": 2863.578784842192,
+    "hidden": false
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Left_4",
+    "loc": [
+      400.0,
+      -1070.0,
+      118.0
+    ],
+    "scale": [
+      0.025,
+      0.018,
+      0.95
+    ],
+    "dist": 2905.7559191642285,
+    "hidden": false
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Back_Top",
+    "loc": [
+      920.0,
+      0.0,
+      168.0
+    ],
+    "scale": [
+      0.018,
+      23.04,
+      0.025
+    ],
+    "dist": 3127.8886134280274,
+    "hidden": false
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Back_3",
+    "loc": [
+      920.0,
+      0.0,
+      118.0
+    ],
+    "scale": [
+      0.018,
+      0.025,
+      0.95
+    ],
+    "dist": 3137.1732854456236,
+    "hidden": false
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Back_4",
+    "loc": [
+      920.0,
+      400.0,
+      118.0
+    ],
+    "scale": [
+      0.018,
+      0.025,
+      0.95
+    ],
+    "dist": 3139.9161358541414,
+    "hidden": false
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Back_2",
+    "loc": [
+      920.0,
+      -400.0,
+      118.0
+    ],
+    "scale": [
+      0.018,
+      0.025,
+      0.95
+    ],
+    "dist": 3185.065008069721,
+    "hidden": false
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Right_5",
+    "loc": [
+      850.0,
+      1070.0,
+      118.0
+    ],
+    "scale": [
+      0.025,
+      0.018,
+      0.95
+    ],
+    "dist": 3190.5366193174505,
+    "hidden": false
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Back_5",
+    "loc": [
+      920.0,
+      800.0,
+      118.0
+    ],
+    "scale": [
+      0.018,
+      0.025,
+      0.95
+    ],
+    "dist": 3193.163080314051,
+    "hidden": false
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Left_5",
+    "loc": [
+      750.0,
+      -1070.0,
+      118.0
+    ],
+    "scale": [
+      0.025,
+      0.018,
+      0.95
+    ],
+    "dist": 3217.5857290778267,
+    "hidden": false
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Back_1",
+    "loc": [
+      920.0,
+      -800.0,
+      118.0
+    ],
+    "scale": [
+      0.018,
+      0.025,
+      0.95
+    ],
+    "dist": 3281.375014890352,
+    "hidden": false
+  },
+  {
+    "label": "NPR_Window_AB_Building_C_3_Hi",
+    "loc": [
+      1306.7,
+      323.0,
+      500.0
+    ],
+    "scale": [
+      0.02,
+      0.23712,
+      0.01925
+    ],
+    "dist": 3469.7722354078023,
+    "hidden": false
+  },
+  {
+    "label": "NPR_Window_AB_Building_C_3",
+    "loc": [
+      1307.5,
+      380.0,
+      490.0
+    ],
+    "scale": [
+      0.035,
+      1.976,
+      0.055
+    ],
+    "dist": 3474.071589524624,
+    "hidden": false
+  },
+  {
+    "label": "NPR_Window_AB_Building_C_2",
+    "loc": [
+      1307.5,
+      380.0,
+      330.0
+    ],
+    "scale": [
+      0.035,
+      1.976,
+      0.055
+    ],
+    "dist": 3488.5346999600392,
+    "hidden": false
+  },
+  {
+    "label": "NPR_Window_AB_Building_C_1_Hi",
+    "loc": [
+      1306.7,
+      323.0,
+      180.0
+    ],
+    "scale": [
+      0.02,
+      0.23712,
+      0.01925
+    ],
+    "dist": 3505.070791435336,
+    "hidden": false
+  },
+  {
+    "label": "NPR_Window_AB_Building_B_4",
+    "loc": [
+      1337.5,
+      -150.0,
+      702.5
+    ],
+    "scale": [
+      0.035,
+      2.08,
+      0.055
+    ],
+    "dist": 3505.7652321917362,
+    "hidden": false
+  },
+  {
+    "label": "NPR_Window_AB_Building_C_1",
+    "loc": [
+      1307.5,
+      380.0,
+      170.0
+    ],
+    "scale": [
+      0.035,
+      1.976,
+      0.055
+    ],
+    "dist": 3510.2386381139986,
+    "hidden": false
+  },
+  {
+    "label": "NPR_Window_AB_Building_B_3",
+    "loc": [
+      1337.5,
+      -150.0,
+      527.5
+    ],
+    "scale": [
+      0.035,
+      2.08,
+      0.055
+    ],
+    "dist": 3511.2364660327007,
+    "hidden": false
+  },
+  {
+    "label": "NPR_Window_AB_Building_B_3_Hi",
+    "loc": [
+      1336.7,
+      -210.0,
+      537.5
+    ],
+    "scale": [
+      0.02,
+      0.2496,
+      0.01925
+    ],
+    "dist": 3516.0164033296114,
+    "hidden": false
+  },
+  {
+    "label": "NPR_Window_AB_Building_A_2",
+    "loc": [
+      1247.5,
+      -650.0,
+      360.0
+    ],
+    "scale": [
+      0.035,
+      1.82,
+      0.055
+    ],
+    "dist": 3518.696661864379,
+    "hidden": false
+  },
+  {
+    "label": "NPR_Window_AB_Building_B_2",
+    "loc": [
+      1337.5,
+      -150.0,
+      352.5
+    ],
+    "scale": [
+      0.035,
+      2.08,
+      0.055
+    ],
+    "dist": 3525.3968822745674,
+    "hidden": false
+  },
+  {
+    "label": "NPR_Window_AB_Building_A_1",
+    "loc": [
+      1247.5,
+      -650.0,
+      180.0
+    ],
+    "scale": [
+      0.035,
+      1.82,
+      0.055
+    ],
+    "dist": 3541.880116528375,
+    "hidden": false
+  },
+  {
+    "label": "NPR_Window_AB_Building_B_1",
+    "loc": [
+      1337.5,
+      -150.0,
+      177.5
+    ],
+    "scale": [
+      0.035,
+      2.08,
+      0.055
+    ],
+    "dist": 3548.142448479862,
+    "hidden": false
+  },
+  {
+    "label": "NPR_Window_AB_Building_B_1_Hi",
+    "loc": [
+      1336.7,
+      -210.0,
+      187.5
+    ],
+    "scale": [
+      0.02,
+      0.2496,
+      0.01925
+    ],
+    "dist": 3551.88747890326,
+    "hidden": false
+  },
+  {
+    "label": "NPR_Window_AB_Building_A_1_Hi",
+    "loc": [
+      1246.7,
+      -702.5,
+      190.0
+    ],
+    "scale": [
+      0.02,
+      0.2184,
+      0.01925
+    ],
+    "dist": 3552.242623877655,
+    "hidden": false
+  },
+  {
+    "label": "NPR_Window_AB_Building_D_5_Hi",
+    "loc": [
+      1391.7,
+      797.5,
+      892.0
+    ],
+    "scale": [
+      0.02,
+      0.2184,
+      0.01925
+    ],
+    "dist": 3602.008101610578,
+    "hidden": false
+  },
+  {
+    "label": "NPR_Window_AB_Building_D_3_Hi",
+    "loc": [
+      1391.7,
+      797.5,
+      540.0
+    ],
+    "scale": [
+      0.02,
+      0.2184,
+      0.01925
+    ],
+    "dist": 3602.8572605879267,
+    "hidden": false
+  },
+  {
+    "label": "NPR_Window_AB_Building_D_4",
+    "loc": [
+      1392.5,
+      850.0,
+      706.0
+    ],
+    "scale": [
+      0.035,
+      1.82,
+      0.055
+    ],
+    "dist": 3608.357590800216,
+    "hidden": false
+  },
+  {
+    "label": "NPR_Window_AB_Building_D_5",
+    "loc": [
+      1392.5,
+      850.0,
+      882.0
+    ],
+    "scale": [
+      0.035,
+      1.82,
+      0.055
+    ],
+    "dist": 3611.736627307435,
+    "hidden": false
+  },
+  {
+    "label": "NPR_Window_AB_Building_D_3",
+    "loc": [
+      1392.5,
+      850.0,
+      530.0
+    ],
+    "scale": [
+      0.035,
+      1.82,
+      0.055
+    ],
+    "dist": 3613.5577401138876,
+    "hidden": false
+  },
+  {
+    "label": "NPR_Window_AB_Building_D_2",
+    "loc": [
+      1392.5,
+      850.0,
+      354.0
+    ],
+    "scale": [
+      0.035,
+      1.82,
+      0.055
+    ],
+    "dist": 3627.300177706339,
+    "hidden": false
+  },
+  {
+    "label": "NPR_Window_AB_Building_D_1_Hi",
+    "loc": [
+      1391.7,
+      797.5,
+      188.0
+    ],
+    "scale": [
+      0.02,
+      0.2184,
+      0.01925
+    ],
+    "dist": 3637.9261284795275,
+    "hidden": false
+  },
+  {
+    "label": "NPR_Window_AB_Building_D_1",
+    "loc": [
+      1392.5,
+      850.0,
+      178.0
+    ],
+    "scale": [
+      0.035,
+      1.82,
+      0.055
+    ],
+    "dist": 3649.4884048644253,
+    "hidden": false
+  },
+  {
+    "label": "NPR_Window_AB_Building_E_4",
+    "loc": [
+      1637.5,
+      80.0,
+      813.3333333333334
+    ],
+    "scale": [
+      0.035,
+      1.248,
+      0.055
+    ],
+    "dist": 3792.587257258152,
+    "hidden": false
+  },
+  {
+    "label": "NPR_Window_AB_Building_E_3",
+    "loc": [
+      1637.5,
+      80.0,
+      606.6666666666666
+    ],
+    "scale": [
+      0.035,
+      1.248,
+      0.055
+    ],
+    "dist": 3793.3876886200674,
+    "hidden": false
+  },
+  {
+    "label": "NPR_Window_AB_Building_E_3_Hi",
+    "loc": [
+      1636.7,
+      44.0,
+      616.6666666666666
+    ],
+    "scale": [
+      0.02,
+      0.14976,
+      0.01925
+    ],
+    "dist": 3793.395885566089,
+    "hidden": false
+  },
+  {
+    "label": "NPR_Window_AB_Building_E_5",
+    "loc": [
+      1637.5,
+      80.0,
+      1020.0
+    ],
+    "scale": [
+      0.035,
+      1.248,
+      0.055
+    ],
+    "dist": 3803.0340879200317,
+    "hidden": false
+  },
+  {
+    "label": "NPR_Window_AB_Building_E_5_Hi",
+    "loc": [
+      1636.7,
+      44.0,
+      1030.0
+    ],
+    "scale": [
+      0.02,
+      0.14976,
+      0.01925
+    ],
+    "dist": 3804.128957988129,
+    "hidden": false
+  },
+  {
+    "label": "NPR_Window_AB_Building_E_2",
+    "loc": [
+      1637.5,
+      80.0,
+      400.0
+    ],
+    "scale": [
+      0.035,
+      1.248,
+      0.055
+    ],
+    "dist": 3805.428284786603,
+    "hidden": false
+  },
+  {
+    "label": "NPR_Window_AB_Building_E_6",
+    "loc": [
+      1637.5,
+      80.0,
+      1226.6666666666667
+    ],
+    "scale": [
+      0.035,
+      1.248,
+      0.055
+    ],
+    "dist": 3824.6360174621595,
+    "hidden": false
+  },
+  {
+    "label": "NPR_Window_AB_Building_E_1_Hi",
+    "loc": [
+      1636.7,
+      44.0,
+      203.33333333333331
+    ],
+    "scale": [
+      0.02,
+      0.14976,
+      0.01925
+    ],
+    "dist": 3827.531377943818,
+    "hidden": false
+  },
+  {
+    "label": "NPR_Window_AB_Building_E_1",
+    "loc": [
+      1637.5,
+      80.0,
+      193.33333333333331
+    ],
+    "scale": [
+      0.035,
+      1.248,
+      0.055
+    ],
+    "dist": 3828.602999444541,
+    "hidden": false
+  }
+]

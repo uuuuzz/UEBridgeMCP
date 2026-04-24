@@ -1,0 +1,22 @@
+{
+  "id": "step6-validation-performance",
+  "title": "Step6 Validation Performance",
+  "description": "Minimal preset used by the Step 6 validation harness.",
+  "resource_uris": [
+    "uebridge://resources/performance-triage-guide"
+  ],
+  "prompt_name": "performance-triage-brief",
+  "tool_calls": [
+    {
+      "name": "query-performance-report",
+      "arguments": {
+        "world": "editor"
+      }
+    }
+  ],
+  "default_arguments": {
+    "goal": "Capture a lightweight editor performance baseline for Step 6 validation.",
+    "world_mode": "editor",
+    "focus_area": "validation"
+  }
+}

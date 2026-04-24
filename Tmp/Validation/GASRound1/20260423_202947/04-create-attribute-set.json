@@ -1,0 +1,64 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "create-as",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Request succeeded"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "tool":  "create-attribute-set",
+                                             "success":  true,
+                                             "dry_run":  false,
+                                             "asset_path":  "/Game/UEBridgeMCPValidation/GASRound1/AS_GASRound1_20260423_202947",
+                                             "parent_class":  "/Script/GameplayAbilities.AttributeSet",
+                                             "created_attributes":  [
+                                                                        {
+                                                                            "name":  "Health",
+                                                                            "category":  "Round1"
+                                                                        },
+                                                                        {
+                                                                            "name":  "Energy",
+                                                                            "category":  "Round1"
+                                                                        }
+                                                                    ],
+                                             "compile":  {
+                                                             "attempted":  true,
+                                                             "success":  true
+                                                         },
+                                             "summary":  {
+                                                             "asset_path":  "/Game/UEBridgeMCPValidation/GASRound1/AS_GASRound1_20260423_202947",
+                                                             "gas_type":  "attribute_set",
+                                                             "valid":  true,
+                                                             "class":  "/Game/UEBridgeMCPValidation/GASRound1/AS_GASRound1_20260423_202947.AS_GASRound1_20260423_202947_C",
+                                                             "attribute_count":  2,
+                                                             "attributes":  [
+                                                                                {
+                                                                                    "name":  "Health",
+                                                                                    "type":  "FGameplayAttributeData",
+                                                                                    "owner_class":  "AS_GASRound1_20260423_202947_C"
+                                                                                },
+                                                                                {
+                                                                                    "name":  "Energy",
+                                                                                    "type":  "FGameplayAttributeData",
+                                                                                    "owner_class":  "AS_GASRound1_20260423_202947_C"
+                                                                                }
+                                                                            ]
+                                                         }
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  155.78140001161955
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "create-attribute-set",
+                                               "mutates":  true,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  0
+                                           }
+                             }
+               }
+}

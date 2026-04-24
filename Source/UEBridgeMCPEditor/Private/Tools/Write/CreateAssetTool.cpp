@@ -8,12 +8,16 @@
 #include "IAssetTools.h"
 #include "Factories/Factory.h"
 #include "Factories/BlueprintFactory.h"
+#include "Factories/BlueprintInterfaceFactory.h"
+#include "Factories/AnimBlueprintFactory.h"
 #include "Factories/MaterialFactoryNew.h"
 #include "Factories/DataTableFactory.h"
 #include "Factories/WorldFactory.h"
 #include "Engine/Blueprint.h"
 #include "Engine/DataTable.h"
 #include "Engine/DataAsset.h"
+#include "Engine/StaticMesh.h"
+#include "FoliageType_InstancedStaticMesh.h"
 #include "Materials/Material.h"
 #include "UObject/SavePackage.h"
 #include "AssetRegistry/AssetRegistryModule.h"
@@ -25,11 +29,12 @@
 #include "Animation/AnimBlueprint.h"
 #include "Animation/Skeleton.h"
 #include "Animation/AnimInstance.h"
+#include "LevelSequence.h"
 
 FString UCreateAssetTool::GetToolDescription() const
 {
-	return TEXT("Create a new asset by class name. Supports any UObject type including Blueprint, Material, DataTable, DataAsset, etc. "
-		"Use full class names (e.g., 'Blueprint', 'Material', 'DataAsset') or Blueprint class paths.");
+	return TEXT("Create a new asset by class name. Supports any UObject type including Blueprint, BlueprintInterface, Material, DataTable, DataAsset, etc. "
+		"Use full class names (e.g., 'Blueprint', 'BlueprintInterface', 'Material', 'DataAsset') or Blueprint class paths.");
 }
 
 TMap<FString, FMcpSchemaProperty> UCreateAssetTool::GetInputSchema() const
@@ -44,7 +49,7 @@ TMap<FString, FMcpSchemaProperty> UCreateAssetTool::GetInputSchema() const
 
 	FMcpSchemaProperty AssetClass;
 	AssetClass.Type = TEXT("string");
-	AssetClass.Description = TEXT("Asset class name. Examples: 'Blueprint', 'Material', 'DataTable', 'DataAsset', 'WidgetBlueprint', 'AnimBlueprint', "
+	AssetClass.Description = TEXT("Asset class name. Examples: 'Blueprint', 'BlueprintInterface', 'Material', 'DataTable', 'DataAsset', 'WidgetBlueprint', 'AnimBlueprint', "
 		"or Blueprint class paths like '/Game/MyDataAsset.MyDataAsset_C'");
 	AssetClass.bRequired = true;
 	Schema.Add(TEXT("asset_class"), AssetClass);
@@ -60,6 +65,12 @@ TMap<FString, FMcpSchemaProperty> UCreateAssetTool::GetInputSchema() const
 	RowStruct.Description = TEXT("Row struct path for DataTables");
 	RowStruct.bRequired = false;
 	Schema.Add(TEXT("row_struct"), RowStruct);
+
+	FMcpSchemaProperty StaticMeshPath;
+	StaticMeshPath.Type = TEXT("string");
+	StaticMeshPath.Description = TEXT("Static mesh asset path for FoliageType_InstancedStaticMesh assets");
+	StaticMeshPath.bRequired = false;
+	Schema.Add(TEXT("static_mesh_path"), StaticMeshPath);
 
 	return Schema;
 }
@@ -77,6 +88,7 @@ FMcpToolResult UCreateAssetTool::Execute(
 	FString AssetClass = GetStringArgOrDefault(Arguments, TEXT("asset_class"));
 	FString ParentClass = GetStringArgOrDefault(Arguments, TEXT("parent_class"));
 	FString RowStruct = GetStringArgOrDefault(Arguments, TEXT("row_struct"));
+	FString StaticMeshPath = GetStringArgOrDefault(Arguments, TEXT("static_mesh_path"));
 
 	if (AssetPath.IsEmpty() || AssetClass.IsEmpty())
 	{
@@ -121,12 +133,12 @@ FMcpToolResult UCreateAssetTool::Execute(
 	// Special handling for known asset types that need factories
 	if (ResolvedClass)
 	{
-		CreatedAsset = CreateAssetOfClass(ResolvedClass, AssetPath, PackagePath, AssetName, ParentClass, RowStruct, AssetTools, Result, ClassError);
+		CreatedAsset = CreateAssetOfClass(ResolvedClass, AssetPath, PackagePath, AssetName, ParentClass, RowStruct, StaticMeshPath, AssetTools, Result, ClassError);
 	}
 	else
 	{
 		// Try special names that don't directly map to classes
-		CreatedAsset = CreateAssetByName(AssetClass, AssetPath, PackagePath, AssetName, ParentClass, RowStruct, AssetTools, Result, ClassError);
+		CreatedAsset = CreateAssetByName(AssetClass, AssetPath, PackagePath, AssetName, ParentClass, RowStruct, StaticMeshPath, AssetTools, Result, ClassError);
 	}
 
 	if (!CreatedAsset)
@@ -154,26 +166,26 @@ UObject* UCreateAssetTool::CreateAssetOfClass(
 	const FString& AssetName,
 	const FString& ParentClass,
 	const FString& RowStruct,
+	const FString& StaticMeshPath,
 	IAssetTools& AssetTools,
 	TSharedPtr<FJsonObject>& Result,
 	FString& OutError)
 {
+	// Check specialized Blueprint assets before generic Blueprint because they inherit UBlueprint.
+	if (AssetClass->IsChildOf<UAnimBlueprint>() || AssetClass == UAnimBlueprint::StaticClass())
+	{
+		return CreateAnimBlueprint(PackagePath, AssetName, ParentClass, AssetTools, Result, OutError);
+	}
+
+	if (AssetClass->IsChildOf<UWidgetBlueprint>() || AssetClass == UWidgetBlueprint::StaticClass())
+	{
+		return CreateWidgetBlueprint(PackagePath, AssetName, AssetTools, Result, OutError);
+	}
+
 	// Blueprint
 	if (AssetClass->IsChildOf<UBlueprint>() || AssetClass == UBlueprint::StaticClass())
 	{
 		return CreateBlueprint(PackagePath, AssetName, ParentClass, AssetTools, Result, OutError);
-	}
-
-	// AnimBlueprint
-	if (AssetClass->IsChildOf<UAnimBlueprint>() || AssetClass == UAnimBlueprint::StaticClass())
-	{
-		return CreateAnimBlueprint(AssetPath, AssetName, ParentClass, Result, OutError);
-	}
-
-	// WidgetBlueprint
-	if (AssetClass->IsChildOf<UWidgetBlueprint>() || AssetClass == UWidgetBlueprint::StaticClass())
-	{
-		return CreateWidgetBlueprint(PackagePath, AssetName, AssetTools, Result, OutError);
 	}
 
 	// Material
@@ -194,6 +206,16 @@ UObject* UCreateAssetTool::CreateAssetOfClass(
 		return CreateLevel(PackagePath, AssetName, AssetTools, OutError);
 	}
 
+	if (AssetClass->IsChildOf<ULevelSequence>() || AssetClass == ULevelSequence::StaticClass())
+	{
+		return CreateLevelSequence(AssetPath, AssetName, OutError);
+	}
+
+	if (AssetClass->IsChildOf<UFoliageType_InstancedStaticMesh>() || AssetClass == UFoliageType_InstancedStaticMesh::StaticClass())
+	{
+		return CreateFoliageTypeInstancedStaticMesh(AssetPath, AssetName, StaticMeshPath, Result, OutError);
+	}
+
 	// DataAsset and subclasses - use direct instantiation
 	if (AssetClass->IsChildOf<UDataAsset>())
 	{
@@ -211,6 +233,7 @@ UObject* UCreateAssetTool::CreateAssetByName(
 	const FString& AssetName,
 	const FString& ParentClass,
 	const FString& RowStruct,
+	const FString& StaticMeshPath,
 	IAssetTools& AssetTools,
 	TSharedPtr<FJsonObject>& Result,
 	FString& OutError)
@@ -221,6 +244,11 @@ UObject* UCreateAssetTool::CreateAssetByName(
 	if (LowerName == TEXT("blueprint"))
 	{
 		return CreateBlueprint(PackagePath, AssetName, ParentClass, AssetTools, Result, OutError);
+	}
+
+	if (LowerName == TEXT("blueprintinterface") || LowerName == TEXT("blueprint_interface"))
+	{
+		return CreateBlueprintInterface(PackagePath, AssetName, AssetTools, OutError);
 	}
 
 	if (LowerName == TEXT("material"))
@@ -238,6 +266,16 @@ UObject* UCreateAssetTool::CreateAssetByName(
 		return CreateLevel(PackagePath, AssetName, AssetTools, OutError);
 	}
 
+	if (LowerName == TEXT("levelsequence") || LowerName == TEXT("level_sequence") || LowerName == TEXT("sequencer"))
+	{
+		return CreateLevelSequence(AssetPath, AssetName, OutError);
+	}
+
+	if (LowerName == TEXT("foliagetype") || LowerName == TEXT("foliage_type") || LowerName == TEXT("foliagetype_instancedstaticmesh") || LowerName == TEXT("foliage_type_instanced_static_mesh"))
+	{
+		return CreateFoliageTypeInstancedStaticMesh(AssetPath, AssetName, StaticMeshPath, Result, OutError);
+	}
+
 	if (LowerName == TEXT("widgetblueprint") || LowerName == TEXT("widget") || LowerName == TEXT("userwidget"))
 	{
 		return CreateWidgetBlueprint(PackagePath, AssetName, AssetTools, Result, OutError);
@@ -245,7 +283,7 @@ UObject* UCreateAssetTool::CreateAssetByName(
 
 	if (LowerName == TEXT("animblueprint") || LowerName == TEXT("animbp"))
 	{
-		return CreateAnimBlueprint(AssetPath, AssetName, ParentClass, Result, OutError);
+		return CreateAnimBlueprint(PackagePath, AssetName, ParentClass, AssetTools, Result, OutError);
 	}
 
 	if (LowerName == TEXT("dataasset"))
@@ -253,7 +291,7 @@ UObject* UCreateAssetTool::CreateAssetByName(
 		return CreateDataAsset(AssetPath, AssetName, UDataAsset::StaticClass(), OutError);
 	}
 
-	OutError = FString::Printf(TEXT("Unknown asset class: %s. Use class names like 'Blueprint', 'Material', 'DataAsset', or full class paths."), *AssetClassName);
+	OutError = FString::Printf(TEXT("Unknown asset class: %s. Use class names like 'Blueprint', 'BlueprintInterface', 'Material', 'DataAsset', or full class paths."), *AssetClassName);
 	return nullptr;
 }
 
@@ -290,6 +328,23 @@ UObject* UCreateAssetTool::CreateBlueprint(
 	else
 	{
 		OutError = TEXT("Failed to create Blueprint");
+	}
+
+	return CreatedAsset;
+}
+
+UObject* UCreateAssetTool::CreateBlueprintInterface(
+	const FString& PackagePath,
+	const FString& AssetName,
+	IAssetTools& AssetTools,
+	FString& OutError)
+{
+	UBlueprintInterfaceFactory* Factory = NewObject<UBlueprintInterfaceFactory>();
+	UObject* CreatedAsset = AssetTools.CreateAsset(AssetName, PackagePath, UBlueprint::StaticClass(), Factory);
+
+	if (!CreatedAsset)
+	{
+		OutError = TEXT("Failed to create BlueprintInterface");
 	}
 
 	return CreatedAsset;
@@ -359,6 +414,67 @@ UObject* UCreateAssetTool::CreateLevel(
 	return CreatedAsset;
 }
 
+UObject* UCreateAssetTool::CreateLevelSequence(
+	const FString& AssetPath,
+	const FString& AssetName,
+	FString& OutError)
+{
+	UPackage* Package = CreatePackage(*AssetPath);
+	if (!Package)
+	{
+		OutError = TEXT("Failed to create package");
+		return nullptr;
+	}
+
+	ULevelSequence* Sequence = NewObject<ULevelSequence>(Package, ULevelSequence::StaticClass(), *AssetName, RF_Public | RF_Standalone | RF_Transactional);
+	if (!Sequence)
+	{
+		OutError = TEXT("Failed to create LevelSequence");
+		return nullptr;
+	}
+
+	Sequence->Initialize();
+	return Sequence;
+}
+
+UObject* UCreateAssetTool::CreateFoliageTypeInstancedStaticMesh(
+	const FString& AssetPath,
+	const FString& AssetName,
+	const FString& StaticMeshPath,
+	TSharedPtr<FJsonObject>& Result,
+	FString& OutError)
+{
+	if (StaticMeshPath.IsEmpty())
+	{
+		OutError = TEXT("static_mesh_path is required for FoliageType_InstancedStaticMesh");
+		return nullptr;
+	}
+
+	UStaticMesh* StaticMesh = FMcpAssetModifier::LoadAssetByPath<UStaticMesh>(StaticMeshPath, OutError);
+	if (!StaticMesh)
+	{
+		return nullptr;
+	}
+
+	UPackage* Package = CreatePackage(*AssetPath);
+	if (!Package)
+	{
+		OutError = TEXT("Failed to create package");
+		return nullptr;
+	}
+
+	UFoliageType_InstancedStaticMesh* FoliageType = NewObject<UFoliageType_InstancedStaticMesh>(Package, UFoliageType_InstancedStaticMesh::StaticClass(), *AssetName, RF_Public | RF_Standalone | RF_Transactional);
+	if (!FoliageType)
+	{
+		OutError = TEXT("Failed to create FoliageType_InstancedStaticMesh");
+		return nullptr;
+	}
+
+	FoliageType->SetStaticMesh(StaticMesh);
+	Result->SetStringField(TEXT("static_mesh_path"), StaticMesh->GetPathName());
+	return FoliageType;
+}
+
 UObject* UCreateAssetTool::CreateWidgetBlueprint(
 	const FString& PackagePath,
 	const FString& AssetName,
@@ -384,9 +500,10 @@ UObject* UCreateAssetTool::CreateWidgetBlueprint(
 }
 
 UObject* UCreateAssetTool::CreateAnimBlueprint(
-	const FString& AssetPath,
+	const FString& PackagePath,
 	const FString& AssetName,
 	const FString& SkeletonPath,
+	IAssetTools& AssetTools,
 	TSharedPtr<FJsonObject>& Result,
 	FString& OutError)
 {
@@ -417,18 +534,18 @@ UObject* UCreateAssetTool::CreateAnimBlueprint(
 		return nullptr;
 	}
 
-	UObject* CreatedAsset = FKismetEditorUtilities::CreateBlueprint(
-		UAnimInstance::StaticClass(),
-		CreatePackage(*AssetPath),
-		*AssetName,
-		BPTYPE_Normal,
-		UAnimBlueprint::StaticClass(),
-		UBlueprintGeneratedClass::StaticClass());
+	UAnimBlueprintFactory* Factory = NewObject<UAnimBlueprintFactory>();
+	Factory->BlueprintType = BPTYPE_Normal;
+	Factory->ParentClass = UAnimInstance::StaticClass();
+	Factory->TargetSkeleton = TargetSkeleton;
+	Factory->bTemplate = false;
+
+	UObject* CreatedAsset = AssetTools.CreateAsset(AssetName, PackagePath, UAnimBlueprint::StaticClass(), Factory);
 
 	if (UAnimBlueprint* AnimBP = Cast<UAnimBlueprint>(CreatedAsset))
 	{
-		AnimBP->TargetSkeleton = TargetSkeleton;
 		Result->SetStringField(TEXT("skeleton"), TargetSkeleton->GetPathName());
+		Result->SetStringField(TEXT("parent_class"), Factory->ParentClass->GetName());
 	}
 	else
 	{

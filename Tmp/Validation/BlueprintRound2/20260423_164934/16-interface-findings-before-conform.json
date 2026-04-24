@@ -1,0 +1,41 @@
+{
+    "jsonrpc":  "2.0",
+    "id":  "tool-0f20cd96e8a847ea8cf5c3df9c19409d",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Blueprint findings ready"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "asset_path":  "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_InterfaceTarget_20260423_164934",
+                                             "asset_handle":  {
+                                                                  "kind":  "asset",
+                                                                  "asset_path":  "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_InterfaceTarget_20260423_164934",
+                                                                  "asset_class":  "Blueprint"
+                                                              },
+                                             "findings":  [
+                                                              {
+                                                                  "code":  "missing_interface_graph",
+                                                                  "severity":  "error",
+                                                                  "message":  "Interface \u0027BPI_R2_Interface_20260423_164934_C\u0027 has no generated implementation graphs",
+                                                                  "graph_name":  "BPI_R2_Interface_20260423_164934_C"
+                                                              }
+                                                          ],
+                                             "count":  1
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  0.072700000600889325
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "query-blueprint-findings",
+                                               "mutates":  false,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  1
+                                           }
+                             }
+               }
+}

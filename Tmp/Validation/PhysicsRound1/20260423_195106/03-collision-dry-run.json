@@ -1,0 +1,63 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "605",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Collision edit dry run complete"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "valid":  true,
+                                             "name":  "StaticMeshComponent0",
+                                             "class":  "StaticMeshComponent",
+                                             "owner_name":  "PhysicsRound1_A_20260423_195106",
+                                             "is_root":  true,
+                                             "mobility":  "Movable",
+                                             "world_location":  {
+                                                                    "x":  0,
+                                                                    "y":  0,
+                                                                    "z":  120
+                                                                },
+                                             "collision_profile":  "PhysicsActor",
+                                             "collision_enabled":  "QueryAndPhysics",
+                                             "object_type":  "PhysicsBody",
+                                             "responses":  {
+                                                               "WorldStatic":  "Block",
+                                                               "WorldDynamic":  "Block",
+                                                               "Pawn":  "Block",
+                                                               "Visibility":  "Block",
+                                                               "Camera":  "Block",
+                                                               "PhysicsBody":  "Block",
+                                                               "Vehicle":  "Block",
+                                                               "Destructible":  "Block"
+                                                           },
+                                             "simulate_physics":  false,
+                                             "gravity_enabled":  true,
+                                             "mass_kg":  177.82792663574219,
+                                             "mass_scale":  1,
+                                             "linear_damping":  0.0099999997764825821,
+                                             "angular_damping":  0,
+                                             "physical_material":  "/Engine/EngineMaterials/DefaultPhysicalMaterial.DefaultPhysicalMaterial",
+                                             "physical_material_name":  "DefaultPhysicalMaterial",
+                                             "physical_material_override":  "/Engine/EngineMaterials/DefaultPhysicalMaterial.DefaultPhysicalMaterial",
+                                             "tool":  "edit-collision-settings",
+                                             "dry_run":  true,
+                                             "actor_name":  "PhysicsRound1_A_20260423_195106",
+                                             "would_change":  true
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  0.1821999903768301
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "edit-collision-settings",
+                                               "mutates":  true,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  1
+                                           }
+                             }
+               }
+}

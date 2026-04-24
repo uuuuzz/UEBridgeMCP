@@ -5,6 +5,8 @@
 #include "Materials/MaterialInstance.h"
 #include "Materials/MaterialInstanceConstant.h"
 #include "Materials/MaterialInterface.h"
+#include "Engine/Texture.h"
+#include "ScopedTransaction.h"
 #include "Serialization/JsonSerializer.h"
 
 namespace EditMaterialInstanceToolPrivate
@@ -54,6 +56,111 @@ namespace EditMaterialInstanceToolPrivate
 			});
 
 		return (RemovedScalar + RemovedVector + RemovedDoubleVector + RemovedTexture + RemovedRuntimeVirtualTexture + RemovedSparseVolumeTexture + RemovedFont) > 0;
+	}
+
+	bool ValidateAction(const TSharedPtr<FJsonObject>& ActionObject, FString& OutActionName, FString& OutParameterName, FString& OutError)
+	{
+		if (!ActionObject.IsValid())
+		{
+			OutError = TEXT("Action must be an object");
+			return false;
+		}
+
+		ActionObject->TryGetStringField(TEXT("action"), OutActionName);
+		ActionObject->TryGetStringField(TEXT("parameter"), OutParameterName);
+		if (OutActionName.IsEmpty())
+		{
+			OutError = TEXT("Missing 'action' field");
+			return false;
+		}
+
+		if (OutActionName == TEXT("set_scalar"))
+		{
+			if (OutParameterName.IsEmpty())
+			{
+				OutError = TEXT("'parameter' is required for set_scalar");
+				return false;
+			}
+			double Value = 0.0;
+			if (!ActionObject->TryGetNumberField(TEXT("value"), Value))
+			{
+				OutError = TEXT("'value' is required for set_scalar");
+				return false;
+			}
+			return true;
+		}
+
+		if (OutActionName == TEXT("set_vector"))
+		{
+			if (OutParameterName.IsEmpty())
+			{
+				OutError = TEXT("'parameter' is required for set_vector");
+				return false;
+			}
+			const TArray<TSharedPtr<FJsonValue>>* ValueArray = nullptr;
+			if (!ActionObject->TryGetArrayField(TEXT("value"), ValueArray) || !ValueArray || ValueArray->Num() < 4)
+			{
+				OutError = TEXT("'value' must be an array of 4 numbers for set_vector");
+				return false;
+			}
+			return true;
+		}
+
+		if (OutActionName == TEXT("set_texture"))
+		{
+			if (OutParameterName.IsEmpty())
+			{
+				OutError = TEXT("'parameter' is required for set_texture");
+				return false;
+			}
+			FString TexturePath;
+			ActionObject->TryGetStringField(TEXT("texture_path"), TexturePath);
+			if (TexturePath.IsEmpty())
+			{
+				OutError = TEXT("'texture_path' is required for set_texture");
+				return false;
+			}
+
+			FString TextureError;
+			if (!FMcpAssetModifier::LoadAssetByPath<UTexture>(TexturePath, TextureError))
+			{
+				OutError = TextureError;
+				return false;
+			}
+			return true;
+		}
+
+		if (OutActionName == TEXT("clear_override"))
+		{
+			if (OutParameterName.IsEmpty())
+			{
+				OutError = TEXT("'parameter' is required for clear_override");
+				return false;
+			}
+			return true;
+		}
+
+		if (OutActionName == TEXT("set_parent"))
+		{
+			FString ParentPath;
+			ActionObject->TryGetStringField(TEXT("parent_path"), ParentPath);
+			if (ParentPath.IsEmpty())
+			{
+				OutError = TEXT("'parent_path' is required for set_parent");
+				return false;
+			}
+
+			FString ParentError;
+			if (!FMcpAssetModifier::LoadAssetByPath<UMaterialInterface>(ParentPath, ParentError))
+			{
+				OutError = ParentError;
+				return false;
+			}
+			return true;
+		}
+
+		OutError = FString::Printf(TEXT("Unsupported action: '%s'"), *OutActionName);
+		return false;
 	}
 }
 
@@ -119,12 +226,27 @@ FMcpToolResult UEditMaterialInstanceTool::Execute(const TSharedPtr<FJsonObject>&
 	TArray<TSharedPtr<FJsonValue>> PartialResultsArray;
 	bool bAnyFailed = false;
 	bool bWasModified = false;
+	bool bRolledBack = false;
+
+	TSharedPtr<FScopedTransaction> Transaction;
+	if (!bDryRun)
+	{
+		Transaction = FMcpAssetModifier::BeginTransaction(FText::FromString(TEXT("Edit Material Instance")));
+		MaterialInstance->Modify();
+	}
 
 	for (int32 ActionIndex = 0; ActionIndex < ActionsArray->Num(); ++ActionIndex)
 	{
 		const TSharedPtr<FJsonObject>* ActionObject = nullptr;
 		if (!(*ActionsArray)[ActionIndex]->TryGetObject(ActionObject) || !ActionObject || !(*ActionObject).IsValid())
 		{
+			TSharedPtr<FJsonObject> ResultObject = MakeShareable(new FJsonObject);
+			ResultObject->SetNumberField(TEXT("index"), ActionIndex);
+			ResultObject->SetBoolField(TEXT("success"), false);
+			ResultObject->SetStringField(TEXT("error"), TEXT("Action must be an object"));
+			bAnyFailed = true;
+			PartialResultsArray.Add(MakeShareable(new FJsonValueObject(ResultObject)));
+			ResultsArray.Add(MakeShareable(new FJsonValueObject(ResultObject)));
 			continue;
 		}
 
@@ -137,11 +259,20 @@ FMcpToolResult UEditMaterialInstanceTool::Execute(const TSharedPtr<FJsonObject>&
 
 		if (bDryRun)
 		{
-			ResultObject->SetBoolField(TEXT("success"), !ActionName.IsEmpty());
-			if (ActionName.IsEmpty())
+			FString ParameterNameString;
+			FString ValidationError;
+			const bool bValidationSuccess = EditMaterialInstanceToolPrivate::ValidateAction(*ActionObject, ActionName, ParameterNameString, ValidationError);
+			ResultObject->SetStringField(TEXT("action"), ActionName);
+			if (!ParameterNameString.IsEmpty())
 			{
-				ResultObject->SetStringField(TEXT("error"), TEXT("Missing 'action' field"));
+				ResultObject->SetStringField(TEXT("parameter"), ParameterNameString);
+			}
+			ResultObject->SetBoolField(TEXT("success"), bValidationSuccess);
+			if (!bValidationSuccess)
+			{
+				ResultObject->SetStringField(TEXT("error"), ValidationError);
 				bAnyFailed = true;
+				PartialResultsArray.Add(MakeShareable(new FJsonValueObject(ResultObject)));
 			}
 			ResultsArray.Add(MakeShareable(new FJsonValueObject(ResultObject)));
 			continue;
@@ -299,13 +430,20 @@ FMcpToolResult UEditMaterialInstanceTool::Execute(const TSharedPtr<FJsonObject>&
 		ResultsArray.Add(MakeShareable(new FJsonValueObject(ResultObject)));
 	}
 
-	if (bWasModified)
+	if (!bDryRun && bAnyFailed && Transaction.IsValid())
+	{
+		Transaction->Cancel();
+		bRolledBack = true;
+		bWasModified = false;
+	}
+
+	if (!bAnyFailed && bWasModified)
 	{
 		FMcpAssetModifier::MarkPackageDirty(MaterialInstance);
 		ModifiedAssetsArray.Add(MakeShareable(new FJsonValueString(AssetPath)));
 	}
 
-	if (!bDryRun && bSave && bWasModified)
+	if (!bDryRun && !bAnyFailed && bSave && bWasModified)
 	{
 		FString SaveError;
 		if (!FMcpAssetModifier::SaveAsset(MaterialInstance, false, SaveError))
@@ -327,10 +465,13 @@ FMcpToolResult UEditMaterialInstanceTool::Execute(const TSharedPtr<FJsonObject>&
 	Summary->SetNumberField(TEXT("failed"), bAnyFailed ? PartialResultsArray.Num() : 0);
 	Summary->SetNumberField(TEXT("modified_assets"), ModifiedAssetsArray.Num());
 	Summary->SetBoolField(TEXT("saved"), !bDryRun && bSave && bWasModified && !bAnyFailed);
+	Summary->SetBoolField(TEXT("rolled_back"), bRolledBack);
 
 	TSharedPtr<FJsonObject> Response = MakeShareable(new FJsonObject);
 	Response->SetStringField(TEXT("tool"), TEXT("edit-material-instance"));
 	Response->SetBoolField(TEXT("success"), !bAnyFailed);
+	Response->SetBoolField(TEXT("dry_run"), bDryRun);
+	Response->SetBoolField(TEXT("rolled_back"), bRolledBack);
 	Response->SetStringField(TEXT("asset_path"), AssetPath);
 	Response->SetArrayField(TEXT("results"), ResultsArray);
 	Response->SetArrayField(TEXT("warnings"), WarningsArray);

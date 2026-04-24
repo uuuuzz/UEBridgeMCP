@@ -1,0 +1,37 @@
+﻿{
+	"jsonrpc": "2.0",
+	"id": "create-audio-component-setup-dry-run",
+	"result":
+	{
+		"content": [
+			{
+				"type": "text",
+				"text": "Audio component setup dry run complete"
+			}
+		],
+		"structuredContent":
+		{
+			"tool": "create-audio-component-setup",
+			"dry_run": true,
+			"actor_name": "SM_SkySphere",
+			"component_name": "AudioRound1Component_20260423_185956",
+			"would_create_component": true,
+			"sound_path": "/Game/UEBridgeMCPValidation/AudioRound1/SC_AudioRound1_20260423_185956"
+		},
+		"_meta":
+		{
+			"timing":
+			{
+				"duration_ms": 0.068399996962398291
+			},
+			"stats":
+			{
+				"tool_name": "create-audio-component-setup",
+				"mutates": true,
+				"supports_batch": false,
+				"requires_game_thread": true,
+				"content_items": 1
+			}
+		}
+	}
+}

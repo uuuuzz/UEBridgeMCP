@@ -1,0 +1,29 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "21",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "[UEBMCP_INVALID_ACTION] Unsupported editor macro \u0027\u0027"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "code":  "UEBMCP_INVALID_ACTION",
+                                             "message":  "Unsupported editor macro \u0027\u0027"
+                                         },
+                   "isError":  true,
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  0.0092999835032969713
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "run-editor-macro",
+                                               "mutates":  true,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  1
+                                           }
+                             }
+               }
+}

@@ -1,0 +1,119 @@
+{
+    "Request":  {
+                    "method":  "tools/call",
+                    "params":  {
+                                   "arguments":  {
+                                                     "asset_path":  "/Game/UEBridgeMCPValidation/BlueprintRound1/BP_BlueprintRound1_20260423_152035",
+                                                     "rollback_on_error":  true,
+                                                     "save":  false,
+                                                     "actions":  [
+                                                                     {
+                                                                         "action":  "create_variable",
+                                                                         "name":  "HealthValue",
+                                                                         "tooltip":  "Health value for Blueprint Round 1 smoke",
+                                                                         "default_value":  12.5,
+                                                                         "type":  {
+                                                                                      "kind":  "float"
+                                                                                  },
+                                                                         "category":  "Validation"
+                                                                     },
+                                                                     {
+                                                                         "tooltip":  "Round 1 event dispatcher",
+                                                                         "inputs":  [
+                                                                                        {
+                                                                                            "name":  "Value",
+                                                                                            "type":  {
+                                                                                                         "kind":  "float"
+                                                                                                     }
+                                                                                        }
+                                                                                    ],
+                                                                         "category":  "Validation",
+                                                                         "name":  "OnValidated",
+                                                                         "action":  "create_event_dispatcher"
+                                                                     }
+                                                                 ],
+                                                     "compile":  "if_needed"
+                                                 },
+                                   "name":  "edit-blueprint-members"
+                               },
+                    "id":  "tool-d4a6bfbb0dc9488ca2a1e2114bea560e",
+                    "jsonrpc":  "2.0"
+                },
+    "Response":  {
+                     "Success":  true,
+                     "StatusCode":  200,
+                     "Headers":  {
+                                     "keep-alive":  "timeout=15.000000",
+                                     "Content-Type":  "application/json; charset=utf-8",
+                                     "Mcp-Session-Id":  "4A328CD1-4A72-FF4E-366A-6898BF3B6236",
+                                     "Access-Control-Allow-Origin":  "*",
+                                     "Content-Length":  "1131"
+                                 },
+                     "Content":  "{\r\n\t\"jsonrpc\": \"2.0\",\r\n\t\"id\": \"tool-d4a6bfbb0dc9488ca2a1e2114bea560e\",\r\n\t\"result\":\r\n\t{\r\n\t\t\"content\": [\r\n\t\t\t{\r\n\t\t\t\t\"type\": \"text\",\r\n\t\t\t\t\"text\": \"Request succeeded\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"structuredContent\":\r\n\t\t{\r\n\t\t\t\"tool\": \"edit-blueprint-members\",\r\n\t\t\t\"success\": true,\r\n\t\t\t\"modified_assets\": [\r\n\t\t\t\t\"/Game/UEBridgeMCPValidation/BlueprintRound1/BP_BlueprintRound1_20260423_152035\"\r\n\t\t\t],\r\n\t\t\t\"results\": [\r\n\t\t\t\t{\r\n\t\t\t\t\t\"action\": \"create_variable\",\r\n\t\t\t\t\t\"name\": \"HealthValue\",\r\n\t\t\t\t\t\"index\": 0,\r\n\t\t\t\t\t\"success\": true\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"action\": \"create_event_dispatcher\",\r\n\t\t\t\t\t\"name\": \"OnValidated\",\r\n\t\t\t\t\t\"index\": 1,\r\n\t\t\t\t\t\"success\": true\r\n\t\t\t\t}\r\n\t\t\t],\r\n\t\t\t\"compile\":\r\n\t\t\t{\r\n\t\t\t\t\"attempted\": true,\r\n\t\t\t\t\"success\": true,\r\n\t\t\t\t\"diagnostics\": []\r\n\t\t\t},\r\n\t\t\t\"implemented_interfaces\": [],\r\n\t\t\t\"warnings\": [],\r\n\t\t\t\"diagnostics\": [],\r\n\t\t\t\"partial_results\": []\r\n\t\t},\r\n\t\t\"_meta\":\r\n\t\t{\r\n\t\t\t\"timing\":\r\n\t\t\t{\r\n\t\t\t\t\"duration_ms\": 32.562300009885803\r\n\t\t\t},\r\n\t\t\t\"stats\":\r\n\t\t\t{\r\n\t\t\t\t\"tool_name\": \"edit-blueprint-members\",\r\n\t\t\t\t\"mutates\": false,\r\n\t\t\t\t\"supports_batch\": false,\r\n\t\t\t\t\"requires_game_thread\": true,\r\n\t\t\t\t\"content_items\": 0\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}",
+                     "Json":  {
+                                  "jsonrpc":  "2.0",
+                                  "id":  "tool-d4a6bfbb0dc9488ca2a1e2114bea560e",
+                                  "result":  {
+                                                 "content":  [
+                                                                 {
+                                                                     "type":  "text",
+                                                                     "text":  "Request succeeded"
+                                                                 }
+                                                             ],
+                                                 "structuredContent":  {
+                                                                           "tool":  "edit-blueprint-members",
+                                                                           "success":  true,
+                                                                           "modified_assets":  [
+                                                                                                   "/Game/UEBridgeMCPValidation/BlueprintRound1/BP_BlueprintRound1_20260423_152035"
+                                                                                               ],
+                                                                           "results":  [
+                                                                                           {
+                                                                                               "action":  "create_variable",
+                                                                                               "name":  "HealthValue",
+                                                                                               "index":  0,
+                                                                                               "success":  true
+                                                                                           },
+                                                                                           {
+                                                                                               "action":  "create_event_dispatcher",
+                                                                                               "name":  "OnValidated",
+                                                                                               "index":  1,
+                                                                                               "success":  true
+                                                                                           }
+                                                                                       ],
+                                                                           "compile":  {
+                                                                                           "attempted":  true,
+                                                                                           "success":  true,
+                                                                                           "diagnostics":  [
+
+                                                                                                           ]
+                                                                                       },
+                                                                           "implemented_interfaces":  [
+
+                                                                                                      ],
+                                                                           "warnings":  [
+
+                                                                                        ],
+                                                                           "diagnostics":  [
+
+                                                                                           ],
+                                                                           "partial_results":  [
+
+                                                                                               ]
+                                                                       },
+                                                 "_meta":  {
+                                                               "timing":  {
+                                                                              "duration_ms":  32.562300009885803
+                                                                          },
+                                                               "stats":  {
+                                                                             "tool_name":  "edit-blueprint-members",
+                                                                             "mutates":  false,
+                                                                             "supports_batch":  false,
+                                                                             "requires_game_thread":  true,
+                                                                             "content_items":  0
+                                                                         }
+                                                           }
+                                             }
+                              },
+                     "Error":  null
+                 }
+}

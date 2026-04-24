@@ -1,313 +1,515 @@
-# UEBridgeMCP ? 工具速查手册（内置 46 个工具）
+# UEBridgeMCP 工具速查手册
 
-> 这里列出的每一个工具，都在
-> `Source/UEBridgeMCPEditor/Private/UEBridgeMCPEditor.cpp :: RegisterBuiltInTools()` 中出现过一次。
-> 如需查看每个工具机读格式的完整 JSON Schema，请直接向运行中的编辑器发起请求：
->
-> ```bash
-> curl -s -X POST http://127.0.0.1:8080/mcp \
->   -H "Content-Type: application/json" \
->   -H "Accept: application/json,text/event-stream" \
->   -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
-> ```
->
-> 本文是给人看的速查表；**运行中的编辑器才是权威数据源**。
+权威口径：
 
-## 目录
+- 运行时工具清单，以编辑器返回的 `tools/list` 为准。
+- 运行时工具数量，以 `initialize.capabilities.tools.registeredCount` 为准。
+- `Source/UEBridgeMCPEditor/Private/UEBridgeMCPEditor.cpp :: RegisterBuiltInTools()` 是基础编辑器工具面的源码入口。
+- Step 6 之后，协议层新增了 `resources/*` 和 `prompts/*`，同时又引入了条件注册工具和扩展模块工具，所以运行时工具数量不再承诺为固定常数。
 
-1. [蓝图查询 Blueprint Query（3）](#1-蓝图查询-blueprint-query3)
-2. [关卡/世界查询 Level / World Query（3）](#2-关卡世界查询-level--world-query3)
-3. [材质查询 Material Query（2）](#3-材质查询-material-query2)
-4. [项目/资产/通用查询 Project / Asset / Utility Query（7）](#4-项目资产通用查询-project--asset--utility-query7)
-5. [创建/通用写入 Create / Utility Write（3）](#5-创建通用写入-create--utility-write3)
-6. [StateTree（5）](#6-statetree5)
-7. [脚本 Scripting（1）](#7-脚本-scripting1)
-8. [构建 Build（2）](#8-构建-build2)
-9. [PIE ? Play-In-Editor（4）](#9-pie--play-in-editor4)
-10. [反射调用 Reflection RPC（1）](#10-反射调用-reflection-rpc1)
-11. [批量编辑 Batch Edit（6）](#11-批量编辑-batch-edit6)
-12. [资产生命周期与校验 Asset Lifecycle & Validation（5）](#12-资产生命周期与校验-asset-lifecycle--validation5)
-13. [高阶编排 High-Level Orchestration（4）](#13-高阶编排-high-level-orchestration4)
+当前清单模型：
 
-总计：**46** 个工具（3 + 3 + 2 + 7 + 3 + 5 + 1 + 2 + 4 + 1 + 6 + 5 + 4）。
+- 基础编辑器工具面：直接在 `RegisterBuiltInTools()` 中注册的 always-on 工具。
+- 额外的核心条件工具会在相关引擎模块可用时出现：
+  - `query-level-sequence-summary`
+  - `edit-sequencer-tracks`
+  - `query-landscape-summary`
+  - `create-landscape`
+  - `edit-landscape-region`
+  - `query-foliage-summary`
+  - `edit-foliage-batch`
+  - `query-worldpartition-cells`
+  - `query-niagara-system-summary`
+  - `query-niagara-emitter-summary`
+  - `create-niagara-system-from-template`
+  - `edit-niagara-user-parameters`
+  - `apply-niagara-system-to-actor`
+  - `query-metasound-summary`
+  - `create-metasound-source`
+  - `edit-metasound-graph`
+  - `set-metasound-input-defaults`
+- 额外的扩展模块工具会在对应模块加载后出现：
+  - `edit-control-rig-graph`
+  - `generate-pcg-scatter`
+  - `query-pcg-graph-summary`
+  - `edit-pcg-graph`
+  - `run-pcg-graph`
+  - `generate-external-content`
+  - `generate-external-asset`
 
----
+所以，Step 6 之后不要再把任何单一固定数字当成最终真值。发布前建议运行 `Validation/Smoke/Invoke-ReleasePreflight.ps1`；它会把实时 `registeredCount`、`tools/list`、resources、prompts、兼容 alias 和安全探针结果记录到 `Tmp/Validation/ReleasePreflight/<timestamp>/summary.json`。
 
-## 约定
+## 协议面
 
-- 所有请求都是通过 HTTP POST 到 `http://127.0.0.1:8080/mcp` 的 JSON-RPC 2.0 报文。
-- 每次工具调用都使用 MCP 标准的 `tools/call` 方法：
-  ```json
-  {"jsonrpc":"2.0","id":1,"method":"tools/call",
-   "params":{"name":"<工具名>","arguments":{ ... }}}
-  ```
-- 路径约定：
-  - 资产路径使用 UE 的对象路径 ? `/Game/Blueprints/BP_Hero`（不带扩展名）。
-  - 关卡路径 ? `/Game/Maps/TestMap`。
-- 错误信封：`{"isError": true, "content":[{"type":"text","text":"UEBMCP_<分类>: <消息>"}]}`。
-- 成功响应统一携带 `content[0].text`（里面是 JSON 字符串）以及 `isError:false`。
+UEBridgeMCP 现在正式支持这些 MCP 方法：
 
-> **关于 v1 与 v2 工具** ? 源码树里还保留着一些旧工具（`query-blueprint`、`query-blueprint-graph`、`query-level`、`query-material`、`set-property`、`add-graph-node`、`spawn-actor` 等），但它们**已不再注册**。其功能已被 v2 批处理工具（`edit-blueprint-graph`、`edit-level-batch`、`edit-material-instance-batch`、`query-*-summary` 系列）吸收。以实际 `tools/list` 返回为准。
+- `initialize`
+- `tools/list`
+- `tools/call`
+- `resources/list`
+- `resources/read`
+- `prompts/list`
+- `prompts/get`
 
----
+`initialize` 会暴露：
 
-## 1. 蓝图查询 Blueprint Query（3）
+- `capabilities.tools`
+- `capabilities.resources`
+- `capabilities.prompts`
+- `capabilities.tools.registeredCount`
 
-| 工具 | 用途 | 关键参数 |
+## 内置 Resources
+
+内置资源来自仓库里的文本文件，位于 `Resources/MCP/Resources/`，运行时只读。
+
+| URI | 名称 | 用途 |
 |---|---|---|
-| `query-blueprint-summary` | 蓝图摘要：图表/函数/变量/组件的数量统计 | `blueprint_path` |
-| `query-blueprint-graph-summary` | 列出蓝图内所有图（事件图/函数图/宏图）及各图节点数 | `blueprint_path` |
-| `query-blueprint-node` | 单节点深度信息，包含 object/class 引脚默认值 | `blueprint_path`, `node_guid` |
+| `uebmcp://builtin/resources/animation-smoke-checklist` | Animation Smoke Checklist | 动画作者工具的最小 smoke checklist |
+| `uebmcp://builtin/resources/sequencer-edit-recipe` | Sequencer Edit Recipe | Sequencer 最小安全编辑顺序与验证 recipe |
+| `uebmcp://builtin/resources/world-production-recipe` | World Production Recipe | Spline、Foliage、Landscape、World Partition 等世界生产力工作流指引 |
+| `uebmcp://builtin/resources/performance-triage-guide` | Performance Triage Guide | Editor / PIE 性能排查与证据采集指南 |
+| `uebmcp://builtin/resources/external-content-safety-guide` | External Content Safety Guide | 外部内容生成的 provenance 与安全说明 |
 
-**示例**
-```json
-{"name":"query-blueprint-summary",
- "arguments":{"blueprint_path":"/Game/Blueprints/BP_Hero"}}
-```
+## 内置 Prompts
 
----
+内置 prompts 来自 `Resources/MCP/Prompts/` 下的 JSON 模板。
 
-## 2. 关卡/世界查询 Level / World Query（3）
-
-| 工具 | 用途 | 关键参数 |
+| Prompt 名称 | 用途 | 关键参数 |
 |---|---|---|
-| `query-level-summary` | 当前关卡的紧凑分桶统计视图 | `world_type`（`editor`\|`pie`） |
-| `query-actor-detail` | 某个 Actor 的详细反射信息（组件/属性/标签） | `actor_name` 或 `actor_label` |
-| `query-world-summary` | 流式关卡结构、世界构成、玩法设置 | `include[]` |
+| `animation-workflow-brief` | 生成简洁的动画工作流 brief | `goal`, `asset_path`, `notes` |
+| `sequencer-edit-brief` | 生成 Sequencer 安全编辑 brief | `goal`, `sequence_path`, `shot_notes` |
+| `performance-triage-brief` | 生成性能排查 brief | `goal`, `world_mode`, `focus_area` |
 
-**示例**
-```json
-{"name":"query-actor-detail","arguments":{"actor_label":"BP_Hero_C_0"}}
-```
+## Workflow Presets
 
----
+Step 6 新增了项目级 workflow presets：
 
-## 3. 材质查询 Material Query（2）
+- `manage-workflow-presets`
+- `run-workflow-preset`
 
-| 工具 | 用途 | 关键参数 |
+Preset 文件固定存放在 `Config/UEBridgeMCP/WorkflowPresets/*.json`。
+
+Preset schema 至少包含：
+
+- `id`
+- `title`
+- `description`
+- `resource_uris[]`
+- `prompt_name`
+- `tool_calls[]`
+- `default_arguments{}`
+
+`run-workflow-preset` 支持：
+
+- `dry_run=true` 时只展开资源、prompt 和最终工具调用计划
+- `dry_run=false` 时按顺序真正执行 `tool_calls[]`
+
+## 基础工具面
+
+下面这些工具属于基础编辑器工具面，由 `RegisterBuiltInTools()` 直接注册。
+
+### 1. Blueprint 查询
+
+- `query-blueprint-summary`
+- `query-blueprint-graph-summary`
+- `query-blueprint-node`
+- `query-blueprint-findings`
+- `analyze-blueprint-compile-results`
+
+### 2. Animation 与 Performance 查询
+
+- `query-animation-asset-summary`
+- `query-skeleton-summary`
+- `query-performance-report`
+- `capture-performance-snapshot`
+- `query-render-stats`
+- `query-memory-report`
+- `profile-visible-actors`
+- `query-physics-summary`
+
+### 3. Level / World 查询
+
+- `query-level-summary`
+- `query-actor-detail`
+- `query-actor-selection`
+- `query-spatial-context`
+- `query-world-summary`
+
+### 4. Material / StaticMesh / Audio / Environment 查询
+
+- `query-material-summary`
+- `query-material-instance`
+- `query-static-mesh-summary`
+- `query-mesh-complexity`
+- `query-audio-asset-summary`
+- `query-environment-summary`
+
+### 5. Project / Asset / Utility 查询
+
+- `get-project-info`
+- `query-asset`
+- `query-datatable`
+- `get-asset-diff`
+- `get-class-hierarchy`
+- `query-engine-api-symbol`
+- `query-class-member-summary`
+- `query-plugin-capabilities`
+- `query-editor-subsystem-summary`
+- `query-workspace-health`
+- `find-references`
+- `search-project`
+- `search-assets-advanced`
+- `search-blueprint-symbols`
+- `search-level-entities`
+- `search-content-by-class`
+- `query-unused-assets`
+- `inspect-widget-blueprint`
+- `get-logs`
+
+### 6. Widget / UMG 作者工具
+
+- `create-widget-blueprint`
+- `edit-widget-blueprint`
+- `edit-widget-layout-batch`
+- `edit-widget-animation`
+- `edit-widget-component`
+- `create-common-ui-widget`
+- `edit-common-ui`
+- `query-common-ui-widgets`
+
+兼容说明：
+
+- `add-widget` 仍然保留，但新的写路径优先使用上面的批处理 Widget 工具。
+
+### 7. Create 与 Data Authoring
+
+- `create-asset`
+- `create-user-defined-struct`
+- `create-user-defined-enum`
+- `add-component`
+- `add-widget`
+- `add-datatable-row`
+- `spawn-actor`
+
+Create 说明：
+
+- `create-asset` 现在显式支持 `BlueprintInterface`、`LevelSequence` 和 `FoliageType_InstancedStaticMesh`，连同 Blueprint、WidgetBlueprint、AnimBlueprint、Material、DataTable、DataAsset 以及基于类路径的通用创建一起提供。
+- 创建 Blueprint Interface 时，使用 `asset_class="BlueprintInterface"`，并传正常资产路径，例如 `/Game/UEBridgeMCPValidation/BlueprintRound1/BPI_BlueprintRound1_20260423_123000`。
+- 对 `BlueprintInterface` 来说，`parent_class` 会被忽略；接口资产走引擎内置的 Blueprint Interface factory 创建。
+- 创建 AnimBlueprint 时，使用 `asset_class="AnimBlueprint"`，并把 `parent_class` 设为 Skeleton 资产路径。AnimBlueprint 创建现在走引擎 `UAnimBlueprintFactory`，因此结果是真正带 target skeleton 和默认 AnimGraph 的 `AnimBlueprint` 资产。
+- 创建 LevelSequence 时，使用 `asset_class="LevelSequence"`。工具会调用 `ULevelSequence::Initialize()`，因此新资产在后续 Sequencer 编辑前已经拥有真实 MovieScene。
+- 创建 Instanced Static Mesh Foliage Type 时，使用 `asset_class="FoliageType_InstancedStaticMesh"` 并传 `static_mesh_path`。在 World Partition 地图中，推荐先创建保存型 foliage type 资产，再用 `edit-foliage-batch` 的 `foliage_type_path` 添加实例。
+
+### 8. StateTree
+
+- `query-statetree`
+- `add-statetree-state`
+- `remove-statetree-state`
+- `add-statetree-transition`
+- `add-statetree-task`
+- `edit-statetree-bindings`
+
+### 9. Gameplay / Input / AI / Navigation / Networking
+
+- `create-input-action`
+- `create-input-mapping-context`
+- `edit-input-mapping-context`
+- `manage-gameplay-tags`
+- `query-gas-asset-summary`
+- `create-gameplay-ability`
+- `create-gameplay-effect`
+- `create-attribute-set`
+- `edit-gameplay-effect-modifiers`
+- `manage-ability-system-bindings`
+- `query-ability-system-state`
+- `create-gameframework-blueprint-set`
+- `create-ai-behavior-assets`
+- `query-navigation-state`
+- `query-navigation-path`
+- `edit-navigation-build`
+- `query-ai-behavior-assets`
+- `edit-blackboard-keys`
+- `query-replication-summary`
+- `edit-replication-settings`
+- `query-network-component-settings`
+- `edit-network-component-settings`
+- `trace-gameplay-collision`
+- `edit-collision-settings`
+- `edit-physics-simulation`
+- `create-physics-constraint`
+- `edit-physics-constraint`
+
+### 10. Scripting / Build / PIE / Reflection
+
+- `run-python-script`
+- `trigger-live-coding`
+- `build-and-relaunch`
+- `pie-session`
+- `pie-input`
+- `wait-for-world-condition`
+- `assert-world-state`
+- `query-runtime-actor-state`
+- `query-ability-system-state`
+- `trace-gameplay-collision`
+- `call-function`
+- `edit-editor-selection`
+- `edit-viewport-camera`
+- `run-editor-command`
+
+### 11. Batch Edit 与 Asset Lifecycle
+
+- `edit-blueprint-graph`
+- `edit-blueprint-members`
+- `create-blueprint-function`
+- `create-blueprint-event`
+- `edit-blueprint-function-signature`
+- `manage-blueprint-interfaces`
+- `layout-blueprint-graph`
+- `apply-blueprint-fixups`
+- `edit-blueprint-components`
+- `add-graph-node`
+- `connect-graph-pins`
+- `disconnect-graph-pin`
+- `remove-graph-node`
+- `set-property`
+- `edit-datatable-batch`
+- `edit-level-actor`
+- `edit-level-batch`
+- `align-actors-batch`
+- `drop-actors-to-surface`
+- `edit-static-mesh-settings`
+- `edit-static-mesh-slots`
+- `replace-static-mesh`
+- `edit-material-instance-batch`
+- `create-material-instance`
+- `edit-material-graph`
+- `create-sound-cue`
+- `edit-sound-cue-routing`
+- `create-audio-component-setup`
+- `apply-audio-to-actor`
+- `edit-gameplay-effect-modifiers`
+- `manage-ability-system-bindings`
+- `edit-environment-lighting`
+- `create-animation-montage`
+- `create-blend-space`
+- `edit-blend-space-samples`
+- `edit-animation-notifies`
+- `edit-anim-graph-node`
+- `edit-anim-blueprint-state-machine`
+- `compile-assets`
+- `manage-assets`
+- `manage-asset-folders`
+- `import-assets`
+- `source-control-assets`
+- `capture-viewport`
+- `apply-material`
+- `apply-physical-material`
+- `edit-spline-actors`
+
+### 12. Workflow 与高层编排
+
+- `manage-workflow-presets`
+- `run-workflow-preset`
+- `run-editor-macro`
+- `run-project-maintenance-checks`
+- `blueprint-scaffold-from-spec`
+- `create-blueprint-pattern`
+- `generate-blueprint-pattern`
+- `query-gameplay-state`
+- `auto-fix-blueprint-compile-errors`
+- `generate-level-structure`
+- `generate-level-pattern`
+
+Blueprint Phase 1C 说明：
+
+- `analyze-blueprint-compile-results` 会在内存中编译 Blueprint，并把编译 diagnostics 与静态 Blueprint findings 归一化为 `issues[]` 和 `suggested_fixups`。
+- `apply-blueprint-fixups` 只执行安全的结构性修复：`refresh_all_nodes`、`reconstruct_invalid_nodes`、`remove_orphan_pins`、`recompile_dependencies`、`conform_implemented_interfaces`。
+- `create-blueprint-pattern` 是高层精选 Actor pattern 入口，v1 支持 `logic_actor_skeleton`、`toggle_state_actor`、`interaction_stub_actor`。
+- `blueprint-scaffold-from-spec` 仍然是低层 spec scaffold 工具，不作为 Phase 1C curated pattern 的底层实现路径。
+
+Niagara Phase 2A 说明：
+
+- Niagara 工具在引擎 `Niagara` / `NiagaraEditor` 模块可用时才会从核心编辑器模块条件注册。
+- `query-niagara-system-summary` 和 `query-niagara-emitter-summary` 覆盖 system / emitter 摘要、user parameter、emitter handle 和 renderer 摘要。
+- `create-niagara-system-from-template` 支持通过 Niagara editor factory 创建空系统，或复制已有 template system。
+- `edit-niagara-user-parameters` 支持 v1 标量、向量和颜色 user parameter 的批量 add/remove/rename/default-value 编辑。
+- `apply-niagara-system-to-actor` 可以在编辑器 World Actor 上创建或更新 NiagaraComponent，并写入组件级 user parameter override；editor-world 的 `activate_now` 会返回 deferred warning，而不是直接在 editor GameThread 上启动 simulation。
+
+Audio Phase 2B 说明：
+
+- Audio 工具作为核心编辑器 always-on 工具注册，并通过引擎 `AudioEditor` 支持创建 SoundCue。
+- `query-audio-asset-summary` 覆盖 `SoundWave` 和 `SoundCue` 摘要，包括 SoundCue 节点路由结构。
+- `create-sound-cue` 可以从可选的 `initial_sound_wave_path` 创建 SoundCue，并设置基础 volume/pitch。
+- `edit-sound-cue-routing` 使用批量 `operations[]` 编辑 wave-player、random、mixer、attenuation wrap、multiplier，并覆盖 dry-run、rollback 和 save 路径。
+- `create-audio-component-setup` 与 `apply-audio-to-actor` 可以在 Actor 上创建或更新 `AudioComponent`；editor-world 的 `play_now` 会返回 deferred warning，而不是直接在 editor GameThread 上播放。
+
+MetaSound Phase 2C 说明：
+
+- MetaSound 工具在 `MetasoundEngine`、`MetasoundFrontend`、`MetasoundEditor` 可用时才会从核心编辑器模块条件注册。
+- `query-metasound-summary` 覆盖 MetaSound Source 摘要、graph input/output、interface，以及可选的默认图节点和连线。
+- `create-metasound-source` 通过引擎 Source Builder 创建新的 MetaSound Source，并支持 v1 graph input 和 output format 设置。
+- `set-metasound-input-defaults` 支持 bool/int32/float/string graph input 默认值的批量编辑，并覆盖 dry-run、rollback 和 save 路径。
+- `edit-metasound-graph` 有意限制在 v1 结构性编辑：graph I/O、按 class name 插入节点、显式连接、节点 input 默认值和 layout。任意 MetaSound 图生成留给后续阶段。
+
+Physics Phase 3A 说明：
+
+- Physics 工具作为核心编辑器 always-on 工具注册，并使用引擎 `PhysicsCore` 与 editor-world Actor / Component API。
+- `query-physics-summary` 返回 world 或 actor 级物理摘要，包括 PrimitiveComponent 的 collision / simulation 状态，以及 PhysicsConstraintComponent 明细。
+- `edit-collision-settings` 支持 collision profile、enabled mode、object channel、全通道 response 与单通道 response 修改，并覆盖 dry-run、rollback 和 save 路径。
+- `edit-physics-simulation` 支持 simulate physics、gravity、mass override、mass scale、linear / angular damping、mobility 调整、wake 和 sleep。
+- `create-physics-constraint` 与 `edit-physics-constraint` 覆盖基础双组件约束、disable-collision、projection、linear limits、angular limits 与 break threshold。
+- `apply-physical-material` 可以给 PrimitiveComponent 设置 PhysicalMaterial override；运行时物理播放和仿真断言留给后续阶段。
+
+GAS Phase 3B 说明：
+- GAS 工具作为核心编辑器 always-on 工具注册，并使用引擎 `GameplayAbilities`、`GameplayAbilitiesEditor` 与 `GameplayTasks` 支持。
+- `create-attribute-set` 创建 AttributeSet Blueprint，并写入 `FGameplayAttributeData` 成员变量。
+- `create-gameplay-effect` 创建 GameplayEffect Blueprint，支持 duration、period、granted target tags 与简单常量 modifier。
+- `edit-gameplay-effect-modifiers` 支持 dry-run 与 rollback-safe 的 duration、period、granted tags、clear/add/remove modifier、final compile/save。
+- `create-gameplay-ability` 创建 GameplayAbility Blueprint，支持 ability tags、activation tag containers、常见 policy、cost effect 与 cooldown effect 默认值。
+- `query-gas-asset-summary` 摘要 GameplayAbility、GameplayEffect、AttributeSet 与 Actor Blueprint GAS bindings。
+- `manage-ability-system-bindings` 给 Actor Blueprint 添加 `AbilitySystemComponent`，并用带 UEBridgeMCP metadata 的 `TSubclassOf` 变量保存 ability/effect/attribute-set 绑定。
+- v1 只覆盖资产与 Actor Blueprint 配置；runtime granting、prediction validation、复杂 execution calculation 和 ability task graph authoring 留给后续阶段。
+
+Gameplay Runtime Phase 3C 说明：
+
+- `query-runtime-actor-state` 返回 editor / PIE Actor 的只读运行时状态，包括 transform、bounds、velocity、actor tags、components、collision 摘要和可选 GAS 状态。
+- `query-ability-system-state` 返回 editor / PIE Actor 上实时 `AbilitySystemComponent` 状态，包括 owned gameplay tags、spawned AttributeSets 和 activatable abilities。
+- `trace-gameplay-collision` 在 editor / PIE world 中执行只读 line、sphere、capsule 或 box trace，并返回结构化 hit actor / component 数据。
+- Phase 3C 已覆盖 PIE 实时查询和 collision trace；runtime grant / activate ability、prediction validation、长时间 physics simulation 断言仍留给后续阶段。
+
+Search Phase 4A 说明：
+
+- `search-assets-advanced` 提供 asset name / path / class 字段上的 ranked search，支持 exact、wildcard、contains、camel-case 和 fuzzy subsequence 匹配。
+- `search-content-by-class` 是 class-first asset search 入口，`class` 必填，同时支持 query 与 path filters。
+- `search-blueprint-symbols` 搜索 Blueprint variables、function graphs、macro graphs、event graphs，并可选扫描 graph nodes；通过 `max_blueprints` 限流。
+- `search-level-entities` 搜索 editor / PIE actors 的 label、name、class、folder、tag，并返回 actor handle 与可选 transform / bounds。
+- `search-project` 聚合 assets、Blueprint symbols、level entities，返回 per-section 结果和 flattened ranked list。
+
+Engine API Phase 4B 说明：
+
+- `query-engine-api-symbol` 搜索本地已加载反射数据中的 classes、functions、properties、structs、enums、subsystems 和 plugins。
+- `query-class-member-summary` 解析 class name 或 path，并返回 function / property 摘要、flags、参数和可选 metadata。
+- `query-plugin-capabilities` 返回本地 plugin enablement、mounted/content/Verse support、descriptor metadata 与 module loading state。
+- `query-editor-subsystem-summary` 列出 Editor / Engine / World / GameInstance subsystem class，并在上下文存在时报告当前 instance availability。
+- Phase 4B 只做本地辅助解释，不代理外部文档站点，也不建立在线文档镜像。
+
+## 核心条件工具
+
+这些工具在核心编辑器模块里按“相关引擎模块是否可用”决定是否注册。
+
+| 工具 | 常见依赖 | 说明 |
 |---|---|---|
-| `query-material-summary` | `Material` 资产概要：着色模型、Domain、混合模式、各类参数数量 | `material_path` |
-| `query-material-instance` | 检查 `MaterialInstanceConstant` / `Dynamic` 的覆盖值、父链、标量/向量/贴图参数 | `material_instance_path` |
+| `query-level-sequence-summary` | `LevelSequence`, `MovieSceneTracks` | 摘要 playback range、binding、track、section 和 Camera Cut |
+| `edit-sequencer-tracks` | `LevelSequence`, `MovieSceneTracks` | v1 聚焦 binding、Camera Cut、基础 track、section、key 与 playback range |
+| `query-landscape-summary` | `Landscape` | 汇总 Landscape actor、component、layer、bounds，并可选采样高度 |
+| `create-landscape` | `Landscape` | 在 editor world 创建小型平坦 Landscape，用于 blockout 和验证 fixture |
+| `edit-landscape-region` | `Landscape` | v1 支持矩形区域的地形和图层修改 |
+| `query-foliage-summary` | `Foliage` | 按 foliage type 和 static mesh 汇总 editor 或 PIE world 中的 foliage，可选返回实例采样 |
+| `edit-foliage-batch` | `Foliage` | v1 支持实例增删、bounds 内删除、transform 修改和 mesh 替换 |
+| `query-worldpartition-cells` | 引擎 World Partition 支持 | 在非 World Partition 地图上会返回结构化 no-op 或 unsupported 结果 |
+| `edit-worldpartition-cells` | 引擎 World Partition 支持 | 在引擎支持的情况下加载或卸载 World Partition runtime cell |
+| `query-niagara-system-summary` | `Niagara`, `NiagaraEditor` | Niagara system、emitter、renderer、readiness 和 user parameter 摘要 |
+| `query-niagara-emitter-summary` | `Niagara`, `NiagaraEditor` | Niagara emitter asset 或 system emitter handle 摘要 |
+| `create-niagara-system-from-template` | `Niagara`, `NiagaraEditor` | 从 template 或 factory-backed empty/default system 创建 Niagara system |
+| `edit-niagara-user-parameters` | `Niagara`, `NiagaraEditor` | v1 user parameter 批量编辑，支持 dry-run、compile、save |
+| `apply-niagara-system-to-actor` | `Niagara`, `NiagaraEditor` | 给 editor-world Actor 创建或更新 NiagaraComponent |
+| `query-metasound-summary` | `MetasoundEngine`, `MetasoundFrontend`, `MetasoundEditor` | MetaSound Source 摘要与可选默认图结构 |
+| `create-metasound-source` | `MetasoundEngine`, `MetasoundFrontend`, `MetasoundEditor` | 通过官方 Source Builder 创建 MetaSound Source |
+| `edit-metasound-graph` | `MetasoundEngine`, `MetasoundFrontend`, `MetasoundEditor` | 受限 v1 MetaSound graph I/O、连接、默认值和 layout 编辑 |
+| `set-metasound-input-defaults` | `MetasoundEngine`, `MetasoundFrontend`, `MetasoundEditor` | 批量编辑受支持 graph input 默认值，支持 dry-run 和 rollback |
 
-**示例**
-```json
-{"name":"query-material-instance",
- "arguments":{"material_instance_path":"/Game/Materials/MI_Hero_Red"}}
-```
+## 扩展模块工具
 
----
+这些工具故意不塞进核心编辑器模块，而是放在独立扩展模块里。
 
-## 4. 项目/资产/通用查询 Project / Asset / Utility Query（7）
-
-| 工具 | 用途 | 关键参数 |
+| 工具 | 模块 | 说明 |
 |---|---|---|
-| `get-project-info` | 项目/引擎/模块/插件/目标平台信息 | *(无参数)* |
-| `query-asset` | Content Browser 搜索 + DataTable / DataAsset 检视 | `pattern`, `class_filter`, `path`, `inspect` |
-| `get-asset-diff` | 二进制资产（BP/Material/DT）与 SCM 基线的结构化 diff | `asset_path`, `revision` |
-| `get-class-hierarchy` | 父类/子类继承树（C++ 与蓝图） | `class_name`, `direction`（`up`\|`down`\|`both`） |
-| `find-references` | 查找某资产被谁引用，或它引用了谁 | `asset_path`, `direction` |
-| `inspect-widget-blueprint` | UMG Widget 蓝图的控件树、绑定、动画、输入映射 | `widget_path` |
-| `get-logs` | 读取 UE 输出日志缓冲区，支持类别/文本/级别过滤 | `category`, `contains`, `limit`, `level` |
+| `edit-control-rig-graph` | `UEBridgeMCPControlRig` | 可选的 Control Rig 图编辑工具 |
+| `generate-pcg-scatter` | `UEBridgeMCPPCG` | 可选的 PCG scatter 生成工具，支持绑定已有图或创建 scaffold graph |
+| `query-pcg-graph-summary` | `UEBridgeMCPPCG` | 汇总 PCG graph 的 node、pin、edge 和 settings |
+| `edit-pcg-graph` | `UEBridgeMCPPCG` | 在受限 v1 范围内新增、删除、修改和连接 PCG graph node |
+| `run-pcg-graph` | `UEBridgeMCPPCG` | 对选中 Actor 或指定 Actor 路径触发 PCG component generation |
+| `generate-external-content` | `UEBridgeMCPExternalAI` | 可选的外部 HTTP/JSON 内容生成工具 |
+| `generate-external-asset` | `UEBridgeMCPExternalAI` | 生成外部资产 payload 与显式 import plan，v1 不直接写入导入资产 |
 
-**示例**
-```json
-{"name":"get-logs","arguments":{"category":"LogBlueprint","limit":100,"level":"Warning"}}
-```
+`generate-external-content` 的边界固定为：
 
----
+- 不进入核心编辑器工具面
+- 通过 provider/settings 抽象层工作
+- v1 只支持文本和 JSON 输出
+- 不下载、不导入二进制媒体
 
-## 5. 创建/通用写入 Create / Utility Write（3）
+Macro / Utility Phase 4C 说明：
 
-| 工具 | 用途 | 关键参数 |
-|---|---|---|
-| `create-asset` | 新建 Blueprint / Material / DataTable / Level 等 | `class_name`, `target_path`, `parent_class` |
-| `add-widget` | 向 UMG Widget 蓝图的控件树中添加控件 | `widget_path`, `widget_class`, `parent_slot_name` |
-| `add-datatable-row` | 为 DataTable 资产新增或更新一行 | `datatable_path`, `row_name`, `fields{}` |
+- `query-workspace-health` 返回只读项目状态快照，包括 project paths、UEBridgeMCP plugin/server、editor/PIE world、optional capabilities、validation paths 和 dirty packages。
+- `run-project-maintenance-checks` 组合常见维护检查：workspace health、保守 unused asset candidates、可选 Blueprint compile check。
+- `generate-blueprint-pattern` 是面向 workflow 的 `create-blueprint-pattern` wrapper，保持相同 Actor catalog，并补上 dry-run plan。
+- `generate-level-pattern` 在 editor world 中用 engine-only StaticMeshActor 创建 `test_anchor_pair`、`interaction_test_lane`、`lighting_blockout_minimal` 等精选 level scaffold。
+- `run-editor-macro` 只提供精选 macro catalog：`collect_workspace_health`、`run_maintenance_checks`、`compile_blueprint_assets`、`cleanup_generated_actors`。
+- Phase 4C 明确不新增万能脚本执行器；需要脚本时继续显式使用现有 `run-python-script`。
 
-**示例**
-```json
-{"name":"create-asset",
- "arguments":{"class_name":"Blueprint","target_path":"/Game/Blueprints/BP_NewActor",
-              "parent_class":"/Script/Engine.Actor"}}
-```
+Animation Round 2 收口说明：
 
----
+- `edit-anim-blueprint-state-machine` 现在支持 `create_state_machine` 和 `ensure_state_machine`，并支持可选 `connect_to_output`，因此正向状态机 smoke 不再依赖预制 AnimBP state machine fixture。
+- 自包含宿主 smoke 通过 `create-asset(asset_class="AnimBlueprint")` 创建 AnimBlueprint，再创建 `Locomotion` state machine、添加两个 state、设置 entry state、添加 transition、绑定 sequence、查询摘要并编译资产。
+- 证据：`Tmp/Validation/AnimationRound2/20260423_223834/summary.json`。
 
-## 6. StateTree（5）
+Sequencer Round 1 收口说明：
 
-| 工具 | 用途 | 关键参数 |
-|---|---|---|
-| `query-statetree` | 查看 StateTree 资产的状态/任务/过渡 | `statetree_path` |
-| `add-statetree-state` | 在某父状态下新增一个子状态 | `statetree_path`, `parent_state_id`, `state_name` |
-| `remove-statetree-state` | 移除一个状态及其整个子树 | `statetree_path`, `state_id` |
-| `add-statetree-transition` | 在两个状态之间增加过渡 | `statetree_path`, `from_state_id`, `to_state_id`, `trigger` |
-| `add-statetree-task` | 向某状态添加任务节点 | `statetree_path`, `state_id`, `task_class`, `properties{}` |
+- `create-asset(asset_class="LevelSequence")` 现在会创建已初始化的真实 `ULevelSequence`，并带有 MovieScene，因此 Sequencer smoke 不再依赖预制 sequence 资产。
+- `query-level-sequence-summary` 返回 playback range、frame rate、binding、possessable、spawnable、master/binding track、section 与 Camera Cut 摘要。
+- `edit-sequencer-tracks` 现在走引擎专用 Camera Cut 路径，不再把 Camera Cut 误创建成普通 master track，因此 `GetCameraCutTrack()` 与摘要查询保持一致。
+- 证据：`Tmp/Validation/SequencerRound1/20260423_225804/summary.json`。
 
-**示例**
-```json
-{"name":"add-statetree-transition",
- "arguments":{"statetree_path":"/Game/AI/ST_Enemy",
-              "from_state_id":"Patrol","to_state_id":"Chase",
-              "trigger":"OnEnterCondition"}}
-```
+## Optional Capability Reporting
 
----
+`get-project-info` 现在会返回 `optional_capabilities`，至少包含：
 
-## 7. 脚本 Scripting（1）
+- `sequencer_available`
+- `control_rig_available`
+- `landscape_available`
+- `foliage_available`
+- `world_partition_available`
+- `pcg_available`
+- `niagara_available`
+- `metasound_available`
+- `external_ai_available`
 
-| 工具 | 用途 | 关键参数 |
-|---|---|---|
-| `run-python-script` | 在 UE 内嵌 Python 解释器中执行内联代码或 `.py` 文件 | `command` **或** `script_path`, `capture_output` |
+客户端应该联合使用 `optional_capabilities` 和 `tools/list`，不要再假设 Step 6 的工具总数固定不变。
 
-会回传 `stdout`、`stderr`，以及 `AsyncTask` 衍生出的日志行。Python 抛出的异常会被捕获并以结构化错误返回，编辑器**不会崩溃**（详见 [Troubleshooting](./Troubleshooting.zh-CN.md)）。
+## UnrealMCPServer 兼容别名
 
-**示例**
-```json
-{"name":"run-python-script",
- "arguments":{"command":"import unreal\nprint(unreal.SystemLibrary.get_engine_version())"}}
-```
+UEBridgeMCP 现在会为常见 UnrealMCPServer 风格的 `snake_case` 工具名注册一层“名称兼容”别名。
 
----
+- alias 调用会通过 `FMcpToolRegistry::ResolveToolName()` 解析到 canonical 工具。
+- `tools/list` 会包含 alias definition，description 中会标明 canonical target。
+- UEBridgeMCP 的 canonical schema 仍是权威；alias 不会自动改写旧参数 payload。
+- 静态 smoke 脚本位于 `Validation/Smoke/VerifyCompatibilityAliases.ps1`。
+- 发布前总预检位于 `Validation/Smoke/Invoke-ReleasePreflight.ps1`，会补充运行时 alias 调用和安全探针。
 
-## 8. 构建 Build（2）
-
-| 工具 | 用途 | 关键参数 |
-|---|---|---|
-| `trigger-live-coding` | 触发 Live Coding 编译（等价于 Ctrl+Alt+F11），可选 `wait_for_completion` | `wait_for_completion`（bool）, `timeout_seconds` |
-| `build-and-relaunch` | 关闭**当前**编辑器进程（按 PID 识别），重新构建工程并重启编辑器 | `target_configuration`, `include_editor` |
-
-`build-and-relaunch` 只会关闭连接着 MCP 的这一个编辑器实例，其他打开的编辑器不受影响。仅支持 Windows。
-
-**示例**
-```json
-{"name":"trigger-live-coding","arguments":{"wait_for_completion":true,"timeout_seconds":60}}
-```
-
----
-
-## 9. PIE ? Play-In-Editor（4）
-
-| 工具 | 用途 | 关键参数 |
-|---|---|---|
-| `pie-session` | **Fire-and-forget** 启动/停止/暂停/恢复 PIE，**绝不阻塞**游戏线程 | `action`（`start`\|`stop`\|`pause`\|`resume`）, `mode` |
-| `pie-input` | 向运行中的 PIE 世界注入按键 / 轴输入 / move-to 指令 | `event`（`key`\|`axis`\|`move-to`）, `key`, `axis`, `value`, `target_location` |
-| `wait-for-world-condition` | 按 JSON 定义轮询世界条件，支持超时（actor 数量、属性等值……） | `condition{}`, `timeout_seconds`, `poll_interval_ms` |
-| `assert-world-state` | 一次性断言，供测试用（返回 pass/fail JSON） | `assertions[]` |
-
-> **已知限制** ? 在 UE 5.6 + 旧版 `AxisMapping` 场景下，注入的 `key:W` / `axis:MoveForward` 可以到达 `UPlayerInput::InputKey`，但蓝图的 `InputAxis` 节点**可能采样不到**。如果目标是端到端驱动角色移动，推荐使用 `event:move-to`（走 AI 寻路），或通过 `call-function` 直接调用 `AddMovementInput`。详见 [Troubleshooting](./Troubleshooting.zh-CN.md)。
-
-**示例**
-```json
-{"name":"pie-session","arguments":{"action":"start","mode":"SelectedViewport"}}
-```
-
-启动之后用 `wait-for-world-condition` 或 `query-gameplay-state` 轮询就绪状态，**不要**循环调用 `pie-session` 自己查询。
-
----
-
-## 10. 反射调用 Reflection RPC（1）
-
-| 工具 | 用途 | 关键参数 |
-|---|---|---|
-| `call-function` | 调用 Actor / CDO / Subsystem 上任意 `BlueprintCallable` 的 UFUNCTION，带反射参数序列化 | `target`, `function`, `args{}`, `world_type` |
-
-`target` 支持：Actor 名、`/Script/Module.Class`（C++ CDO）、`/Game/...`（蓝图 CDO）、Subsystem 路径。
-
-**示例**
-```json
-{"name":"call-function",
- "arguments":{"target":"BP_GameMode_C_0","function":"SetDifficulty","args":{"Level":3}}}
-```
-
----
-
-## 11. 批量编辑 Batch Edit（6）
-
-这是 v2 的核心 ? 取代了旧版"单操作"工具。每个批处理工具都支持**事务**（一个 `FScopedTransaction`，支持撤销）、**dry-run 校验**、以及在同一次调用里可选择地进行**编译+保存**。
-
-| 工具 | 用途 | 关键参数 |
-|---|---|---|
-| `edit-blueprint-graph` | 事务化的图编辑：add / remove / connect / disconnect 节点，支持 alias 交叉引用 | `blueprint_path`, `graph_name`, `operations[]`, `dry_run`, `compile`, `save` |
-| `edit-blueprint-members` | 变量/函数/事件派发器的增/删/改名 | `blueprint_path`, `operations[]` |
-| `edit-blueprint-components` | SCS 编辑：增/删/改名/挂接/设为根/改默认值 | `blueprint_path`, `operations[]` |
-| `edit-level-batch` | 关卡层的批量操作（生成/删除/变换/挂接/分离/复制） | `operations[]`, `world_type` |
-| `edit-material-instance-batch` | 一次性修改一个或多个 `MaterialInstanceConstant` 的参数 | `operations[]` |
-| `compile-assets` | 编译一个或多个 `Blueprint / WidgetBlueprint / AnimBlueprint` 资产 | `asset_paths[]`, `save_on_success` |
-
-**示例 ? 一次调用创建 BeginPlay → PrintString 连线**
-```json
-{"name":"edit-blueprint-graph",
- "arguments":{
-   "blueprint_path":"/Game/BP_Hero","graph_name":"EventGraph",
-   "compile":true,"save":true,
-   "operations":[
-     {"op":"add_node","alias":"print","class":"K2Node_CallFunction",
-      "properties":{"FunctionReference":{"MemberName":"PrintString"}}},
-     {"op":"connect","from_alias":"BeginPlay","from_pin":"then",
-      "to_alias":"print","to_pin":"execute"}
-   ]}}
-```
-
----
-
-## 12. 资产生命周期与校验 Asset Lifecycle & Validation（5）
-
-| 工具 | 用途 | 关键参数 |
-|---|---|---|
-| `manage-assets` | 批量重命名/移动/复制/删除/保存 | `actions[]` |
-| `import-assets` | 导入外部文件（FBX / PNG / JPG / TGA / WAV 等） | `files[]`, `destination_path`, `options{}` |
-| `source-control-assets` | 源码管理操作：status / checkout / revert / submit / sync | `action`, `asset_paths[]` |
-| `capture-viewport` | 截图编辑器视口、PIE 窗口，或指定的编辑器面板 | `source`（`editor`\|`pie`\|`panel`）, `output_path`, `width`, `height` |
-| `apply-material` | 按名称/标签/类给 Actor 应用材质或 MIC | `target`, `material_path`, `slot_index` |
-
-**示例**
-```json
-{"name":"capture-viewport",
- "arguments":{"source":"pie","output_path":"D:/tmp/shot.png","width":1920,"height":1080}}
-```
-
----
-
-## 13. 高阶编排 High-Level Orchestration（4）
-
-| 工具 | 用途 | 关键参数 |
-|---|---|---|
-| `blueprint-scaffold-from-spec` | 从 JSON 规格（组件/变量/函数/事件图步骤）新建或合并一个蓝图 ? 比 `create-asset` + `edit-blueprint-*` 更高一层 | `target_path`, `spec{}`, `dry_run` |
-| `query-gameplay-state` | PIE 玩法快照：PlayerController / Pawn / GameState / GameMode / 世界时间 | `world_type`, `include[]` |
-| `auto-fix-blueprint-compile-errors` | 用确定性策略修复蓝图编译错误（重连丢失的引脚、替换缺失引用等） | `blueprint_path`, `strategies[]`, `dry_run` |
-| `generate-level-structure` | 按声明式 spec 生成关卡骨架（文件夹/子关卡/World Settings） | `map_path`, `spec{}` |
-
-**示例**
-```json
-{"name":"blueprint-scaffold-from-spec",
- "arguments":{
-   "target_path":"/Game/Blueprints/BP_Minion",
-   "spec":{
-     "parent_class":"/Script/Engine.Character",
-     "components":[{"name":"Health","class":"UHealthComponent"}],
-     "variables":[{"name":"MaxHP","type":"float","default":100.0}]
-   }}}
-```
-
----
-
-## 查询实时清单
-
-机读格式的权威清单，总是以运行中的编辑器为准：
+## 如何检查运行时清单
 
 ```bash
 curl -s -X POST http://127.0.0.1:8080/mcp \
   -H "Content-Type: application/json" \
   -H "Accept: application/json,text/event-stream" \
-  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}' | jq '.result.tools | length'
+  -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"check","version":"1.0"}}}'
 ```
 
-预期是 **46**。如果本地看到的数字不是 46，说明你本地的插件副本已过期 ? 请拉取最新 `main` 分支并重新编译。
+然后再调用：
 
----
+```bash
+curl -s -X POST http://127.0.0.1:8080/mcp \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json,text/event-stream" \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/list"}'
+```
 
-延伸阅读：
+Step 6 之后，不同机器看到的数量不同是正常的，只要它和 `registeredCount`、可选模块状态一致即可。
 
-- [自定义工具开发指南](./ToolDevelopment.zh-CN.md) ? 如何写一个新工具
-- [架构文档](./Architecture.zh-CN.md) ? 模块布局、服务器、注册表、协议
-- [故障排查](./Troubleshooting.zh-CN.md) ? IPv6、端口、PIE 死锁、Python GC、pie-input AxisMapping 坑位
+## 另请参阅
+
+- [Tool Development Guide](./ToolDevelopment.zh-CN.md)
+- [Architecture](./Architecture.zh-CN.md)
+- [Troubleshooting](./Troubleshooting.zh-CN.md)
+- [Capability Matrix](./CapabilityMatrix.zh-CN.md)

@@ -1,0 +1,45 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "search_content_by_class",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Content class search complete"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "class":  "Blueprint",
+                                             "query":  "BP_SearchRound1_20260423_214405",
+                                             "results":  [
+                                                             {
+                                                                 "kind":  "asset",
+                                                                 "name":  "BP_SearchRound1_20260423_214405",
+                                                                 "path":  "/Game/UEBridgeMCPValidation/SearchRound1/BP_SearchRound1_20260423_214405.BP_SearchRound1_20260423_214405",
+                                                                 "package":  "/Game/UEBridgeMCPValidation/SearchRound1/BP_SearchRound1_20260423_214405",
+                                                                 "package_path":  "/Game/UEBridgeMCPValidation/SearchRound1",
+                                                                 "class":  "Blueprint",
+                                                                 "class_path":  "/Script/Engine.Blueprint",
+                                                                 "score":  100
+                                                             }
+                                                         ],
+                                             "count":  1,
+                                             "total_matches":  1,
+                                             "scanned":  1,
+                                             "truncated":  false,
+                                             "class_filter_resolved":  true
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  0.16289998893626034
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "search-content-by-class",
+                                               "mutates":  false,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  1
+                                           }
+                             }
+               }
+}

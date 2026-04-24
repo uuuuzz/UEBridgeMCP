@@ -1,0 +1,24 @@
+{
+  "errors": [],
+  "DirectionalLight": {
+    "atmosphere_sun_light": "True",
+    "atmosphere_sun_light_index": "0",
+    "forward_shading_priority": "0",
+    "affects_world": "True",
+    "visible": "True",
+    "intensity": "10.0",
+    "light_source_angle": "0.5357000231742859"
+  },
+  "SkyAtmosphere": {
+    "transform_mode": "<SkyAtmosphereTransformMode.PLANET_TOP_AT_ABSOLUTE_WORLD_ORIGIN: 0>",
+    "planet_radius": "ERR SkyAtmosphereComponent: Failed to find property 'planet_radius' for attribute 'planet_radius' on 'SkyAtmosphereComponent'",
+    "atmosphere_height": "60.0",
+    "rayleigh_scattering": "<Struct 'LinearColor' (0x000001DD0A12EAAC) {r: 0.180000, g: 0.360000, b: 0.950000, a: 1.000000}>",
+    "rayleigh_scattering_scale": "1.0",
+    "mie_scattering": "<Struct 'LinearColor' (0x000001DD0A12EAC4) {r: 1.000000, g: 1.000000, b: 1.000000, a: 1.000000}>",
+    "mie_scattering_scale": "0.012000000104308128",
+    "mie_absorption_scale": "0.0020000000949949026",
+    "other_absorption_scale": "0.0018810000037774444",
+    "ground_albedo": "<Struct 'Color' (0x000001DD0A12EA98) {b: 170, g: 170, r: 170, a: 255}>"
+  }
+}

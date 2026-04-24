@@ -1,0 +1,32 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "311",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Structured result ready"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "asset_path":  "/Game/UEBridgeMCPValidation/BlueprintRound1/BP_BlueprintRound1_20260423_154544",
+                                             "asset_class":  "Blueprint",
+                                             "parent_class":  "Actor",
+                                             "success":  true,
+                                             "created_class":  "Blueprint",
+                                             "needs_save":  true
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  4.0072000119835138
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "create-asset",
+                                               "mutates":  false,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  1
+                                           }
+                             }
+               }
+}

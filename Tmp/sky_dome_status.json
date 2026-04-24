@@ -1,0 +1,27 @@
+[
+  {
+    "label": "NPR_SunnySkyDome",
+    "loc": [
+      0.0,
+      0.0,
+      2200.0
+    ],
+    "scale": [
+      260.0,
+      260.0,
+      260.0
+    ],
+    "hidden_temp": false,
+    "bHidden": false,
+    "components": [
+      {
+        "visible": true,
+        "mobility": "<ComponentMobility.STATIC: 0>",
+        "materials": [
+          "/Game/Materials/NPR/M_NPR_SunnySkyDome.M_NPR_SunnySkyDome"
+        ],
+        "bounds_err": "'StaticMeshComponent' object has no attribute 'bounds'"
+      }
+    ]
+  }
+]

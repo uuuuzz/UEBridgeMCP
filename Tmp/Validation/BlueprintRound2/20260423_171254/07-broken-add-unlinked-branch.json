@@ -1,0 +1,65 @@
+﻿{
+	"jsonrpc": "2.0",
+	"id": "07-broken-add-unlinked-branch",
+	"result":
+	{
+		"content": [
+			{
+				"type": "text",
+				"text": "Blueprint graph edit complete"
+			}
+		],
+		"structuredContent":
+		{
+			"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Broken_20260423_171254",
+			"asset_handle":
+			{
+				"kind": "asset",
+				"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Broken_20260423_171254",
+				"asset_class": "Blueprint"
+			},
+			"results": [
+				{
+					"op": "add_branch",
+					"index": 0,
+					"alias": "unlinked_branch",
+					"node_guid": "18C5C8BF-4E97-BB91-DC13-1EA5A6C79333",
+					"handle":
+					{
+						"kind": "blueprint_node",
+						"session_id": "42194E5B-48C0-6CAD-13CD-7FA4D40E82AE",
+						"resource_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Broken_20260423_171254",
+						"entity_id": "18C5C8BF-4E97-BB91-DC13-1EA5A6C79333",
+						"display_name": "Branch"
+					},
+					"node_class": "K2Node_IfThenElse",
+					"graph_name": "EventGraph",
+					"success": true
+				}
+			],
+			"partial_results": [],
+			"summary":
+			{
+				"total_operations": 1,
+				"failed_operations": 0,
+				"compiled": false,
+				"saved": true
+			}
+		},
+		"_meta":
+		{
+			"timing":
+			{
+				"duration_ms": 4.9841000000014901
+			},
+			"stats":
+			{
+				"tool_name": "edit-blueprint-graph",
+				"mutates": true,
+				"supports_batch": true,
+				"requires_game_thread": true,
+				"content_items": 1
+			}
+		}
+	}
+}

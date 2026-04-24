@@ -1,0 +1,44 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "12",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Request succeeded"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "tool":  "edit-viewport-camera",
+                                             "success":  true,
+                                             "dry_run":  false,
+                                             "action":  "query",
+                                             "location":  [
+                                                              75201.914250999995,
+                                                              85553.025720999998,
+                                                              44620.97724
+                                                          ],
+                                             "rotation":  [
+                                                              -24.1999,
+                                                              -854.39819,
+                                                              0
+                                                          ],
+                                             "fov":  90
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  0.39259999175556004
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "edit-viewport-camera",
+                                               "requested_tool_name":  "set_viewport_camera",
+                                               "compatibility_alias":  true,
+                                               "compatibility_arguments_adapted":  false,
+                                               "mutates":  true,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  0
+                                           }
+                             }
+               }
+}

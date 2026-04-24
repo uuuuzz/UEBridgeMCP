@@ -1,0 +1,11 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "setup_search_actor",
+    "method":  "tools/call",
+    "params":  {
+                   "name":  "run-python-script",
+                   "arguments":  {
+                                     "script":  "import json\nimport unreal\nactor = unreal.EditorLevelLibrary.spawn_actor_from_class(unreal.StaticMeshActor, unreal.Vector(480.0, 120.0, 120.0), unreal.Rotator(0.0, 0.0, 0.0))\nactor.set_actor_label(\u0027UEBridgeMCP_SearchActor_20260423_214405\u0027)\nactor.tags = [unreal.Name(\u0027UEBridgeMCP_SearchRound1\u0027)]\nmesh = unreal.load_asset(\u0027/Engine/BasicShapes/Cube.Cube\u0027)\ncomp = actor.get_component_by_class(unreal.StaticMeshComponent)\nif comp and mesh:\n    comp.set_static_mesh(mesh)\n    comp.set_collision_profile_name(\u0027BlockAll\u0027)\nprint(json.dumps({\u0027label\u0027: actor.get_actor_label(), \u0027name\u0027: actor.get_name(), \u0027tags\u0027: [str(t) for t in actor.tags]}))"
+                                 }
+               }
+}

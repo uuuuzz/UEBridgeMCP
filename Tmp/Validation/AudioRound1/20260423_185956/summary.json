@@ -1,0 +1,38 @@
+﻿{
+    "timestamp":  "20260423_185956",
+    "evidence_dir":  "G:\\UEProjects\\UEBridgeMCP\\Tmp\\Validation\\AudioRound1\\20260423_185956",
+    "session_id":  "8E81C44C-4BC5-A370-DA4A-0AB69F62844C",
+    "required_tools":  [
+                           "query-audio-asset-summary",
+                           "create-sound-cue",
+                           "edit-sound-cue-routing",
+                           "create-audio-component-setup",
+                           "apply-audio-to-actor"
+                       ],
+    "missing_tools":  [
+
+                      ],
+    "sound_wave_path":  "/Engine/EngineSounds/WhiteNoise.WhiteNoise",
+    "sound_cue_path":  "/Game/UEBridgeMCPValidation/AudioRound1/SC_AudioRound1_20260423_185956.SC_AudioRound1_20260423_185956",
+    "target_actor_name":  "SM_SkySphere",
+    "target_actor_class":  "/Script/Engine.StaticMeshActor",
+    "component_name":  "AudioRound1Component_20260423_185956",
+    "cue_root_after":  "SoundNodeAttenuation",
+    "cue_volume_after":  0.64999997615814209,
+    "component_setup_success":  true,
+    "apply_audio_success":  true,
+    "playback_deferred":  true,
+    "validation":  {
+                       "tools_visible":  true,
+                       "query_wave_ok":  true,
+                       "create_sound_cue_ok":  true,
+                       "routing_dry_run_ok":  true,
+                       "routing_root_ok":  true,
+                       "routing_negative_is_error":  true,
+                       "component_setup_dry_run_ok":  true,
+                       "component_setup_ok":  true,
+                       "apply_audio_ok":  true,
+                       "apply_audio_editor_deferred":  true,
+                       "apply_negative_is_error":  true
+                   }
+}

@@ -1,0 +1,55 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "104",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Blueprint pattern generation plan ready"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "tool":  "generate-blueprint-pattern",
+                                             "success":  true,
+                                             "dry_run":  true,
+                                             "asset_path":  "/Game/UEBridgeMCPValidation/MacroUtilityRound1/BP_GeneratedPattern_20260423_222221",
+                                             "pattern":  "logic_actor_skeleton",
+                                             "delegated_tool":  "create-blueprint-pattern",
+                                             "tool_calls":  [
+                                                                {
+                                                                    "name":  "create-blueprint-pattern",
+                                                                    "arguments":  {
+                                                                                      "asset_path":  "/Game/UEBridgeMCPValidation/MacroUtilityRound1/BP_GeneratedPattern_20260423_222221",
+                                                                                      "pattern":  "logic_actor_skeleton",
+                                                                                      "compile":  "final",
+                                                                                      "save":  true
+                                                                                  }
+                                                                }
+                                                            ],
+                                             "warnings":  [
+
+                                                          ],
+                                             "diagnostics":  [
+
+                                                             ],
+                                             "modified_assets":  [
+
+                                                                 ],
+                                             "partial_results":  [
+
+                                                                 ]
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  0.82019998808391392
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "generate-blueprint-pattern",
+                                               "mutates":  true,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  1
+                                           }
+                             }
+               }
+}

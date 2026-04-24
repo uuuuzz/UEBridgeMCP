@@ -1,0 +1,6799 @@
+{
+	"jsonrpc": "2.0",
+	"id": "3104",
+	"result":
+	{
+		"content": [
+			{
+				"type": "text",
+				"text": "Landscape summary ready"
+			}
+		],
+		"structuredContent":
+		{
+			"tool": "query-landscape-summary",
+			"world_name": "Untitled_1",
+			"world_path": "/Temp/Untitled_1.Untitled_1",
+			"world_type": "editor",
+			"landscape_count": 65,
+			"component_count": 256,
+			"landscapes": [
+				{
+					"actor":
+					{
+						"name": "Landscape_UAID_A85E45CFE404FBD100_1221515703",
+						"label": "Landscape",
+						"class": "/Script/Landscape.Landscape",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.Landscape_UAID_A85E45CFE404FBD100_1221515703",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.Landscape_UAID_A85E45CFE404FBD100_1221515703",
+							"display_name": "Landscape"
+						},
+						"transform":
+						{
+							"location": [
+								-100800,
+								-100800,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.Landscape",
+					"is_main_landscape": true,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						0,
+						0
+					],
+					"resolution_x": 1,
+					"resolution_y": 1,
+					"component_count": 0,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							0
+						],
+						"box_extent": [
+							0,
+							0,
+							0
+						],
+						"box_min": [
+							0,
+							0,
+							0
+						],
+						"box_max": [
+							0,
+							0,
+							0
+						],
+						"sphere_radius": 0
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_3_2_0",
+						"label": "LandscapeStreamingProxy_3_2_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_3_2_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_3_2_0",
+							"display_name": "LandscapeStreamingProxy_3_2_0"
+						},
+						"transform":
+						{
+							"location": [
+								-25200,
+								-50400,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							-12600,
+							-37800,
+							996.484375
+						],
+						"box_extent": [
+							12600,
+							12600,
+							997.265625
+						],
+						"box_min": [
+							-25200,
+							-50400,
+							-0.78125
+						],
+						"box_max": [
+							0,
+							-25200,
+							1993.75
+						],
+						"sphere_radius": 17846.975618485241
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_3_3_0",
+						"label": "LandscapeStreamingProxy_3_3_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_3_3_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_3_3_0",
+							"display_name": "LandscapeStreamingProxy_3_3_0"
+						},
+						"transform":
+						{
+							"location": [
+								-25200,
+								-25200,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							-12600,
+							-12600,
+							0
+						],
+						"box_extent": [
+							12600,
+							12600,
+							100
+						],
+						"box_min": [
+							-25200,
+							-25200,
+							-100
+						],
+						"box_max": [
+							0,
+							0,
+							100
+						],
+						"sphere_radius": 17819.371481620783
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_4_3_0",
+						"label": "LandscapeStreamingProxy_4_3_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_4_3_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_4_3_0",
+							"display_name": "LandscapeStreamingProxy_4_3_0"
+						},
+						"transform":
+						{
+							"location": [
+								0,
+								-25200,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							12600,
+							-12600,
+							0
+						],
+						"box_extent": [
+							12600,
+							12600,
+							100
+						],
+						"box_min": [
+							0,
+							-25200,
+							-100
+						],
+						"box_max": [
+							25200,
+							0,
+							100
+						],
+						"sphere_radius": 17819.371481620783
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_3_5_0",
+						"label": "LandscapeStreamingProxy_3_5_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_3_5_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_3_5_0",
+							"display_name": "LandscapeStreamingProxy_3_5_0"
+						},
+						"transform":
+						{
+							"location": [
+								-25200,
+								25200,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							-12600,
+							37800,
+							641.796875
+						],
+						"box_extent": [
+							12600,
+							12600,
+							642.578125
+						],
+						"box_min": [
+							-25200,
+							25200,
+							-0.78125
+						],
+						"box_max": [
+							0,
+							50400,
+							1284.375
+						],
+						"sphere_radius": 17830.673196677923
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_3_4_0",
+						"label": "LandscapeStreamingProxy_3_4_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_3_4_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_3_4_0",
+							"display_name": "LandscapeStreamingProxy_3_4_0"
+						},
+						"transform":
+						{
+							"location": [
+								-25200,
+								0,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							-12600,
+							12600,
+							0
+						],
+						"box_extent": [
+							12600,
+							12600,
+							100
+						],
+						"box_min": [
+							-25200,
+							0,
+							-100
+						],
+						"box_max": [
+							0,
+							25200,
+							100
+						],
+						"sphere_radius": 17819.371481620783
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_4_5_0",
+						"label": "LandscapeStreamingProxy_4_5_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_4_5_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_4_5_0",
+							"display_name": "LandscapeStreamingProxy_4_5_0"
+						},
+						"transform":
+						{
+							"location": [
+								0,
+								25200,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							12600,
+							37800,
+							600.78125
+						],
+						"box_extent": [
+							12600,
+							12600,
+							601.5625
+						],
+						"box_min": [
+							0,
+							25200,
+							-0.78125
+						],
+						"box_max": [
+							25200,
+							50400,
+							1202.34375
+						],
+						"sphere_radius": 17829.242200424735
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_4_4_0",
+						"label": "LandscapeStreamingProxy_4_4_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_4_4_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_4_4_0",
+							"display_name": "LandscapeStreamingProxy_4_4_0"
+						},
+						"transform":
+						{
+							"location": [
+								0,
+								0,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							12600,
+							12600,
+							0
+						],
+						"box_extent": [
+							12600,
+							12600,
+							100
+						],
+						"box_min": [
+							0,
+							0,
+							-100
+						],
+						"box_max": [
+							25200,
+							25200,
+							100
+						],
+						"sphere_radius": 17819.371481620783
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_0_0_0",
+						"label": "LandscapeStreamingProxy_0_0_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_0_0_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_0_0_0",
+							"display_name": "LandscapeStreamingProxy_0_0_0"
+						},
+						"transform":
+						{
+							"location": [
+								-100800,
+								-100800,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							-88200,
+							-88200,
+							9713.28125
+						],
+						"box_extent": [
+							12600,
+							12600,
+							2443.75
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							7269.53125
+						],
+						"box_max": [
+							-75600,
+							-75600,
+							12157.03125
+						],
+						"sphere_radius": 17985.880964314758
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_0_1_0",
+						"label": "LandscapeStreamingProxy_0_1_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_0_1_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_0_1_0",
+							"display_name": "LandscapeStreamingProxy_0_1_0"
+						},
+						"transform":
+						{
+							"location": [
+								-100800,
+								-75600,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							-88200,
+							-63000,
+							7105.46875
+						],
+						"box_extent": [
+							12600,
+							12600,
+							1656.25
+						],
+						"box_min": [
+							-100800,
+							-75600,
+							5449.21875
+						],
+						"box_max": [
+							-75600,
+							-50400,
+							8761.71875
+						],
+						"sphere_radius": 17895.897967481262
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_1_0_0",
+						"label": "LandscapeStreamingProxy_1_0_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_1_0_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_1_0_0",
+							"display_name": "LandscapeStreamingProxy_1_0_0"
+						},
+						"transform":
+						{
+							"location": [
+								-75600,
+								-100800,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							-63000,
+							-88200,
+							9633.59375
+						],
+						"box_extent": [
+							12600,
+							12600,
+							3025
+						],
+						"box_min": [
+							-75600,
+							-100800,
+							6608.59375
+						],
+						"box_max": [
+							-50400,
+							-75600,
+							12658.59375
+						],
+						"sphere_radius": 18074.031785962976
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_1_1_0",
+						"label": "LandscapeStreamingProxy_1_1_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_1_1_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_1_1_0",
+							"display_name": "LandscapeStreamingProxy_1_1_0"
+						},
+						"transform":
+						{
+							"location": [
+								-75600,
+								-75600,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							-63000,
+							-63000,
+							6488.28125
+						],
+						"box_extent": [
+							12600,
+							12600,
+							1375
+						],
+						"box_min": [
+							-75600,
+							-75600,
+							5113.28125
+						],
+						"box_max": [
+							-50400,
+							-50400,
+							7863.28125
+						],
+						"sphere_radius": 17872.062695727094
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_0_2_0",
+						"label": "LandscapeStreamingProxy_0_2_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_0_2_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_0_2_0",
+							"display_name": "LandscapeStreamingProxy_0_2_0"
+						},
+						"transform":
+						{
+							"location": [
+								-100800,
+								-50400,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							-88200,
+							-37800,
+							7653.90625
+						],
+						"box_extent": [
+							12600,
+							12600,
+							1846.875
+						],
+						"box_min": [
+							-100800,
+							-50400,
+							5807.03125
+						],
+						"box_max": [
+							-75600,
+							-25200,
+							9500.78125
+						],
+						"sphere_radius": 17914.545689623978
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_0_3_0",
+						"label": "LandscapeStreamingProxy_0_3_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_0_3_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_0_3_0",
+							"display_name": "LandscapeStreamingProxy_0_3_0"
+						},
+						"transform":
+						{
+							"location": [
+								-100800,
+								-25200,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							-88200,
+							-12600,
+							5084.375
+						],
+						"box_extent": [
+							12600,
+							12600,
+							4117.96875
+						],
+						"box_min": [
+							-100800,
+							-25200,
+							966.40625
+						],
+						"box_max": [
+							-75600,
+							0,
+							9202.34375
+						],
+						"sphere_radius": 18288.730590885101
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_1_2_0",
+						"label": "LandscapeStreamingProxy_1_2_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_1_2_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_1_2_0",
+							"display_name": "LandscapeStreamingProxy_1_2_0"
+						},
+						"transform":
+						{
+							"location": [
+								-75600,
+								-50400,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							-63000,
+							-37800,
+							4982.03125
+						],
+						"box_extent": [
+							12600,
+							12600,
+							3943.75
+						],
+						"box_min": [
+							-75600,
+							-50400,
+							1038.28125
+						],
+						"box_max": [
+							-50400,
+							-25200,
+							8925.78125
+						],
+						"sphere_radius": 18250.292163757269
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_1_3_0",
+						"label": "LandscapeStreamingProxy_1_3_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_1_3_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_1_3_0",
+							"display_name": "LandscapeStreamingProxy_1_3_0"
+						},
+						"transform":
+						{
+							"location": [
+								-75600,
+								-25200,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							-63000,
+							-12600,
+							3247.265625
+						],
+						"box_extent": [
+							12600,
+							12600,
+							3230.078125
+						],
+						"box_min": [
+							-75600,
+							-25200,
+							17.1875
+						],
+						"box_max": [
+							-50400,
+							0,
+							6477.34375
+						],
+						"sphere_radius": 18109.483832887217
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_2_0_0",
+						"label": "LandscapeStreamingProxy_2_0_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_2_0_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_2_0_0",
+							"display_name": "LandscapeStreamingProxy_2_0_0"
+						},
+						"transform":
+						{
+							"location": [
+								-50400,
+								-100800,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							-37800,
+							-88200,
+							9257.03125
+						],
+						"box_extent": [
+							12600,
+							12600,
+							2684.375
+						],
+						"box_min": [
+							-50400,
+							-100800,
+							6572.65625
+						],
+						"box_max": [
+							-25200,
+							-75600,
+							11941.40625
+						],
+						"sphere_radius": 18020.15175132066
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_2_1_0",
+						"label": "LandscapeStreamingProxy_2_1_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_2_1_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_2_1_0",
+							"display_name": "LandscapeStreamingProxy_2_1_0"
+						},
+						"transform":
+						{
+							"location": [
+								-50400,
+								-75600,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							-37800,
+							-63000,
+							5280.078125
+						],
+						"box_extent": [
+							12600,
+							12600,
+							3286.328125
+						],
+						"box_min": [
+							-50400,
+							-75600,
+							1993.75
+						],
+						"box_max": [
+							-25200,
+							-50400,
+							8566.40625
+						],
+						"sphere_radius": 18119.601335160936
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_3_0_0",
+						"label": "LandscapeStreamingProxy_3_0_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_3_0_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_3_0_0",
+							"display_name": "LandscapeStreamingProxy_3_0_0"
+						},
+						"transform":
+						{
+							"location": [
+								-25200,
+								-100800,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							-12600,
+							-88200,
+							8948.4375
+						],
+						"box_extent": [
+							12600,
+							12600,
+							2494.53125
+						],
+						"box_min": [
+							-25200,
+							-100800,
+							6453.90625
+						],
+						"box_max": [
+							0,
+							-75600,
+							11442.96875
+						],
+						"sphere_radius": 17992.850973573546
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_3_1_0",
+						"label": "LandscapeStreamingProxy_3_1_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_3_1_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_3_1_0",
+							"display_name": "LandscapeStreamingProxy_3_1_0"
+						},
+						"transform":
+						{
+							"location": [
+								-25200,
+								-75600,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							-12600,
+							-63000,
+							4473.828125
+						],
+						"box_extent": [
+							12600,
+							12600,
+							4331.640625
+						],
+						"box_min": [
+							-25200,
+							-75600,
+							142.1875
+						],
+						"box_max": [
+							0,
+							-50400,
+							8805.46875
+						],
+						"sphere_radius": 18338.023625902286
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_2_2_0",
+						"label": "LandscapeStreamingProxy_2_2_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_2_2_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_2_2_0",
+							"display_name": "LandscapeStreamingProxy_2_2_0"
+						},
+						"transform":
+						{
+							"location": [
+								-50400,
+								-50400,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							-37800,
+							-37800,
+							2630.078125
+						],
+						"box_extent": [
+							12600,
+							12600,
+							2630.078125
+						],
+						"box_min": [
+							-50400,
+							-50400,
+							0
+						],
+						"box_max": [
+							-25200,
+							-25200,
+							5260.15625
+						],
+						"sphere_radius": 18012.143430019747
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_2_3_0",
+						"label": "LandscapeStreamingProxy_2_3_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_2_3_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_2_3_0",
+							"display_name": "LandscapeStreamingProxy_2_3_0"
+						},
+						"transform":
+						{
+							"location": [
+								-50400,
+								-25200,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							-37800,
+							-12600,
+							519.140625
+						],
+						"box_extent": [
+							12600,
+							12600,
+							519.140625
+						],
+						"box_min": [
+							-50400,
+							-25200,
+							0
+						],
+						"box_max": [
+							-25200,
+							0,
+							1038.28125
+						],
+						"sphere_radius": 17826.651592167425
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_5_0_0",
+						"label": "LandscapeStreamingProxy_5_0_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_5_0_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_5_0_0",
+							"display_name": "LandscapeStreamingProxy_5_0_0"
+						},
+						"transform":
+						{
+							"location": [
+								25200,
+								-100800,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							37800,
+							-88200,
+							6959.375
+						],
+						"box_extent": [
+							12600,
+							12600,
+							2008.59375
+						],
+						"box_min": [
+							25200,
+							-100800,
+							4950.78125
+						],
+						"box_max": [
+							50400,
+							-75600,
+							8967.96875
+						],
+						"sphere_radius": 17931.939350012843
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_4_0_0",
+						"label": "LandscapeStreamingProxy_4_0_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_4_0_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_4_0_0",
+							"display_name": "LandscapeStreamingProxy_4_0_0"
+						},
+						"transform":
+						{
+							"location": [
+								0,
+								-100800,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							12600,
+							-88200,
+							7967.96875
+						],
+						"box_extent": [
+							12600,
+							12600,
+							3346.875
+						],
+						"box_min": [
+							0,
+							-100800,
+							4621.09375
+						],
+						"box_max": [
+							25200,
+							-75600,
+							11314.84375
+						],
+						"sphere_radius": 18130.680413752401
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_4_1_0",
+						"label": "LandscapeStreamingProxy_4_1_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_4_1_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_4_1_0",
+							"display_name": "LandscapeStreamingProxy_4_1_0"
+						},
+						"transform":
+						{
+							"location": [
+								0,
+								-75600,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							12600,
+							-63000,
+							3420.703125
+						],
+						"box_extent": [
+							12600,
+							12600,
+							3314.453125
+						],
+						"box_min": [
+							0,
+							-75600,
+							106.25
+						],
+						"box_max": [
+							25200,
+							-50400,
+							6735.15625
+						],
+						"sphere_radius": 18124.723432864357
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_5_1_0",
+						"label": "LandscapeStreamingProxy_5_1_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_5_1_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_5_1_0",
+							"display_name": "LandscapeStreamingProxy_5_1_0"
+						},
+						"transform":
+						{
+							"location": [
+								25200,
+								-75600,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							37800,
+							-63000,
+							3787.890625
+						],
+						"box_extent": [
+							12600,
+							12600,
+							2723.828125
+						],
+						"box_min": [
+							25200,
+							-75600,
+							1064.0625
+						],
+						"box_max": [
+							50400,
+							-50400,
+							6511.71875
+						],
+						"sphere_radius": 18026.071109771565
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_6_0_0",
+						"label": "LandscapeStreamingProxy_6_0_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_6_0_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_6_0_0",
+							"display_name": "LandscapeStreamingProxy_6_0_0"
+						},
+						"transform":
+						{
+							"location": [
+								50400,
+								-100800,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							63000,
+							-88200,
+							8463.28125
+						],
+						"box_extent": [
+							12600,
+							12600,
+							2523.4375
+						],
+						"box_min": [
+							50400,
+							-100800,
+							5939.84375
+						],
+						"box_max": [
+							75600,
+							-75600,
+							10986.71875
+						],
+						"sphere_radius": 17996.88130806019
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_6_1_0",
+						"label": "LandscapeStreamingProxy_6_1_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_6_1_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_6_1_0",
+							"display_name": "LandscapeStreamingProxy_6_1_0"
+						},
+						"transform":
+						{
+							"location": [
+								50400,
+								-75600,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							63000,
+							-63000,
+							8235.15625
+						],
+						"box_extent": [
+							12600,
+							12600,
+							2595.3125
+						],
+						"box_min": [
+							50400,
+							-75600,
+							5639.84375
+						],
+						"box_max": [
+							75600,
+							-50400,
+							10830.46875
+						],
+						"sphere_radius": 18007.099904555875
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_5_2_0",
+						"label": "LandscapeStreamingProxy_5_2_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_5_2_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_5_2_0",
+							"display_name": "LandscapeStreamingProxy_5_2_0"
+						},
+						"transform":
+						{
+							"location": [
+								25200,
+								-50400,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							37800,
+							-37800,
+							3460.546875
+						],
+						"box_extent": [
+							12600,
+							12600,
+							3459.765625
+						],
+						"box_min": [
+							25200,
+							-50400,
+							0.78125
+						],
+						"box_max": [
+							50400,
+							-25200,
+							6920.3125
+						],
+						"sphere_radius": 18151.858807844768
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_4_2_0",
+						"label": "LandscapeStreamingProxy_4_2_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_4_2_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_4_2_0",
+							"display_name": "LandscapeStreamingProxy_4_2_0"
+						},
+						"transform":
+						{
+							"location": [
+								0,
+								-50400,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							12600,
+							-37800,
+							532.03125
+						],
+						"box_extent": [
+							12600,
+							12600,
+							532.03125
+						],
+						"box_min": [
+							0,
+							-50400,
+							0
+						],
+						"box_max": [
+							25200,
+							-25200,
+							1064.0625
+						],
+						"sphere_radius": 17827.031644415078
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_5_3_0",
+						"label": "LandscapeStreamingProxy_5_3_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_5_3_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_5_3_0",
+							"display_name": "LandscapeStreamingProxy_5_3_0"
+						},
+						"transform":
+						{
+							"location": [
+								25200,
+								-25200,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							37800,
+							-12600,
+							1655.078125
+						],
+						"box_extent": [
+							12600,
+							12600,
+							1655.078125
+						],
+						"box_min": [
+							25200,
+							-25200,
+							0
+						],
+						"box_max": [
+							50400,
+							0,
+							3310.15625
+						],
+						"sphere_radius": 17895.78954949609
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_6_2_0",
+						"label": "LandscapeStreamingProxy_6_2_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_6_2_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_6_2_0",
+							"display_name": "LandscapeStreamingProxy_6_2_0"
+						},
+						"transform":
+						{
+							"location": [
+								50400,
+								-50400,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							63000,
+							-37800,
+							7500.78125
+						],
+						"box_extent": [
+							12600,
+							12600,
+							4190.625
+						],
+						"box_min": [
+							50400,
+							-50400,
+							3310.15625
+						],
+						"box_max": [
+							75600,
+							-25200,
+							11691.40625
+						],
+						"sphere_radius": 18305.227064710914
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_6_3_0",
+						"label": "LandscapeStreamingProxy_6_3_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_6_3_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_6_3_0",
+							"display_name": "LandscapeStreamingProxy_6_3_0"
+						},
+						"transform":
+						{
+							"location": [
+								50400,
+								-25200,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							63000,
+							-12600,
+							4998.046875
+						],
+						"box_extent": [
+							12600,
+							12600,
+							4127.734375
+						],
+						"box_min": [
+							50400,
+							-25200,
+							870.3125
+						],
+						"box_max": [
+							75600,
+							0,
+							9125.78125
+						],
+						"sphere_radius": 18290.931935539989
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_7_0_0",
+						"label": "LandscapeStreamingProxy_7_0_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_7_0_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_7_0_0",
+							"display_name": "LandscapeStreamingProxy_7_0_0"
+						},
+						"transform":
+						{
+							"location": [
+								75600,
+								-100800,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							88200,
+							-88200,
+							10538.28125
+						],
+						"box_extent": [
+							12600,
+							12600,
+							3015.625
+						],
+						"box_min": [
+							75600,
+							-100800,
+							7522.65625
+						],
+						"box_max": [
+							100800,
+							-75600,
+							13553.90625
+						],
+						"sphere_radius": 18072.465082014267
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_7_1_0",
+						"label": "LandscapeStreamingProxy_7_1_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_7_1_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_7_1_0",
+							"display_name": "LandscapeStreamingProxy_7_1_0"
+						},
+						"transform":
+						{
+							"location": [
+								75600,
+								-75600,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							88200,
+							-63000,
+							10191.40625
+						],
+						"box_extent": [
+							12600,
+							12600,
+							1581.25
+						],
+						"box_min": [
+							75600,
+							-75600,
+							8610.15625
+						],
+						"box_max": [
+							100800,
+							-50400,
+							11772.65625
+						],
+						"sphere_radius": 17889.112654419168
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_7_2_0",
+						"label": "LandscapeStreamingProxy_7_2_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_7_2_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_7_2_0",
+							"display_name": "LandscapeStreamingProxy_7_2_0"
+						},
+						"transform":
+						{
+							"location": [
+								75600,
+								-50400,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							88200,
+							-37800,
+							11049.21875
+						],
+						"box_extent": [
+							12600,
+							12600,
+							1923.4375
+						],
+						"box_min": [
+							75600,
+							-50400,
+							9125.78125
+						],
+						"box_max": [
+							100800,
+							-25200,
+							12972.65625
+						],
+						"sphere_radius": 17922.600587426095
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_7_3_0",
+						"label": "LandscapeStreamingProxy_7_3_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_7_3_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_7_3_0",
+							"display_name": "LandscapeStreamingProxy_7_3_0"
+						},
+						"transform":
+						{
+							"location": [
+								75600,
+								-25200,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							88200,
+							-12600,
+							8433.59375
+						],
+						"box_extent": [
+							12600,
+							12600,
+							3153.125
+						],
+						"box_min": [
+							75600,
+							-25200,
+							5280.46875
+						],
+						"box_max": [
+							100800,
+							0,
+							11586.71875
+						],
+						"sphere_radius": 18095.916590922523
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_0_5_0",
+						"label": "LandscapeStreamingProxy_0_5_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_0_5_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_0_5_0",
+							"display_name": "LandscapeStreamingProxy_0_5_0"
+						},
+						"transform":
+						{
+							"location": [
+								-100800,
+								25200,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							-88200,
+							37800,
+							7114.0625
+						],
+						"box_extent": [
+							12600,
+							12600,
+							3213.28125
+						],
+						"box_min": [
+							-100800,
+							25200,
+							3900.78125
+						],
+						"box_max": [
+							-75600,
+							50400,
+							10327.34375
+						],
+						"sphere_radius": 18106.495419920488
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_0_4_0",
+						"label": "LandscapeStreamingProxy_0_4_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_0_4_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_0_4_0",
+							"display_name": "LandscapeStreamingProxy_0_4_0"
+						},
+						"transform":
+						{
+							"location": [
+								-100800,
+								0,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							-88200,
+							12600,
+							5059.375
+						],
+						"box_extent": [
+							12600,
+							12600,
+							4211.71875
+						],
+						"box_min": [
+							-100800,
+							0,
+							847.65625
+						],
+						"box_max": [
+							-75600,
+							25200,
+							9271.09375
+						],
+						"sphere_radius": 18310.067581227042
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_0_6_0",
+						"label": "LandscapeStreamingProxy_0_6_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_0_6_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_0_6_0",
+							"display_name": "LandscapeStreamingProxy_0_6_0"
+						},
+						"transform":
+						{
+							"location": [
+								-100800,
+								50400,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							-88200,
+							63000,
+							8290.625
+						],
+						"box_extent": [
+							12600,
+							12600,
+							2839.84375
+						],
+						"box_min": [
+							-100800,
+							50400,
+							5450.78125
+						],
+						"box_max": [
+							-75600,
+							75600,
+							11130.46875
+						],
+						"sphere_radius": 18043.966097408131
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_1_5_0",
+						"label": "LandscapeStreamingProxy_1_5_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_1_5_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_1_5_0",
+							"display_name": "LandscapeStreamingProxy_1_5_0"
+						},
+						"transform":
+						{
+							"location": [
+								-75600,
+								25200,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							-63000,
+							37800,
+							4075.390625
+						],
+						"box_extent": [
+							12600,
+							12600,
+							3944.140625
+						],
+						"box_min": [
+							-75600,
+							25200,
+							131.25
+						],
+						"box_max": [
+							-50400,
+							50400,
+							8019.53125
+						],
+						"sphere_radius": 18250.376578848322
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_1_4_0",
+						"label": "LandscapeStreamingProxy_1_4_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_1_4_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_1_4_0",
+							"display_name": "LandscapeStreamingProxy_1_4_0"
+						},
+						"transform":
+						{
+							"location": [
+								-75600,
+								0,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							-63000,
+							12600,
+							2198.4375
+						],
+						"box_extent": [
+							12600,
+							12600,
+							2191.40625
+						],
+						"box_min": [
+							-75600,
+							0,
+							7.03125
+						],
+						"box_max": [
+							-50400,
+							25200,
+							4389.84375
+						],
+						"sphere_radius": 17953.335660888733
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_1_6_0",
+						"label": "LandscapeStreamingProxy_1_6_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_1_6_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_1_6_0",
+							"display_name": "LandscapeStreamingProxy_1_6_0"
+						},
+						"transform":
+						{
+							"location": [
+								-75600,
+								50400,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							-63000,
+							63000,
+							6196.09375
+						],
+						"box_extent": [
+							12600,
+							12600,
+							2976.5625
+						],
+						"box_min": [
+							-75600,
+							50400,
+							3219.53125
+						],
+						"box_max": [
+							-50400,
+							75600,
+							9172.65625
+						],
+						"sphere_radius": 18065.98805259226
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_0_7_0",
+						"label": "LandscapeStreamingProxy_0_7_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_0_7_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_0_7_0",
+							"display_name": "LandscapeStreamingProxy_0_7_0"
+						},
+						"transform":
+						{
+							"location": [
+								-100800,
+								75600,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							-88200,
+							88200,
+							10934.375
+						],
+						"box_extent": [
+							12600,
+							12600,
+							2671.09375
+						],
+						"box_min": [
+							-100800,
+							75600,
+							8263.28125
+						],
+						"box_max": [
+							-75600,
+							100800,
+							13605.46875
+						],
+						"sphere_radius": 18018.178093838706
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_1_7_0",
+						"label": "LandscapeStreamingProxy_1_7_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_1_7_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_1_7_0",
+							"display_name": "LandscapeStreamingProxy_1_7_0"
+						},
+						"transform":
+						{
+							"location": [
+								-75600,
+								75600,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							-63000,
+							88200,
+							9908.59375
+						],
+						"box_extent": [
+							12600,
+							12600,
+							3289.0625
+						],
+						"box_min": [
+							-75600,
+							75600,
+							6619.53125
+						],
+						"box_max": [
+							-50400,
+							100800,
+							13197.65625
+						],
+						"sphere_radius": 18120.097464663544
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_2_4_0",
+						"label": "LandscapeStreamingProxy_2_4_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_2_4_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_2_4_0",
+							"display_name": "LandscapeStreamingProxy_2_4_0"
+						},
+						"transform":
+						{
+							"location": [
+								-50400,
+								0,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							-37800,
+							12600,
+							82.421875
+						],
+						"box_extent": [
+							12600,
+							12600,
+							82.421875
+						],
+						"box_min": [
+							-50400,
+							0,
+							0
+						],
+						"box_max": [
+							-25200,
+							25200,
+							164.84375
+						],
+						"sphere_radius": 17819.281505309875
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_2_5_0",
+						"label": "LandscapeStreamingProxy_2_5_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_2_5_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_2_5_0",
+							"display_name": "LandscapeStreamingProxy_2_5_0"
+						},
+						"transform":
+						{
+							"location": [
+								-50400,
+								25200,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							-37800,
+							37800,
+							1804.6875
+						],
+						"box_extent": [
+							12600,
+							12600,
+							1804.6875
+						],
+						"box_min": [
+							-50400,
+							25200,
+							0
+						],
+						"box_max": [
+							-25200,
+							50400,
+							3609.375
+						],
+						"sphere_radius": 17910.245586609253
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_2_6_0",
+						"label": "LandscapeStreamingProxy_2_6_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_2_6_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_2_6_0",
+							"display_name": "LandscapeStreamingProxy_2_6_0"
+						},
+						"transform":
+						{
+							"location": [
+								-50400,
+								50400,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							-37800,
+							63000,
+							4367.578125
+						],
+						"box_extent": [
+							12600,
+							12600,
+							3083.203125
+						],
+						"box_min": [
+							-50400,
+							50400,
+							1284.375
+						],
+						"box_max": [
+							-25200,
+							75600,
+							7450.78125
+						],
+						"sphere_radius": 18083.864119983034
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_3_6_0",
+						"label": "LandscapeStreamingProxy_3_6_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_3_6_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_3_6_0",
+							"display_name": "LandscapeStreamingProxy_3_6_0"
+						},
+						"transform":
+						{
+							"location": [
+								-25200,
+								50400,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							-12600,
+							63000,
+							2720.703125
+						],
+						"box_extent": [
+							12600,
+							12600,
+							2531.640625
+						],
+						"box_min": [
+							-25200,
+							50400,
+							189.0625
+						],
+						"box_max": [
+							0,
+							75600,
+							5252.34375
+						],
+						"sphere_radius": 17998.03334406708
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_2_7_0",
+						"label": "LandscapeStreamingProxy_2_7_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_2_7_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_2_7_0",
+							"display_name": "LandscapeStreamingProxy_2_7_0"
+						},
+						"transform":
+						{
+							"location": [
+								-50400,
+								75600,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							-37800,
+							88200,
+							9123.4375
+						],
+						"box_extent": [
+							12600,
+							12600,
+							4042.96875
+						],
+						"box_min": [
+							-50400,
+							75600,
+							5080.46875
+						],
+						"box_max": [
+							-25200,
+							100800,
+							13166.40625
+						],
+						"sphere_radius": 18271.989391236973
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_3_7_0",
+						"label": "LandscapeStreamingProxy_3_7_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_3_7_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_3_7_0",
+							"display_name": "LandscapeStreamingProxy_3_7_0"
+						},
+						"transform":
+						{
+							"location": [
+								-25200,
+								75600,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							-12600,
+							88200,
+							6887.5
+						],
+						"box_extent": [
+							12600,
+							12600,
+							3760.15625
+						],
+						"box_min": [
+							-25200,
+							75600,
+							3127.34375
+						],
+						"box_max": [
+							0,
+							100800,
+							10647.65625
+						],
+						"sphere_radius": 18211.501174379177
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_5_5_0",
+						"label": "LandscapeStreamingProxy_5_5_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_5_5_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_5_5_0",
+							"display_name": "LandscapeStreamingProxy_5_5_0"
+						},
+						"transform":
+						{
+							"location": [
+								25200,
+								25200,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							37800,
+							37800,
+							2944.140625
+						],
+						"box_extent": [
+							12600,
+							12600,
+							2944.140625
+						],
+						"box_min": [
+							25200,
+							25200,
+							0
+						],
+						"box_max": [
+							50400,
+							50400,
+							5888.28125
+						],
+						"sphere_radius": 18060.674517297946
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_5_4_0",
+						"label": "LandscapeStreamingProxy_5_4_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_5_4_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_5_4_0",
+							"display_name": "LandscapeStreamingProxy_5_4_0"
+						},
+						"transform":
+						{
+							"location": [
+								25200,
+								0,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							37800,
+							12600,
+							1151.5625
+						],
+						"box_extent": [
+							12600,
+							12600,
+							1151.5625
+						],
+						"box_min": [
+							25200,
+							0,
+							0
+						],
+						"box_max": [
+							50400,
+							25200,
+							2303.125
+						],
+						"sphere_radius": 17856.262100210286
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_4_6_0",
+						"label": "LandscapeStreamingProxy_4_6_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_4_6_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_4_6_0",
+							"display_name": "LandscapeStreamingProxy_4_6_0"
+						},
+						"transform":
+						{
+							"location": [
+								0,
+								50400,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							12600,
+							63000,
+							1697.265625
+						],
+						"box_extent": [
+							12600,
+							12600,
+							1597.265625
+						],
+						"box_min": [
+							0,
+							50400,
+							100
+						],
+						"box_max": [
+							25200,
+							75600,
+							3294.53125
+						],
+						"sphere_radius": 17890.535416158084
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_5_6_0",
+						"label": "LandscapeStreamingProxy_5_6_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_5_6_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_5_6_0",
+							"display_name": "LandscapeStreamingProxy_5_6_0"
+						},
+						"transform":
+						{
+							"location": [
+								25200,
+								50400,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							37800,
+							63000,
+							4939.84375
+						],
+						"box_extent": [
+							12600,
+							12600,
+							3737.5
+						],
+						"box_min": [
+							25200,
+							50400,
+							1202.34375
+						],
+						"box_max": [
+							50400,
+							75600,
+							8677.34375
+						],
+						"sphere_radius": 18206.836799675006
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_6_4_0",
+						"label": "LandscapeStreamingProxy_6_4_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_6_4_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_6_4_0",
+							"display_name": "LandscapeStreamingProxy_6_4_0"
+						},
+						"transform":
+						{
+							"location": [
+								50400,
+								0,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							63000,
+							12600,
+							4131.640625
+						],
+						"box_extent": [
+							12600,
+							12600,
+							3237.890625
+						],
+						"box_min": [
+							50400,
+							0,
+							893.75
+						],
+						"box_max": [
+							75600,
+							25200,
+							7369.53125
+						],
+						"sphere_radius": 18110.878932273357
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_6_5_0",
+						"label": "LandscapeStreamingProxy_6_5_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_6_5_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_6_5_0",
+							"display_name": "LandscapeStreamingProxy_6_5_0"
+						},
+						"transform":
+						{
+							"location": [
+								50400,
+								25200,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							63000,
+							37800,
+							5748.046875
+						],
+						"box_extent": [
+							12600,
+							12600,
+							3483.984375
+						],
+						"box_min": [
+							50400,
+							25200,
+							2264.0625
+						],
+						"box_max": [
+							75600,
+							50400,
+							9232.03125
+						],
+						"sphere_radius": 18156.490495832175
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_6_6_0",
+						"label": "LandscapeStreamingProxy_6_6_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_6_6_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_6_6_0",
+							"display_name": "LandscapeStreamingProxy_6_6_0"
+						},
+						"transform":
+						{
+							"location": [
+								50400,
+								50400,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							63000,
+							63000,
+							8097.65625
+						],
+						"box_extent": [
+							12600,
+							12600,
+							2756.25
+						],
+						"box_min": [
+							50400,
+							50400,
+							5341.40625
+						],
+						"box_max": [
+							75600,
+							75600,
+							10853.90625
+						],
+						"sphere_radius": 18030.998698422114
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_4_7_0",
+						"label": "LandscapeStreamingProxy_4_7_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_4_7_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_4_7_0",
+							"display_name": "LandscapeStreamingProxy_4_7_0"
+						},
+						"transform":
+						{
+							"location": [
+								0,
+								75600,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							12600,
+							88200,
+							4067.96875
+						],
+						"box_extent": [
+							12600,
+							12600,
+							1987.5
+						],
+						"box_min": [
+							0,
+							75600,
+							2080.46875
+						],
+						"box_max": [
+							25200,
+							100800,
+							6055.46875
+						],
+						"sphere_radius": 17929.588847767816
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_5_7_0",
+						"label": "LandscapeStreamingProxy_5_7_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_5_7_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_5_7_0",
+							"display_name": "LandscapeStreamingProxy_5_7_0"
+						},
+						"transform":
+						{
+							"location": [
+								25200,
+								75600,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							37800,
+							88200,
+							6225
+						],
+						"box_extent": [
+							12600,
+							12600,
+							3571.09375
+						],
+						"box_min": [
+							25200,
+							75600,
+							2653.90625
+						],
+						"box_max": [
+							50400,
+							100800,
+							9796.09375
+						],
+						"sphere_radius": 18173.406685904793
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_6_7_0",
+						"label": "LandscapeStreamingProxy_6_7_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_6_7_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_6_7_0",
+							"display_name": "LandscapeStreamingProxy_6_7_0"
+						},
+						"transform":
+						{
+							"location": [
+								50400,
+								75600,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							63000,
+							88200,
+							9788.28125
+						],
+						"box_extent": [
+							12600,
+							12600,
+							2003.125
+						],
+						"box_min": [
+							50400,
+							75600,
+							7785.15625
+						],
+						"box_max": [
+							75600,
+							100800,
+							11791.40625
+						],
+						"sphere_radius": 17931.327607447951
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_7_4_0",
+						"label": "LandscapeStreamingProxy_7_4_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_7_4_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_7_4_0",
+							"display_name": "LandscapeStreamingProxy_7_4_0"
+						},
+						"transform":
+						{
+							"location": [
+								75600,
+								0,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							88200,
+							12600,
+							7160.15625
+						],
+						"box_extent": [
+							12600,
+							12600,
+							2068.75
+						],
+						"box_min": [
+							75600,
+							0,
+							5091.40625
+						],
+						"box_max": [
+							100800,
+							25200,
+							9228.90625
+						],
+						"sphere_radius": 17938.777175785981
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_7_5_0",
+						"label": "LandscapeStreamingProxy_7_5_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_7_5_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_7_5_0",
+							"display_name": "LandscapeStreamingProxy_7_5_0"
+						},
+						"transform":
+						{
+							"location": [
+								75600,
+								25200,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							88200,
+							37800,
+							9734.375
+						],
+						"box_extent": [
+							12600,
+							12600,
+							3861.71875
+						],
+						"box_min": [
+							75600,
+							25200,
+							5872.65625
+						],
+						"box_max": [
+							100800,
+							50400,
+							13596.09375
+						],
+						"sphere_radius": 18232.741749503872
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_7_6_0",
+						"label": "LandscapeStreamingProxy_7_6_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_7_6_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_7_6_0",
+							"display_name": "LandscapeStreamingProxy_7_6_0"
+						},
+						"transform":
+						{
+							"location": [
+								75600,
+								50400,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							88200,
+							63000,
+							12097.65625
+						],
+						"box_extent": [
+							12600,
+							12600,
+							2892.1875
+						],
+						"box_min": [
+							75600,
+							50400,
+							9205.46875
+						],
+						"box_max": [
+							100800,
+							75600,
+							14989.84375
+						],
+						"sphere_radius": 18052.278209000553
+					},
+					"height_samples": []
+				},
+				{
+					"actor":
+					{
+						"name": "LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_7_7_0",
+						"label": "LandscapeStreamingProxy_7_7_0",
+						"class": "/Script/Landscape.LandscapeStreamingProxy",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_7_7_0",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "BADD997B-4094-5055-7732-84884BAE3571",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.LandscapeStreamingProxy_D7T4VF4LBP34PHV9XOEVM5TIG_1_7_7_0",
+							"display_name": "LandscapeStreamingProxy_7_7_0"
+						},
+						"transform":
+						{
+							"location": [
+								75600,
+								75600,
+								100
+							],
+							"rotation": [
+								0,
+								0,
+								-0
+							],
+							"scale": [
+								100,
+								100,
+								100
+							]
+						}
+					},
+					"landscape_guid": "c02c3ba0-c7c0-b38a-a122-494f0a1244fe",
+					"class": "/Script/Landscape.LandscapeStreamingProxy",
+					"is_main_landscape": false,
+					"component_size_quads": 126,
+					"subsection_size_quads": 63,
+					"num_subsections": 2,
+					"bounding_rect_min": [
+						0,
+						0
+					],
+					"bounding_rect_max": [
+						252,
+						252
+					],
+					"resolution_x": 253,
+					"resolution_y": 253,
+					"component_count": 4,
+					"material_path": "/Engine/OpenWorldTemplate/LandscapeMaterial/M_ProcGrid.M_ProcGrid",
+					"has_landscape_info": true,
+					"layers": [],
+					"complete_bounds":
+					{
+						"origin": [
+							0,
+							0,
+							7444.921875
+						],
+						"box_extent": [
+							100800,
+							100800,
+							7544.921875
+						],
+						"box_min": [
+							-100800,
+							-100800,
+							-100
+						],
+						"box_max": [
+							100800,
+							100800,
+							14989.84375
+						],
+						"sphere_radius": 142752.25338361511
+					},
+					"actor_bounds":
+					{
+						"origin": [
+							88200,
+							88200,
+							10799.21875
+						],
+						"box_extent": [
+							12600,
+							12600,
+							2071.875
+						],
+						"box_min": [
+							75600,
+							75600,
+							8727.34375
+						],
+						"box_max": [
+							100800,
+							100800,
+							12871.09375
+						],
+						"sphere_radius": 17939.137828101579
+					},
+					"height_samples": []
+				}
+			]
+		},
+		"_meta":
+		{
+			"timing":
+			{
+				"duration_ms": 3.1268000020645559
+			},
+			"stats":
+			{
+				"tool_name": "query-landscape-summary",
+				"mutates": false,
+				"supports_batch": false,
+				"requires_game_thread": true,
+				"content_items": 1
+			}
+		}
+	}
+}

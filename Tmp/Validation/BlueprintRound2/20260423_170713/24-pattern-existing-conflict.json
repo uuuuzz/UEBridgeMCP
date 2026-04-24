@@ -1,0 +1,38 @@
+﻿{
+	"jsonrpc": "2.0",
+	"id": "24-pattern-existing-conflict",
+	"result":
+	{
+		"content": [
+			{
+				"type": "text",
+				"text": "[UEBMCP_ASSET_ALREADY_EXISTS] Asset already exists"
+			}
+		],
+		"structuredContent":
+		{
+			"code": "UEBMCP_ASSET_ALREADY_EXISTS",
+			"message": "Asset already exists",
+			"details":
+			{
+				"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Logic_20260423_170713"
+			}
+		},
+		"isError": true,
+		"_meta":
+		{
+			"timing":
+			{
+				"duration_ms": 0.040899991290643811
+			},
+			"stats":
+			{
+				"tool_name": "create-blueprint-pattern",
+				"mutates": false,
+				"supports_batch": false,
+				"requires_game_thread": true,
+				"content_items": 1
+			}
+		}
+	}
+}

@@ -1,0 +1,110 @@
+﻿{
+	"jsonrpc": "2.0",
+	"id": "05-broken-add-call-functions",
+	"result":
+	{
+		"content": [
+			{
+				"type": "text",
+				"text": "Blueprint graph edit complete"
+			}
+		],
+		"structuredContent":
+		{
+			"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Broken_20260423_171056",
+			"asset_handle":
+			{
+				"kind": "asset",
+				"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Broken_20260423_171056",
+				"asset_class": "Blueprint"
+			},
+			"results": [
+				{
+					"op": "create_custom_event",
+					"index": 0,
+					"alias": "trigger_broken",
+					"node_guid": "7A20341D-4356-8AA8-763A-AA9DE6BF4C52",
+					"handle":
+					{
+						"kind": "blueprint_node",
+						"session_id": "ECCDCD12-4415-36AB-01CD-11B912956606",
+						"resource_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Broken_20260423_171056",
+						"entity_id": "7A20341D-4356-8AA8-763A-AA9DE6BF4C52",
+						"display_name": "TriggerBroken"
+					},
+					"node_class": "K2Node_CustomEvent",
+					"graph_name": "EventGraph",
+					"success": true
+				},
+				{
+					"op": "add_call_function",
+					"index": 1,
+					"alias": "broken_call_connected",
+					"node_guid": "F0C8F020-44FC-0B16-89CB-98AC2FA779B6",
+					"handle":
+					{
+						"kind": "blueprint_node",
+						"session_id": "ECCDCD12-4415-36AB-01CD-11B912956606",
+						"resource_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Broken_20260423_171056",
+						"entity_id": "F0C8F020-44FC-0B16-89CB-98AC2FA779B6",
+						"display_name": "BrokenFunction"
+					},
+					"node_class": "K2Node_CallFunction",
+					"graph_name": "EventGraph",
+					"success": true
+				},
+				{
+					"op": "add_call_function",
+					"index": 2,
+					"alias": "broken_call_orphan",
+					"node_guid": "3AB35F2A-4657-0519-B062-909CC16496B9",
+					"handle":
+					{
+						"kind": "blueprint_node",
+						"session_id": "ECCDCD12-4415-36AB-01CD-11B912956606",
+						"resource_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Broken_20260423_171056",
+						"entity_id": "3AB35F2A-4657-0519-B062-909CC16496B9",
+						"display_name": "BrokenFunction"
+					},
+					"node_class": "K2Node_CallFunction",
+					"graph_name": "EventGraph",
+					"success": true
+				},
+				{
+					"op": "auto_connect",
+					"index": 3,
+					"connections": [
+						{
+							"source_pin": "then",
+							"target_pin": "execute"
+						}
+					],
+					"success": true
+				}
+			],
+			"partial_results": [],
+			"summary":
+			{
+				"total_operations": 4,
+				"failed_operations": 0,
+				"compiled": false,
+				"saved": false
+			}
+		},
+		"_meta":
+		{
+			"timing":
+			{
+				"duration_ms": 2.8103000076953322
+			},
+			"stats":
+			{
+				"tool_name": "edit-blueprint-graph",
+				"mutates": true,
+				"supports_batch": true,
+				"requires_game_thread": true,
+				"content_items": 1
+			}
+		}
+	}
+}

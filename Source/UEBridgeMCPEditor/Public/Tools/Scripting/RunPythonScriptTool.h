@@ -26,6 +26,10 @@ public:
 		const TSharedPtr<FJsonObject>& Arguments,
 		const FMcpToolContext& Context) override;
 	virtual bool RequiresGameThread() const override { return true; }
+	virtual FString GetToolKind() const override { return TEXT("mutation"); }
+	virtual FString GetResourceScope() const override { return TEXT("editor"); }
+	virtual bool MutatesState() const override { return true; }
+	virtual bool SupportsDryRun() const override { return true; }
 
 private:
 	// Execute a Python command and capture output

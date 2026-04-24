@@ -1,0 +1,1 @@
+{"method":"tools/call","params":{"arguments":{"include":["gameplay_tags","attributes","abilities"],"world":"editor","actor_name":"UEBridgeMCP_RuntimeGAS_20260423_211254"},"name":"query-ability-system-state"},"id":"06_query_ability_system_state","jsonrpc":"2.0"}

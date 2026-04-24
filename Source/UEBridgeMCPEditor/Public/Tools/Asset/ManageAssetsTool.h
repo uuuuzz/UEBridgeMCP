@@ -21,6 +21,12 @@ public:
 	virtual TArray<FString> GetRequiredParams() const override;
 	virtual FMcpToolResult Execute(const TSharedPtr<FJsonObject>& Arguments, const FMcpToolContext& Context) override;
 	virtual bool RequiresGameThread() const override { return true; }
+	virtual FString GetToolKind() const override { return TEXT("batch"); }
+	virtual FString GetResourceScope() const override { return TEXT("asset"); }
+	virtual bool MutatesState() const override { return true; }
+	virtual bool SupportsBatch() const override { return true; }
+	virtual bool SupportsDryRun() const override { return true; }
+	virtual bool SupportsSave() const override { return true; }
 
 private:
 	bool ExecuteAction(const TSharedPtr<FJsonObject>& Action, int32 Index, TSharedPtr<FJsonObject>& OutResult, FString& OutError);

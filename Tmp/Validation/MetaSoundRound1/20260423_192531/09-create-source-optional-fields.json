@@ -1,0 +1,136 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "201",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "MetaSound Source created"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "valid":  true,
+                                             "asset_path":  "/Game/UEBridgeMCPValidation/MetaSoundRound1/MS_MetaSoundRound1_Optional_20260423_192531",
+                                             "asset_class":  "MetaSoundSource",
+                                             "name":  "MS_MetaSoundRound1_Optional_20260423_192531",
+                                             "output_format":  "mono",
+                                             "num_channels":  1,
+                                             "duration":  9999,
+                                             "sample_rate":  48000,
+                                             "interfaces":  [
+                                                                {
+                                                                    "name":  "UE.Source.OneShot",
+                                                                    "major":  1,
+                                                                    "minor":  0
+                                                                },
+                                                                {
+                                                                    "name":  "UE.OutputFormat.Mono",
+                                                                    "major":  1,
+                                                                    "minor":  0
+                                                                },
+                                                                {
+                                                                    "name":  "UE.Source",
+                                                                    "major":  1,
+                                                                    "minor":  1
+                                                                }
+                                                            ],
+                                             "interface_count":  3,
+                                             "inputs":  [
+                                                            {
+                                                                "name":  "UE.Source.OnPlay",
+                                                                "type":  "Trigger",
+                                                                "vertex_id":  "0FDBBA3A-47C8-8F22-E9DF-289EA874A3B0",
+                                                                "node_id":  "21A8038E-45B3-58D5-AEBB-FFAF69E64102",
+                                                                "default_count":  1,
+                                                                "default":  {
+                                                                                "literal_type":  "Boolean",
+                                                                                "valid":  true,
+                                                                                "is_array":  false,
+                                                                                "array_num":  -1,
+                                                                                "value":  false
+                                                                            }
+                                                            },
+                                                            {
+                                                                "name":  "OptionalGain",
+                                                                "type":  "Float",
+                                                                "vertex_id":  "73290DEF-4944-3D16-10F7-5EAC6099AB37",
+                                                                "node_id":  "274D616D-456D-DBF8-EF0A-0FA8F884C4C5",
+                                                                "default_count":  1,
+                                                                "default":  {
+                                                                                "literal_type":  "Float",
+                                                                                "valid":  true,
+                                                                                "is_array":  false,
+                                                                                "array_num":  -1,
+                                                                                "value":  0.40000000596046448
+                                                                            }
+                                                            }
+                                                        ],
+                                             "input_count":  2,
+                                             "outputs":  [
+                                                             {
+                                                                 "name":  "UE.Source.OneShot.OnFinished",
+                                                                 "type":  "Trigger",
+                                                                 "vertex_id":  "AE7A04DC-415D-CFA0-85E4-9E8C699C4523",
+                                                                 "node_id":  "F9AF9553-45AF-88FE-107A-E3A6F5513A40"
+                                                             },
+                                                             {
+                                                                 "name":  "UE.OutputFormat.Mono.Audio:0",
+                                                                 "type":  "Audio",
+                                                                 "vertex_id":  "C0559CC6-48CB-2867-D3EF-88ACB40476C7",
+                                                                 "node_id":  "6A7D40AA-4CD3-EEE4-D7F9-EE99BA4613DC"
+                                                             }
+                                                         ],
+                                             "output_count":  2,
+                                             "node_count":  6,
+                                             "edge_count":  2,
+                                             "variable_count":  0,
+                                             "tool":  "create-metasound-source",
+                                             "success":  true,
+                                             "builder_result":  "Succeeded",
+                                             "creation_mode":  "source_builder",
+                                             "on_play_output_handle":  {
+                                                                           "node_id":  "21A8038E-45B3-58D5-AEBB-FFAF69E64102",
+                                                                           "vertex_id":  "CC02F279-9674-D5DA-72AB-BEB51D1DC820",
+                                                                           "valid":  true
+                                                                       },
+                                             "on_finished_input_handle":  {
+                                                                              "node_id":  "F9AF9553-45AF-88FE-107A-E3A6F5513A40",
+                                                                              "vertex_id":  "DC13176B-76D7-263C-9A5A-C6AF2436C9B4",
+                                                                              "valid":  true
+                                                                          },
+                                             "audio_output_count":  1,
+                                             "operations":  [
+                                                                {
+                                                                    "index":  0,
+                                                                    "action":  "add_graph_input",
+                                                                    "name":  "OptionalGain",
+                                                                    "type":  "Float",
+                                                                    "success":  true,
+                                                                    "output_handle":  {
+                                                                                          "node_id":  "274D616D-456D-DBF8-EF0A-0FA8F884C4C5",
+                                                                                          "vertex_id":  "C502B26E-CED3-84DD-42DA-6C62718AACCD",
+                                                                                          "valid":  true
+                                                                                      },
+                                                                    "builder_result":  "Succeeded"
+                                                                }
+                                                            ],
+                                             "saved":  true,
+                                             "needs_save":  false,
+                                             "warnings":  [
+
+                                                          ]
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  9.0017000038642436
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "create-metasound-source",
+                                               "mutates":  true,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  1
+                                           }
+                             }
+               }
+}

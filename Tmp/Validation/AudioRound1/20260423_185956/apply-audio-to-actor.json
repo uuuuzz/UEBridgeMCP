@@ -1,0 +1,56 @@
+﻿{
+	"jsonrpc": "2.0",
+	"id": "apply-audio-to-actor",
+	"result":
+	{
+		"content": [
+			{
+				"type": "text",
+				"text": "Audio applied to actor"
+			}
+		],
+		"structuredContent":
+		{
+			"valid": true,
+			"component_name": "AudioRound1Component_20260423_185956",
+			"sound_path": "/Game/UEBridgeMCPValidation/AudioRound1/SC_AudioRound1_20260423_185956.SC_AudioRound1_20260423_185956",
+			"volume_multiplier": 0.75,
+			"pitch_multiplier": 1.1000000238418579,
+			"auto_activate": true,
+			"active": true,
+			"playing": true,
+			"override_attenuation": false,
+			"attenuation_settings": "",
+			"concurrency": [],
+			"tool": "apply-audio-to-actor",
+			"success": true,
+			"dry_run": false,
+			"actor_name": "SM_SkySphere",
+			"component_created": false,
+			"play_now": true,
+			"playback_applied": false,
+			"playback_deferred": true,
+			"warnings": [
+				"play_now was requested but skipped in the editor world; the AudioComponent setup was applied without starting playback."
+			],
+			"modified_assets": [
+				"/Temp/Untitled_1"
+			]
+		},
+		"_meta":
+		{
+			"timing":
+			{
+				"duration_ms": 3.5678000131156296
+			},
+			"stats":
+			{
+				"tool_name": "apply-audio-to-actor",
+				"mutates": true,
+				"supports_batch": false,
+				"requires_game_thread": true,
+				"content_items": 1
+			}
+		}
+	}
+}

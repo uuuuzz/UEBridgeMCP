@@ -17,5 +17,11 @@ public:
 	virtual TMap<FString, FMcpSchemaProperty> GetInputSchema() const override;
 	virtual TArray<FString> GetRequiredParams() const override;
 	virtual FMcpToolResult Execute(const TSharedPtr<FJsonObject>& Arguments, const FMcpToolContext& Context) override;
+	virtual FString GetToolKind() const override { return TEXT("write"); }
+	virtual FString GetResourceScope() const override { return TEXT("material"); }
+	virtual bool MutatesState() const override { return true; }
+	virtual bool SupportsBatch() const override { return true; }
+	virtual bool SupportsDryRun() const override { return true; }
+	virtual bool SupportsSave() const override { return true; }
 	virtual bool RequiresGameThread() const override { return true; }
 };

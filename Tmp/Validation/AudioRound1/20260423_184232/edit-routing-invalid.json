@@ -1,0 +1,102 @@
+{
+    "jsonrpc":  "2.0",
+    "id":  "edit-routing-invalid",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "[UEBMCP_INVALID_ACTION] Failed to load asset: /Game/UEBridgeMCPValidation/AudioRound1/MissingWave.MissingWave"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "code":  "UEBMCP_INVALID_ACTION",
+                                             "message":  "Failed to load asset: /Game/UEBridgeMCPValidation/AudioRound1/MissingWave.MissingWave",
+                                             "partial_result":  {
+                                                                    "tool":  "edit-sound-cue-routing",
+                                                                    "results":  [
+                                                                                    {
+                                                                                        "index":  0,
+                                                                                        "action":  "set_wave_player",
+                                                                                        "success":  false,
+                                                                                        "changed":  false,
+                                                                                        "error":  "Failed to load asset: /Game/UEBridgeMCPValidation/AudioRound1/MissingWave.MissingWave"
+                                                                                    }
+                                                                                ],
+                                                                    "warnings":  [
+
+                                                                                 ],
+                                                                    "sound_cue":  {
+                                                                                      "valid":  true,
+                                                                                      "asset_path":  "/Game/UEBridgeMCPValidation/AudioRound1/SC_AudioRound1_20260423_184232.SC_AudioRound1_20260423_184232",
+                                                                                      "volume_multiplier":  0.64999997615814209,
+                                                                                      "pitch_multiplier":  1.0499999523162842,
+                                                                                      "override_attenuation":  false,
+                                                                                      "root_node_class":  "SoundNodeAttenuation",
+                                                                                      "has_root_node":  true,
+                                                                                      "root_node":  {
+                                                                                                        "valid":  true,
+                                                                                                        "node_class":  "SoundNodeAttenuation",
+                                                                                                        "depth":  0,
+                                                                                                        "child_count":  1,
+                                                                                                        "node_type":  "attenuation",
+                                                                                                        "override_attenuation":  false,
+                                                                                                        "attenuation_settings":  "",
+                                                                                                        "children":  [
+                                                                                                                         {
+                                                                                                                             "valid":  true,
+                                                                                                                             "node_class":  "SoundNodeRandom",
+                                                                                                                             "depth":  1,
+                                                                                                                             "child_count":  2,
+                                                                                                                             "node_type":  "random",
+                                                                                                                             "weights":  [
+                                                                                                                                             0.25,
+                                                                                                                                             0.75
+                                                                                                                                         ],
+                                                                                                                             "randomize_without_replacement":  true,
+                                                                                                                             "children":  [
+                                                                                                                                              {
+                                                                                                                                                  "valid":  true,
+                                                                                                                                                  "node_class":  "SoundNodeWavePlayer",
+                                                                                                                                                  "depth":  2,
+                                                                                                                                                  "child_count":  0,
+                                                                                                                                                  "node_type":  "wave_player",
+                                                                                                                                                  "sound_wave":  "/Engine/EngineSounds/WhiteNoise.WhiteNoise",
+                                                                                                                                                  "looping":  false,
+                                                                                                                                                  "children":  [
+
+                                                                                                                                                               ]
+                                                                                                                                              },
+                                                                                                                                              {
+                                                                                                                                                  "valid":  true,
+                                                                                                                                                  "node_class":  "SoundNodeWavePlayer",
+                                                                                                                                                  "depth":  2,
+                                                                                                                                                  "child_count":  0,
+                                                                                                                                                  "node_type":  "wave_player",
+                                                                                                                                                  "sound_wave":  "/Engine/EngineSounds/WhiteNoise.WhiteNoise",
+                                                                                                                                                  "looping":  false,
+                                                                                                                                                  "children":  [
+
+                                                                                                                                                               ]
+                                                                                                                                              }
+                                                                                                                                          ]
+                                                                                                                         }
+                                                                                                                     ]
+                                                                                                    }
+                                                                                  }
+                                                                }
+                                         },
+                   "isError":  true,
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  1.7528999887872487
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "edit-sound-cue-routing",
+                                               "mutates":  true,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  1
+                                           }
+                             }
+               }
+}

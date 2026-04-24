@@ -1,0 +1,32 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "616",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "[UEBMCP_ACTOR_NOT_FOUND] Actor not found"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "code":  "UEBMCP_ACTOR_NOT_FOUND",
+                                             "message":  "Actor not found",
+                                             "details":  {
+                                                             "actor_name":  "MissingPhysicsActorForQuery"
+                                                         }
+                                         },
+                   "isError":  true,
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  0.086799991549924016
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "query-physics-summary",
+                                               "mutates":  false,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  1
+                                           }
+                             }
+               }
+}

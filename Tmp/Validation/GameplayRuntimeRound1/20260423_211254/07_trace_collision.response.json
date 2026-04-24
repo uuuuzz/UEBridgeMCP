@@ -1,0 +1,116 @@
+{
+	"jsonrpc": "2.0",
+	"id": "07_trace_collision",
+	"result":
+	{
+		"content": [
+			{
+				"type": "text",
+				"text": "Request succeeded"
+			}
+		],
+		"structuredContent":
+		{
+			"tool": "trace-gameplay-collision",
+			"success": true,
+			"world":
+			{
+				"valid": true,
+				"name": "Untitled_1",
+				"path": "/Temp/Untitled_1.Untitled_1",
+				"type": "Editor",
+				"map_name": "Untitled_1",
+				"is_pie": false,
+				"time_seconds": 159.6592407040298,
+				"delta_seconds": 0.0083333998918533325
+			},
+			"shape": "line",
+			"channel": "Visibility",
+			"start":
+			{
+				"x": 0,
+				"y": 0,
+				"z": 400
+			},
+			"end":
+			{
+				"x": 0,
+				"y": 0,
+				"z": -200
+			},
+			"hit": true,
+			"blocking_hit": true,
+			"hit_count": 1,
+			"hits": [
+				{
+					"blocking_hit": true,
+					"start_penetrating": false,
+					"time": 0.4166666567325592,
+					"distance": 250,
+					"location":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 150.00000596046448
+					},
+					"impact_point":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 150
+					},
+					"normal":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 1
+					},
+					"impact_normal":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 1
+					},
+					"bone_name": "None",
+					"component_name": "StaticMeshComponent0",
+					"component_class": "StaticMeshComponent",
+					"actor":
+					{
+						"name": "StaticMeshActor_UAID_10B676572F6E79D402_1521829663",
+						"label": "UEBridgeMCP_RuntimeRound1_20260423_211254",
+						"class": "/Script/Engine.StaticMeshActor",
+						"object_path": "/Temp/Untitled_1.Untitled_1:PersistentLevel.StaticMeshActor_UAID_10B676572F6E79D402_1521829663",
+						"handle":
+						{
+							"kind": "actor",
+							"session_id": "ED32720F-4FDB-3A64-6534-CC81AE311DF2",
+							"resource_path": "/Temp/Untitled_1.Untitled_1",
+							"entity_id": "/Temp/Untitled_1.Untitled_1:PersistentLevel.StaticMeshActor_UAID_10B676572F6E79D402_1521829663",
+							"display_name": "UEBridgeMCP_RuntimeRound1_20260423_211254"
+						}
+					},
+					"index": 0
+				}
+			],
+			"warnings": [],
+			"diagnostics": [],
+			"modified_assets": [],
+			"partial_results": []
+		},
+		"_meta":
+		{
+			"timing":
+			{
+				"duration_ms": 0.2269999822601676
+			},
+			"stats":
+			{
+				"tool_name": "trace-gameplay-collision",
+				"mutates": false,
+				"supports_batch": false,
+				"requires_game_thread": true,
+				"content_items": 0
+			}
+		}
+	}
+}

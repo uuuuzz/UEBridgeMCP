@@ -1,0 +1,52 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.19.0",
+	"FriendlyName": "UE Bridge MCP",
+	"Description": "Native C++ Model Context Protocol (MCP) server for Unreal Engine 5.6+. Enables AI assistants to interact with UE Editor via HTTP.",
+	"Category": "Editor",
+	"CreatedBy": "uuuuzz",
+	"CreatedByURL": "https://github.com/uuuuzz/UEBridgeMCP",
+	"DocsURL": "https://github.com/uuuuzz/UEBridgeMCP/blob/main/README.md",
+	"MarketplaceURL": "",
+	"SupportURL": "https://github.com/uuuuzz/UEBridgeMCP/issues",
+	"EngineVersion": "5.6.0",
+	"CanContainContent": false,
+	"IsExperimentalVersion": true,
+	"Installed": true,
+	"Modules": [
+		{
+			"Name": "UEBridgeMCP",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
+		},
+		{
+			"Name": "UEBridgeMCPEditor",
+			"Type": "Editor",
+			"LoadingPhase": "PostEngineInit"
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "EditorScriptingUtilities",
+			"Enabled": true
+		},
+		{
+			"Name": "GameplayAbilities",
+			"Enabled": true
+		},
+		{
+			"Name": "StateTree",
+			"Enabled": true
+		},
+		{
+			"Name": "GameplayStateTree",
+			"Enabled": true
+		},
+		{
+			"Name": "PythonScriptPlugin",
+			"Enabled": true,
+			"Optional": true
+		}
+	]
+}

@@ -1,0 +1,42 @@
+{
+  "CustomInput": "<class 'CustomInput'>",
+  "CustomInput_vals": [
+    {
+      "input_name": "None"
+    }
+  ],
+  "CustomOutput": "<class 'CustomOutput'>",
+  "CustomOutput_vals": [
+    {
+      "output_name": "None",
+      "output_type": "<CustomMaterialOutputType.CMOT_FLOAT1: 0>"
+    }
+  ],
+  "CustomMaterialOutputType": "<class 'CustomMaterialOutputType'>",
+  "CustomMaterialOutputType_vals": [
+    "<CustomMaterialOutputType.CMOT_FLOAT1: 0>",
+    "<CustomMaterialOutputType.CMOT_FLOAT2: 1>",
+    "<CustomMaterialOutputType.CMOT_FLOAT3: 2>",
+    "<CustomMaterialOutputType.CMOT_FLOAT4: 3>",
+    "<CustomMaterialOutputType.CMOT_MATERIAL_ATTRIBUTES: 4>"
+  ],
+  "MaterialProperty": "<class 'MaterialProperty'>",
+  "MaterialProperty_vals": [
+    "<MaterialProperty.MP_EMISSIVE_COLOR: 0>",
+    "<MaterialProperty.MP_OPACITY: 1>",
+    "<MaterialProperty.MP_OPACITY_MASK: 2>",
+    "<MaterialProperty.MP_BASE_COLOR: 5>",
+    "<MaterialProperty.MP_METALLIC: 6>",
+    "<MaterialProperty.MP_SPECULAR: 7>",
+    "<MaterialProperty.MP_ROUGHNESS: 8>",
+    "<MaterialProperty.MP_ANISOTROPY: 9>",
+    "<MaterialProperty.MP_NORMAL: 10>",
+    "<MaterialProperty.MP_TANGENT: 11>",
+    "<MaterialProperty.MP_WORLD_POSITION_OFFSET: 12>",
+    "<MaterialProperty.MP_SUBSURFACE_COLOR: 15>",
+    "<MaterialProperty.MP_AMBIENT_OCCLUSION: 18>",
+    "<MaterialProperty.MP_REFRACTION: 19>",
+    "<MaterialProperty.MP_FRONT_MATERIAL: 30>",
+    "<MaterialProperty.MP_MATERIAL_ATTRIBUTES: 33>"
+  ]
+}

@@ -1,0 +1,36 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "303",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Content class search complete"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "class":  "Skeleton",
+                                             "query":  "",
+                                             "results":  [
+
+                                                         ],
+                                             "count":  0,
+                                             "total_matches":  0,
+                                             "scanned":  0,
+                                             "truncated":  false,
+                                             "class_filter_resolved":  true
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  0.073900009738281369
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "search-content-by-class",
+                                               "mutates":  false,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  1
+                                           }
+                             }
+               }
+}

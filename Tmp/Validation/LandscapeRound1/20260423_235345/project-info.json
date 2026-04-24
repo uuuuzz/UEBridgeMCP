@@ -1,0 +1,59 @@
+{
+	"jsonrpc": "2.0",
+	"id": "3103",
+	"result":
+	{
+		"content": [
+			{
+				"type": "text",
+				"text": "Structured result ready"
+			}
+		],
+		"structuredContent":
+		{
+			"project_name": "MyProject",
+			"project_path": "../../../../../UEProjects/MyProject/MyProject.uproject",
+			"project_directory": "../../../../../UEProjects/MyProject/",
+			"engine_version": "5.7.2-49658320+++UE5+Release-5.7",
+			"plugin":
+			{
+				"name": "UEBridgeMCP",
+				"version": "1.19.0"
+			},
+			"mcp_server":
+			{
+				"port": 8080,
+				"bind_address": "127.0.0.1",
+				"running": true,
+				"actual_port": 8080
+			},
+			"optional_capabilities":
+			{
+				"sequencer_available": true,
+				"landscape_available": true,
+				"foliage_available": true,
+				"control_rig_available": true,
+				"pcg_available": true,
+				"niagara_available": true,
+				"metasound_available": true,
+				"external_ai_available": true,
+				"world_partition_available": true
+			}
+		},
+		"_meta":
+		{
+			"timing":
+			{
+				"duration_ms": 0.77120002242736518
+			},
+			"stats":
+			{
+				"tool_name": "get-project-info",
+				"mutates": false,
+				"supports_batch": false,
+				"requires_game_thread": true,
+				"content_items": 1
+			}
+		}
+	}
+}

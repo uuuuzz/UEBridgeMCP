@@ -1,0 +1,74 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "115",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Request succeeded"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "tool":  "edit-blueprint-members",
+                                             "success":  true,
+                                             "modified_assets":  [
+                                                                     "/Game/UEBridgeMCPValidation/BlueprintRound1/BP_BlueprintRound1_20260423_154236"
+                                                                 ],
+                                             "results":  [
+                                                             {
+                                                                 "action":  "add_interface",
+                                                                 "interface_path":  "/Game/UEBridgeMCPValidation/BlueprintRound1/BPI_BlueprintRound1_20260423_154236.BPI_BlueprintRound1_20260423_154236_C",
+                                                                 "touched_graphs":  [
+
+                                                                                    ],
+                                                                 "implemented_interfaces":  [
+                                                                                                {
+                                                                                                    "interface_path":  "/Game/UEBridgeMCPValidation/BlueprintRound1/BPI_BlueprintRound1_20260423_154236.BPI_BlueprintRound1_20260423_154236_C",
+                                                                                                    "graphs":  [
+
+                                                                                                               ]
+                                                                                                }
+                                                                                            ],
+                                                                 "index":  0,
+                                                                 "success":  true
+                                                             }
+                                                         ],
+                                             "compile":  {
+                                                             "attempted":  true,
+                                                             "success":  true,
+                                                             "diagnostics":  [
+
+                                                                             ]
+                                                         },
+                                             "implemented_interfaces":  [
+                                                                            {
+                                                                                "interface_path":  "/Game/UEBridgeMCPValidation/BlueprintRound1/BPI_BlueprintRound1_20260423_154236.BPI_BlueprintRound1_20260423_154236_C",
+                                                                                "graphs":  [
+
+                                                                                           ]
+                                                                            }
+                                                                        ],
+                                             "warnings":  [
+
+                                                          ],
+                                             "diagnostics":  [
+
+                                                             ],
+                                             "partial_results":  [
+
+                                                                 ]
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  29.199800017522648
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "manage-blueprint-interfaces",
+                                               "mutates":  false,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  0
+                                           }
+                             }
+               }
+}

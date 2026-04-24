@@ -47,6 +47,8 @@ TMap<FString, FMcpSchemaProperty> UManageAssetsTool::GetInputSchema() const
 	ActionItemSchema->Properties.Add(TEXT("destination_path"), MakeShared<FMcpSchemaProperty>(FMcpSchemaProperty::Make(TEXT("string"), TEXT("Destination package path for move or duplicate"))));
 	ActionItemSchema->Properties.Add(TEXT("target_asset_path"), MakeShared<FMcpSchemaProperty>(FMcpSchemaProperty::Make(TEXT("string"), TEXT("Target asset path for consolidate"))));
 	ActionItemSchema->Properties.Add(TEXT("source_asset_paths"), MakeShared<FMcpSchemaProperty>(FMcpSchemaProperty::MakeArray(TEXT("Source asset paths for consolidate"), TEXT("string"))));
+	ActionItemSchema->Properties.Add(TEXT("confirm_delete"), MakeShared<FMcpSchemaProperty>(FMcpSchemaProperty::Make(TEXT("boolean"), TEXT("Required for non-dry-run delete actions"))));
+	ActionItemSchema->Properties.Add(TEXT("confirm_consolidate"), MakeShared<FMcpSchemaProperty>(FMcpSchemaProperty::Make(TEXT("boolean"), TEXT("Required for non-dry-run consolidate actions"))));
 
 	FMcpSchemaProperty ActionsSchema;
 	ActionsSchema.Type = TEXT("array");
@@ -224,6 +226,13 @@ bool UManageAssetsTool::ExecuteAction(const TSharedPtr<FJsonObject>& Action, int
 
 	if (ActionName == TEXT("consolidate"))
 	{
+		bool bConfirmConsolidate = false;
+		if (!Action->TryGetBoolField(TEXT("confirm_consolidate"), bConfirmConsolidate) || !bConfirmConsolidate)
+		{
+			OutError = TEXT("confirm_consolidate=true is required for consolidate actions");
+			return false;
+		}
+
 		FString TargetAssetPath;
 		const TArray<TSharedPtr<FJsonValue>>* SourcePathsArray = nullptr;
 		if (!Action->TryGetStringField(TEXT("target_asset_path"), TargetAssetPath))
@@ -345,6 +354,13 @@ bool UManageAssetsTool::ExecuteAction(const TSharedPtr<FJsonObject>& Action, int
 	}
 	else if (ActionName == TEXT("delete"))
 	{
+		bool bConfirmDelete = false;
+		if (!Action->TryGetBoolField(TEXT("confirm_delete"), bConfirmDelete) || !bConfirmDelete)
+		{
+			OutError = TEXT("confirm_delete=true is required for delete actions");
+			return false;
+		}
+
 		FString LoadError;
 		UObject* Asset = FMcpAssetModifier::LoadAssetByPath(AssetPath, LoadError);
 		if (!Asset) { OutError = LoadError; return false; }

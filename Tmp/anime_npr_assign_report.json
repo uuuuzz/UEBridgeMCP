@@ -1,0 +1,6 @@
+{
+  "ok": false,
+  "errors": [
+    "Traceback (most recent call last):\n  File \"<string>\", line 62, in <module>\nAttributeError: type object 'EditorLevelLibrary' has no attribute 'redraw_all_viewports'\n"
+  ]
+}

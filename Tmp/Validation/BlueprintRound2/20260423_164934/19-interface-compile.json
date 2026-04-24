@@ -1,0 +1,58 @@
+{
+    "jsonrpc":  "2.0",
+    "id":  "tool-2d107ef1ae6a4224aa78c0aa7ed4a780",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Request succeeded"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "tool":  "compile-assets",
+                                             "success":  true,
+                                             "results":  [
+                                                             {
+                                                                 "asset_path":  "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_InterfaceTarget_20260423_164934",
+                                                                 "asset_type":  "Blueprint",
+                                                                 "compiled":  true,
+                                                                 "success":  true,
+                                                                 "warning_count":  0,
+                                                                 "error_count":  0,
+                                                                 "diagnostics":  [
+
+                                                                                 ]
+                                                             }
+                                                         ],
+                                             "warnings":  [
+
+                                                          ],
+                                             "diagnostics":  [
+
+                                                             ],
+                                             "modified_assets":  [
+                                                                     "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_InterfaceTarget_20260423_164934"
+                                                                 ],
+                                             "partial_results":  [
+
+                                                                 ],
+                                             "summary":  {
+                                                             "total":  1,
+                                                             "succeeded":  1,
+                                                             "failed":  0
+                                                         }
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  20.346200006315485
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "compile-assets",
+                                               "mutates":  false,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  0
+                                           }
+                             }
+               }
+}

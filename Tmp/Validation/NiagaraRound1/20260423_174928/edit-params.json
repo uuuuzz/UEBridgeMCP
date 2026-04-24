@@ -1,0 +1,95 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "206",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Request succeeded"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "tool":  "edit-niagara-user-parameters",
+                                             "success":  true,
+                                             "dry_run":  false,
+                                             "asset_path":  "/Game/UEBridgeMCPValidation/NiagaraRound1/NS_NiagaraRound1_20260423_174928",
+                                             "results":  [
+                                                             {
+                                                                 "index":  0,
+                                                                 "action":  "add_parameter",
+                                                                 "name":  "SpawnRate",
+                                                                 "type":  "float",
+                                                                 "already_exists":  false,
+                                                                 "success":  true,
+                                                                 "changed":  true
+                                                             },
+                                                             {
+                                                                 "index":  1,
+                                                                 "action":  "set_default",
+                                                                 "name":  "Tint",
+                                                                 "type":  "color",
+                                                                 "success":  true,
+                                                                 "changed":  true
+                                                             },
+                                                             {
+                                                                 "index":  2,
+                                                                 "action":  "rename_parameter",
+                                                                 "name":  "Tint",
+                                                                 "new_name":  "TintColor",
+                                                                 "type":  "color",
+                                                                 "success":  true,
+                                                                 "changed":  true
+                                                             },
+                                                             {
+                                                                 "index":  3,
+                                                                 "action":  "remove_parameter",
+                                                                 "name":  "TintColor",
+                                                                 "type":  "color",
+                                                                 "success":  true,
+                                                                 "changed":  true
+                                                             }
+                                                         ],
+                                             "warnings":  [
+
+                                                          ],
+                                             "modified_assets":  [
+                                                                     "/Game/UEBridgeMCPValidation/NiagaraRound1/NS_NiagaraRound1_20260423_174928"
+                                                                 ],
+                                             "compile":  {
+                                                             "requested":  true,
+                                                             "completed":  false,
+                                                             "ready_to_run":  true,
+                                                             "needs_compile":  false
+                                                         },
+                                             "user_parameters":  [
+                                                                     {
+                                                                         "name":  "SpawnRate",
+                                                                         "display_name":  "SpawnRate",
+                                                                         "type":  "float",
+                                                                         "type_name":  "NiagaraFloat",
+                                                                         "size_bytes":  4,
+                                                                         "is_data_interface":  false,
+                                                                         "is_uobject":  false,
+                                                                         "value":  10
+                                                                     }
+                                                                 ],
+                                             "summary":  {
+                                                             "total":  4,
+                                                             "succeeded":  4,
+                                                             "failed":  0
+                                                         }
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  113.94359997939318
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "edit-niagara-user-parameters",
+                                               "mutates":  true,
+                                               "supports_batch":  true,
+                                               "requires_game_thread":  true,
+                                               "content_items":  0
+                                           }
+                             }
+               }
+}

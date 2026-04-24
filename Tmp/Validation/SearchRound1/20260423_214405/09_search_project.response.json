@@ -1,0 +1,286 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "search_project",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Project search complete"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "query":  "SearchRound1",
+                                             "assets":  {
+                                                            "results":  [
+                                                                            {
+                                                                                "kind":  "asset",
+                                                                                "name":  "BP_SearchRound1_20260423_214405",
+                                                                                "path":  "/Game/UEBridgeMCPValidation/SearchRound1/BP_SearchRound1_20260423_214405.BP_SearchRound1_20260423_214405",
+                                                                                "package":  "/Game/UEBridgeMCPValidation/SearchRound1/BP_SearchRound1_20260423_214405",
+                                                                                "package_path":  "/Game/UEBridgeMCPValidation/SearchRound1",
+                                                                                "class":  "Blueprint",
+                                                                                "class_path":  "/Script/Engine.Blueprint",
+                                                                                "score":  65,
+                                                                                "section":  "assets"
+                                                                            }
+                                                                        ],
+                                                            "count":  1,
+                                                            "total_matches":  1,
+                                                            "scanned":  1,
+                                                            "class_filter_resolved":  true
+                                                        },
+                                             "blueprint_symbols":  {
+                                                                       "results":  [
+                                                                                       {
+                                                                                           "kind":  "blueprint_symbol",
+                                                                                           "asset_path":  "/Game/UEBridgeMCPValidation/SearchRound1/BP_SearchRound1_20260423_214405.BP_SearchRound1_20260423_214405",
+                                                                                           "blueprint":  "BP_SearchRound1_20260423_214405",
+                                                                                           "symbol_type":  "variable",
+                                                                                           "name":  "bIsActive",
+                                                                                           "score":  72,
+                                                                                           "detail":  "bool",
+                                                                                           "section":  "blueprint_symbols"
+                                                                                       },
+                                                                                       {
+                                                                                           "kind":  "blueprint_symbol",
+                                                                                           "asset_path":  "/Game/UEBridgeMCPValidation/SearchRound1/BP_SearchRound1_20260423_214405.BP_SearchRound1_20260423_214405",
+                                                                                           "blueprint":  "BP_SearchRound1_20260423_214405",
+                                                                                           "symbol_type":  "function",
+                                                                                           "name":  "SetIsActive",
+                                                                                           "score":  69,
+                                                                                           "graph":  "SetIsActive",
+                                                                                           "graph_type":  "function",
+                                                                                           "section":  "blueprint_symbols"
+                                                                                       },
+                                                                                       {
+                                                                                           "kind":  "blueprint_symbol",
+                                                                                           "asset_path":  "/Game/UEBridgeMCPValidation/SearchRound1/BP_SearchRound1_20260423_214405.BP_SearchRound1_20260423_214405",
+                                                                                           "blueprint":  "BP_SearchRound1_20260423_214405",
+                                                                                           "symbol_type":  "function",
+                                                                                           "name":  "ToggleIsActive",
+                                                                                           "score":  69,
+                                                                                           "graph":  "ToggleIsActive",
+                                                                                           "graph_type":  "function",
+                                                                                           "section":  "blueprint_symbols"
+                                                                                       },
+                                                                                       {
+                                                                                           "kind":  "blueprint_symbol",
+                                                                                           "asset_path":  "/Game/UEBridgeMCPValidation/SearchRound1/BP_SearchRound1_20260423_214405.BP_SearchRound1_20260423_214405",
+                                                                                           "blueprint":  "BP_SearchRound1_20260423_214405",
+                                                                                           "symbol_type":  "function",
+                                                                                           "name":  "GetIsActive",
+                                                                                           "score":  69,
+                                                                                           "graph":  "GetIsActive",
+                                                                                           "graph_type":  "function",
+                                                                                           "section":  "blueprint_symbols"
+                                                                                       },
+                                                                                       {
+                                                                                           "kind":  "blueprint_symbol",
+                                                                                           "asset_path":  "/Game/UEBridgeMCPValidation/SearchRound1/BP_SearchRound1_20260423_214405.BP_SearchRound1_20260423_214405",
+                                                                                           "blueprint":  "BP_SearchRound1_20260423_214405",
+                                                                                           "symbol_type":  "function",
+                                                                                           "name":  "UserConstructionScript",
+                                                                                           "score":  69,
+                                                                                           "graph":  "UserConstructionScript",
+                                                                                           "graph_type":  "function",
+                                                                                           "section":  "blueprint_symbols"
+                                                                                       },
+                                                                                       {
+                                                                                           "kind":  "blueprint_symbol",
+                                                                                           "asset_path":  "/Game/UEBridgeMCPValidation/SearchRound1/BP_SearchRound1_20260423_214405.BP_SearchRound1_20260423_214405",
+                                                                                           "blueprint":  "BP_SearchRound1_20260423_214405",
+                                                                                           "symbol_type":  "graph",
+                                                                                           "name":  "EventGraph",
+                                                                                           "score":  65,
+                                                                                           "graph":  "EventGraph",
+                                                                                           "graph_type":  "event",
+                                                                                           "section":  "blueprint_symbols"
+                                                                                       }
+                                                                                   ],
+                                                                       "count":  6,
+                                                                       "total_matches":  6,
+                                                                       "blueprints_scanned":  1,
+                                                                       "blueprints_truncated":  false
+                                                                   },
+                                             "level_entities":  {
+                                                                    "world_name":  "Untitled_1",
+                                                                    "world_path":  "/Temp/Untitled_1.Untitled_1",
+                                                                    "results":  [
+                                                                                    {
+                                                                                        "name":  "StaticMeshActor_UAID_10B676572F6E7BD402_1245629015",
+                                                                                        "label":  "UEBridgeMCP_SearchActor_20260423_214405",
+                                                                                        "class":  "/Script/Engine.StaticMeshActor",
+                                                                                        "object_path":  "/Temp/Untitled_1.Untitled_1:PersistentLevel.StaticMeshActor_UAID_10B676572F6E7BD402_1245629015",
+                                                                                        "handle":  {
+                                                                                                       "kind":  "actor",
+                                                                                                       "session_id":  "8A7796F0-427C-1BC1-91B9-AE938751B812",
+                                                                                                       "resource_path":  "/Temp/Untitled_1.Untitled_1",
+                                                                                                       "entity_id":  "/Temp/Untitled_1.Untitled_1:PersistentLevel.StaticMeshActor_UAID_10B676572F6E7BD402_1245629015",
+                                                                                                       "display_name":  "UEBridgeMCP_SearchActor_20260423_214405"
+                                                                                                   },
+                                                                                        "transform":  {
+                                                                                                          "location":  [
+                                                                                                                           480,
+                                                                                                                           120,
+                                                                                                                           120
+                                                                                                                       ],
+                                                                                                          "rotation":  [
+                                                                                                                           0,
+                                                                                                                           0,
+                                                                                                                           0
+                                                                                                                       ],
+                                                                                                          "scale":  [
+                                                                                                                        1,
+                                                                                                                        1,
+                                                                                                                        1
+                                                                                                                    ]
+                                                                                                      },
+                                                                                        "kind":  "level_entity",
+                                                                                        "folder_path":  "None",
+                                                                                        "score":  55,
+                                                                                        "tags":  [
+                                                                                                     "UEBridgeMCP_SearchRound1"
+                                                                                                 ],
+                                                                                        "section":  "level_entities"
+                                                                                    }
+                                                                                ],
+                                                                    "count":  1,
+                                                                    "total_matches":  1,
+                                                                    "actors_scanned":  145
+                                                                },
+                                             "results":  [
+                                                             {
+                                                                 "kind":  "blueprint_symbol",
+                                                                 "asset_path":  "/Game/UEBridgeMCPValidation/SearchRound1/BP_SearchRound1_20260423_214405.BP_SearchRound1_20260423_214405",
+                                                                 "blueprint":  "BP_SearchRound1_20260423_214405",
+                                                                 "symbol_type":  "variable",
+                                                                 "name":  "bIsActive",
+                                                                 "score":  72,
+                                                                 "detail":  "bool",
+                                                                 "section":  "blueprint_symbols"
+                                                             },
+                                                             {
+                                                                 "kind":  "blueprint_symbol",
+                                                                 "asset_path":  "/Game/UEBridgeMCPValidation/SearchRound1/BP_SearchRound1_20260423_214405.BP_SearchRound1_20260423_214405",
+                                                                 "blueprint":  "BP_SearchRound1_20260423_214405",
+                                                                 "symbol_type":  "function",
+                                                                 "name":  "UserConstructionScript",
+                                                                 "score":  69,
+                                                                 "graph":  "UserConstructionScript",
+                                                                 "graph_type":  "function",
+                                                                 "section":  "blueprint_symbols"
+                                                             },
+                                                             {
+                                                                 "kind":  "blueprint_symbol",
+                                                                 "asset_path":  "/Game/UEBridgeMCPValidation/SearchRound1/BP_SearchRound1_20260423_214405.BP_SearchRound1_20260423_214405",
+                                                                 "blueprint":  "BP_SearchRound1_20260423_214405",
+                                                                 "symbol_type":  "function",
+                                                                 "name":  "SetIsActive",
+                                                                 "score":  69,
+                                                                 "graph":  "SetIsActive",
+                                                                 "graph_type":  "function",
+                                                                 "section":  "blueprint_symbols"
+                                                             },
+                                                             {
+                                                                 "kind":  "blueprint_symbol",
+                                                                 "asset_path":  "/Game/UEBridgeMCPValidation/SearchRound1/BP_SearchRound1_20260423_214405.BP_SearchRound1_20260423_214405",
+                                                                 "blueprint":  "BP_SearchRound1_20260423_214405",
+                                                                 "symbol_type":  "function",
+                                                                 "name":  "ToggleIsActive",
+                                                                 "score":  69,
+                                                                 "graph":  "ToggleIsActive",
+                                                                 "graph_type":  "function",
+                                                                 "section":  "blueprint_symbols"
+                                                             },
+                                                             {
+                                                                 "kind":  "blueprint_symbol",
+                                                                 "asset_path":  "/Game/UEBridgeMCPValidation/SearchRound1/BP_SearchRound1_20260423_214405.BP_SearchRound1_20260423_214405",
+                                                                 "blueprint":  "BP_SearchRound1_20260423_214405",
+                                                                 "symbol_type":  "function",
+                                                                 "name":  "GetIsActive",
+                                                                 "score":  69,
+                                                                 "graph":  "GetIsActive",
+                                                                 "graph_type":  "function",
+                                                                 "section":  "blueprint_symbols"
+                                                             },
+                                                             {
+                                                                 "kind":  "blueprint_symbol",
+                                                                 "asset_path":  "/Game/UEBridgeMCPValidation/SearchRound1/BP_SearchRound1_20260423_214405.BP_SearchRound1_20260423_214405",
+                                                                 "blueprint":  "BP_SearchRound1_20260423_214405",
+                                                                 "symbol_type":  "graph",
+                                                                 "name":  "EventGraph",
+                                                                 "score":  65,
+                                                                 "graph":  "EventGraph",
+                                                                 "graph_type":  "event",
+                                                                 "section":  "blueprint_symbols"
+                                                             },
+                                                             {
+                                                                 "kind":  "asset",
+                                                                 "name":  "BP_SearchRound1_20260423_214405",
+                                                                 "path":  "/Game/UEBridgeMCPValidation/SearchRound1/BP_SearchRound1_20260423_214405.BP_SearchRound1_20260423_214405",
+                                                                 "package":  "/Game/UEBridgeMCPValidation/SearchRound1/BP_SearchRound1_20260423_214405",
+                                                                 "package_path":  "/Game/UEBridgeMCPValidation/SearchRound1",
+                                                                 "class":  "Blueprint",
+                                                                 "class_path":  "/Script/Engine.Blueprint",
+                                                                 "score":  65,
+                                                                 "section":  "assets"
+                                                             },
+                                                             {
+                                                                 "name":  "StaticMeshActor_UAID_10B676572F6E7BD402_1245629015",
+                                                                 "label":  "UEBridgeMCP_SearchActor_20260423_214405",
+                                                                 "class":  "/Script/Engine.StaticMeshActor",
+                                                                 "object_path":  "/Temp/Untitled_1.Untitled_1:PersistentLevel.StaticMeshActor_UAID_10B676572F6E7BD402_1245629015",
+                                                                 "handle":  {
+                                                                                "kind":  "actor",
+                                                                                "session_id":  "8A7796F0-427C-1BC1-91B9-AE938751B812",
+                                                                                "resource_path":  "/Temp/Untitled_1.Untitled_1",
+                                                                                "entity_id":  "/Temp/Untitled_1.Untitled_1:PersistentLevel.StaticMeshActor_UAID_10B676572F6E7BD402_1245629015",
+                                                                                "display_name":  "UEBridgeMCP_SearchActor_20260423_214405"
+                                                                            },
+                                                                 "transform":  {
+                                                                                   "location":  [
+                                                                                                    480,
+                                                                                                    120,
+                                                                                                    120
+                                                                                                ],
+                                                                                   "rotation":  [
+                                                                                                    0,
+                                                                                                    0,
+                                                                                                    0
+                                                                                                ],
+                                                                                   "scale":  [
+                                                                                                 1,
+                                                                                                 1,
+                                                                                                 1
+                                                                                             ]
+                                                                               },
+                                                                 "kind":  "level_entity",
+                                                                 "folder_path":  "None",
+                                                                 "score":  55,
+                                                                 "tags":  [
+                                                                              "UEBridgeMCP_SearchRound1"
+                                                                          ],
+                                                                 "section":  "level_entities"
+                                                             }
+                                                         ],
+                                             "count":  8,
+                                             "total_matches":  8,
+                                             "truncated":  false,
+                                             "warnings":  [
+
+                                                          ]
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  3.3358999935444444
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "search-project",
+                                               "mutates":  false,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  1
+                                           }
+                             }
+               }
+}

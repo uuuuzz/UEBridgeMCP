@@ -1,0 +1,98 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "1007",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Request succeeded"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "tool":  "edit-sequencer-tracks",
+                                             "success":  true,
+                                             "results":  [
+                                                             {
+                                                                 "index":  0,
+                                                                 "action":  "set_playback_range",
+                                                                 "changed":  true
+                                                             },
+                                                             {
+                                                                 "index":  1,
+                                                                 "action":  "bind_actor",
+                                                                 "changed":  true,
+                                                                 "actor_name":  "SM_SkySphere",
+                                                                 "binding_guid":  "3bee9672-431e-558c-1820-e484e7ff6e02",
+                                                                 "binding_created":  true
+                                                             },
+                                                             {
+                                                                 "index":  2,
+                                                                 "action":  "add_transform_track",
+                                                                 "changed":  true,
+                                                                 "actor_name":  "SM_SkySphere",
+                                                                 "binding_guid":  "0fb21943-46b5-fb52-a289-0a8ccfed480f"
+                                                             },
+                                                             {
+                                                                 "index":  3,
+                                                                 "action":  "add_transform_key",
+                                                                 "changed":  true,
+                                                                 "actor_name":  "SM_SkySphere",
+                                                                 "binding_guid":  "a33dbfe0-4f6c-ac5f-d724-01aa8cd39313"
+                                                             },
+                                                             {
+                                                                 "index":  4,
+                                                                 "action":  "add_transform_key",
+                                                                 "changed":  true,
+                                                                 "actor_name":  "SM_SkySphere",
+                                                                 "binding_guid":  "662b0a31-4cac-929c-06aa-faa890e63ce4"
+                                                             },
+                                                             {
+                                                                 "index":  5,
+                                                                 "action":  "add_bool_track",
+                                                                 "changed":  true,
+                                                                 "actor_name":  "SM_SkySphere",
+                                                                 "binding_guid":  "900e5db8-43e5-e201-f105-1fac6d839bcc"
+                                                             },
+                                                             {
+                                                                 "index":  6,
+                                                                 "action":  "add_bool_key",
+                                                                 "changed":  true,
+                                                                 "actor_name":  "SM_SkySphere",
+                                                                 "binding_guid":  "f4c1a877-4a18-5aa9-de8c-ef84c880287c"
+                                                             },
+                                                             {
+                                                                 "index":  7,
+                                                                 "action":  "add_camera_cut",
+                                                                 "changed":  true,
+                                                                 "actor_name":  "SM_SkySphere",
+                                                                 "binding_guid":  "3e6b1cdd-4453-61db-2a05-0b88526cdacf"
+                                                             }
+                                                         ],
+                                             "warnings":  [
+
+                                                          ],
+                                             "diagnostics":  [
+
+                                                             ],
+                                             "modified_assets":  [
+
+                                                                 ],
+                                             "partial_results":  [
+
+                                                                 ],
+                                             "dry_run":  true
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  0.1464999804738909
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "edit-sequencer-tracks",
+                                               "mutates":  true,
+                                               "supports_batch":  true,
+                                               "requires_game_thread":  true,
+                                               "content_items":  0
+                                           }
+                             }
+               }
+}

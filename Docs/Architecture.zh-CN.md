@@ -1,6 +1,6 @@
 # UEBridgeMCP · 架构说明
 
-解释 46 个内置工具、HTTP 服务、注册表以及会话管理器，如何在一个 UE 编辑器进程内部协同工作。
+解释运行时工具面、HTTP 服务、注册表以及会话管理器，如何在一个 UE 编辑器进程内部协同工作。
 
 ---
 
@@ -10,26 +10,28 @@
 +---------------------------------+   HTTP POST /mcp   +---------------------------------------+
 | MCP 客户端                      | ---JSON-RPC 2.0--> | UE 编辑器进程                        |
 |  Claude Desktop / Claude Code   |                    |                                       |
-|  Cursor / Windsurf / Continue   | <--- Response ---- |  +- UEBridgeMCP          (Runtime)    |
+|  Cursor / Windsurf / Continue   | <--- Response ---- |  +- UEBridgeMCP          (Editor)     |
 |  Codex / 自定义脚本 / curl      |                    |  |   McpToolBase / Result / Registry  |
 +---------------------------------+                    |  |   Schema / Protocol types          |
                                                        |  +- UEBridgeMCPEditor    (Editor)     |
                                                        |      McpServer (FHttpServerModule)    |
                                                        |      McpEditorSubsystem (lifecycle)   |
-                                                       |      46 x UMcpToolBase 子类           |
+                                                       |      动态 UMcpToolBase 工具面          |
                                                        |      Toolbar icon + log capture       |
+                                                       |  +- UEBridgeMCP* 扩展模块             |
+                                                       |      Control Rig / PCG / External AI  |
                                                        +---------------------------------------+
 ```
 
 - **传输层。** 默认通过 `FHttpServerModule` 绑定 `127.0.0.1:8080`。没有额外外部依赖——不需要 Node.js、不需要 Python 服务，也不需要额外桥接端口。
-- **协议。** 使用 MCP 2025-03-26 的 Streamable HTTP 传输，消息封装采用 JSON-RPC 2.0。服务端会根据请求返回普通 `application/json` 响应，或针对长耗时调用返回 `text/event-stream` 流。
+- **协议。** 使用 MCP 2025-06-18 的 Streamable HTTP 传输，消息封装采用 JSON-RPC 2.0。服务端当前对 POST 请求返回 `application/json`；GET/SSE 流式请求会返回 `405`，因为尚未实现 streaming。
 - **线程模型。** HTTP 请求先落到工作线程。凡是会触碰 UE 对象 API 的工具，都会通过 `AsyncTask(ENamedThreads::GameThread, ...)` + `TPromise<FMcpToolResult>` 切回 GameThread 执行。纯只读且线程安全的工具，可以通过从 `RequiresGameThread()` 返回 `false` 选择不切线程。
 
 ---
 
 ## 模块划分
 
-### `UEBridgeMCP`（Runtime）
+### `UEBridgeMCP`（Editor）
 
 加载阶段：`Default`。
 
@@ -65,14 +67,28 @@ Source/UEBridgeMCPEditor/
     Server/McpServer.h              # 基于 FHttpServerModule 的轻量封装
     Subsystem/McpEditorSubsystem.h  # UEditorSubsystem：生命周期 + 设置
     UI/McpToolbarExtension.h        # 编辑器工具栏状态图标
-    Tools/<Category>/...            # 46 个工具头文件
+    Tools/<Category>/...            # 工具头文件（含已注册与兼容保留项）
   Private/
     UEBridgeMCPEditor.cpp           # RegisterBuiltInTools()：权威工具列表
     Server/McpServer.cpp            # /mcp、/mcp/session/* 路由处理
     Server/McpSessionManager.cpp    # 面向客户端的黏性会话 ID 管理
     Subsystem/McpEditorSubsystem.cpp
-    Tools/<Category>/*.cpp          # 46 个工具实现
+    Tools/<Category>/*.cpp          # 工具实现（含已注册与兼容保留项）
 ```
+
+### 扩展模块（Editor）
+
+加载阶段：**`PostEngineInit`**。
+
+插件描述文件还声明了几个 Editor-only 扩展模块，它们通过同一个 `FMcpToolRegistry` 注册聚焦的工具族：
+
+```text
+Source/UEBridgeMCPControlRig/   # edit-control-rig-graph
+Source/UEBridgeMCPPCG/          # generate/query/edit/run PCG 工具
+Source/UEBridgeMCPExternalAI/   # 外部内容与资产生成工具
+```
+
+这些模块把可选工作流工具面留在核心编辑器模块之外；当模块加载成功后，对应工具同样会出现在 `tools/list` 中。
 
 ---
 
@@ -147,7 +163,7 @@ LogLevel=Log               ; Error | Warning | Log | Verbose | VeryVerbose
 
 也可以在运行时通过 `UMcpEditorSubsystem::GetSettings()` 覆盖这些设置——这对自动化测试很有用，例如同时拉起多个编辑器实例并让它们监听不同端口。
 
-环境变量 `SOFT_UE_BRIDGE_PORT` 仅在启动阶段作为覆盖项生效。
+当前没有接入启动环境变量或 CLI 端口覆盖；如需改端口，请在配置里改 `ServerPort`，或在启动服务前通过编辑器 settings 对象覆盖。
 
 ---
 
@@ -192,12 +208,13 @@ return FMcpToolResult::Error(TEXT("UEBMCP_NOT_FOUND: blueprint /Game/... does no
 ```text
 编辑器启动
    v
-UEBridgeMCPEditor 模块加载（PostEngineInit）
+UEBridgeMCPEditor 与扩展模块加载（PostEngineInit）
    v
 FUEBridgeMCPEditorModule::StartupModule()
    RegisterBuiltInTools()      -> 填充 FMcpToolRegistry
-     Registry.WarmupAllTools() -> 预实例化全部 46 个工具
+Registry.WarmupAllTools() -> 预实例化已注册的 canonical 工具
    FMcpToolbarExtension::Initialize()
+扩展模块在同一个 registry 中注册并预热各自的工具族
    v
 FUEBridgeMCPEditorModule 持有 UMcpEditorSubsystem
    v
@@ -234,5 +251,5 @@ FUEBridgeMCPEditorModule::ShutdownModule()
 延伸阅读：
 
 - [自定义工具开发指南](./ToolDevelopment.zh-CN.md) —— 如何编写一个新工具。
-- [工具参考](./Tools-Reference.zh-CN.md) —— 46 个内置工具总览。
+- [工具参考](./Tools-Reference.zh-CN.md) —— 运行时基础工具面与条件工具面总览。
 - [故障排查](./Troubleshooting.zh-CN.md) —— 连接、构建、PIE、Python 常见问题。

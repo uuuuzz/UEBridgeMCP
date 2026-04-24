@@ -1,0 +1,97 @@
+{
+    "Request":  {
+                    "method":  "tools/call",
+                    "params":  {
+                                   "arguments":  {
+                                                     "asset_path":  "/Game/UEBridgeMCPValidation/BlueprintRound1/BP_BlueprintRound1_20260423_152624",
+                                                     "rollback_on_error":  true,
+                                                     "actions":  [
+                                                                     {
+                                                                         "type":  {
+                                                                                      "kind":  "float"
+                                                                                  },
+                                                                         "name":  "DryRunOnlyValue",
+                                                                         "default_value":  3.5,
+                                                                         "action":  "create_variable"
+                                                                     }
+                                                                 ],
+                                                     "compile":  "never",
+                                                     "dry_run":  true
+                                                 },
+                                   "name":  "edit-blueprint-members"
+                               },
+                    "id":  "tool-bc746abbb244416dac517a8e4ba55b28",
+                    "jsonrpc":  "2.0"
+                },
+    "Response":  {
+                     "Success":  true,
+                     "StatusCode":  200,
+                     "Headers":  {
+                                     "keep-alive":  "timeout=15.000000",
+                                     "Content-Type":  "application/json; charset=utf-8",
+                                     "Mcp-Session-Id":  "E8A41810-4ED0-8081-CC2A-7385028DB2ED",
+                                     "Access-Control-Allow-Origin":  "*",
+                                     "Content-Length":  "1009"
+                                 },
+                     "Content":  "{\r\n\t\"jsonrpc\": \"2.0\",\r\n\t\"id\": \"tool-bc746abbb244416dac517a8e4ba55b28\",\r\n\t\"result\":\r\n\t{\r\n\t\t\"content\": [\r\n\t\t\t{\r\n\t\t\t\t\"type\": \"text\",\r\n\t\t\t\t\"text\": \"Request succeeded\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"structuredContent\":\r\n\t\t{\r\n\t\t\t\"tool\": \"edit-blueprint-members\",\r\n\t\t\t\"success\": true,\r\n\t\t\t\"modified_assets\": [\r\n\t\t\t\t\"/Game/UEBridgeMCPValidation/BlueprintRound1/BP_BlueprintRound1_20260423_152624\"\r\n\t\t\t],\r\n\t\t\t\"results\": [\r\n\t\t\t\t{\r\n\t\t\t\t\t\"action\": \"create_variable\",\r\n\t\t\t\t\t\"name\": \"DryRunOnlyValue\",\r\n\t\t\t\t\t\"index\": 0,\r\n\t\t\t\t\t\"success\": true\r\n\t\t\t\t}\r\n\t\t\t],\r\n\t\t\t\"compile\":\r\n\t\t\t{\r\n\t\t\t\t\"attempted\": false,\r\n\t\t\t\t\"success\": true,\r\n\t\t\t\t\"diagnostics\": []\r\n\t\t\t},\r\n\t\t\t\"implemented_interfaces\": [],\r\n\t\t\t\"warnings\": [],\r\n\t\t\t\"diagnostics\": [],\r\n\t\t\t\"partial_results\": []\r\n\t\t},\r\n\t\t\"_meta\":\r\n\t\t{\r\n\t\t\t\"timing\":\r\n\t\t\t{\r\n\t\t\t\t\"duration_ms\": 85.829799994826317\r\n\t\t\t},\r\n\t\t\t\"stats\":\r\n\t\t\t{\r\n\t\t\t\t\"tool_name\": \"edit-blueprint-members\",\r\n\t\t\t\t\"mutates\": false,\r\n\t\t\t\t\"supports_batch\": false,\r\n\t\t\t\t\"requires_game_thread\": true,\r\n\t\t\t\t\"content_items\": 0\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}",
+                     "Json":  {
+                                  "jsonrpc":  "2.0",
+                                  "id":  "tool-bc746abbb244416dac517a8e4ba55b28",
+                                  "result":  {
+                                                 "content":  [
+                                                                 {
+                                                                     "type":  "text",
+                                                                     "text":  "Request succeeded"
+                                                                 }
+                                                             ],
+                                                 "structuredContent":  {
+                                                                           "tool":  "edit-blueprint-members",
+                                                                           "success":  true,
+                                                                           "modified_assets":  [
+                                                                                                   "/Game/UEBridgeMCPValidation/BlueprintRound1/BP_BlueprintRound1_20260423_152624"
+                                                                                               ],
+                                                                           "results":  [
+                                                                                           {
+                                                                                               "action":  "create_variable",
+                                                                                               "name":  "DryRunOnlyValue",
+                                                                                               "index":  0,
+                                                                                               "success":  true
+                                                                                           }
+                                                                                       ],
+                                                                           "compile":  {
+                                                                                           "attempted":  false,
+                                                                                           "success":  true,
+                                                                                           "diagnostics":  [
+
+                                                                                                           ]
+                                                                                       },
+                                                                           "implemented_interfaces":  [
+
+                                                                                                      ],
+                                                                           "warnings":  [
+
+                                                                                        ],
+                                                                           "diagnostics":  [
+
+                                                                                           ],
+                                                                           "partial_results":  [
+
+                                                                                               ]
+                                                                       },
+                                                 "_meta":  {
+                                                               "timing":  {
+                                                                              "duration_ms":  85.829799994826317
+                                                                          },
+                                                               "stats":  {
+                                                                             "tool_name":  "edit-blueprint-members",
+                                                                             "mutates":  false,
+                                                                             "supports_batch":  false,
+                                                                             "requires_game_thread":  true,
+                                                                             "content_items":  0
+                                                                         }
+                                                           }
+                                             }
+                              },
+                     "Error":  null
+                 }
+}

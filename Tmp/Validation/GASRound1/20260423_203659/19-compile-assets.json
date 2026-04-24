@@ -1,0 +1,121 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "compile",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Request failed"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "tool":  "compile-assets",
+                                             "success":  false,
+                                             "results":  [
+                                                             {
+                                                                 "asset_path":  "/Game/UEBridgeMCPValidation/GASRound1/AS_GASRound1_20260423_203659",
+                                                                 "asset_type":  "Blueprint",
+                                                                 "compiled":  true,
+                                                                 "success":  true,
+                                                                 "warning_count":  0,
+                                                                 "error_count":  0,
+                                                                 "diagnostics":  [
+
+                                                                                 ]
+                                                             },
+                                                             {
+                                                                 "asset_path":  "/Game/UEBridgeMCPValidation/GASRound1/GE_GASRound1_20260423_203659",
+                                                                 "asset_type":  "Blueprint",
+                                                                 "compiled":  true,
+                                                                 "success":  true,
+                                                                 "warning_count":  0,
+                                                                 "error_count":  0,
+                                                                 "diagnostics":  [
+
+                                                                                 ]
+                                                             },
+                                                             {
+                                                                 "asset_path":  "/Game/UEBridgeMCPValidation/GASRound1/GA_GASRound1_20260423_203659",
+                                                                 "asset_type":  "Unknown",
+                                                                 "compiled":  false,
+                                                                 "success":  false,
+                                                                 "error":  "Failed to load asset: /Game/UEBridgeMCPValidation/GASRound1/GA_GASRound1_20260423_203659",
+                                                                 "warning_count":  0,
+                                                                 "error_count":  1,
+                                                                 "diagnostics":  [
+                                                                                     {
+                                                                                         "severity":  "error",
+                                                                                         "code":  "UEBMCP_ASSET_NOT_FOUND",
+                                                                                         "message":  "Failed to load asset: /Game/UEBridgeMCPValidation/GASRound1/GA_GASRound1_20260423_203659",
+                                                                                         "asset_path":  "/Game/UEBridgeMCPValidation/GASRound1/GA_GASRound1_20260423_203659"
+                                                                                     }
+                                                                                 ]
+                                                             },
+                                                             {
+                                                                 "asset_path":  "/Game/UEBridgeMCPValidation/GASRound1/BP_GASRound1_20260423_203659",
+                                                                 "asset_type":  "Blueprint",
+                                                                 "compiled":  true,
+                                                                 "success":  true,
+                                                                 "warning_count":  0,
+                                                                 "error_count":  0,
+                                                                 "diagnostics":  [
+
+                                                                                 ]
+                                                             }
+                                                         ],
+                                             "warnings":  [
+
+                                                          ],
+                                             "diagnostics":  [
+                                                                 {
+                                                                     "severity":  "error",
+                                                                     "code":  "UEBMCP_ASSET_NOT_FOUND",
+                                                                     "message":  "Failed to load asset: /Game/UEBridgeMCPValidation/GASRound1/GA_GASRound1_20260423_203659",
+                                                                     "asset_path":  "/Game/UEBridgeMCPValidation/GASRound1/GA_GASRound1_20260423_203659"
+                                                                 }
+                                                             ],
+                                             "modified_assets":  [
+                                                                     "/Game/UEBridgeMCPValidation/GASRound1/AS_GASRound1_20260423_203659",
+                                                                     "/Game/UEBridgeMCPValidation/GASRound1/GE_GASRound1_20260423_203659",
+                                                                     "/Game/UEBridgeMCPValidation/GASRound1/BP_GASRound1_20260423_203659"
+                                                                 ],
+                                             "partial_results":  [
+                                                                     {
+                                                                         "asset_path":  "/Game/UEBridgeMCPValidation/GASRound1/GA_GASRound1_20260423_203659",
+                                                                         "asset_type":  "Unknown",
+                                                                         "compiled":  false,
+                                                                         "success":  false,
+                                                                         "error":  "Failed to load asset: /Game/UEBridgeMCPValidation/GASRound1/GA_GASRound1_20260423_203659",
+                                                                         "warning_count":  0,
+                                                                         "error_count":  1,
+                                                                         "diagnostics":  [
+                                                                                             {
+                                                                                                 "severity":  "error",
+                                                                                                 "code":  "UEBMCP_ASSET_NOT_FOUND",
+                                                                                                 "message":  "Failed to load asset: /Game/UEBridgeMCPValidation/GASRound1/GA_GASRound1_20260423_203659",
+                                                                                                 "asset_path":  "/Game/UEBridgeMCPValidation/GASRound1/GA_GASRound1_20260423_203659"
+                                                                                             }
+                                                                                         ]
+                                                                     }
+                                                                 ],
+                                             "summary":  {
+                                                             "total":  4,
+                                                             "succeeded":  3,
+                                                             "failed":  1
+                                                         }
+                                         },
+                   "isError":  true,
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  64.618299977155402
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "compile-assets",
+                                               "mutates":  false,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  0
+                                           }
+                             }
+               }
+}

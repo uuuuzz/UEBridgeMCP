@@ -1,0 +1,71 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "612",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Physics constraint created"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "valid":  true,
+                                             "name":  "PC_PhysicsRound1_20260423_0",
+                                             "class":  "PhysicsConstraintComponent",
+                                             "owner_name":  "PhysicsRound1_A_20260423_195106",
+                                             "component1":  {
+                                                                "component_name":  "StaticMeshComponent0",
+                                                                "component_class":  "StaticMeshComponent",
+                                                                "owner_name":  "PhysicsRound1_A_20260423_195106",
+                                                                "bone_name":  "None",
+                                                                "valid":  true
+                                                            },
+                                             "component2":  {
+                                                                "component_name":  "StaticMeshComponent0",
+                                                                "component_class":  "StaticMeshComponent",
+                                                                "owner_name":  "PhysicsRound1_B_20260423_195106",
+                                                                "bone_name":  "None",
+                                                                "valid":  true
+                                                            },
+                                             "disable_collision":  true,
+                                             "broken":  false,
+                                             "projection_enabled":  true,
+                                             "linear_limit":  {
+                                                                  "x_motion":  "Limited",
+                                                                  "y_motion":  "Limited",
+                                                                  "z_motion":  "Limited",
+                                                                  "limit_cm":  80
+                                                              },
+                                             "angular_limit":  {
+                                                                   "swing1_motion":  "Limited",
+                                                                   "swing2_motion":  "Limited",
+                                                                   "twist_motion":  "Limited",
+                                                                   "swing1_degrees":  30,
+                                                                   "swing2_degrees":  30,
+                                                                   "twist_degrees":  20
+                                                               },
+                                             "tool":  "create-physics-constraint",
+                                             "success":  true,
+                                             "dry_run":  false,
+                                             "actor_name":  "PhysicsRound1_A_20260423_195106",
+                                             "warnings":  [
+
+                                                          ],
+                                             "modified_assets":  [
+                                                                     "/Temp/Untitled_1"
+                                                                 ]
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  5.9985000116284937
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "create-physics-constraint",
+                                               "mutates":  true,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  1
+                                           }
+                             }
+               }
+}

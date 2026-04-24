@@ -1,0 +1,83 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "405",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Request succeeded"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "tool":  "edit-anim-blueprint-state-machine",
+                                             "success":  true,
+                                             "asset_path":  "/Game/UEBridgeMCPValidation/AnimationRound2/ABP_StateMachine_20260423_223834",
+                                             "state_machine_name":  "Locomotion",
+                                             "results":  [
+                                                             {
+                                                                 "index":  0,
+                                                                 "action":  "create_state_machine",
+                                                                 "state_machine_name":  "Locomotion",
+                                                                 "node_guid":  "68B6826E-409A-478E-6230-4987872FC158",
+                                                                 "graph_name":  "Locomotion",
+                                                                 "success":  true,
+                                                                 "changed":  true
+                                                             },
+                                                             {
+                                                                 "index":  1,
+                                                                 "action":  "add_state",
+                                                                 "success":  true,
+                                                                 "changed":  true
+                                                             },
+                                                             {
+                                                                 "index":  2,
+                                                                 "action":  "add_state",
+                                                                 "success":  true,
+                                                                 "changed":  true
+                                                             },
+                                                             {
+                                                                 "index":  3,
+                                                                 "action":  "set_entry_state",
+                                                                 "success":  true,
+                                                                 "changed":  true
+                                                             },
+                                                             {
+                                                                 "index":  4,
+                                                                 "action":  "add_transition",
+                                                                 "success":  true,
+                                                                 "changed":  true
+                                                             },
+                                                             {
+                                                                 "index":  5,
+                                                                 "action":  "set_state_sequence",
+                                                                 "success":  true,
+                                                                 "changed":  true
+                                                             }
+                                                         ],
+                                             "warnings":  [
+
+                                                          ],
+                                             "diagnostics":  [
+
+                                                             ],
+                                             "modified_assets":  [
+                                                                     "/Game/UEBridgeMCPValidation/AnimationRound2/ABP_StateMachine_20260423_223834"
+                                                                 ],
+                                             "partial_results":  [
+
+                                                                 ]
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  137.44069999665953
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "edit-anim-blueprint-state-machine",
+                                               "mutates":  true,
+                                               "supports_batch":  true,
+                                               "requires_game_thread":  true,
+                                               "content_items":  0
+                                           }
+                             }
+               }
+}

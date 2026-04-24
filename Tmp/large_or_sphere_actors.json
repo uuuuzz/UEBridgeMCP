@@ -1,0 +1,342 @@
+[
+  {
+    "label": "Floor",
+    "class": "StaticMeshActor",
+    "loc": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      40.0,
+      40.0,
+      1.0
+    ],
+    "mesh": [
+      "/Engine/BasicShapes/Plane.Plane"
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Ground_Grass.MI_NPR_Ground_Grass"
+    ]
+  },
+  {
+    "label": "SM_TestSphere",
+    "class": "StaticMeshActor",
+    "loc": [
+      0.0,
+      0.0,
+      200.0
+    ],
+    "scale": [
+      2.0,
+      2.0,
+      2.0
+    ],
+    "mesh": [
+      "/Engine/BasicShapes/Sphere.Sphere"
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Prop_Player_Lilac.MI_NPR_Prop_Player_Lilac"
+    ]
+  },
+  {
+    "label": "AB_Sidewalk",
+    "class": "StaticMeshActor",
+    "loc": [
+      -1650.0,
+      0.0,
+      2.0
+    ],
+    "scale": [
+      5.5,
+      40.0,
+      1.0
+    ],
+    "mesh": [
+      "/Engine/BasicShapes/Plane.Plane"
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Concrete_Sidewalk.MI_NPR_Concrete_Sidewalk"
+    ]
+  },
+  {
+    "label": "AB_Wall_Left",
+    "class": "StaticMeshActor",
+    "loc": [
+      50.0,
+      -1100.0,
+      90.0
+    ],
+    "scale": [
+      22.0,
+      0.6,
+      1.8
+    ],
+    "mesh": [
+      "/Engine/BasicShapes/Cube.Cube"
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Concrete_Wall.MI_NPR_Concrete_Wall"
+    ]
+  },
+  {
+    "label": "AB_Wall_Right",
+    "class": "StaticMeshActor",
+    "loc": [
+      150.0,
+      1100.0,
+      90.0
+    ],
+    "scale": [
+      21.0,
+      0.6,
+      1.8
+    ],
+    "mesh": [
+      "/Engine/BasicShapes/Cube.Cube"
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Concrete_Wall.MI_NPR_Concrete_Wall"
+    ]
+  },
+  {
+    "label": "AB_Wall_Back",
+    "class": "StaticMeshActor",
+    "loc": [
+      950.0,
+      0.0,
+      90.0
+    ],
+    "scale": [
+      0.6,
+      24.0,
+      1.8
+    ],
+    "mesh": [
+      "/Engine/BasicShapes/Cube.Cube"
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Concrete_Wall.MI_NPR_Concrete_Wall"
+    ]
+  },
+  {
+    "label": "AB_Tree_L_Canopy_A",
+    "class": "StaticMeshActor",
+    "loc": [
+      140.0,
+      -650.0,
+      460.0
+    ],
+    "scale": [
+      2.4,
+      2.4,
+      2.2
+    ],
+    "mesh": [
+      "/Engine/BasicShapes/Sphere.Sphere"
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Foliage_Light.MI_NPR_Foliage_Light"
+    ]
+  },
+  {
+    "label": "AB_Tree_L_Canopy_B",
+    "class": "StaticMeshActor",
+    "loc": [
+      240.0,
+      -580.0,
+      450.0
+    ],
+    "scale": [
+      1.6,
+      1.6,
+      1.5
+    ],
+    "mesh": [
+      "/Engine/BasicShapes/Sphere.Sphere"
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Foliage_Light.MI_NPR_Foliage_Light"
+    ]
+  },
+  {
+    "label": "AB_Tree_R_Canopy_A",
+    "class": "StaticMeshActor",
+    "loc": [
+      300.0,
+      520.0,
+      440.0
+    ],
+    "scale": [
+      2.1,
+      2.1,
+      1.9
+    ],
+    "mesh": [
+      "/Engine/BasicShapes/Sphere.Sphere"
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Foliage_Light.MI_NPR_Foliage_Light"
+    ]
+  },
+  {
+    "label": "AB_Tree_R_Canopy_B",
+    "class": "StaticMeshActor",
+    "loc": [
+      390.0,
+      560.0,
+      420.0
+    ],
+    "scale": [
+      1.4,
+      1.4,
+      1.3
+    ],
+    "mesh": [
+      "/Engine/BasicShapes/Sphere.Sphere"
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Foliage_Light.MI_NPR_Foliage_Light"
+    ]
+  },
+  {
+    "label": "AB_Bush_1",
+    "class": "StaticMeshActor",
+    "loc": [
+      520.0,
+      850.0,
+      60.0
+    ],
+    "scale": [
+      0.8,
+      0.8,
+      0.6
+    ],
+    "mesh": [
+      "/Engine/BasicShapes/Sphere.Sphere"
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Foliage_Bush.MI_NPR_Foliage_Bush"
+    ]
+  },
+  {
+    "label": "AB_Bush_2",
+    "class": "StaticMeshActor",
+    "loc": [
+      670.0,
+      720.0,
+      50.0
+    ],
+    "scale": [
+      0.6,
+      0.6,
+      0.45
+    ],
+    "mesh": [
+      "/Engine/BasicShapes/Sphere.Sphere"
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Foliage_Bush.MI_NPR_Foliage_Bush"
+    ]
+  },
+  {
+    "label": "AB_Bush_3",
+    "class": "StaticMeshActor",
+    "loc": [
+      220.0,
+      -900.0,
+      55.0
+    ],
+    "scale": [
+      0.7,
+      0.7,
+      0.5
+    ],
+    "mesh": [
+      "/Engine/BasicShapes/Sphere.Sphere"
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Foliage_Bush.MI_NPR_Foliage_Bush"
+    ]
+  },
+  {
+    "label": "AB_Bush_4",
+    "class": "StaticMeshActor",
+    "loc": [
+      760.0,
+      -850.0,
+      45.0
+    ],
+    "scale": [
+      0.55,
+      0.55,
+      0.4
+    ],
+    "mesh": [
+      "/Engine/BasicShapes/Sphere.Sphere"
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Foliage_Bush.MI_NPR_Foliage_Bush"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Left_Top",
+    "class": "StaticMeshActor",
+    "loc": [
+      50.0,
+      -1070.0,
+      168.0
+    ],
+    "scale": [
+      21.119999999999997,
+      0.018,
+      0.025
+    ],
+    "mesh": [
+      "/Engine/BasicShapes/Cube.Cube"
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Right_Top",
+    "class": "StaticMeshActor",
+    "loc": [
+      150.0,
+      1070.0,
+      168.0
+    ],
+    "scale": [
+      20.16,
+      0.018,
+      0.025
+    ],
+    "mesh": [
+      "/Engine/BasicShapes/Cube.Cube"
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Back_Top",
+    "class": "StaticMeshActor",
+    "loc": [
+      920.0,
+      0.0,
+      168.0
+    ],
+    "scale": [
+      0.018,
+      23.04,
+      0.025
+    ],
+    "mesh": [
+      "/Engine/BasicShapes/Cube.Cube"
+    ],
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  }
+]

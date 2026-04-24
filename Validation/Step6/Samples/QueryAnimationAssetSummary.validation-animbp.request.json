@@ -1,0 +1,11 @@
+{
+  "jsonrpc": "2.0",
+  "id": "sample-query-validation-animbp",
+  "method": "tools/call",
+  "params": {
+    "name": "query-animation-asset-summary",
+    "arguments": {
+      "asset_path": "/Game/UEBridgeMCPValidation/Step6/Animations/VLD_TutorialTPP_AnimBlueprint.VLD_TutorialTPP_AnimBlueprint"
+    }
+  }
+}

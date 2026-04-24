@@ -1,0 +1,154 @@
+{
+    "Request":  {
+                    "method":  "tools/call",
+                    "params":  {
+                                   "arguments":  {
+                                                     "asset_path":  "/Game/UEBridgeMCPValidation/BlueprintRound1/BP_BlueprintRound1_20260423_152624",
+                                                     "rollback_on_error":  true,
+                                                     "save":  false,
+                                                     "compile":  true,
+                                                     "operations":  [
+                                                                        {
+                                                                            "source_node":  "979DBF8E-4F11-20F6-7EA2-179DC8FE73DD",
+                                                                            "target_node":  "7D97EC95-4F57-96DC-E4A1-AE99662DAAC1",
+                                                                            "op":  "auto_connect"
+                                                                        },
+                                                                        {
+                                                                            "op":  "move_nodes_batch",
+                                                                            "delta":  [
+                                                                                          120,
+                                                                                          60
+                                                                                      ],
+                                                                            "nodes":  [
+                                                                                          "979DBF8E-4F11-20F6-7EA2-179DC8FE73DD",
+                                                                                          "7D97EC95-4F57-96DC-E4A1-AE99662DAAC1",
+                                                                                          "CBED9B21-4466-AB4B-0EDB-8388214F4EBB"
+                                                                                      ]
+                                                                        },
+                                                                        {
+                                                                            "graph_name":  "EventGraph",
+                                                                            "comment_text":  "Connected validation path",
+                                                                            "op":  "comment_region",
+                                                                            "nodes":  [
+                                                                                          "979DBF8E-4F11-20F6-7EA2-179DC8FE73DD",
+                                                                                          "7D97EC95-4F57-96DC-E4A1-AE99662DAAC1",
+                                                                                          "CBED9B21-4466-AB4B-0EDB-8388214F4EBB"
+                                                                                      ]
+                                                                        },
+                                                                        {
+                                                                            "op":  "layout_graph",
+                                                                            "nodes":  [
+                                                                                          "979DBF8E-4F11-20F6-7EA2-179DC8FE73DD",
+                                                                                          "7D97EC95-4F57-96DC-E4A1-AE99662DAAC1",
+                                                                                          "CBED9B21-4466-AB4B-0EDB-8388214F4EBB"
+                                                                                      ],
+                                                                            "start_x":  0,
+                                                                            "start_y":  0,
+                                                                            "spacing_x":  340,
+                                                                            "graph_name":  "EventGraph",
+                                                                            "spacing_y":  180
+                                                                        }
+                                                                    ]
+                                                 },
+                                   "name":  "edit-blueprint-graph"
+                               },
+                    "id":  "tool-e8fa4f3849384c7a9e77cd894e156470",
+                    "jsonrpc":  "2.0"
+                },
+    "Response":  {
+                     "Success":  true,
+                     "StatusCode":  200,
+                     "Headers":  {
+                                     "keep-alive":  "timeout=15.000000",
+                                     "Content-Type":  "application/json; charset=utf-8",
+                                     "Mcp-Session-Id":  "E8A41810-4ED0-8081-CC2A-7385028DB2ED",
+                                     "Access-Control-Allow-Origin":  "*",
+                                     "Content-Length":  "1979"
+                                 },
+                     "Content":  "{\r\n\t\"jsonrpc\": \"2.0\",\r\n\t\"id\": \"tool-e8fa4f3849384c7a9e77cd894e156470\",\r\n\t\"result\":\r\n\t{\r\n\t\t\"content\": [\r\n\t\t\t{\r\n\t\t\t\t\"type\": \"text\",\r\n\t\t\t\t\"text\": \"Blueprint graph edit complete\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"structuredContent\":\r\n\t\t{\r\n\t\t\t\"asset_path\": \"/Game/UEBridgeMCPValidation/BlueprintRound1/BP_BlueprintRound1_20260423_152624\",\r\n\t\t\t\"asset_handle\":\r\n\t\t\t{\r\n\t\t\t\t\"kind\": \"asset\",\r\n\t\t\t\t\"asset_path\": \"/Game/UEBridgeMCPValidation/BlueprintRound1/BP_BlueprintRound1_20260423_152624\",\r\n\t\t\t\t\"asset_class\": \"Blueprint\"\r\n\t\t\t},\r\n\t\t\t\"results\": [\r\n\t\t\t\t{\r\n\t\t\t\t\t\"op\": \"auto_connect\",\r\n\t\t\t\t\t\"index\": 0,\r\n\t\t\t\t\t\"connections\": [\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"source_pin\": \"then\",\r\n\t\t\t\t\t\t\t\"target_pin\": \"execute\"\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t],\r\n\t\t\t\t\t\"success\": true\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"op\": \"move_nodes_batch\",\r\n\t\t\t\t\t\"index\": 1,\r\n\t\t\t\t\t\"moved_nodes\": 3,\r\n\t\t\t\t\t\"success\": true\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"op\": \"comment_region\",\r\n\t\t\t\t\t\"index\": 2,\r\n\t\t\t\t\t\"node_guid\": \"4642BF23-4416-B50C-D063-68B1F9F3CC6D\",\r\n\t\t\t\t\t\"handle\":\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\t\"kind\": \"blueprint_node\",\r\n\t\t\t\t\t\t\"session_id\": \"E8A41810-4ED0-8081-CC2A-7385028DB2ED\",\r\n\t\t\t\t\t\t\"resource_path\": \"/Game/UEBridgeMCPValidation/BlueprintRound1/BP_BlueprintRound1_20260423_152624\",\r\n\t\t\t\t\t\t\"entity_id\": \"4642BF23-4416-B50C-D063-68B1F9F3CC6D\",\r\n\t\t\t\t\t\t\"display_name\": \"Comment\"\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"node_class\": \"EdGraphNode_Comment\",\r\n\t\t\t\t\t\"covered_nodes\": 3,\r\n\t\t\t\t\t\"graph_name\": \"EventGraph\",\r\n\t\t\t\t\t\"success\": true\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"op\": \"layout_graph\",\r\n\t\t\t\t\t\"index\": 3,\r\n\t\t\t\t\t\"layout_nodes\": 3,\r\n\t\t\t\t\t\"graph_name\": \"EventGraph\",\r\n\t\t\t\t\t\"success\": true\r\n\t\t\t\t}\r\n\t\t\t],\r\n\t\t\t\"partial_results\": [],\r\n\t\t\t\"summary\":\r\n\t\t\t{\r\n\t\t\t\t\"total_operations\": 4,\r\n\t\t\t\t\"failed_operations\": 0,\r\n\t\t\t\t\"compiled\": true,\r\n\t\t\t\t\"saved\": false\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"_meta\":\r\n\t\t{\r\n\t\t\t\"timing\":\r\n\t\t\t{\r\n\t\t\t\t\"duration_ms\": 36.226099997293204\r\n\t\t\t},\r\n\t\t\t\"stats\":\r\n\t\t\t{\r\n\t\t\t\t\"tool_name\": \"edit-blueprint-graph\",\r\n\t\t\t\t\"mutates\": true,\r\n\t\t\t\t\"supports_batch\": true,\r\n\t\t\t\t\"requires_game_thread\": true,\r\n\t\t\t\t\"content_items\": 1\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}",
+                     "Json":  {
+                                  "jsonrpc":  "2.0",
+                                  "id":  "tool-e8fa4f3849384c7a9e77cd894e156470",
+                                  "result":  {
+                                                 "content":  [
+                                                                 {
+                                                                     "type":  "text",
+                                                                     "text":  "Blueprint graph edit complete"
+                                                                 }
+                                                             ],
+                                                 "structuredContent":  {
+                                                                           "asset_path":  "/Game/UEBridgeMCPValidation/BlueprintRound1/BP_BlueprintRound1_20260423_152624",
+                                                                           "asset_handle":  {
+                                                                                                "kind":  "asset",
+                                                                                                "asset_path":  "/Game/UEBridgeMCPValidation/BlueprintRound1/BP_BlueprintRound1_20260423_152624",
+                                                                                                "asset_class":  "Blueprint"
+                                                                                            },
+                                                                           "results":  [
+                                                                                           {
+                                                                                               "op":  "auto_connect",
+                                                                                               "index":  0,
+                                                                                               "connections":  [
+                                                                                                                   {
+                                                                                                                       "source_pin":  "then",
+                                                                                                                       "target_pin":  "execute"
+                                                                                                                   }
+                                                                                                               ],
+                                                                                               "success":  true
+                                                                                           },
+                                                                                           {
+                                                                                               "op":  "move_nodes_batch",
+                                                                                               "index":  1,
+                                                                                               "moved_nodes":  3,
+                                                                                               "success":  true
+                                                                                           },
+                                                                                           {
+                                                                                               "op":  "comment_region",
+                                                                                               "index":  2,
+                                                                                               "node_guid":  "4642BF23-4416-B50C-D063-68B1F9F3CC6D",
+                                                                                               "handle":  {
+                                                                                                              "kind":  "blueprint_node",
+                                                                                                              "session_id":  "E8A41810-4ED0-8081-CC2A-7385028DB2ED",
+                                                                                                              "resource_path":  "/Game/UEBridgeMCPValidation/BlueprintRound1/BP_BlueprintRound1_20260423_152624",
+                                                                                                              "entity_id":  "4642BF23-4416-B50C-D063-68B1F9F3CC6D",
+                                                                                                              "display_name":  "Comment"
+                                                                                                          },
+                                                                                               "node_class":  "EdGraphNode_Comment",
+                                                                                               "covered_nodes":  3,
+                                                                                               "graph_name":  "EventGraph",
+                                                                                               "success":  true
+                                                                                           },
+                                                                                           {
+                                                                                               "op":  "layout_graph",
+                                                                                               "index":  3,
+                                                                                               "layout_nodes":  3,
+                                                                                               "graph_name":  "EventGraph",
+                                                                                               "success":  true
+                                                                                           }
+                                                                                       ],
+                                                                           "partial_results":  [
+
+                                                                                               ],
+                                                                           "summary":  {
+                                                                                           "total_operations":  4,
+                                                                                           "failed_operations":  0,
+                                                                                           "compiled":  true,
+                                                                                           "saved":  false
+                                                                                       }
+                                                                       },
+                                                 "_meta":  {
+                                                               "timing":  {
+                                                                              "duration_ms":  36.226099997293204
+                                                                          },
+                                                               "stats":  {
+                                                                             "tool_name":  "edit-blueprint-graph",
+                                                                             "mutates":  true,
+                                                                             "supports_batch":  true,
+                                                                             "requires_game_thread":  true,
+                                                                             "content_items":  1
+                                                                         }
+                                                           }
+                                             }
+                              },
+                     "Error":  null
+                 }
+}

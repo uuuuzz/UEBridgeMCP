@@ -1,0 +1,29 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "13",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "[UEBMCP_INVALID_ASSET_PATH] Asset path is empty"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "code":  "UEBMCP_INVALID_ASSET_PATH",
+                                             "message":  "Asset path is empty"
+                                         },
+                   "isError":  true,
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  0.008700008038431406
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "create-niagara-system-from-template",
+                                               "mutates":  true,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  1
+                                           }
+                             }
+               }
+}

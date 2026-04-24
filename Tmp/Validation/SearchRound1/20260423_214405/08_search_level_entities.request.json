@@ -1,0 +1,16 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "search_level_entities",
+    "method":  "tools/call",
+    "params":  {
+                   "name":  "search-level-entities",
+                   "arguments":  {
+                                     "query":  "SearchActor",
+                                     "world":  "editor",
+                                     "tag_filter":  "UEBridgeMCP_SearchRound1",
+                                     "include_transform":  true,
+                                     "include_bounds":  true,
+                                     "limit":  10
+                                 }
+               }
+}

@@ -1,0 +1,17 @@
+{
+  "jsonrpc": "2.0",
+  "id": "sample-external-ai-bad-config",
+  "method": "tools/call",
+  "params": {
+    "name": "generate-external-content",
+    "arguments": {
+      "brief": "Produce a short validation summary as JSON.",
+      "response_format": "json",
+      "provider": "openai_compatible",
+      "api_base_url": "http://127.0.0.1:9/v1",
+      "api_key": "invalid-key-for-validation",
+      "model": "dummy-model",
+      "timeout_seconds": 2
+    }
+  }
+}

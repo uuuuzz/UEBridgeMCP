@@ -1,0 +1,58 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "205",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Request succeeded"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "tool":  "edit-niagara-user-parameters",
+                                             "success":  true,
+                                             "dry_run":  true,
+                                             "asset_path":  "/Game/UEBridgeMCPValidation/NiagaraRound1/NS_NiagaraRound1_20260423_174928",
+                                             "results":  [
+                                                             {
+                                                                 "index":  0,
+                                                                 "action":  "add_parameter",
+                                                                 "name":  "DryRunFloat",
+                                                                 "type":  "float",
+                                                                 "already_exists":  false,
+                                                                 "success":  true,
+                                                                 "changed":  true
+                                                             }
+                                                         ],
+                                             "warnings":  [
+
+                                                          ],
+                                             "modified_assets":  [
+
+                                                                 ],
+                                             "compile":  {
+                                                             "requested":  false
+                                                         },
+                                             "user_parameters":  [
+
+                                                                 ],
+                                             "summary":  {
+                                                             "total":  1,
+                                                             "succeeded":  1,
+                                                             "failed":  0
+                                                         }
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  0.080600002547726035
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "edit-niagara-user-parameters",
+                                               "mutates":  true,
+                                               "supports_batch":  true,
+                                               "requires_game_thread":  true,
+                                               "content_items":  0
+                                           }
+                             }
+               }
+}

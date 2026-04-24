@@ -1,0 +1,67 @@
+// Copyright uuuuzz 2024-2026. All Rights Reserved.
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "Tools/McpToolBase.h"
+#include "QueryAssetTool.generated.h"
+
+/**
+ * Consolidated tool for asset operations.
+ * Replaces: search-assets, inspect-asset, inspect-data-asset
+ *
+ * Usage modes:
+ * - query param: Search for assets (like search-assets)
+ * - asset_path param: Inspect specific asset (like inspect-asset/inspect-data-asset)
+ */
+UCLASS()
+class UEBRIDGEMCPEDITOR_API UQueryAssetTool : public UMcpToolBase
+{
+	GENERATED_BODY()
+
+public:
+	virtual FString GetToolName() const override { return TEXT("query-asset"); }
+	virtual FString GetToolDescription() const override;
+	virtual TMap<FString, FMcpSchemaProperty> GetInputSchema() const override;
+	virtual TArray<FString> GetRequiredParams() const override;
+
+	virtual FMcpToolResult Execute(
+		const TSharedPtr<FJsonObject>& Arguments,
+		const FMcpToolContext& Context) override;
+
+private:
+	// === Search mode ===
+
+	/** Search for assets matching criteria */
+	FMcpToolResult SearchAssets(const FString& Query, const FString& ClassFilter,
+		const FString& PathFilter, int32 Limit) const;
+
+	// === Inspect mode ===
+
+	/** Inspect a specific asset */
+	FMcpToolResult InspectAsset(const FString& AssetPath, int32 MaxDepth,
+		bool bIncludeDefaults, const FString& PropertyFilter, const FString& CategoryFilter,
+		const FString& RowFilter) const;
+
+	/** Inspect DataTable */
+	TSharedPtr<FJsonObject> InspectDataTable(class UDataTable* DataTable, const FString& RowFilter) const;
+
+	/** Inspect DataAsset */
+	TSharedPtr<FJsonObject> InspectDataAsset(class UDataAsset* DataAsset) const;
+
+	/** Inspect general UObject */
+	TSharedPtr<FJsonObject> InspectObject(UObject* Object, int32 MaxDepth,
+		bool bIncludeDefaults, const FString& PropertyFilter, const FString& CategoryFilter) const;
+
+	// === Helpers ===
+
+	/** Convert property to JSON */
+	TSharedPtr<FJsonObject> PropertyToJson(class FProperty* Property, void* Container,
+		UObject* Owner, int32 CurrentDepth, int32 MaxDepth, bool bIncludeDefaults) const;
+
+	/** Get property type as string */
+	FString GetPropertyTypeString(class FProperty* Property) const;
+
+	/** Check if name matches wildcard pattern */
+	bool MatchesWildcard(const FString& Name, const FString& Pattern) const;
+};

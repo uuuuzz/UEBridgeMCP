@@ -19,7 +19,7 @@ Practical fixes for the problems you will actually hit. If your symptom isn't li
 
 ### 1.2 Server not running at all
 
-- The editor is closed, or the plugin is disabled. Open `Edit -> Plugins`, search "UEBridgeMCP", make sure both Runtime and Editor modules show enabled.
+- The editor is closed, or the plugin is disabled. Open `Edit -> Plugins`, search "UEBridgeMCP", and make sure the plugin and its editor modules are enabled.
 - Port already bound by another process. On Windows:
   ```powershell
   netstat -ano | findstr 8080
@@ -28,7 +28,7 @@ Practical fixes for the problems you will actually hit. If your symptom isn't li
 
 ### 1.3 Port clash between multiple UE instances
 
-Each editor instance needs its **own** port. Give each project a unique `ServerPort` (8080 / 8081 / 8082) and update the client's URL per project. You can also override at launch time with `SOFT_UE_BRIDGE_PORT=8081` or CLI flag.
+Each editor instance needs its **own** port. Give each project a unique `ServerPort` (8080 / 8081 / 8082) in `Config/DefaultUEBridgeMCP.ini` or the editor settings object, then update the client's URL per project.
 
 ### 1.4 `tools/list` returns empty or 404
 
@@ -46,8 +46,11 @@ Missing engine plugin dependencies. UE should auto-enable them via the plugin's 
 
 - `EditorScriptingUtilities`
 - `GameplayAbilities`
+- `EnhancedInput`
 - `StateTree` + `GameplayStateTree`
 - `PythonScriptPlugin` (hard linked in `Build.cs`)
+- `Niagara` and `Metasound` if you keep the current conditional tool sources enabled
+- `ControlRig` and `PCG` if you keep the extension modules enabled
 
 Then Generate Project Files, rebuild.
 
@@ -168,7 +171,7 @@ The legacy v1 tools were consolidated in v2:
 | `query-level` | `query-level-summary` + `query-actor-detail` |
 | `query-material` | `query-material-summary` |
 | `spawn-actor` / `set-property` / `add-component` | `edit-level-batch` |
-| `add-graph-node` / `remove-graph-node` / `connect-graph-pins` / `disconnect-graph-pin` | `edit-blueprint-graph` |
+| `add-graph-node` / `remove-graph-node` / `connect-graph-pins` / `disconnect-graph-pin` | `edit-blueprint-graph` for Blueprint graphs, `edit-material-graph` for `UMaterial` expression graphs |
 | `set-property` (on Blueprint members) | `edit-blueprint-members` |
 | `analyze-blueprint` | `query-blueprint-summary` |
 
@@ -186,7 +189,7 @@ UEBridgeMCP has **zero** game-code coupling ? no `Lyra*` / project-specific symb
 2. Make sure the new project is C++ and UE 5.6+.
 3. Add `{"Name":"UEBridgeMCP","Enabled":true}` to `.uproject`.
 4. Regenerate project files, rebuild.
-5. `curl -X POST http://127.0.0.1:8080/mcp -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'` to verify ? expect 46 tools.
+5. `curl -X POST http://127.0.0.1:8080/mcp -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'` to verify. After Step 6, do not expect a fixed count; compare against `initialize.capabilities.tools.registeredCount` instead.
 
 ### 6.2 Submitting via Perforce / Git
 
@@ -225,12 +228,12 @@ curl -i -X POST http://127.0.0.1:8080/mcp \
   -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
 ```
 
-Or enable the built-in MCP session log by setting environment variable `UEBMCP_LOG_SESSIONS=1` before launching the editor.
+There is no separate session-log environment variable in the current source; use `LogLevel=Verbose` plus `curl -i` when you need full request/response evidence.
 
 ---
 
 See also:
 
-- [Tools Reference](./Tools-Reference.md) ? the 46 built-in tools.
+- [Tools Reference](./Tools-Reference.md) ? the live base and conditional tool surface.
 - [Tool Development Guide](./ToolDevelopment.md) ? author a new tool.
 - [Architecture](./Architecture.md) ? HTTP / Registry / Session internals.

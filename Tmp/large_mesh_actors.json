@@ -1,0 +1,1028 @@
+[
+  {
+    "label": "Floor",
+    "folder": "Level",
+    "loc": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      40.0,
+      40.0,
+      1.0
+    ],
+    "hidden": false,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Ground_Grass.MI_NPR_Ground_Grass"
+    ]
+  },
+  {
+    "label": "AB_Sidewalk",
+    "folder": "ArtBlockout/Ground",
+    "loc": [
+      -1650.0,
+      0.0,
+      2.0
+    ],
+    "scale": [
+      5.5,
+      40.0,
+      1.0
+    ],
+    "hidden": false,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Concrete_Sidewalk.MI_NPR_Concrete_Sidewalk"
+    ]
+  },
+  {
+    "label": "AB_DirtPath",
+    "folder": "ArtBlockout/Ground",
+    "loc": [
+      -350.0,
+      0.0,
+      1.0
+    ],
+    "scale": [
+      19.0,
+      8.5,
+      1.0
+    ],
+    "hidden": false,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Dirt_Path.MI_NPR_Dirt_Path"
+    ]
+  },
+  {
+    "label": "AB_Wall_Left",
+    "folder": "ArtBlockout/Walls",
+    "loc": [
+      50.0,
+      -1100.0,
+      90.0
+    ],
+    "scale": [
+      22.0,
+      0.6,
+      1.8
+    ],
+    "hidden": false,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Concrete_Wall.MI_NPR_Concrete_Wall"
+    ]
+  },
+  {
+    "label": "AB_Wall_Right",
+    "folder": "ArtBlockout/Walls",
+    "loc": [
+      150.0,
+      1100.0,
+      90.0
+    ],
+    "scale": [
+      21.0,
+      0.6,
+      1.8
+    ],
+    "hidden": false,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Concrete_Wall.MI_NPR_Concrete_Wall"
+    ]
+  },
+  {
+    "label": "AB_Wall_Back",
+    "folder": "ArtBlockout/Walls",
+    "loc": [
+      950.0,
+      0.0,
+      90.0
+    ],
+    "scale": [
+      0.6,
+      24.0,
+      1.8
+    ],
+    "hidden": false,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Concrete_Wall.MI_NPR_Concrete_Wall"
+    ]
+  },
+  {
+    "label": "AB_Building_D",
+    "folder": "ArtBlockout/Buildings",
+    "loc": [
+      1620.0,
+      850.0,
+      520.0
+    ],
+    "scale": [
+      4.5,
+      3.5,
+      10.4
+    ],
+    "hidden": false,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Building_Cool.MI_NPR_Building_Cool"
+    ]
+  },
+  {
+    "label": "AB_Building_E",
+    "folder": "ArtBlockout/Buildings",
+    "loc": [
+      1760.0,
+      80.0,
+      700.0
+    ],
+    "scale": [
+      2.4,
+      2.4,
+      14.0
+    ],
+    "hidden": false,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Building_Warm.MI_NPR_Building_Warm"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_A_1",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      1247.5,
+      -650.0,
+      180.0
+    ],
+    "scale": [
+      0.035,
+      1.82,
+      0.055
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_A_1_Hi",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      1246.7,
+      -702.5,
+      190.0
+    ],
+    "scale": [
+      0.02,
+      0.2184,
+      0.01925
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Highlight.MI_NPR_Window_Highlight"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_A_2",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      1247.5,
+      -650.0,
+      360.0
+    ],
+    "scale": [
+      0.035,
+      1.82,
+      0.055
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_B_1",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      1337.5,
+      -150.0,
+      177.5
+    ],
+    "scale": [
+      0.035,
+      2.08,
+      0.055
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_B_1_Hi",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      1336.7,
+      -210.0,
+      187.5
+    ],
+    "scale": [
+      0.02,
+      0.2496,
+      0.01925
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Highlight.MI_NPR_Window_Highlight"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_B_2",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      1337.5,
+      -150.0,
+      352.5
+    ],
+    "scale": [
+      0.035,
+      2.08,
+      0.055
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_B_3",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      1337.5,
+      -150.0,
+      527.5
+    ],
+    "scale": [
+      0.035,
+      2.08,
+      0.055
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_B_3_Hi",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      1336.7,
+      -210.0,
+      537.5
+    ],
+    "scale": [
+      0.02,
+      0.2496,
+      0.01925
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Highlight.MI_NPR_Window_Highlight"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_B_4",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      1337.5,
+      -150.0,
+      702.5
+    ],
+    "scale": [
+      0.035,
+      2.08,
+      0.055
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_C_1",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      1307.5,
+      380.0,
+      170.0
+    ],
+    "scale": [
+      0.035,
+      1.976,
+      0.055
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_C_1_Hi",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      1306.7,
+      323.0,
+      180.0
+    ],
+    "scale": [
+      0.02,
+      0.23712,
+      0.01925
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Highlight.MI_NPR_Window_Highlight"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_C_2",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      1307.5,
+      380.0,
+      330.0
+    ],
+    "scale": [
+      0.035,
+      1.976,
+      0.055
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_C_3",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      1307.5,
+      380.0,
+      490.0
+    ],
+    "scale": [
+      0.035,
+      1.976,
+      0.055
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_C_3_Hi",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      1306.7,
+      323.0,
+      500.0
+    ],
+    "scale": [
+      0.02,
+      0.23712,
+      0.01925
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Highlight.MI_NPR_Window_Highlight"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_D_1",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      1392.5,
+      850.0,
+      178.0
+    ],
+    "scale": [
+      0.035,
+      1.82,
+      0.055
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_D_1_Hi",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      1391.7,
+      797.5,
+      188.0
+    ],
+    "scale": [
+      0.02,
+      0.2184,
+      0.01925
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Highlight.MI_NPR_Window_Highlight"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_D_2",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      1392.5,
+      850.0,
+      354.0
+    ],
+    "scale": [
+      0.035,
+      1.82,
+      0.055
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_D_3",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      1392.5,
+      850.0,
+      530.0
+    ],
+    "scale": [
+      0.035,
+      1.82,
+      0.055
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_D_3_Hi",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      1391.7,
+      797.5,
+      540.0
+    ],
+    "scale": [
+      0.02,
+      0.2184,
+      0.01925
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Highlight.MI_NPR_Window_Highlight"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_D_4",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      1392.5,
+      850.0,
+      706.0
+    ],
+    "scale": [
+      0.035,
+      1.82,
+      0.055
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_D_5",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      1392.5,
+      850.0,
+      882.0
+    ],
+    "scale": [
+      0.035,
+      1.82,
+      0.055
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_D_5_Hi",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      1391.7,
+      797.5,
+      892.0
+    ],
+    "scale": [
+      0.02,
+      0.2184,
+      0.01925
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Highlight.MI_NPR_Window_Highlight"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_E_1",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      1637.5,
+      80.0,
+      193.33333333333331
+    ],
+    "scale": [
+      0.035,
+      1.248,
+      0.055
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_E_1_Hi",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      1636.7,
+      44.0,
+      203.33333333333331
+    ],
+    "scale": [
+      0.02,
+      0.14976,
+      0.01925
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Highlight.MI_NPR_Window_Highlight"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_E_2",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      1637.5,
+      80.0,
+      400.0
+    ],
+    "scale": [
+      0.035,
+      1.248,
+      0.055
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_E_3",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      1637.5,
+      80.0,
+      606.6666666666666
+    ],
+    "scale": [
+      0.035,
+      1.248,
+      0.055
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_E_3_Hi",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      1636.7,
+      44.0,
+      616.6666666666666
+    ],
+    "scale": [
+      0.02,
+      0.14976,
+      0.01925
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Highlight.MI_NPR_Window_Highlight"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_E_4",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      1637.5,
+      80.0,
+      813.3333333333334
+    ],
+    "scale": [
+      0.035,
+      1.248,
+      0.055
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_E_5",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      1637.5,
+      80.0,
+      1020.0
+    ],
+    "scale": [
+      0.035,
+      1.248,
+      0.055
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_E_5_Hi",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      1636.7,
+      44.0,
+      1030.0
+    ],
+    "scale": [
+      0.02,
+      0.14976,
+      0.01925
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Highlight.MI_NPR_Window_Highlight"
+    ]
+  },
+  {
+    "label": "NPR_Window_AB_Building_E_6",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      1637.5,
+      80.0,
+      1226.6666666666667
+    ],
+    "scale": [
+      0.035,
+      1.248,
+      0.055
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Left_1",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      -650.0,
+      -1070.0,
+      118.0
+    ],
+    "scale": [
+      0.025,
+      0.018,
+      0.95
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Left_2",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      -300.0,
+      -1070.0,
+      118.0
+    ],
+    "scale": [
+      0.025,
+      0.018,
+      0.95
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Left_3",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      50.0,
+      -1070.0,
+      118.0
+    ],
+    "scale": [
+      0.025,
+      0.018,
+      0.95
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Left_4",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      400.0,
+      -1070.0,
+      118.0
+    ],
+    "scale": [
+      0.025,
+      0.018,
+      0.95
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Left_5",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      750.0,
+      -1070.0,
+      118.0
+    ],
+    "scale": [
+      0.025,
+      0.018,
+      0.95
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Left_Top",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      50.0,
+      -1070.0,
+      168.0
+    ],
+    "scale": [
+      21.119999999999997,
+      0.018,
+      0.025
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Right_1",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      -550.0,
+      1070.0,
+      118.0
+    ],
+    "scale": [
+      0.025,
+      0.018,
+      0.95
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Right_2",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      -200.0,
+      1070.0,
+      118.0
+    ],
+    "scale": [
+      0.025,
+      0.018,
+      0.95
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Right_3",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      150.0,
+      1070.0,
+      118.0
+    ],
+    "scale": [
+      0.025,
+      0.018,
+      0.95
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Right_4",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      500.0,
+      1070.0,
+      118.0
+    ],
+    "scale": [
+      0.025,
+      0.018,
+      0.95
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Right_5",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      850.0,
+      1070.0,
+      118.0
+    ],
+    "scale": [
+      0.025,
+      0.018,
+      0.95
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Right_Top",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      150.0,
+      1070.0,
+      168.0
+    ],
+    "scale": [
+      20.16,
+      0.018,
+      0.025
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Back_1",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      920.0,
+      -800.0,
+      118.0
+    ],
+    "scale": [
+      0.018,
+      0.025,
+      0.95
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Back_2",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      920.0,
+      -400.0,
+      118.0
+    ],
+    "scale": [
+      0.018,
+      0.025,
+      0.95
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Back_3",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      920.0,
+      0.0,
+      118.0
+    ],
+    "scale": [
+      0.018,
+      0.025,
+      0.95
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Back_4",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      920.0,
+      400.0,
+      118.0
+    ],
+    "scale": [
+      0.018,
+      0.025,
+      0.95
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Back_5",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      920.0,
+      800.0,
+      118.0
+    ],
+    "scale": [
+      0.018,
+      0.025,
+      0.95
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  },
+  {
+    "label": "NPR_WallLine_AB_Wall_Back_Top",
+    "folder": "ArtBlockout/MaterialDetails",
+    "loc": [
+      920.0,
+      0.0,
+      168.0
+    ],
+    "scale": [
+      0.018,
+      23.04,
+      0.025
+    ],
+    "hidden": true,
+    "mats": [
+      "/Game/Materials/NPR/Env/Instances/MI_NPR_Window_Glass.MI_NPR_Window_Glass"
+    ]
+  }
+]

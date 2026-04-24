@@ -1,0 +1,522 @@
+﻿{
+	"jsonrpc": "2.0",
+	"id": "23-pattern-interaction",
+	"result":
+	{
+		"content": [
+			{
+				"type": "text",
+				"text": "Request succeeded"
+			}
+		],
+		"structuredContent":
+		{
+			"tool": "create-blueprint-pattern",
+			"success": true,
+			"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Interaction_20260423_171056",
+			"pattern": "interaction_stub_actor",
+			"asset_handle":
+			{
+				"kind": "asset",
+				"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Interaction_20260423_171056",
+				"asset_class": "Blueprint"
+			},
+			"steps": [
+				{
+					"step": "create_asset",
+					"success": true,
+					"payload":
+					{
+						"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Interaction_20260423_171056",
+						"pattern": "interaction_stub_actor"
+					}
+				},
+				{
+					"step": "edit_members",
+					"success": true,
+					"payload":
+					{
+						"tool": "edit-blueprint-members",
+						"success": true,
+						"modified_assets": [
+							"/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Interaction_20260423_171056"
+						],
+						"results": [
+							{
+								"action": "create_variable",
+								"name": "bCanInteract",
+								"index": 0,
+								"success": true
+							},
+							{
+								"action": "create_function",
+								"name": "CanInteract",
+								"graph_name": "CanInteract",
+								"index": 1,
+								"success": true
+							},
+							{
+								"action": "create_function",
+								"name": "Interact",
+								"graph_name": "Interact",
+								"index": 2,
+								"success": true
+							}
+						],
+						"compile":
+						{
+							"attempted": false,
+							"success": true,
+							"diagnostics": []
+						},
+						"implemented_interfaces": [],
+						"warnings": [],
+						"diagnostics": [],
+						"partial_results": []
+					}
+				},
+				{
+					"step": "configure_can_interact",
+					"success": true,
+					"payload":
+					{
+						"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Interaction_20260423_171056",
+						"asset_handle":
+						{
+							"kind": "asset",
+							"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Interaction_20260423_171056",
+							"asset_class": "Blueprint"
+						},
+						"results": [
+							{
+								"op": "add_get_variable",
+								"index": 0,
+								"alias": "can_interact_state",
+								"node_guid": "13319BD5-4DA1-2B64-0C01-958BB9FE1AC1",
+								"handle":
+								{
+									"kind": "blueprint_node",
+									"session_id": "ECCDCD12-4415-36AB-01CD-11B912956606",
+									"resource_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Interaction_20260423_171056",
+									"entity_id": "13319BD5-4DA1-2B64-0C01-958BB9FE1AC1",
+									"display_name": "Get bCanInteract"
+								},
+								"node_class": "K2Node_VariableGet",
+								"graph_name": "CanInteract",
+								"success": true
+							},
+							{
+								"op": "auto_connect",
+								"index": 1,
+								"connections": [
+									{
+										"source_pin": "bCanInteract",
+										"target_pin": "ReturnValue"
+									}
+								],
+								"success": true
+							}
+						],
+						"partial_results": [],
+						"summary":
+						{
+							"total_operations": 2,
+							"failed_operations": 0,
+							"compiled": false,
+							"saved": false
+						}
+					}
+				},
+				{
+					"step": "layout_CanInteract",
+					"success": true,
+					"payload":
+					{
+						"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Interaction_20260423_171056",
+						"asset_handle":
+						{
+							"kind": "asset",
+							"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Interaction_20260423_171056",
+							"asset_class": "Blueprint"
+						},
+						"results": [
+							{
+								"op": "layout_graph",
+								"index": 0,
+								"layout_nodes": 3,
+								"graph_name": "CanInteract",
+								"success": true
+							}
+						],
+						"partial_results": [],
+						"summary":
+						{
+							"total_operations": 1,
+							"failed_operations": 0,
+							"compiled": false,
+							"saved": false
+						}
+					}
+				},
+				{
+					"step": "comment_can_interact",
+					"success": true,
+					"payload":
+					{
+						"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Interaction_20260423_171056",
+						"asset_handle":
+						{
+							"kind": "asset",
+							"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Interaction_20260423_171056",
+							"asset_class": "Blueprint"
+						},
+						"results": [
+							{
+								"op": "comment_region",
+								"index": 0,
+								"node_guid": "22A55947-4861-C1D8-31E3-70886AD498A9",
+								"handle":
+								{
+									"kind": "blueprint_node",
+									"session_id": "ECCDCD12-4415-36AB-01CD-11B912956606",
+									"resource_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Interaction_20260423_171056",
+									"entity_id": "22A55947-4861-C1D8-31E3-70886AD498A9",
+									"display_name": "Comment"
+								},
+								"node_class": "EdGraphNode_Comment",
+								"covered_nodes": 1,
+								"graph_name": "CanInteract",
+								"success": true
+							}
+						],
+						"partial_results": [],
+						"summary":
+						{
+							"total_operations": 1,
+							"failed_operations": 0,
+							"compiled": false,
+							"saved": false
+						}
+					}
+				},
+				{
+					"step": "configure_interact",
+					"success": true,
+					"payload":
+					{
+						"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Interaction_20260423_171056",
+						"asset_handle":
+						{
+							"kind": "asset",
+							"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Interaction_20260423_171056",
+							"asset_class": "Blueprint"
+						},
+						"results": [
+							{
+								"op": "add_call_function",
+								"index": 0,
+								"alias": "call_can_interact",
+								"node_guid": "81924312-443D-7B7E-070A-82BC9964E5A7",
+								"handle":
+								{
+									"kind": "blueprint_node",
+									"session_id": "ECCDCD12-4415-36AB-01CD-11B912956606",
+									"resource_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Interaction_20260423_171056",
+									"entity_id": "81924312-443D-7B7E-070A-82BC9964E5A7",
+									"display_name": "CanInteract"
+								},
+								"node_class": "K2Node_CallFunction",
+								"graph_name": "Interact",
+								"success": true
+							},
+							{
+								"op": "add_branch",
+								"index": 1,
+								"alias": "interaction_branch",
+								"node_guid": "18012807-41A3-7941-42C6-28B7C3FAB712",
+								"handle":
+								{
+									"kind": "blueprint_node",
+									"session_id": "ECCDCD12-4415-36AB-01CD-11B912956606",
+									"resource_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Interaction_20260423_171056",
+									"entity_id": "18012807-41A3-7941-42C6-28B7C3FAB712",
+									"display_name": "Branch"
+								},
+								"node_class": "K2Node_IfThenElse",
+								"graph_name": "Interact",
+								"success": true
+							},
+							{
+								"op": "add_reroute",
+								"index": 2,
+								"alias": "interaction_success",
+								"node_guid": "C46AF12A-4817-0634-18D8-CCA16F7DADB4",
+								"handle":
+								{
+									"kind": "blueprint_node",
+									"session_id": "ECCDCD12-4415-36AB-01CD-11B912956606",
+									"resource_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Interaction_20260423_171056",
+									"entity_id": "C46AF12A-4817-0634-18D8-CCA16F7DADB4",
+									"display_name": "Reroute Node"
+								},
+								"node_class": "K2Node_Knot",
+								"graph_name": "Interact",
+								"success": true
+							},
+							{
+								"op": "add_reroute",
+								"index": 3,
+								"alias": "interaction_blocked",
+								"node_guid": "CDAB07D8-4E5C-3FC3-9317-2789E6CEB775",
+								"handle":
+								{
+									"kind": "blueprint_node",
+									"session_id": "ECCDCD12-4415-36AB-01CD-11B912956606",
+									"resource_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Interaction_20260423_171056",
+									"entity_id": "CDAB07D8-4E5C-3FC3-9317-2789E6CEB775",
+									"display_name": "Reroute Node"
+								},
+								"node_class": "K2Node_Knot",
+								"graph_name": "Interact",
+								"success": true
+							},
+							{
+								"op": "connect",
+								"index": 4,
+								"success": true
+							},
+							{
+								"op": "connect",
+								"index": 5,
+								"success": true
+							},
+							{
+								"op": "connect",
+								"index": 6,
+								"success": true
+							},
+							{
+								"op": "connect",
+								"index": 7,
+								"success": true
+							},
+							{
+								"op": "connect",
+								"index": 8,
+								"success": true
+							}
+						],
+						"partial_results": [],
+						"summary":
+						{
+							"total_operations": 9,
+							"failed_operations": 0,
+							"compiled": false,
+							"saved": false
+						}
+					}
+				},
+				{
+					"step": "layout_Interact",
+					"success": true,
+					"payload":
+					{
+						"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Interaction_20260423_171056",
+						"asset_handle":
+						{
+							"kind": "asset",
+							"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Interaction_20260423_171056",
+							"asset_class": "Blueprint"
+						},
+						"results": [
+							{
+								"op": "layout_graph",
+								"index": 0,
+								"layout_nodes": 5,
+								"graph_name": "Interact",
+								"success": true
+							}
+						],
+						"partial_results": [],
+						"summary":
+						{
+							"total_operations": 1,
+							"failed_operations": 0,
+							"compiled": false,
+							"saved": false
+						}
+					}
+				},
+				{
+					"step": "comment_interact_success",
+					"success": true,
+					"payload":
+					{
+						"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Interaction_20260423_171056",
+						"asset_handle":
+						{
+							"kind": "asset",
+							"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Interaction_20260423_171056",
+							"asset_class": "Blueprint"
+						},
+						"results": [
+							{
+								"op": "comment_region",
+								"index": 0,
+								"node_guid": "308DF82F-4D85-F20D-EE28-50B5038C2049",
+								"handle":
+								{
+									"kind": "blueprint_node",
+									"session_id": "ECCDCD12-4415-36AB-01CD-11B912956606",
+									"resource_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Interaction_20260423_171056",
+									"entity_id": "308DF82F-4D85-F20D-EE28-50B5038C2049",
+									"display_name": "Comment"
+								},
+								"node_class": "EdGraphNode_Comment",
+								"covered_nodes": 1,
+								"graph_name": "Interact",
+								"success": true
+							}
+						],
+						"partial_results": [],
+						"summary":
+						{
+							"total_operations": 1,
+							"failed_operations": 0,
+							"compiled": false,
+							"saved": false
+						}
+					}
+				},
+				{
+					"step": "comment_interact_blocked",
+					"success": true,
+					"payload":
+					{
+						"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Interaction_20260423_171056",
+						"asset_handle":
+						{
+							"kind": "asset",
+							"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Interaction_20260423_171056",
+							"asset_class": "Blueprint"
+						},
+						"results": [
+							{
+								"op": "comment_region",
+								"index": 0,
+								"node_guid": "9C59C25C-4AFF-A781-01F1-74BB1DC0D4F5",
+								"handle":
+								{
+									"kind": "blueprint_node",
+									"session_id": "ECCDCD12-4415-36AB-01CD-11B912956606",
+									"resource_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Interaction_20260423_171056",
+									"entity_id": "9C59C25C-4AFF-A781-01F1-74BB1DC0D4F5",
+									"display_name": "Comment"
+								},
+								"node_class": "EdGraphNode_Comment",
+								"covered_nodes": 1,
+								"graph_name": "Interact",
+								"success": true
+							}
+						],
+						"partial_results": [],
+						"summary":
+						{
+							"total_operations": 1,
+							"failed_operations": 0,
+							"compiled": false,
+							"saved": false
+						}
+					}
+				},
+				{
+					"step": "compile_asset",
+					"success": true,
+					"payload":
+					{
+						"tool": "compile-assets",
+						"success": true,
+						"results": [
+							{
+								"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Interaction_20260423_171056",
+								"asset_type": "Blueprint",
+								"compiled": true,
+								"success": true,
+								"warning_count": 0,
+								"error_count": 0,
+								"diagnostics": []
+							}
+						],
+						"warnings": [],
+						"diagnostics": [],
+						"modified_assets": [
+							"/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Interaction_20260423_171056"
+						],
+						"partial_results": [],
+						"summary":
+						{
+							"total": 1,
+							"succeeded": 1,
+							"failed": 0
+						}
+					}
+				},
+				{
+					"step": "save_asset",
+					"success": true,
+					"payload":
+					{
+						"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Interaction_20260423_171056"
+					}
+				}
+			],
+			"partial_results": [],
+			"modified_assets": [
+				"/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Interaction_20260423_171056"
+			],
+			"compile":
+			{
+				"tool": "compile-assets",
+				"success": true,
+				"results": [
+					{
+						"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Interaction_20260423_171056",
+						"asset_type": "Blueprint",
+						"compiled": true,
+						"success": true,
+						"warning_count": 0,
+						"error_count": 0,
+						"diagnostics": []
+					}
+				],
+				"warnings": [],
+				"diagnostics": [],
+				"modified_assets": [
+					"/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Interaction_20260423_171056"
+				],
+				"partial_results": [],
+				"summary":
+				{
+					"total": 1,
+					"succeeded": 1,
+					"failed": 0
+				}
+			}
+		},
+		"_meta":
+		{
+			"timing":
+			{
+				"duration_ms": 42.907099996227771
+			},
+			"stats":
+			{
+				"tool_name": "create-blueprint-pattern",
+				"mutates": false,
+				"supports_batch": false,
+				"requires_game_thread": true,
+				"content_items": 0
+			}
+		}
+	}
+}

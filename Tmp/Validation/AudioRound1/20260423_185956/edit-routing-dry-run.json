@@ -1,0 +1,79 @@
+﻿{
+	"jsonrpc": "2.0",
+	"id": "edit-routing-dry-run",
+	"result":
+	{
+		"content": [
+			{
+				"type": "text",
+				"text": "Request succeeded"
+			}
+		],
+		"structuredContent":
+		{
+			"tool": "edit-sound-cue-routing",
+			"success": true,
+			"dry_run": true,
+			"asset_path": "/Game/UEBridgeMCPValidation/AudioRound1/SC_AudioRound1_20260423_185956",
+			"results": [
+				{
+					"index": 0,
+					"action": "set_random_waves",
+					"wave_count": 2,
+					"success": true,
+					"changed": true
+				},
+				{
+					"index": 1,
+					"action": "wrap_with_attenuation",
+					"success": true,
+					"changed": true
+				}
+			],
+			"warnings": [],
+			"summary":
+			{
+				"total": 2,
+				"succeeded": 2,
+				"failed": 0
+			},
+			"sound_cue":
+			{
+				"valid": true,
+				"asset_path": "/Game/UEBridgeMCPValidation/AudioRound1/SC_AudioRound1_20260423_185956.SC_AudioRound1_20260423_185956",
+				"volume_multiplier": 0.85000002384185791,
+				"pitch_multiplier": 1.0499999523162842,
+				"override_attenuation": false,
+				"root_node_class": "SoundNodeWavePlayer",
+				"has_root_node": true,
+				"root_node":
+				{
+					"valid": true,
+					"node_class": "SoundNodeWavePlayer",
+					"depth": 0,
+					"child_count": 0,
+					"node_type": "wave_player",
+					"sound_wave": "/Engine/EngineSounds/WhiteNoise.WhiteNoise",
+					"looping": false,
+					"children": []
+				}
+			},
+			"needs_save": false
+		},
+		"_meta":
+		{
+			"timing":
+			{
+				"duration_ms": 0.3651999868452549
+			},
+			"stats":
+			{
+				"tool_name": "edit-sound-cue-routing",
+				"mutates": true,
+				"supports_batch": false,
+				"requires_game_thread": true,
+				"content_items": 0
+			}
+		}
+	}
+}

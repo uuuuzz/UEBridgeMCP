@@ -1,0 +1,13 @@
+﻿{
+    "registered_count":  99,
+    "required_tools_present":  {
+                                   "create-blueprint-function":  true,
+                                   "create-blueprint-event":  true,
+                                   "edit-blueprint-function-signature":  true,
+                                   "manage-blueprint-interfaces":  true,
+                                   "layout-blueprint-graph":  true,
+                                   "query-blueprint-findings":  true
+                               },
+    "edit_blueprint_members_present":  true,
+    "edit_blueprint_graph_present":  true
+}

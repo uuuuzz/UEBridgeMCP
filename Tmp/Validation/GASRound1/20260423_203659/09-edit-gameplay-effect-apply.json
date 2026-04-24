@@ -1,0 +1,85 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "edit-ge",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Request succeeded"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "tool":  "edit-gameplay-effect-modifiers",
+                                             "success":  true,
+                                             "dry_run":  false,
+                                             "results":  [
+                                                             {
+                                                                 "index":  0,
+                                                                 "action":  "set_duration",
+                                                                 "success":  true,
+                                                                 "changed":  true
+                                                             },
+                                                             {
+                                                                 "index":  1,
+                                                                 "action":  "set_granted_tags",
+                                                                 "success":  true,
+                                                                 "changed":  true
+                                                             },
+                                                             {
+                                                                 "index":  2,
+                                                                 "action":  "add_modifier",
+                                                                 "success":  true,
+                                                                 "changed":  true
+                                                             }
+                                                         ],
+                                             "partial_results":  [
+
+                                                                 ],
+                                             "compile":  {
+                                                             "attempted":  true,
+                                                             "success":  true
+                                                         },
+                                             "summary":  {
+                                                             "asset_path":  "/Game/UEBridgeMCPValidation/GASRound1/GE_GASRound1_20260423_203659",
+                                                             "gas_type":  "gameplay_effect",
+                                                             "valid":  true,
+                                                             "class":  "/Engine/Transient.REINST_GE_GASRound1_20260423_203659_C_1",
+                                                             "duration_policy":  "has_duration",
+                                                             "duration_seconds":  7,
+                                                             "period":  1,
+                                                             "granted_tags":  [
+                                                                                  "State.UEBridgeMCP.Active"
+                                                                              ],
+                                                             "modifier_count":  2,
+                                                             "modifiers":  [
+                                                                               {
+                                                                                   "index":  0,
+                                                                                   "attribute":  "AS_GASRound1_20260423_203659_C.Health",
+                                                                                   "operation":  "additive",
+                                                                                   "magnitude":  -10,
+                                                                                   "magnitude_type":  "scalable_float"
+                                                                               },
+                                                                               {
+                                                                                   "index":  1,
+                                                                                   "attribute":  "AS_GASRound1_20260423_203659_C.Energy",
+                                                                                   "operation":  "override",
+                                                                                   "magnitude":  25,
+                                                                                   "magnitude_type":  "scalable_float"
+                                                                               }
+                                                                           ]
+                                                         }
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  25.530399987474084
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "edit-gameplay-effect-modifiers",
+                                               "mutates":  true,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  0
+                                           }
+                             }
+               }
+}

@@ -1,0 +1,16 @@
+[
+  {
+    "actor": "DirectionalLight",
+    "rot": [
+      -34.999999999999986,
+      0.0,
+      -49.99999999999999
+    ],
+    "light_source_angle": "0.5350000262260437",
+    "light_source_soft_angle": "0.0",
+    "intensity": "8.0",
+    "atmosphere_sun_light": "True",
+    "atmosphere_sun_light_index": "0",
+    "atmosphere_sun_disk_color_scale": "<Struct 'LinearColor' (0x000001DE640AE5A0) {r: 1.000000, g: 1.000000, b: 1.000000, a: 1.000000}>"
+  }
+]

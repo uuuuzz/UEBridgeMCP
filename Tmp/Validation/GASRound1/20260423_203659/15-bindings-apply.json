@@ -1,0 +1,33 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "bindings-apply",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "[UEBMCP_INVALID_ACTION] Class or Blueprint asset not found: /Game/UEBridgeMCPValidation/GASRound1/GA_GASRound1_20260423_203659"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "code":  "UEBMCP_INVALID_ACTION",
+                                             "message":  "Class or Blueprint asset not found: /Game/UEBridgeMCPValidation/GASRound1/GA_GASRound1_20260423_203659",
+                                             "details":  {
+                                                             "asset_path":  "/Game/UEBridgeMCPValidation/GASRound1/BP_GASRound1_20260423_203659",
+                                                             "failed_action_index":  1
+                                                         }
+                                         },
+                   "isError":  true,
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  4.7739000001456589
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "manage-ability-system-bindings",
+                                               "mutates":  true,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  1
+                                           }
+                             }
+               }
+}

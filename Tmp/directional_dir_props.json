@@ -1,0 +1,14 @@
+[
+  "atmosphere_sun_disk_color_scale",
+  "atmosphere_sun_light",
+  "atmosphere_sun_light_index",
+  "light_source_angle",
+  "light_source_soft_angle",
+  "set_atmosphere_sun_disk_color_scale",
+  "set_atmosphere_sun_light",
+  "set_atmosphere_sun_light_index",
+  "set_light_source_angle",
+  "set_light_source_soft_angle",
+  "set_shadow_source_angle_factor",
+  "shadow_source_angle_factor"
+]

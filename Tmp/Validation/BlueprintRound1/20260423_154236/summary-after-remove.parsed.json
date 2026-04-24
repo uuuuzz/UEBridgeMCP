@@ -1,0 +1,53 @@
+﻿{
+    "is_error":  false,
+    "text":  "Blueprint summary ready",
+    "structured":  null,
+    "raw":  {
+                "jsonrpc":  "2.0",
+                "id":  "118",
+                "result":  {
+                               "content":  [
+                                               {
+                                                   "type":  "text",
+                                                   "text":  "Blueprint summary ready"
+                                               }
+                                           ],
+                               "structuredContent":  {
+                                                         "name":  "BP_BlueprintRound1_20260423_154236",
+                                                         "asset_path":  "/Game/UEBridgeMCPValidation/BlueprintRound1/BP_BlueprintRound1_20260423_154236",
+                                                         "asset_handle":  {
+                                                                              "kind":  "asset",
+                                                                              "asset_path":  "/Game/UEBridgeMCPValidation/BlueprintRound1/BP_BlueprintRound1_20260423_154236",
+                                                                              "asset_class":  "Blueprint"
+                                                                          },
+                                                         "parent_class":  "/Script/Engine.Actor",
+                                                         "event_graph_count":  1,
+                                                         "function_count":  1,
+                                                         "macro_count":  0,
+                                                         "variable_count":  0,
+                                                         "component_count":  1,
+                                                         "function_names":  [
+                                                                                "UserConstructionScript"
+                                                                            ],
+                                                         "variable_names":  [
+
+                                                                            ],
+                                                         "component_names":  [
+                                                                                 "DefaultSceneRoot"
+                                                                             ]
+                                                     },
+                               "_meta":  {
+                                             "timing":  {
+                                                            "duration_ms":  0.03160000778734684
+                                                        },
+                                             "stats":  {
+                                                           "tool_name":  "query-blueprint-summary",
+                                                           "mutates":  false,
+                                                           "supports_batch":  false,
+                                                           "requires_game_thread":  true,
+                                                           "content_items":  1
+                                                       }
+                                         }
+                           }
+            }
+}

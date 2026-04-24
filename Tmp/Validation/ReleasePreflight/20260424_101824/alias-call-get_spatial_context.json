@@ -1,0 +1,114 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "9",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Spatial context ready"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "world_name":  "Untitled_1",
+                                             "world_path":  "/Temp/Untitled_1.Untitled_1",
+                                             "actors":  [
+                                                            {
+                                                                "name":  "WorldSettings",
+                                                                "label":  "WorldSettings-1",
+                                                                "class":  "/Script/Engine.WorldSettings",
+                                                                "object_path":  "/Temp/Untitled_1.Untitled_1:PersistentLevel.WorldSettings",
+                                                                "handle":  {
+                                                                               "kind":  "actor",
+                                                                               "session_id":  "E96C575D-4FED-F971-4531-58950A73013B",
+                                                                               "resource_path":  "/Temp/Untitled_1.Untitled_1",
+                                                                               "entity_id":  "/Temp/Untitled_1.Untitled_1:PersistentLevel.WorldSettings",
+                                                                               "display_name":  "WorldSettings-1"
+                                                                           },
+                                                                "transform":  {
+                                                                                  "location":  [
+                                                                                                   0,
+                                                                                                   0,
+                                                                                                   0
+                                                                                               ],
+                                                                                  "rotation":  [
+                                                                                                   0,
+                                                                                                   0,
+                                                                                                   0
+                                                                                               ],
+                                                                                  "scale":  [
+                                                                                                1,
+                                                                                                1,
+                                                                                                1
+                                                                                            ]
+                                                                              },
+                                                                "bounds":  {
+                                                                               "origin":  [
+                                                                                              0,
+                                                                                              0,
+                                                                                              0
+                                                                                          ],
+                                                                               "box_extent":  [
+                                                                                                  0,
+                                                                                                  0,
+                                                                                                  0
+                                                                                              ],
+                                                                               "box_min":  [
+                                                                                               0,
+                                                                                               0,
+                                                                                               0
+                                                                                           ],
+                                                                               "box_max":  [
+                                                                                               0,
+                                                                                               0,
+                                                                                               0
+                                                                                           ],
+                                                                               "sphere_radius":  0
+                                                                           },
+                                                                "pivot_location":  [
+                                                                                       0,
+                                                                                       0,
+                                                                                       0
+                                                                                   ]
+                                                            }
+                                                        ],
+                                             "aggregate_bounds":  {
+                                                                      "origin":  [
+                                                                                     0,
+                                                                                     0,
+                                                                                     0
+                                                                                 ],
+                                                                      "box_extent":  [
+                                                                                         0,
+                                                                                         0,
+                                                                                         0
+                                                                                     ],
+                                                                      "box_min":  [
+                                                                                      0,
+                                                                                      0,
+                                                                                      0
+                                                                                  ],
+                                                                      "box_max":  [
+                                                                                      0,
+                                                                                      0,
+                                                                                      0
+                                                                                  ],
+                                                                      "sphere_radius":  0
+                                                                  }
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  0.065100000938400626
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "query-spatial-context",
+                                               "requested_tool_name":  "get_spatial_context",
+                                               "compatibility_alias":  true,
+                                               "compatibility_arguments_adapted":  false,
+                                               "mutates":  false,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  1
+                                           }
+                             }
+               }
+}

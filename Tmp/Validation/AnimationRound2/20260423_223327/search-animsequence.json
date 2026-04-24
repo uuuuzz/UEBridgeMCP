@@ -1,0 +1,45 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "304",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Content class search complete"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "class":  "AnimSequence",
+                                             "query":  "",
+                                             "results":  [
+                                                             {
+                                                                 "kind":  "asset",
+                                                                 "name":  "VLD_Tutorial_Idle",
+                                                                 "path":  "/Game/UEBridgeMCPValidation/Step6/Animations/VLD_Tutorial_Idle.VLD_Tutorial_Idle",
+                                                                 "package":  "/Game/UEBridgeMCPValidation/Step6/Animations/VLD_Tutorial_Idle",
+                                                                 "package_path":  "/Game/UEBridgeMCPValidation/Step6/Animations",
+                                                                 "class":  "AnimSequence",
+                                                                 "class_path":  "/Script/Engine.AnimSequence",
+                                                                 "score":  1
+                                                             }
+                                                         ],
+                                             "count":  1,
+                                             "total_matches":  1,
+                                             "scanned":  1,
+                                             "truncated":  false,
+                                             "class_filter_resolved":  true
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  0.058499979786574841
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "search-content-by-class",
+                                               "mutates":  false,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  1
+                                           }
+                             }
+               }
+}

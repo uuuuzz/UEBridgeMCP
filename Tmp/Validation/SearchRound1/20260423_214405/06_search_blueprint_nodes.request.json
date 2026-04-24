@@ -1,0 +1,15 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "search_blueprint_nodes",
+    "method":  "tools/call",
+    "params":  {
+                   "name":  "search-blueprint-symbols",
+                   "arguments":  {
+                                     "query":  "RequestToggle",
+                                     "path":  "/Game/UEBridgeMCPValidation/SearchRound1",
+                                     "include_nodes":  true,
+                                     "limit":  10,
+                                     "max_blueprints":  50
+                                 }
+               }
+}

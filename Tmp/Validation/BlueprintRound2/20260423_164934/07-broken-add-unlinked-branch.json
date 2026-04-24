@@ -1,0 +1,59 @@
+{
+    "jsonrpc":  "2.0",
+    "id":  "tool-0131c72f10704c7fbe95387c348c2ff1",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Blueprint graph edit complete"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "asset_path":  "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Broken_20260423_164934",
+                                             "asset_handle":  {
+                                                                  "kind":  "asset",
+                                                                  "asset_path":  "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Broken_20260423_164934",
+                                                                  "asset_class":  "Blueprint"
+                                                              },
+                                             "results":  [
+                                                             {
+                                                                 "op":  "add_branch",
+                                                                 "index":  0,
+                                                                 "alias":  "loose_branch",
+                                                                 "node_guid":  "6DA202E9-473F-66A0-1CE2-83B14440E8E7",
+                                                                 "handle":  {
+                                                                                "kind":  "blueprint_node",
+                                                                                "session_id":  "0957FC28-459D-9FC2-7A71-9AB4A7857A4B",
+                                                                                "resource_path":  "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Broken_20260423_164934",
+                                                                                "entity_id":  "6DA202E9-473F-66A0-1CE2-83B14440E8E7",
+                                                                                "display_name":  "Branch"
+                                                                            },
+                                                                 "node_class":  "K2Node_IfThenElse",
+                                                                 "graph_name":  "EventGraph",
+                                                                 "success":  true
+                                                             }
+                                                         ],
+                                             "partial_results":  [
+
+                                                                 ],
+                                             "summary":  {
+                                                             "total_operations":  1,
+                                                             "failed_operations":  0,
+                                                             "compiled":  false,
+                                                             "saved":  false
+                                                         }
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  2.7817999944090843
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "edit-blueprint-graph",
+                                               "mutates":  true,
+                                               "supports_batch":  true,
+                                               "requires_game_thread":  true,
+                                               "content_items":  1
+                                           }
+                             }
+               }
+}

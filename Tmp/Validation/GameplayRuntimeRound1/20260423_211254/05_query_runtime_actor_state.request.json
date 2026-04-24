@@ -1,0 +1,1 @@
+{"method":"tools/call","params":{"arguments":{"include":["metadata","transform","velocity","tags","components","collision"],"world":"editor","actor_name":"UEBridgeMCP_RuntimeRound1_20260423_211254"},"name":"query-runtime-actor-state"},"id":"05_query_runtime_actor_state","jsonrpc":"2.0"}

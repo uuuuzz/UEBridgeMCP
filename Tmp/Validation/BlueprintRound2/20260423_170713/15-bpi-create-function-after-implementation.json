@@ -1,0 +1,54 @@
+﻿{
+	"jsonrpc": "2.0",
+	"id": "15-bpi-create-function-after-implementation",
+	"result":
+	{
+		"content": [
+			{
+				"type": "text",
+				"text": "[UEBMCP_INVALID_ACTION] Type descriptor missing 'kind' field"
+			}
+		],
+		"structuredContent":
+		{
+			"code": "UEBMCP_INVALID_ACTION",
+			"message": "Type descriptor missing 'kind' field",
+			"details":
+			{
+				"asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound2/BPI_R2_Interface_20260423_170713",
+				"failed_action_index": 0,
+				"action": "create_function"
+			},
+			"partial_result":
+			{
+				"results": [],
+				"partial_results": [
+					{
+						"action": "create_function",
+						"name": "Round2InterfaceCheck",
+						"index": 0,
+						"success": false,
+						"error": "Type descriptor missing 'kind' field",
+						"code": "UEBMCP_INVALID_ACTION"
+					}
+				]
+			}
+		},
+		"isError": true,
+		"_meta":
+		{
+			"timing":
+			{
+				"duration_ms": 2.8888999950140715
+			},
+			"stats":
+			{
+				"tool_name": "create-blueprint-function",
+				"mutates": false,
+				"supports_batch": false,
+				"requires_game_thread": true,
+				"content_items": 1
+			}
+		}
+	}
+}

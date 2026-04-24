@@ -1,0 +1,33 @@
+{
+	"jsonrpc": "2.0",
+	"id": "12_pie_stop_state_0",
+	"result":
+	{
+		"content": [
+			{
+				"type": "text",
+				"text": "Structured result ready"
+			}
+		],
+		"structuredContent":
+		{
+			"running": false,
+			"state": "not_running"
+		},
+		"_meta":
+		{
+			"timing":
+			{
+				"duration_ms": 0.0090999819803982973
+			},
+			"stats":
+			{
+				"tool_name": "pie-session",
+				"mutates": false,
+				"supports_batch": false,
+				"requires_game_thread": true,
+				"content_items": 1
+			}
+		}
+	}
+}

@@ -1,0 +1,1 @@
+{"method":"tools/call","params":{"arguments":{"asset_path":"/Game/UEBridgeMCPValidation/GameplayRuntimeRound1/BP_GameplayRuntimePIE_20260423_211350","save":true,"actions":[{"component_name":"AbilitySystem","action":"add_ability_system_component","replication_mode":"mixed"}],"compile":true},"name":"manage-ability-system-bindings"},"id":"03_add_asc","jsonrpc":"2.0"}

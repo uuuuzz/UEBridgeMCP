@@ -11,6 +11,7 @@ class UEdGraph;
 class UK2Node_EditablePinBase;
 class UK2Node_FunctionEntry;
 class UK2Node_FunctionResult;
+struct FBPVariableDescription;
 struct FEdGraphPinType;
 struct FKismetUserDeclaredFunctionMetadata;
 
@@ -45,6 +46,10 @@ private:
 	bool RenameVariable(UBlueprint* Blueprint, const TSharedPtr<FJsonObject>& Action, TSharedPtr<FJsonObject>& OutResult, FString& OutError);
 	bool DeleteVariable(UBlueprint* Blueprint, const TSharedPtr<FJsonObject>& Action, TSharedPtr<FJsonObject>& OutResult, FString& OutError);
 	bool SetVariableProperties(UBlueprint* Blueprint, const TSharedPtr<FJsonObject>& Action, TSharedPtr<FJsonObject>& OutResult, FString& OutError);
+	bool CreateLocalVariable(UBlueprint* Blueprint, const TSharedPtr<FJsonObject>& Action, TSharedPtr<FJsonObject>& OutResult, FString& OutError);
+	bool RenameLocalVariable(UBlueprint* Blueprint, const TSharedPtr<FJsonObject>& Action, TSharedPtr<FJsonObject>& OutResult, FString& OutError);
+	bool DeleteLocalVariable(UBlueprint* Blueprint, const TSharedPtr<FJsonObject>& Action, TSharedPtr<FJsonObject>& OutResult, FString& OutError);
+	bool SetLocalVariableProperties(UBlueprint* Blueprint, const TSharedPtr<FJsonObject>& Action, TSharedPtr<FJsonObject>& OutResult, FString& OutError);
 
 	bool CreateFunction(UBlueprint* Blueprint, const TSharedPtr<FJsonObject>& Action, TSharedPtr<FJsonObject>& OutResult, FString& OutError);
 	bool RenameFunction(UBlueprint* Blueprint, const TSharedPtr<FJsonObject>& Action, TSharedPtr<FJsonObject>& OutResult, FString& OutError);
@@ -52,16 +57,22 @@ private:
 	bool SetFunctionSignature(UBlueprint* Blueprint, const TSharedPtr<FJsonObject>& Action, TSharedPtr<FJsonObject>& OutResult, FString& OutError);
 
 	bool CreateEventDispatcher(UBlueprint* Blueprint, const TSharedPtr<FJsonObject>& Action, TSharedPtr<FJsonObject>& OutResult, FString& OutError);
+	bool AddInterface(UBlueprint* Blueprint, const TSharedPtr<FJsonObject>& Action, TSharedPtr<FJsonObject>& OutResult, FString& OutError);
+	bool RemoveInterface(UBlueprint* Blueprint, const TSharedPtr<FJsonObject>& Action, TSharedPtr<FJsonObject>& OutResult, FString& OutError);
 
 	static bool ParseTypeDescriptor(const TSharedPtr<FJsonObject>& TypeObj, FEdGraphPinType& OutPinType, FString& OutError);
 	static FString JsonValueToDefaultString(const TSharedPtr<FJsonValue>& JsonValue, const FEdGraphPinType& PinType);
 	static bool GetFunctionNodes(UEdGraph* Graph, UK2Node_FunctionEntry*& OutEntryNode, UK2Node_FunctionResult*& OutResultNode, FString& OutError);
 	static bool ApplyVariableActionSettings(UBlueprint* Blueprint, const FName VarName, const TSharedPtr<FJsonObject>& Action, bool bAllowTypeChange, FString& OutError);
 	static bool ApplyFunctionActionSettings(UEdGraph* Graph, const TSharedPtr<FJsonObject>& Action, bool bAllowOutputs, FString& OutError);
+	static bool ApplyLocalVariableActionSettings(UBlueprint* Blueprint, UEdGraph* Graph, const FName VarName, const TSharedPtr<FJsonObject>& Action, bool bAllowTypeChange, FString& OutError);
 	static bool SynchronizeUserDefinedPins(UK2Node_EditablePinBase* EditableNode, const TArray<TSharedPtr<FJsonValue>>* PinDescriptors, EEdGraphPinDirection PinDirection, FString& OutError);
 	static bool ApplyFunctionMetadataObject(FKismetUserDeclaredFunctionMetadata& FunctionMetaData, const TSharedPtr<FJsonObject>& MetadataObject, FString& OutError);
 	static void ApplyVariableMetadataObject(UBlueprint* Blueprint, const FName VarName, const TSharedPtr<FJsonObject>& MetadataObject);
+	static void ApplyVariableMetadataObject(FBPVariableDescription& VariableDescription, const TSharedPtr<FJsonObject>& MetadataObject);
 	static void SetOrClearBlueprintVariableMetaData(UBlueprint* Blueprint, const FName VarName, const FName MetaDataKey, bool bShouldSet, const FString& EnabledValue = TEXT("true"));
 	static void SetOrClearBlueprintVariableMetaData(UBlueprint* Blueprint, const FName VarName, const FName MetaDataKey, const FString& Value);
+	static void SetOrClearVariableDescriptionMetaData(FBPVariableDescription& VariableDescription, const FName MetaDataKey, bool bShouldSet, const FString& EnabledValue = TEXT("true"));
+	static void SetOrClearVariableDescriptionMetaData(FBPVariableDescription& VariableDescription, const FName MetaDataKey, const FString& Value);
 	static bool ConvertMetadataValueToString(const TSharedPtr<FJsonValue>& JsonValue, FString& OutString);
 };

@@ -1,0 +1,66 @@
+{
+	"jsonrpc": "2.0",
+	"id": "03_add_asc",
+	"result":
+	{
+		"content": [
+			{
+				"type": "text",
+				"text": "Request succeeded"
+			}
+		],
+		"structuredContent":
+		{
+			"tool": "manage-ability-system-bindings",
+			"success": true,
+			"dry_run": false,
+			"results": [
+				{
+					"index": 0,
+					"action": "add_ability_system_component",
+					"component_name": "AbilitySystem",
+					"component_class": "/Script/GameplayAbilities.AbilitySystemComponent",
+					"replication_mode": "mixed",
+					"success": true,
+					"changed": true
+				}
+			],
+			"partial_results": [],
+			"compile":
+			{
+				"attempted": true,
+				"success": true
+			},
+			"summary":
+			{
+				"asset_path": "/Game/UEBridgeMCPValidation/GameplayRuntimeRound1/BP_GameplayRuntimePIE_20260423_211350",
+				"gas_type": "actor_bindings",
+				"valid": true,
+				"ability_system_component_count": 1,
+				"ability_system_components": [
+					{
+						"name": "AbilitySystem",
+						"class": "/Script/GameplayAbilities.AbilitySystemComponent"
+					}
+				],
+				"binding_variable_count": 0,
+				"binding_variables": []
+			}
+		},
+		"_meta":
+		{
+			"timing":
+			{
+				"duration_ms": 27.822899981401861
+			},
+			"stats":
+			{
+				"tool_name": "manage-ability-system-bindings",
+				"mutates": true,
+				"supports_batch": false,
+				"requires_game_thread": true,
+				"content_items": 0
+			}
+		}
+	}
+}

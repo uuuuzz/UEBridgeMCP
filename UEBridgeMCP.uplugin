@@ -18,11 +18,26 @@
 	"Modules": [
 		{
 			"Name": "UEBridgeMCP",
-			"Type": "Runtime",
+			"Type": "Editor",
 			"LoadingPhase": "Default"
 		},
 		{
 			"Name": "UEBridgeMCPEditor",
+			"Type": "Editor",
+			"LoadingPhase": "PostEngineInit"
+		},
+		{
+			"Name": "UEBridgeMCPControlRig",
+			"Type": "Editor",
+			"LoadingPhase": "PostEngineInit"
+		},
+		{
+			"Name": "UEBridgeMCPPCG",
+			"Type": "Editor",
+			"LoadingPhase": "PostEngineInit"
+		},
+		{
+			"Name": "UEBridgeMCPExternalAI",
 			"Type": "Editor",
 			"LoadingPhase": "PostEngineInit"
 		}
@@ -37,6 +52,10 @@
 			"Enabled": true
 		},
 		{
+			"Name": "EnhancedInput",
+			"Enabled": true
+		},
+		{
 			"Name": "StateTree",
 			"Enabled": true
 		},
@@ -46,6 +65,26 @@
 		},
 		{
 			"Name": "PythonScriptPlugin",
+			"Enabled": true,
+			"Optional": true
+		},
+		{
+			"Name": "ControlRig",
+			"Enabled": true,
+			"Optional": true
+		},
+		{
+			"Name": "PCG",
+			"Enabled": true,
+			"Optional": true
+		},
+		{
+			"Name": "Niagara",
+			"Enabled": true,
+			"Optional": true
+		},
+		{
+			"Name": "Metasound",
 			"Enabled": true,
 			"Optional": true
 		}

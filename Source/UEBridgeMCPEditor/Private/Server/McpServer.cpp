@@ -3,6 +3,8 @@
 #include "Server/McpServer.h"
 #include "UEBridgeMCPEditor.h"
 #include "UEBridgeMCP.h"
+#include "Protocol/McpPromptRegistry.h"
+#include "Protocol/McpResourceRegistry.h"
 #include "Tools/McpToolRegistry.h"
 #include "HttpServerModule.h"
 #include "HttpPath.h"
@@ -12,14 +14,119 @@
 #include "HAL/PlatformProcess.h"
 #include "HAL/ThreadSafeBool.h"
 #include "Session/McpEditorSessionManager.h"
+#include "Dom/JsonObject.h"
+#include "Dom/JsonValue.h"
+#include "Serialization/JsonSerializer.h"
+#include "Serialization/JsonWriter.h"
+
+namespace
+{
+	FString Utf8BodyToString(const TArray<uint8>& Body)
+	{
+		if (Body.Num() == 0)
+		{
+			return FString();
+		}
+
+		FUTF8ToTCHAR Convert(reinterpret_cast<const ANSICHAR*>(Body.GetData()), Body.Num());
+		return FString(Convert.Length(), Convert.Get());
+	}
+
+	bool IsSensitiveJsonKey(const FString& Key)
+	{
+		const FString LowerKey = Key.ToLower();
+		return LowerKey.Contains(TEXT("api_key"))
+			|| LowerKey.Contains(TEXT("apikey"))
+			|| LowerKey.Contains(TEXT("authorization"))
+			|| LowerKey.Contains(TEXT("auth_token"))
+			|| LowerKey.Contains(TEXT("access_token"))
+			|| LowerKey.Contains(TEXT("refresh_token"))
+			|| LowerKey.Contains(TEXT("password"))
+			|| LowerKey.Contains(TEXT("secret"));
+	}
+
+	void RedactSensitiveJsonValue(const TSharedPtr<FJsonValue>& Value);
+
+	void RedactSensitiveJsonObject(const TSharedPtr<FJsonObject>& Object)
+	{
+		if (!Object.IsValid())
+		{
+			return;
+		}
+
+		for (TPair<FString, TSharedPtr<FJsonValue>>& Pair : Object->Values)
+		{
+			if (IsSensitiveJsonKey(Pair.Key))
+			{
+				Pair.Value = MakeShareable(new FJsonValueString(TEXT("<redacted>")));
+			}
+			else
+			{
+				RedactSensitiveJsonValue(Pair.Value);
+			}
+		}
+	}
+
+	void RedactSensitiveJsonValue(const TSharedPtr<FJsonValue>& Value)
+	{
+		if (!Value.IsValid())
+		{
+			return;
+		}
+
+		if (Value->Type == EJson::Object)
+		{
+			RedactSensitiveJsonObject(Value->AsObject());
+		}
+		else if (Value->Type == EJson::Array)
+		{
+			for (const TSharedPtr<FJsonValue>& Child : Value->AsArray())
+			{
+				RedactSensitiveJsonValue(Child);
+			}
+		}
+	}
+
+	FString RedactSensitiveJsonText(const FString& JsonText)
+	{
+		TSharedPtr<FJsonObject> Object;
+		TSharedRef<TJsonReader<>> Reader = TJsonReaderFactory<>::Create(JsonText);
+		if (FJsonSerializer::Deserialize(Reader, Object) && Object.IsValid())
+		{
+			RedactSensitiveJsonObject(Object);
+
+			FString Output;
+			TSharedRef<TJsonWriter<>> Writer = TJsonWriterFactory<>::Create(&Output);
+			FJsonSerializer::Serialize(Object.ToSharedRef(), Writer);
+			return Output;
+		}
+
+		TArray<TSharedPtr<FJsonValue>> Array;
+		TSharedRef<TJsonReader<>> ArrayReader = TJsonReaderFactory<>::Create(JsonText);
+		if (FJsonSerializer::Deserialize(ArrayReader, Array))
+		{
+			for (const TSharedPtr<FJsonValue>& Value : Array)
+			{
+				RedactSensitiveJsonValue(Value);
+			}
+
+			FString Output;
+			TSharedRef<TJsonWriter<>> Writer = TJsonWriterFactory<>::Create(&Output);
+			FJsonSerializer::Serialize(Array, Writer);
+			return Output;
+		}
+
+		return JsonText;
+	}
+}
 
 FMcpServer::FMcpServer()
 {
 	// Initialize capabilities
 	Capabilities.bSupportsTools = true;
 	Capabilities.bToolsListChanged = false;
-	Capabilities.bSupportsResources = false;
-	Capabilities.bSupportsPrompts = false;
+	Capabilities.bSupportsResources = true;
+	Capabilities.bSupportsPrompts = true;
 	Capabilities.bSupportsLogging = false;
 
 	// Initialize server info
@@ -145,8 +252,8 @@ bool FMcpServer::HandleMcpRequest(const FHttpServerRequest& Request, const FHttp
 	}
 	if (Request.Body.Num() > 0)
 	{
-		FString BodyString = FString(UTF8_TO_TCHAR(reinterpret_cast<const char*>(Request.Body.GetData())));
-		UE_LOG(LogUEBridgeMCPEditor, Log, TEXT("  Body: %s"), *BodyString);
+		const FString BodyString = RedactSensitiveJsonText(Utf8BodyToString(Request.Body));
+		UE_LOG(LogUEBridgeMCPEditor, Verbose, TEXT("  Body: %s"), *BodyString);
 	}
 
 	// Handle CORS preflight
@@ -230,8 +337,7 @@ bool FMcpServer::HandleMcpRequest(const FHttpServerRequest& Request, const FHttp
 	if (Request.Body.Num() > 0)
 	{
 		// Convert binary data to string with explicit length to avoid reading garbage bytes
-		FUTF8ToTCHAR Convert(reinterpret_cast<const ANSICHAR*>(Request.Body.GetData()), Request.Body.Num());
-		Body = FString(Convert.Length(), Convert.Get());
+		Body = Utf8BodyToString(Request.Body);
 	}
 
 	if (Body.IsEmpty())
@@ -240,7 +346,8 @@ bool FMcpServer::HandleMcpRequest(const FHttpServerRequest& Request, const FHttp
 		return true;
 	}
 
-	UE_LOG(LogUEBridgeMCPEditor, Verbose, TEXT("MCP Request: %s"), *Body);
+	const FString RedactedRequestBody = RedactSensitiveJsonText(Body);
+	UE_LOG(LogUEBridgeMCPEditor, Verbose, TEXT("MCP Request: %s"), *RedactedRequestBody);
 
 	// Parse JSON-RPC request
 	TOptional<FMcpRequest> ParsedRequest = FMcpRequest::FromJsonString(Body);
@@ -429,6 +536,18 @@ FMcpResponse FMcpServer::ProcessRequest(const FMcpRequest& Request)
 	case EMcpMethod::ToolsCall:
 		return HandleToolsCall(Request);
 
+	case EMcpMethod::ResourcesList:
+		return HandleResourcesList(Request);
+
+	case EMcpMethod::ResourcesRead:
+		return HandleResourcesRead(Request);
+
+	case EMcpMethod::PromptsList:
+		return HandlePromptsList(Request);
+
+	case EMcpMethod::PromptsGet:
+		return HandlePromptsGet(Request);
+
 	case EMcpMethod::Shutdown:
 		bInitialized = false;
 		if (!CurrentSessionId.IsEmpty())
@@ -470,6 +589,7 @@ FMcpResponse FMcpServer::HandleInitialize(const FMcpRequest& Request)
 		*ClientInfo.Name, *ClientInfo.Version);
 
 	// Build response
+	Capabilities.RegisteredToolCount = FMcpToolRegistry::Get().GetToolCount();
 	TSharedPtr<FJsonObject> Result = MakeShareable(new FJsonObject);
 	Result->SetStringField(TEXT("protocolVersion"), MCP_PROTOCOL_VERSION);
 	Result->SetObjectField(TEXT("capabilities"), Capabilities.ToJson());
@@ -480,6 +600,7 @@ FMcpResponse FMcpServer::HandleInitialize(const FMcpRequest& Request)
 
 FMcpResponse FMcpServer::HandleToolsList(const FMcpRequest& Request)
 {
+	Capabilities.RegisteredToolCount = FMcpToolRegistry::Get().GetToolCount();
 	TArray<FMcpToolDefinition> Tools = FMcpToolRegistry::Get().GetAllToolDefinitions();
 
 	TArray<TSharedPtr<FJsonValue>> ToolsArray;
@@ -492,6 +613,89 @@ FMcpResponse FMcpServer::HandleToolsList(const FMcpRequest& Request)
 	Result->SetArrayField(TEXT("tools"), ToolsArray);
 
 	return FMcpResponse::Success(Request.Id, Result);
+}
+
+FMcpResponse FMcpServer::HandleResourcesList(const FMcpRequest& Request)
+{
+	TArray<FMcpResourceDefinition> Definitions = FMcpResourceRegistry::Get().GetAllResourceDefinitions();
+
+	TArray<TSharedPtr<FJsonValue>> ResourcesArray;
+	for (const FMcpResourceDefinition& Definition : Definitions)
+	{
+		ResourcesArray.Add(MakeShareable(new FJsonValueObject(Definition.ToJson())));
+	}
+
+	TSharedPtr<FJsonObject> Result = MakeShareable(new FJsonObject);
+	Result->SetArrayField(TEXT("resources"), ResourcesArray);
+	return FMcpResponse::Success(Request.Id, Result);
+}
+
+FMcpResponse FMcpServer::HandleResourcesRead(const FMcpRequest& Request)
+{
+	if (!Request.Params.IsValid())
+	{
+		return FMcpResponse::Error(Request.Id, EMcpErrorCode::InvalidParams, TEXT("Missing params"));
+	}
+
+	FString Uri;
+	if (!Request.Params->TryGetStringField(TEXT("uri"), Uri) || Uri.IsEmpty())
+	{
+		return FMcpResponse::Error(Request.Id, EMcpErrorCode::InvalidParams, TEXT("Missing resource uri"));
+	}
+
+	FMcpResourceReadResult ReadResult;
+	FString ReadError;
+	if (!FMcpResourceRegistry::Get().ReadResource(Uri, ReadResult, ReadError))
+	{
+		return FMcpResponse::Error(Request.Id, EMcpErrorCode::InvalidParams, ReadError);
+	}
+
+	return FMcpResponse::Success(Request.Id, ReadResult.ToJson());
+}
+
+FMcpResponse FMcpServer::HandlePromptsList(const FMcpRequest& Request)
+{
+	TArray<FMcpPromptDefinition> Definitions = FMcpPromptRegistry::Get().GetAllPromptDefinitions();
+
+	TArray<TSharedPtr<FJsonValue>> PromptsArray;
+	for (const FMcpPromptDefinition& Definition : Definitions)
+	{
+		PromptsArray.Add(MakeShareable(new FJsonValueObject(Definition.ToJson())));
+	}
+
+	TSharedPtr<FJsonObject> Result = MakeShareable(new FJsonObject);
+	Result->SetArrayField(TEXT("prompts"), PromptsArray);
+	return FMcpResponse::Success(Request.Id, Result);
+}
+
+FMcpResponse FMcpServer::HandlePromptsGet(const FMcpRequest& Request)
+{
+	if (!Request.Params.IsValid())
+	{
+		return FMcpResponse::Error(Request.Id, EMcpErrorCode::InvalidParams, TEXT("Missing params"));
+	}
+
+	FString Name;
+	if (!Request.Params->TryGetStringField(TEXT("name"), Name) || Name.IsEmpty())
+	{
+		return FMcpResponse::Error(Request.Id, EMcpErrorCode::InvalidParams, TEXT("Missing prompt name"));
+	}
+
+	TSharedPtr<FJsonObject> Arguments = MakeShareable(new FJsonObject);
+	const TSharedPtr<FJsonObject>* ArgumentsObject = nullptr;
+	if (Request.Params->TryGetObjectField(TEXT("arguments"), ArgumentsObject) && ArgumentsObject && (*ArgumentsObject).IsValid())
+	{
+		Arguments = *ArgumentsObject;
+	}
+
+	FMcpPromptGetResult PromptResult;
+	FString BuildError;
+	if (!FMcpPromptRegistry::Get().BuildPrompt(Name, Arguments, PromptResult, BuildError))
+	{
+		return FMcpResponse::Error(Request.Id, EMcpErrorCode::InvalidParams, BuildError);
+	}
+
+	return FMcpResponse::Success(Request.Id, PromptResult.ToJson());
 }
 
 FMcpResponse FMcpServer::HandleToolsCall(const FMcpRequest& Request)
@@ -542,7 +746,8 @@ void FMcpServer::SendResponse(const FHttpResultCallback& OnComplete, const FMcpR
 
 	UE_LOG(LogUEBridgeMCPEditor, Log, TEXT("=== MCP Response ==="));
 	UE_LOG(LogUEBridgeMCPEditor, Log, TEXT("  Status Code: %d"), StatusCode);
-	UE_LOG(LogUEBridgeMCPEditor, Log, TEXT("  Body: %s"), *JsonString);
+	const FString RedactedResponseBody = RedactSensitiveJsonText(JsonString);
+	UE_LOG(LogUEBridgeMCPEditor, Verbose, TEXT("  Body: %s"), *RedactedResponseBody);
 
 	TUniquePtr<FHttpServerResponse> HttpResponse = FHttpServerResponse::Create(JsonString, TEXT("application/json"));
 	HttpResponse->Headers.Add(TEXT("Access-Control-Allow-Origin"), {TEXT("*")});

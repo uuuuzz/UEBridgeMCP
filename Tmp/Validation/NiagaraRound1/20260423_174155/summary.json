@@ -1,0 +1,33 @@
+﻿{
+    "timestamp":  "20260423_174155",
+    "evidence_dir":  "G:\\UEProjects\\UEBridgeMCP\\Tmp\\Validation\\NiagaraRound1\\20260423_174155",
+    "assets":  {
+                   "system":  "/Game/UEBridgeMCPValidation/NiagaraRound1/NS_NiagaraRound1_20260423_174155"
+               },
+    "actor":  "NiagaraRound1Actor_20260423_174155",
+    "tools_visible":  {
+                          "query-niagara-emitter-summary":  true,
+                          "create-niagara-system-from-template":  true,
+                          "apply-niagara-system-to-actor":  true,
+                          "analyze-blueprint-compile-results":  true,
+                          "create-blueprint-pattern":  true,
+                          "query-niagara-system-summary":  true,
+                          "apply-blueprint-fixups":  true,
+                          "edit-niagara-user-parameters":  true
+                      },
+    "optional_niagara_available":  true,
+    "create_success":  null,
+    "query_user_parameter_count_before":  null,
+    "edit_dry_run":  null,
+    "edit_success":  null,
+    "query_user_parameter_count_after":  null,
+    "invalid_error_code":  "UEBMCP_MISSING_REQUIRED_FIELD",
+    "emitter_missing_code":  "UEBMCP_MISSING_REQUIRED_FIELD",
+    "apply_success":  null,
+    "component_name":  null,
+    "warnings":  {
+                     "create":  0,
+                     "edit":  0,
+                     "apply":  0
+                 }
+}

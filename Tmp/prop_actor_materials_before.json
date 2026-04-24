@@ -1,0 +1,290 @@
+[
+  {
+    "label": "Grid_0_0",
+    "class": "StaticMeshActor",
+    "loc": [
+      -600.0,
+      -600.0,
+      100.0
+    ],
+    "mats": [
+      "/Game/Materials/MI_Grid_Red.MI_Grid_Red"
+    ]
+  },
+  {
+    "label": "Grid_0_1",
+    "class": "StaticMeshActor",
+    "loc": [
+      -200.0,
+      -600.0,
+      100.0
+    ],
+    "mats": [
+      "/Game/Materials/MI_Grid_Orange.MI_Grid_Orange"
+    ]
+  },
+  {
+    "label": "Grid_0_2",
+    "class": "StaticMeshActor",
+    "loc": [
+      200.0,
+      -600.0,
+      100.0
+    ],
+    "mats": [
+      "/Game/Materials/MI_Grid_Yellow.MI_Grid_Yellow"
+    ]
+  },
+  {
+    "label": "Grid_1_0",
+    "class": "StaticMeshActor",
+    "loc": [
+      -600.0,
+      -200.0,
+      100.0
+    ],
+    "mats": [
+      "/Game/Materials/MI_Grid_Orange.MI_Grid_Orange"
+    ]
+  },
+  {
+    "label": "Grid_1_1",
+    "class": "StaticMeshActor",
+    "loc": [
+      -200.0,
+      -200.0,
+      100.0
+    ],
+    "mats": [
+      "/Game/Materials/MI_Grid_Yellow.MI_Grid_Yellow"
+    ]
+  },
+  {
+    "label": "Grid_1_2",
+    "class": "StaticMeshActor",
+    "loc": [
+      200.0,
+      -200.0,
+      100.0
+    ],
+    "mats": [
+      "/Game/Materials/MI_Grid_Red.MI_Grid_Red"
+    ]
+  },
+  {
+    "label": "Grid_2_0",
+    "class": "StaticMeshActor",
+    "loc": [
+      -600.0,
+      200.0,
+      100.0
+    ],
+    "mats": [
+      "/Game/Materials/MI_Grid_Yellow.MI_Grid_Yellow"
+    ]
+  },
+  {
+    "label": "Grid_2_1",
+    "class": "StaticMeshActor",
+    "loc": [
+      -200.0,
+      200.0,
+      100.0
+    ],
+    "mats": [
+      "/Game/Materials/MI_Grid_Red.MI_Grid_Red"
+    ]
+  },
+  {
+    "label": "Grid_2_2",
+    "class": "StaticMeshActor",
+    "loc": [
+      200.0,
+      200.0,
+      100.0
+    ],
+    "mats": [
+      "/Game/Materials/MI_Grid_Orange.MI_Grid_Orange"
+    ]
+  },
+  {
+    "label": "Step_0",
+    "class": "StaticMeshActor",
+    "loc": [
+      900.0,
+      -300.0,
+      50.0
+    ],
+    "mats": [
+      "/Game/Materials/MI_Stair_Blue.MI_Stair_Blue"
+    ]
+  },
+  {
+    "label": "Step_1",
+    "class": "StaticMeshActor",
+    "loc": [
+      1040.0,
+      -300.0,
+      100.0
+    ],
+    "mats": [
+      "/Game/Materials/MI_Stair_Blue.MI_Stair_Blue"
+    ]
+  },
+  {
+    "label": "Step_2",
+    "class": "StaticMeshActor",
+    "loc": [
+      1180.0,
+      -300.0,
+      150.0
+    ],
+    "mats": [
+      "/Game/Materials/MI_Stair_Blue.MI_Stair_Blue"
+    ]
+  },
+  {
+    "label": "Step_3",
+    "class": "StaticMeshActor",
+    "loc": [
+      1320.0,
+      -300.0,
+      200.0
+    ],
+    "mats": [
+      "/Game/Materials/MI_Stair_Blue.MI_Stair_Blue"
+    ]
+  },
+  {
+    "label": "Step_4",
+    "class": "StaticMeshActor",
+    "loc": [
+      1460.0,
+      -300.0,
+      250.0
+    ],
+    "mats": [
+      "/Game/Materials/MI_Stair_Blue.MI_Stair_Blue"
+    ]
+  },
+  {
+    "label": "Step_5",
+    "class": "StaticMeshActor",
+    "loc": [
+      1600.0,
+      -300.0,
+      300.0
+    ],
+    "mats": [
+      "/Game/Materials/MI_Stair_Blue.MI_Stair_Blue"
+    ]
+  },
+  {
+    "label": "Ring_0",
+    "class": "StaticMeshActor",
+    "loc": [
+      900.0,
+      1200.0,
+      100.0
+    ],
+    "mats": [
+      "/Game/Materials/MI_Ring_Green.MI_Ring_Green"
+    ]
+  },
+  {
+    "label": "Ring_1",
+    "class": "StaticMeshActor",
+    "loc": [
+      636.3961030678929,
+      1836.396103067893,
+      100.0
+    ],
+    "mats": [
+      "/Game/Materials/MI_Ring_Green.MI_Ring_Green"
+    ]
+  },
+  {
+    "label": "Ring_2",
+    "class": "StaticMeshActor",
+    "loc": [
+      1.1021821192326178e-13,
+      2100.0,
+      100.0
+    ],
+    "mats": [
+      "/Game/Materials/MI_Ring_Green.MI_Ring_Green"
+    ]
+  },
+  {
+    "label": "Ring_3",
+    "class": "StaticMeshActor",
+    "loc": [
+      -636.3961030678927,
+      1836.396103067893,
+      100.0
+    ],
+    "mats": [
+      "/Game/Materials/MI_Ring_Green.MI_Ring_Green"
+    ]
+  },
+  {
+    "label": "Ring_4",
+    "class": "StaticMeshActor",
+    "loc": [
+      -900.0,
+      1200.0,
+      100.0
+    ],
+    "mats": [
+      "/Game/Materials/MI_Ring_Green.MI_Ring_Green"
+    ]
+  },
+  {
+    "label": "Ring_5",
+    "class": "StaticMeshActor",
+    "loc": [
+      -636.3961030678929,
+      563.6038969321073,
+      100.0
+    ],
+    "mats": [
+      "/Game/Materials/MI_Ring_Green.MI_Ring_Green"
+    ]
+  },
+  {
+    "label": "Ring_6",
+    "class": "StaticMeshActor",
+    "loc": [
+      -2.2043642384652357e-13,
+      300.0,
+      100.0
+    ],
+    "mats": [
+      "/Game/Materials/MI_Ring_Green.MI_Ring_Green"
+    ]
+  },
+  {
+    "label": "Ring_7",
+    "class": "StaticMeshActor",
+    "loc": [
+      636.3961030678926,
+      563.6038969321071,
+      100.0
+    ],
+    "mats": [
+      "/Game/Materials/MI_Ring_Green.MI_Ring_Green"
+    ]
+  },
+  {
+    "label": "SM_TestSphere",
+    "class": "StaticMeshActor",
+    "loc": [
+      0.0,
+      0.0,
+      200.0
+    ],
+    "mats": [
+      "/Game/Materials/MI_Target_Purple.MI_Target_Purple"
+    ]
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "name": "animation-workflow-brief",
+  "description": "Compose a concise animation workflow brief grounded in the requested goal and asset.",
+  "arguments": [
+    { "name": "goal", "description": "The workflow goal to achieve.", "required": true },
+    { "name": "asset_path", "description": "Primary animation asset path.", "required": false },
+    { "name": "notes", "description": "Extra implementation notes.", "required": false }
+  ],
+  "messages": [
+    {
+      "role": "system",
+      "template": "You are UEBridgeMCP. Produce a short, implementation-oriented animation workflow brief using only project-local context."
+    },
+    {
+      "role": "user",
+      "template": "Goal: {goal}\nAsset: {asset_path}\nExtra notes: {notes}\nFocus on safe edits, verification steps, and what to query after the change."
+    }
+  ]
+}

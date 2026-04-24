@@ -1,0 +1,57 @@
+﻿{
+    "jsonrpc":  "2.0",
+    "id":  "create-ge",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Request succeeded"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "tool":  "create-gameplay-effect",
+                                             "success":  true,
+                                             "dry_run":  false,
+                                             "asset_path":  "/Game/UEBridgeMCPValidation/GASRound1/GE_GASRound1_20260423_203952",
+                                             "parent_class":  "/Script/GameplayAbilities.GameplayEffect",
+                                             "compile":  {
+                                                             "attempted":  true,
+                                                             "success":  true
+                                                         },
+                                             "summary":  {
+                                                             "asset_path":  "/Game/UEBridgeMCPValidation/GASRound1/GE_GASRound1_20260423_203952",
+                                                             "gas_type":  "gameplay_effect",
+                                                             "valid":  true,
+                                                             "class":  "/Game/UEBridgeMCPValidation/GASRound1/GE_GASRound1_20260423_203952.GE_GASRound1_20260423_203952_C",
+                                                             "duration_policy":  "has_duration",
+                                                             "duration_seconds":  5,
+                                                             "period":  1,
+                                                             "granted_tags":  [
+                                                                                  "State.UEBridgeMCP.Active"
+                                                                              ],
+                                                             "modifier_count":  1,
+                                                             "modifiers":  [
+                                                                               {
+                                                                                   "index":  0,
+                                                                                   "attribute":  "AS_GASRound1_20260423_203952_C.Health",
+                                                                                   "operation":  "additive",
+                                                                                   "magnitude":  -10,
+                                                                                   "magnitude_type":  "scalable_float"
+                                                                               }
+                                                                           ]
+                                                         }
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  28.288200002862141
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "create-gameplay-effect",
+                                               "mutates":  true,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  0
+                                           }
+                             }
+               }
+}

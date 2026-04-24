@@ -1,0 +1,58 @@
+{
+    "jsonrpc":  "2.0",
+    "id":  "tool-f3f8f28ad6a84c99b773cfdde165c9dd",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "type":  "text",
+                                       "text":  "Request succeeded"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "tool":  "edit-blueprint-members",
+                                             "success":  true,
+                                             "modified_assets":  [
+                                                                     "/Game/UEBridgeMCPValidation/BlueprintRound2/BP_R2_Broken_20260423_164934"
+                                                                 ],
+                                             "results":  [
+                                                             {
+                                                                 "action":  "create_variable",
+                                                                 "name":  "BrokenValue",
+                                                                 "index":  0,
+                                                                 "success":  true
+                                                             }
+                                                         ],
+                                             "compile":  {
+                                                             "attempted":  false,
+                                                             "success":  true,
+                                                             "diagnostics":  [
+
+                                                                             ]
+                                                         },
+                                             "implemented_interfaces":  [
+
+                                                                        ],
+                                             "warnings":  [
+
+                                                          ],
+                                             "diagnostics":  [
+
+                                                             ],
+                                             "partial_results":  [
+
+                                                                 ]
+                                         },
+                   "_meta":  {
+                                 "timing":  {
+                                                "duration_ms":  5.4058999812696129
+                                            },
+                                 "stats":  {
+                                               "tool_name":  "edit-blueprint-members",
+                                               "mutates":  false,
+                                               "supports_batch":  false,
+                                               "requires_game_thread":  true,
+                                               "content_items":  0
+                                           }
+                             }
+               }
+}
