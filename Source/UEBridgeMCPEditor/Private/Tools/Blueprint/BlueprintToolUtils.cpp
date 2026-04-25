@@ -1080,6 +1080,186 @@ namespace BlueprintToolUtils
 		}
 	}
 
+	void LayoutNodesByMeasuredSize(
+		const TArray<UEdGraphNode*>& Nodes,
+		const TMap<UEdGraphNode*, FVector2D>& NodeSizes,
+		int32 StartX,
+		int32 StartY,
+		int32 PaddingX,
+		int32 PaddingY)
+	{
+		if (Nodes.Num() == 0)
+		{
+			return;
+		}
+
+		TMap<UEdGraphNode*, int32> IncomingExecCount;
+		TMap<UEdGraphNode*, int32> Depths;
+		for (UEdGraphNode* Node : Nodes)
+		{
+			if (Node)
+			{
+				IncomingExecCount.Add(Node, 0);
+				Depths.Add(Node, 0);
+			}
+		}
+
+		for (UEdGraphNode* Node : Nodes)
+		{
+			if (!Node)
+			{
+				continue;
+			}
+
+			for (UEdGraphPin* Pin : Node->Pins)
+			{
+				if (!IsExecPin(Pin) || Pin->Direction != EGPD_Output)
+				{
+					continue;
+				}
+
+				for (UEdGraphPin* LinkedPin : Pin->LinkedTo)
+				{
+					UEdGraphNode* LinkedNode = LinkedPin ? LinkedPin->GetOwningNode() : nullptr;
+					if (LinkedNode && IncomingExecCount.Contains(LinkedNode))
+					{
+						IncomingExecCount.FindOrAdd(LinkedNode) += 1;
+					}
+				}
+			}
+		}
+
+		TArray<UEdGraphNode*> SortedRoots;
+		for (UEdGraphNode* Node : Nodes)
+		{
+			if (Node && IncomingExecCount.FindRef(Node) == 0)
+			{
+				SortedRoots.Add(Node);
+			}
+		}
+
+		SortedRoots.Sort([](const UEdGraphNode& A, const UEdGraphNode& B)
+		{
+			return GetStableNodeSortKey(&A) < GetStableNodeSortKey(&B);
+		});
+
+		TSet<UEdGraphNode*> Visited;
+		TQueue<UEdGraphNode*> Queue;
+
+		auto EnqueueRoot = [&](UEdGraphNode* RootNode, int32 RootDepth)
+		{
+			if (!RootNode || Visited.Contains(RootNode))
+			{
+				return;
+			}
+
+			Depths.FindOrAdd(RootNode) = RootDepth;
+			Visited.Add(RootNode);
+			Queue.Enqueue(RootNode);
+
+			while (!Queue.IsEmpty())
+			{
+				UEdGraphNode* CurrentNode = nullptr;
+				Queue.Dequeue(CurrentNode);
+				const int32 CurrentDepth = Depths.FindRef(CurrentNode);
+
+				for (UEdGraphPin* Pin : CurrentNode->Pins)
+				{
+					if (!IsExecPin(Pin) || Pin->Direction != EGPD_Output)
+					{
+						continue;
+					}
+
+					for (UEdGraphPin* LinkedPin : Pin->LinkedTo)
+					{
+						UEdGraphNode* NextNode = LinkedPin ? LinkedPin->GetOwningNode() : nullptr;
+						if (!NextNode || !Depths.Contains(NextNode))
+						{
+							continue;
+						}
+
+						const int32 NextDepth = FMath::Max(Depths.FindRef(NextNode), CurrentDepth + 1);
+						Depths.FindOrAdd(NextNode) = NextDepth;
+						if (!Visited.Contains(NextNode))
+						{
+							Visited.Add(NextNode);
+							Queue.Enqueue(NextNode);
+						}
+					}
+				}
+			}
+		};
+
+		for (UEdGraphNode* RootNode : SortedRoots)
+		{
+			EnqueueRoot(RootNode, 0);
+		}
+
+		for (UEdGraphNode* Node : Nodes)
+		{
+			if (Node && !Visited.Contains(Node))
+			{
+				EnqueueRoot(Node, 0);
+			}
+		}
+
+		TMap<int32, TArray<UEdGraphNode*>> Columns;
+		for (UEdGraphNode* Node : Nodes)
+		{
+			if (Node)
+			{
+				Columns.FindOrAdd(Depths.FindRef(Node)).Add(Node);
+			}
+		}
+
+		TArray<int32> ColumnKeys;
+		Columns.GenerateKeyArray(ColumnKeys);
+		ColumnKeys.Sort();
+
+		TMap<int32, float> ColumnWidths;
+		for (int32 ColumnKey : ColumnKeys)
+		{
+			TArray<UEdGraphNode*>& ColumnNodes = Columns.FindChecked(ColumnKey);
+			ColumnNodes.Sort([](const UEdGraphNode& A, const UEdGraphNode& B)
+			{
+				return GetStableNodeSortKey(&A) < GetStableNodeSortKey(&B);
+			});
+
+			float MaxWidth = 240.0f;
+			for (UEdGraphNode* Node : ColumnNodes)
+			{
+				const FVector2D Size = NodeSizes.FindRef(Node);
+				MaxWidth = FMath::Max(MaxWidth, static_cast<float>(Size.X));
+			}
+			ColumnWidths.Add(ColumnKey, MaxWidth);
+		}
+
+		TMap<int32, float> ColumnX;
+		float CursorX = static_cast<float>(StartX);
+		for (int32 ColumnKey : ColumnKeys)
+		{
+			ColumnX.Add(ColumnKey, CursorX);
+			CursorX += ColumnWidths.FindRef(ColumnKey) + FMath::Max(0, PaddingX);
+		}
+
+		for (int32 ColumnKey : ColumnKeys)
+		{
+			float CursorY = static_cast<float>(StartY);
+			for (UEdGraphNode* Node : Columns.FindChecked(ColumnKey))
+			{
+				if (!Node)
+				{
+					continue;
+				}
+
+				const FVector2D Size = NodeSizes.FindRef(Node);
+				Node->NodePosX = FMath::RoundToInt(ColumnX.FindRef(ColumnKey));
+				Node->NodePosY = FMath::RoundToInt(CursorY);
+				CursorY += FMath::Max(120.0f, static_cast<float>(Size.Y)) + FMath::Max(0, PaddingY);
+			}
+		}
+	}
+
 	FBox2D ComputeNodeBounds(const TArray<UEdGraphNode*>& Nodes, float Padding)
 	{
 		bool bHasPoint = false;

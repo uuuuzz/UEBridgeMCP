@@ -33,11 +33,17 @@
 #include "K2Node_SwitchEnum.h"
 #include "K2Node_VariableGet.h"
 #include "K2Node_VariableSet.h"
+#include "Kismet2/KismetEditorUtilities.h"
 #include "Kismet2/BlueprintEditorUtils.h"
+#include "Framework/Application/SlateApplication.h"
 #include "ScopedTransaction.h"
 #include "Serialization/JsonSerializer.h"
 #include "Serialization/JsonWriter.h"
 #include "EdGraphNode_Comment.h"
+#include "GraphEditor.h"
+#include "SGraphNode.h"
+#include "SGraphPanel.h"
+#include "SGraphPin.h"
 
 namespace
 {
@@ -69,6 +75,214 @@ namespace
 		Schema->ItemsType = TEXT("number");
 		Schema->Description = Description;
 		return Schema;
+	}
+
+	void AddStringWarning(TArray<TSharedPtr<FJsonValue>>& Warnings, const FString& Message)
+	{
+		Warnings.Add(MakeShareable(new FJsonValueString(Message)));
+	}
+
+	void SetVectorObject(TSharedPtr<FJsonObject> Object, const FString& FieldName, const FVector2D& Vector)
+	{
+		TSharedPtr<FJsonObject> VectorObject = MakeShareable(new FJsonObject);
+		VectorObject->SetNumberField(TEXT("x"), Vector.X);
+		VectorObject->SetNumberField(TEXT("y"), Vector.Y);
+		Object->SetObjectField(FieldName, VectorObject);
+	}
+
+	FVector2D EstimateNodeSize(const UEdGraphNode* Node)
+	{
+		if (!Node)
+		{
+			return FVector2D(240.0, 120.0);
+		}
+
+		int32 VisiblePinCount = 0;
+		int32 LongestPinLabel = 0;
+		for (const UEdGraphPin* Pin : Node->Pins)
+		{
+			if (!Pin)
+			{
+				continue;
+			}
+
+			++VisiblePinCount;
+			LongestPinLabel = FMath::Max(LongestPinLabel, Pin->PinName.ToString().Len());
+		}
+
+		const FString Title = Node->GetNodeTitle(ENodeTitleType::FullTitle).ToString();
+		const float TitleWidth = 120.0f + static_cast<float>(FMath::Min(60, Title.Len())) * 7.0f;
+		const float PinWidth = 160.0f + static_cast<float>(FMath::Min(48, LongestPinLabel)) * 7.0f;
+		const float StoredWidth = Node->NodeWidth > 0 ? static_cast<float>(Node->NodeWidth) : 0.0f;
+		const float StoredHeight = Node->NodeHeight > 0 ? static_cast<float>(Node->NodeHeight) : 0.0f;
+
+		const float Width = FMath::Max(FMath::Max(240.0f, StoredWidth), FMath::Max(TitleWidth, PinWidth));
+		const float Height = FMath::Max(FMath::Max(120.0f, StoredHeight), 72.0f + static_cast<float>(VisiblePinCount) * 24.0f);
+		return FVector2D(Width, Height);
+	}
+
+	void PumpSlateForMeasurement(int32 TickCount)
+	{
+		if (!FSlateApplication::IsInitialized())
+		{
+			return;
+		}
+
+		FSlateApplication& SlateApplication = FSlateApplication::Get();
+		if (SlateApplication.IsTicking())
+		{
+			return;
+		}
+
+		for (int32 TickIndex = 0; TickIndex < FMath::Max(0, TickCount); ++TickIndex)
+		{
+			SlateApplication.Tick(ESlateTickType::All);
+		}
+	}
+
+	bool CollectSlateMeasurements(
+		UEdGraph* Graph,
+		const TArray<UEdGraphNode*>& Nodes,
+		bool bIncludeMeasurements,
+		TMap<UEdGraphNode*, FVector2D>& OutNodeSizes,
+		TArray<TSharedPtr<FJsonValue>>& OutMeasurementArray,
+		int32& OutSlateMeasuredNodes,
+		FString& OutSource)
+	{
+		OutSlateMeasuredNodes = 0;
+		if (!Graph)
+		{
+			return false;
+		}
+
+		TSharedPtr<SGraphEditor> GraphEditor = SGraphEditor::FindGraphEditorForGraph(Graph);
+		if (!GraphEditor.IsValid())
+		{
+			return false;
+		}
+
+		SGraphPanel* GraphPanel = GraphEditor->GetGraphPanel();
+		if (!GraphPanel)
+		{
+			return false;
+		}
+
+		GraphEditor->NotifyGraphChanged();
+		GraphPanel->Update();
+		GraphEditor->SlatePrepass(1.0f);
+		GraphPanel->SlatePrepass(1.0f);
+
+		for (UEdGraphNode* Node : Nodes)
+		{
+			if (!Node)
+			{
+				continue;
+			}
+
+			FVector2D MeasuredSize = FVector2D::ZeroVector;
+			FSlateRect Bounds;
+			if (GraphEditor->GetBoundsForNode(Node, Bounds, 0.0f))
+			{
+				MeasuredSize = FVector2D(
+					FMath::Max(0.0f, Bounds.Right - Bounds.Left),
+					FMath::Max(0.0f, Bounds.Bottom - Bounds.Top));
+			}
+
+			TSharedPtr<SGraphNode> NodeWidget = GraphPanel->GetNodeWidgetFromGuid(Node->NodeGuid);
+			if (NodeWidget.IsValid())
+			{
+				const FVector2D DesiredSize(NodeWidget->GetDesiredSize());
+				if (DesiredSize.X > 1.0 || DesiredSize.Y > 1.0)
+				{
+					MeasuredSize.X = FMath::Max(MeasuredSize.X, DesiredSize.X);
+					MeasuredSize.Y = FMath::Max(MeasuredSize.Y, DesiredSize.Y);
+				}
+			}
+
+			if (MeasuredSize.X <= 1.0 || MeasuredSize.Y <= 1.0)
+			{
+				continue;
+			}
+
+			OutNodeSizes.Add(Node, MeasuredSize);
+			++OutSlateMeasuredNodes;
+
+			if (bIncludeMeasurements)
+			{
+				TSharedPtr<FJsonObject> NodeObject = MakeShareable(new FJsonObject);
+				NodeObject->SetStringField(TEXT("guid"), Node->NodeGuid.ToString(EGuidFormats::DigitsWithHyphens));
+				NodeObject->SetStringField(TEXT("title"), Node->GetNodeTitle(ENodeTitleType::ListView).ToString());
+				NodeObject->SetStringField(TEXT("measurement"), TEXT("slate"));
+				SetVectorObject(NodeObject, TEXT("size"), MeasuredSize);
+
+				if (NodeWidget.IsValid())
+				{
+					TArray<TSharedRef<SWidget>> PinWidgets;
+					NodeWidget->GetPins(PinWidgets);
+
+					TArray<TSharedPtr<FJsonValue>> PinsArray;
+					for (const TSharedRef<SWidget>& PinWidgetRef : PinWidgets)
+					{
+						TSharedPtr<SGraphPin> GraphPinWidget = StaticCastSharedRef<SGraphPin>(PinWidgetRef).ToSharedPtr();
+						if (!GraphPinWidget.IsValid() || !GraphPinWidget->GetPinObj())
+						{
+							continue;
+						}
+
+						UEdGraphPin* Pin = GraphPinWidget->GetPinObj();
+						TSharedPtr<FJsonObject> PinObject = MakeShareable(new FJsonObject);
+						PinObject->SetStringField(TEXT("name"), Pin->PinName.ToString());
+						PinObject->SetStringField(TEXT("direction"), Pin->Direction == EGPD_Input ? TEXT("input") : TEXT("output"));
+						SetVectorObject(PinObject, TEXT("desired_size"), FVector2D(GraphPinWidget->GetDesiredSize()));
+
+						const FGeometry& CachedGeometry = GraphPinWidget->GetCachedGeometry();
+						const FVector2D LocalSize(CachedGeometry.GetLocalSize());
+						if (LocalSize.X > 1.0 || LocalSize.Y > 1.0)
+						{
+							SetVectorObject(PinObject, TEXT("cached_local_size"), LocalSize);
+							SetVectorObject(PinObject, TEXT("cached_absolute_position"), FVector2D(CachedGeometry.GetAbsolutePosition()));
+						}
+
+						PinsArray.Add(MakeShareable(new FJsonValueObject(PinObject)));
+					}
+
+					NodeObject->SetArrayField(TEXT("pins"), PinsArray);
+				}
+
+				OutMeasurementArray.Add(MakeShareable(new FJsonValueObject(NodeObject)));
+			}
+		}
+
+		OutSource = TEXT("slate");
+		return OutSlateMeasuredNodes > 0;
+	}
+
+	void FillEstimatedMeasurements(
+		const TArray<UEdGraphNode*>& Nodes,
+		bool bIncludeMeasurements,
+		TMap<UEdGraphNode*, FVector2D>& NodeSizes,
+		TArray<TSharedPtr<FJsonValue>>& MeasurementArray)
+	{
+		for (UEdGraphNode* Node : Nodes)
+		{
+			if (!Node || NodeSizes.Contains(Node))
+			{
+				continue;
+			}
+
+			const FVector2D EstimatedSize = EstimateNodeSize(Node);
+			NodeSizes.Add(Node, EstimatedSize);
+
+			if (bIncludeMeasurements)
+			{
+				TSharedPtr<FJsonObject> NodeObject = MakeShareable(new FJsonObject);
+				NodeObject->SetStringField(TEXT("guid"), Node->NodeGuid.ToString(EGuidFormats::DigitsWithHyphens));
+				NodeObject->SetStringField(TEXT("title"), Node->GetNodeTitle(ENodeTitleType::ListView).ToString());
+				NodeObject->SetStringField(TEXT("measurement"), TEXT("estimate"));
+				SetVectorObject(NodeObject, TEXT("size"), EstimatedSize);
+				MeasurementArray.Add(MakeShareable(new FJsonValueObject(NodeObject)));
+			}
+		}
 	}
 
 	FString JsonValueToLiteral(const TSharedPtr<FJsonValue>& Value)
@@ -423,6 +637,13 @@ TMap<FString, FMcpSchemaProperty> UEditBlueprintGraphTool::GetInputSchema() cons
 	OperationSchema->Properties.Add(TEXT("option_count"), MakeShared<FMcpSchemaProperty>(FMcpSchemaProperty::Make(TEXT("integer"), TEXT("Requested number of select options"))));
 	OperationSchema->Properties.Add(TEXT("spacing_x"), MakeShared<FMcpSchemaProperty>(FMcpSchemaProperty::Make(TEXT("integer"), TEXT("Horizontal layout spacing"))));
 	OperationSchema->Properties.Add(TEXT("spacing_y"), MakeShared<FMcpSchemaProperty>(FMcpSchemaProperty::Make(TEXT("integer"), TEXT("Vertical layout spacing"))));
+	OperationSchema->Properties.Add(TEXT("padding_x"), MakeShared<FMcpSchemaProperty>(FMcpSchemaProperty::Make(TEXT("integer"), TEXT("Measured layout horizontal padding between columns"))));
+	OperationSchema->Properties.Add(TEXT("padding_y"), MakeShared<FMcpSchemaProperty>(FMcpSchemaProperty::Make(TEXT("integer"), TEXT("Measured layout vertical padding between nodes"))));
+	OperationSchema->Properties.Add(TEXT("measurement_mode"), MakeShared<FMcpSchemaProperty>(FMcpSchemaProperty::MakeEnum(
+		TEXT("Layout measurement mode: 'none' keeps legacy fixed spacing, 'estimate' uses node/pin heuristics, 'slate_if_open' reads open graph editor widgets, 'slate_open_if_needed' opens/focuses the graph before measuring"),
+		{TEXT("none"), TEXT("estimate"), TEXT("slate_if_open"), TEXT("slate_open_if_needed")})));
+	OperationSchema->Properties.Add(TEXT("include_measurements"), MakeShared<FMcpSchemaProperty>(FMcpSchemaProperty::Make(TEXT("boolean"), TEXT("Include per-node measurement details in the operation result"))));
+	OperationSchema->Properties.Add(TEXT("slate_ticks"), MakeShared<FMcpSchemaProperty>(FMcpSchemaProperty::Make(TEXT("integer"), TEXT("Slate ticks to pump before reading open graph geometry"))));
 	OperationSchema->Properties.Add(TEXT("start_x"), MakeShared<FMcpSchemaProperty>(FMcpSchemaProperty::Make(TEXT("integer"), TEXT("Layout start X"))));
 	OperationSchema->Properties.Add(TEXT("start_y"), MakeShared<FMcpSchemaProperty>(FMcpSchemaProperty::Make(TEXT("integer"), TEXT("Layout start Y"))));
 	OperationSchema->Properties.Add(TEXT("call_in_editor"), MakeShared<FMcpSchemaProperty>(FMcpSchemaProperty::Make(TEXT("boolean"), TEXT("Call-in-editor flag for custom events"))));
@@ -1648,6 +1869,7 @@ FMcpToolResult UEditBlueprintGraphTool::Execute(const TSharedPtr<FJsonObject>& A
 		{
 			const FString GraphName = GetStringArgOrDefault(Operation, TEXT("graph_name"), TEXT("EventGraph"));
 			TArray<UEdGraphNode*> Nodes;
+			UEdGraph* TargetGraph = FMcpAssetModifier::FindGraphByName(WorkingBlueprint, GraphName);
 			if (Operation->HasField(TEXT("nodes")))
 			{
 				if (!CollectOperationNodes(WorkingBlueprint, Operation, AliasMap, Nodes, ErrorMessage))
@@ -1655,7 +1877,7 @@ FMcpToolResult UEditBlueprintGraphTool::Execute(const TSharedPtr<FJsonObject>& A
 					// Error populated.
 				}
 			}
-			else if (UEdGraph* TargetGraph = FMcpAssetModifier::FindGraphByName(WorkingBlueprint, GraphName))
+			else if (TargetGraph)
 			{
 				for (UEdGraphNode* Node : TargetGraph->Nodes)
 				{
@@ -1676,12 +1898,77 @@ FMcpToolResult UEditBlueprintGraphTool::Execute(const TSharedPtr<FJsonObject>& A
 				const int32 StartY = GetIntArgOrDefault(Operation, TEXT("start_y"), 0);
 				const int32 SpacingX = GetIntArgOrDefault(Operation, TEXT("spacing_x"), 380);
 				const int32 SpacingY = GetIntArgOrDefault(Operation, TEXT("spacing_y"), 220);
-				BlueprintToolUtils::LayoutNodesSimple(Nodes, StartX, StartY, SpacingX, SpacingY);
-				MarkBlueprintGraphDirty(WorkingBlueprint);
+				const int32 PaddingX = GetIntArgOrDefault(Operation, TEXT("padding_x"), 120);
+				const int32 PaddingY = GetIntArgOrDefault(Operation, TEXT("padding_y"), 40);
+				const int32 SlateTicks = GetIntArgOrDefault(Operation, TEXT("slate_ticks"), 2);
+				const bool bIncludeMeasurements = GetBoolArgOrDefault(Operation, TEXT("include_measurements"), false);
+				FString MeasurementMode = GetStringArgOrDefault(Operation, TEXT("measurement_mode"), TEXT("none")).ToLower();
+
+				if (MeasurementMode == TEXT("none"))
+				{
+					BlueprintToolUtils::LayoutNodesSimple(Nodes, StartX, StartY, SpacingX, SpacingY);
+					ResultObject->SetStringField(TEXT("measurement_mode"), TEXT("none"));
+					ResultObject->SetStringField(TEXT("measurement_source"), TEXT("legacy_fixed_spacing"));
+				}
+				else if (MeasurementMode == TEXT("estimate")
+					|| MeasurementMode == TEXT("slate_if_open")
+					|| MeasurementMode == TEXT("slate_open_if_needed"))
+				{
+					TMap<UEdGraphNode*, FVector2D> NodeSizes;
+					TArray<TSharedPtr<FJsonValue>> MeasurementArray;
+					TArray<TSharedPtr<FJsonValue>> MeasurementWarnings;
+					FString MeasurementSource = TEXT("estimate");
+					int32 SlateMeasuredNodes = 0;
+
+					if (MeasurementMode == TEXT("slate_open_if_needed") && bDryRun)
+					{
+						AddStringWarning(MeasurementWarnings, TEXT("slate_open_if_needed is not used during dry_run because the working Blueprint is transient; falling back to estimate"));
+					}
+					else if (TargetGraph && (MeasurementMode == TEXT("slate_if_open") || MeasurementMode == TEXT("slate_open_if_needed")))
+					{
+						if (MeasurementMode == TEXT("slate_open_if_needed") && !SGraphEditor::FindGraphEditorForGraph(TargetGraph).IsValid())
+						{
+							FKismetEditorUtilities::BringKismetToFocusAttentionOnObject(TargetGraph, false);
+						}
+
+						PumpSlateForMeasurement(SlateTicks);
+						if (!CollectSlateMeasurements(TargetGraph, Nodes, bIncludeMeasurements, NodeSizes, MeasurementArray, SlateMeasuredNodes, MeasurementSource))
+						{
+							AddStringWarning(MeasurementWarnings, TEXT("No Slate graph node measurements were available; falling back to estimated node sizes"));
+						}
+					}
+
+					FillEstimatedMeasurements(Nodes, bIncludeMeasurements, NodeSizes, MeasurementArray);
+					BlueprintToolUtils::LayoutNodesByMeasuredSize(Nodes, NodeSizes, StartX, StartY, PaddingX, PaddingY);
+
+					ResultObject->SetStringField(TEXT("measurement_mode"), MeasurementMode);
+					ResultObject->SetStringField(TEXT("measurement_source"), SlateMeasuredNodes > 0 ? MeasurementSource : TEXT("estimate"));
+					ResultObject->SetNumberField(TEXT("slate_measured_nodes"), SlateMeasuredNodes);
+					ResultObject->SetNumberField(TEXT("estimated_nodes"), NodeSizes.Num() - SlateMeasuredNodes);
+					ResultObject->SetNumberField(TEXT("padding_x"), PaddingX);
+					ResultObject->SetNumberField(TEXT("padding_y"), PaddingY);
+					if (MeasurementWarnings.Num() > 0)
+					{
+						ResultObject->SetArrayField(TEXT("measurement_warnings"), MeasurementWarnings);
+					}
+					if (bIncludeMeasurements)
+					{
+						ResultObject->SetArrayField(TEXT("measurements"), MeasurementArray);
+					}
+				}
+				else
+				{
+					ErrorMessage = FString::Printf(TEXT("Unsupported measurement_mode: %s"), *MeasurementMode);
+				}
+
 				ResultObject->SetNumberField(TEXT("layout_nodes"), Nodes.Num());
 				ResultObject->SetStringField(TEXT("graph_name"), GraphName);
-				bSuccess = true;
-				bMutatedBlueprint = true;
+				bSuccess = ErrorMessage.IsEmpty();
+				if (bSuccess)
+				{
+					MarkBlueprintGraphDirty(WorkingBlueprint);
+					bMutatedBlueprint = true;
+				}
 			}
 		}
 		else

@@ -77,6 +77,14 @@ namespace BlueprintToolUtils
 		int32 SpacingX,
 		int32 SpacingY);
 
+	void LayoutNodesByMeasuredSize(
+		const TArray<UEdGraphNode*>& Nodes,
+		const TMap<UEdGraphNode*, FVector2D>& NodeSizes,
+		int32 StartX,
+		int32 StartY,
+		int32 PaddingX,
+		int32 PaddingY);
+
 	FBox2D ComputeNodeBounds(const TArray<UEdGraphNode*>& Nodes, float Padding);
 	TArray<TSharedPtr<FJsonValue>> BuildImplementedInterfacesArray(const UBlueprint* Blueprint);
 }

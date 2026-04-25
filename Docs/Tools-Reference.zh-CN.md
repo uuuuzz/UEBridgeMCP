@@ -79,6 +79,7 @@ UEBridgeMCP 现在正式支持这些 MCP 方法：
 | `animation-workflow-brief` | 生成简洁的动画工作流 brief | `goal`, `asset_path`, `notes` |
 | `sequencer-edit-brief` | 生成 Sequencer 安全编辑 brief | `goal`, `sequence_path`, `shot_notes` |
 | `performance-triage-brief` | 生成性能排查 brief | `goal`, `world_mode`, `focus_area` |
+| `widget-ui-from-spec-brief` | 根据 UI 描述生成 Widget Blueprint 实施 brief | `goal`, `asset_path`, `screen_size`, `style_notes`, `constraints` |
 
 ## Workflow Presets
 
@@ -180,6 +181,7 @@ Preset schema 至少包含：
 兼容说明：
 
 - `add-widget` 仍然保留，但新的写路径优先使用上面的批处理 Widget 工具。
+- `widget-ui-from-spec-brief` 是 prompt，不是写入工具。它帮助 AI 客户端把自然语言 UI 描述展开成上面这些 Widget 工具调用；编辑器侧仍执行显式 operations。
 
 ### 7. Create 与 Data Authoring
 
@@ -326,6 +328,7 @@ Blueprint Phase 1C 说明：
 - `apply-blueprint-fixups` 只执行安全的结构性修复：`refresh_all_nodes`、`reconstruct_invalid_nodes`、`remove_orphan_pins`、`recompile_dependencies`、`conform_implemented_interfaces`。
 - `create-blueprint-pattern` 是高层精选 Actor pattern 入口，v1 支持 `logic_actor_skeleton`、`toggle_state_actor`、`interaction_stub_actor`。
 - `blueprint-scaffold-from-spec` 仍然是低层 spec scaffold 工具，不作为 Phase 1C curated pattern 的底层实现路径。
+- `layout-blueprint-graph` 与 `edit-blueprint-graph` 的 `layout_graph` operation 支持 `measurement_mode`：`none` 保留旧固定间距，`estimate` 用节点标题和 pin 数估算，`slate_if_open` 读取已打开图编辑器，`slate_open_if_needed` 会打开/聚焦图后再测量。测量式布局用 `padding_x`、`padding_y` 控制间距；`include_measurements=true` 会返回逐节点测量细节。`dry_run` 时由于工作 Blueprint 是临时副本，Slate-open 测量会回退到估算。
 
 Niagara Phase 2A 说明：
 

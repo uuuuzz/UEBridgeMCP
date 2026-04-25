@@ -1,0 +1,21 @@
+{
+  "name": "widget-ui-from-spec-brief",
+  "description": "Compose a Widget Blueprint implementation brief that turns a UI spec into concrete UEBridgeMCP widget tool calls.",
+  "arguments": [
+    { "name": "goal", "description": "The UI goal or natural-language screen spec to implement.", "required": true },
+    { "name": "asset_path", "description": "Target Widget Blueprint asset path to create or edit.", "required": false },
+    { "name": "screen_size", "description": "Optional reference screen size, for example 1920x1080 or 1280x720.", "required": false },
+    { "name": "style_notes", "description": "Visual style, theme, CommonUI, platform, or interaction notes.", "required": false },
+    { "name": "constraints", "description": "Allowed widget classes, required asset paths, save/compile policy, existing widget names, or other constraints.", "required": false }
+  ],
+  "messages": [
+    {
+      "role": "system",
+      "template": "You are UEBridgeMCP. Produce a concise Widget Blueprint implementation brief. Planning happens in the AI client; UEBridgeMCP executes deterministic tool calls. Do not invent unsupported tools or claim the editor infers the layout by itself."
+    },
+    {
+      "role": "user",
+      "template": "Goal/spec: {goal}\nTarget Widget Blueprint: {asset_path}\nReference screen size: {screen_size}\nStyle notes: {style_notes}\nConstraints: {constraints}\n\nConvert the spec into an executable MCP workflow. Prefer this order: inspect-widget-blueprint when editing an existing asset, create-widget-blueprint when the asset is new, edit-widget-blueprint for batched widget tree/property/slot operations, edit-widget-layout-batch only for layout-only passes, and inspect-widget-blueprint again for verification. Include dry_run=true before destructive or broad writes, then compile/save policy for the final call. Return concrete planned tool calls with JSON-shaped arguments, including widget names, parent widgets, widget classes, and slot data where the spec gives enough detail. Call out missing details as assumptions rather than adding unsupported behavior."
+    }
+  ]
+}

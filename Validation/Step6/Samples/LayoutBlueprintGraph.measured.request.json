@@ -1,0 +1,19 @@
+{
+  "jsonrpc": "2.0",
+  "id": "sample-layout-blueprint-graph-measured",
+  "method": "tools/call",
+  "params": {
+    "name": "layout-blueprint-graph",
+    "arguments": {
+      "asset_path": "/Game/UEBridgeMCPValidation/BlueprintRound1/BP_LayoutCandidate",
+      "graph_name": "EventGraph",
+      "measurement_mode": "estimate",
+      "padding_x": 140,
+      "padding_y": 48,
+      "include_measurements": true,
+      "dry_run": true,
+      "compile": "never",
+      "save": false
+    }
+  }
+}

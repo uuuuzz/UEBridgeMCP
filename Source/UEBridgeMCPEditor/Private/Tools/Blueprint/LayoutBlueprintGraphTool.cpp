@@ -18,6 +18,13 @@ TMap<FString, FMcpSchemaProperty> ULayoutBlueprintGraphTool::GetInputSchema() co
 	Schema.Add(TEXT("start_y"), FMcpSchemaProperty::Make(TEXT("integer"), TEXT("Layout start Y")));
 	Schema.Add(TEXT("spacing_x"), FMcpSchemaProperty::Make(TEXT("integer"), TEXT("Horizontal layout spacing")));
 	Schema.Add(TEXT("spacing_y"), FMcpSchemaProperty::Make(TEXT("integer"), TEXT("Vertical layout spacing")));
+	Schema.Add(TEXT("padding_x"), FMcpSchemaProperty::Make(TEXT("integer"), TEXT("Measured layout horizontal padding between columns")));
+	Schema.Add(TEXT("padding_y"), FMcpSchemaProperty::Make(TEXT("integer"), TEXT("Measured layout vertical padding between nodes")));
+	Schema.Add(TEXT("measurement_mode"), FMcpSchemaProperty::MakeEnum(
+		TEXT("Layout measurement mode. 'none' keeps legacy fixed spacing; 'estimate' uses node/pin heuristics; 'slate_if_open' reads open graph editor widgets; 'slate_open_if_needed' opens/focuses the graph before measuring."),
+		{TEXT("none"), TEXT("estimate"), TEXT("slate_if_open"), TEXT("slate_open_if_needed")}));
+	Schema.Add(TEXT("include_measurements"), FMcpSchemaProperty::Make(TEXT("boolean"), TEXT("Include per-node measurement details in the result")));
+	Schema.Add(TEXT("slate_ticks"), FMcpSchemaProperty::Make(TEXT("integer"), TEXT("Slate ticks to pump before reading open graph geometry")));
 	Schema.Add(TEXT("compile"), FMcpSchemaProperty::MakeEnum(TEXT("Compile policy: 'never', 'if_needed', or 'always'"), {TEXT("never"), TEXT("if_needed"), TEXT("always")}));
 	Schema.Add(TEXT("save"), FMcpSchemaProperty::Make(TEXT("boolean"), TEXT("Save after success")));
 	Schema.Add(TEXT("dry_run"), FMcpSchemaProperty::Make(TEXT("boolean"), TEXT("Validate without applying edits")));
@@ -49,6 +56,11 @@ FMcpToolResult ULayoutBlueprintGraphTool::Execute(const TSharedPtr<FJsonObject>&
 	BlueprintWrapperToolUtils::CopyFieldIfPresent(Arguments, OperationObject, TEXT("start_y"));
 	BlueprintWrapperToolUtils::CopyFieldIfPresent(Arguments, OperationObject, TEXT("spacing_x"));
 	BlueprintWrapperToolUtils::CopyFieldIfPresent(Arguments, OperationObject, TEXT("spacing_y"));
+	BlueprintWrapperToolUtils::CopyFieldIfPresent(Arguments, OperationObject, TEXT("padding_x"));
+	BlueprintWrapperToolUtils::CopyFieldIfPresent(Arguments, OperationObject, TEXT("padding_y"));
+	BlueprintWrapperToolUtils::CopyFieldIfPresent(Arguments, OperationObject, TEXT("measurement_mode"));
+	BlueprintWrapperToolUtils::CopyFieldIfPresent(Arguments, OperationObject, TEXT("include_measurements"));
+	BlueprintWrapperToolUtils::CopyFieldIfPresent(Arguments, OperationObject, TEXT("slate_ticks"));
 
 	TArray<TSharedPtr<FJsonValue>> Operations;
 	Operations.Add(MakeShareable(new FJsonValueObject(OperationObject)));

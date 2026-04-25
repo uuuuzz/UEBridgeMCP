@@ -79,6 +79,7 @@ Built-in prompts are repo-tracked JSON templates under `Resources/MCP/Prompts/`.
 | `animation-workflow-brief` | Compose a concise animation workflow brief | `goal`, `asset_path`, `notes` |
 | `sequencer-edit-brief` | Compose a safe Sequencer edit brief | `goal`, `sequence_path`, `shot_notes` |
 | `performance-triage-brief` | Compose a lightweight performance investigation brief | `goal`, `world_mode`, `focus_area` |
+| `widget-ui-from-spec-brief` | Compose a Widget Blueprint implementation brief from a UI spec | `goal`, `asset_path`, `screen_size`, `style_notes`, `constraints` |
 
 ## Workflow Presets
 
@@ -180,6 +181,7 @@ The base editor surface below is always registered by `RegisterBuiltInTools()`.
 Compatibility note:
 
 - `add-widget` is still registered for compatibility, but new write flows should prefer the batched widget tools.
+- `widget-ui-from-spec-brief` is a prompt, not a write tool. It helps an AI client expand a natural-language UI spec into calls to the widget tools above; the editor still executes the resulting explicit operations.
 
 ### 7. Create And Data Authoring
 
@@ -326,6 +328,7 @@ Blueprint Phase 1C note:
 - `apply-blueprint-fixups` applies safe structural fixups: `refresh_all_nodes`, `reconstruct_invalid_nodes`, `remove_orphan_pins`, `recompile_dependencies`, and `conform_implemented_interfaces`.
 - `create-blueprint-pattern` is the curated high-level Actor pattern entrypoint for `logic_actor_skeleton`, `toggle_state_actor`, and `interaction_stub_actor`.
 - `blueprint-scaffold-from-spec` remains a lower-level spec-driven scaffold tool and is not the backend for curated Phase 1C patterns.
+- `layout-blueprint-graph` and `edit-blueprint-graph` operation `layout_graph` support `measurement_mode`: `none` keeps the legacy fixed spacing, `estimate` uses node titles and pin counts, `slate_if_open` reads an already-open graph editor, and `slate_open_if_needed` opens/focuses the graph before measuring. Measured layout uses `padding_x` and `padding_y`; `include_measurements=true` returns per-node measurement details. During `dry_run`, Slate-open measurement falls back to estimates because the working Blueprint is transient.
 
 Niagara Phase 2A note:
 

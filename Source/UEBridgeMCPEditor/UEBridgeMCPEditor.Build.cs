@@ -35,6 +35,7 @@ public class UEBridgeMCPEditor : ModuleRules
 			"Kismet",
 			"KismetCompiler",
 			"BlueprintGraph",
+			"GraphEditor",
 			"MaterialEditor",
 			"StaticMeshEditor",
 

@@ -1,0 +1,15 @@
+{
+  "jsonrpc": "2.0",
+  "id": "sample-widget-ui-prompt-get",
+  "method": "prompts/get",
+  "params": {
+    "name": "widget-ui-from-spec-brief",
+    "arguments": {
+      "goal": "Create a main menu with a title, three centered buttons, and a footer hint.",
+      "asset_path": "/Game/UI/WBP_MainMenu",
+      "screen_size": "1920x1080",
+      "style_notes": "Dark sci-fi theme, readable text, keyboard/gamepad friendly.",
+      "constraints": "Use create-widget-blueprint plus batched edit-widget-blueprint operations; dry run before applying."
+    }
+  }
+}
