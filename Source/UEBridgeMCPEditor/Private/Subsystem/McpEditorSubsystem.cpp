@@ -9,6 +9,14 @@
 
 #define LOCTEXT_NAMESPACE "UEBridgeMCP"
 
+namespace
+{
+	bool ShouldSuppressMcpServerStart()
+	{
+		return IsRunningCommandlet();
+	}
+}
+
 void UMcpEditorSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
 	Super::Initialize(Collection);
@@ -26,7 +34,14 @@ void UMcpEditorSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 	// Auto-start if configured
 	if (Settings && Settings->bAutoStartServer)
 	{
-		StartServer();
+		if (ShouldSuppressMcpServerStart())
+		{
+			UE_LOG(LogUEBridgeMCPEditor, Log, TEXT("Skipping MCP Server auto-start while running a commandlet"));
+		}
+		else
+		{
+			StartServer();
+		}
 	}
 }
 
@@ -60,6 +75,12 @@ bool UMcpEditorSubsystem::IsServerRunning() const
 
 bool UMcpEditorSubsystem::StartServer()
 {
+	if (ShouldSuppressMcpServerStart())
+	{
+		UE_LOG(LogUEBridgeMCPEditor, Warning, TEXT("MCP Server start skipped while running a commandlet"));
+		return false;
+	}
+
 	if (!Server.IsValid())
 	{
 		Server = MakeUnique<FMcpServer>();

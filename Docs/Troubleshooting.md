@@ -30,7 +30,13 @@ Practical fixes for the problems you will actually hit. If your symptom isn't li
 
 Each editor instance needs its **own** port. Give each project a unique `ServerPort` (8080 / 8081 / 8082) in `Config/DefaultUEBridgeMCP.ini` or the editor settings object, then update the client's URL per project.
 
-### 1.4 `tools/list` returns empty or 404
+### 1.4 Package/Cook fails with `HttpListener unable to bind`
+
+**Cause.** Older builds could auto-start the MCP HTTP listener inside UE commandlet processes used by Cook/Package. If the interactive editor already owns the configured port, UAT sees `LogHttpListener: Error` and treats the package as failed.
+
+**Fix.** Use a build whose modules are marked `EditorNoCommandlet` and whose server start path rejects commandlets. As a workaround on older builds, set `bAutoStartServer=false` in `Config/DefaultUEBridgeMCP.ini` before packaging, then start the server manually after returning to the editor.
+
+### 1.5 `tools/list` returns empty or 404
 
 - The editor module failed to load. Check `LogUEBridgeMCPEditor` at startup for errors.
 - `RegisterBuiltInTools` ran before dependent modules were ready. The plugin uses `LoadingPhase = PostEngineInit` on purpose ? don't change that.

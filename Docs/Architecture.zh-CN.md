@@ -206,7 +206,7 @@ return FMcpToolResult::Error(TEXT("UEBMCP_NOT_FOUND: blueprint /Game/... does no
 ## 服务端生命周期
 
 ```text
-编辑器启动
+交互式编辑器启动
    v
 UEBridgeMCPEditor 与扩展模块加载（PostEngineInit）
    v
@@ -231,6 +231,8 @@ UMcpEditorSubsystem::Deinitialize()
 FUEBridgeMCPEditorModule::ShutdownModule()
    FMcpToolbarExtension::Shutdown()
 ```
+
+插件模块使用 `EditorNoCommandlet`，因此 UAT/Cook/Package 这类 commandlet 进程不会加载 MCP server，也不会绑定 HTTP 端口。`UMcpEditorSubsystem::StartServer()` 里还保留了 commandlet 启动保护，作为防御性兜底。
 
 `McpServer::Start` 内部使用 `FHttpServerModule::Get().GetHttpRouter(Port)` 获取路由器，并注册以下路由：
 

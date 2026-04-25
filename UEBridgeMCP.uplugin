@@ -18,27 +18,27 @@
 	"Modules": [
 		{
 			"Name": "UEBridgeMCP",
-			"Type": "Editor",
+			"Type": "EditorNoCommandlet",
 			"LoadingPhase": "Default"
 		},
 		{
 			"Name": "UEBridgeMCPEditor",
-			"Type": "Editor",
+			"Type": "EditorNoCommandlet",
 			"LoadingPhase": "PostEngineInit"
 		},
 		{
 			"Name": "UEBridgeMCPControlRig",
-			"Type": "Editor",
+			"Type": "EditorNoCommandlet",
 			"LoadingPhase": "PostEngineInit"
 		},
 		{
 			"Name": "UEBridgeMCPPCG",
-			"Type": "Editor",
+			"Type": "EditorNoCommandlet",
 			"LoadingPhase": "PostEngineInit"
 		},
 		{
 			"Name": "UEBridgeMCPExternalAI",
-			"Type": "Editor",
+			"Type": "EditorNoCommandlet",
 			"LoadingPhase": "PostEngineInit"
 		}
 	],

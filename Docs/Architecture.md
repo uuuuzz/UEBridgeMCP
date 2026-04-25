@@ -206,7 +206,7 @@ MCP clients that follow the spec will surface this as a tool failure (with `isEr
 ## Server lifecycle
 
 ```
-Editor launch
+Interactive editor launch
    v
 UEBridgeMCPEditor and extension module load  (PostEngineInit)
    v
@@ -231,6 +231,8 @@ UMcpEditorSubsystem::Deinitialize()
 FUEBridgeMCPEditorModule::ShutdownModule()
    FMcpToolbarExtension::Shutdown()
 ```
+
+The plugin modules use `EditorNoCommandlet`, so UAT/Cook/Package commandlet processes do not load the MCP server or bind the HTTP port. `UMcpEditorSubsystem::StartServer()` also guards against commandlet startup as a defensive check.
 
 `McpServer::Start` uses `FHttpServerModule::Get().GetHttpRouter(Port)` and registers handlers for `/mcp` (POST, JSON-RPC), `/mcp/session/*` (DELETE, cancellation), and `/health` (GET, liveness check used by CI).
 

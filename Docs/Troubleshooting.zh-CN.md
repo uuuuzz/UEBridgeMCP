@@ -30,7 +30,13 @@
 
 每个编辑器实例需要自己**独立的**端口。请在 `Config/DefaultUEBridgeMCP.ini` 或编辑器 settings 对象里给每个项目分配不同的 `ServerPort`（8080 / 8081 / 8082），客户端 URL 也跟着改。
 
-### 1.4 `tools/list` 返回空或 404
+### 1.4 打包/Cook 失败并出现 `HttpListener unable to bind`
+
+**原因。** 旧版本可能会在 Cook/Package 使用的 UE commandlet 进程里自动启动 MCP HTTP listener。如果交互式编辑器已经占用了配置端口，UAT 会看到 `LogHttpListener: Error` 并把打包判为失败。
+
+**解决。** 使用模块标记为 `EditorNoCommandlet`、且 server 启动路径会拒绝 commandlet 的版本。旧版本临时规避方式：打包前在 `Config/DefaultUEBridgeMCP.ini` 里设置 `bAutoStartServer=false`，回到编辑器后再手动启动 server。
+
+### 1.5 `tools/list` 返回空或 404
 
 - 编辑器模块加载失败，检查启动时的 `LogUEBridgeMCPEditor` 日志。
 - `RegisterBuiltInTools` 比依赖模块更早跑了。插件用 `LoadingPhase = PostEngineInit` 是**故意**的，别改。
